@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智感云品牌设计规范文档</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #007BFF;
+            --secondary-dark: #333333;
+            --secondary-gray: #666666;
+            --light-gray: #F5F5F5;
+            --white: #FFFFFF;
+            --cyan: #00C2FF;
+            --green: #00C853;
+            --red: #FF4F3D;
+            --yellow: #FFC107;
+            
+            --font-main: 'Noto Sans SC', 'NotoSansHans-Regular', sans-serif;
+            --font-display: 'AlimamaShuHeiTi-Bold', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1920px;
+            margin: 0 auto;
+            background-color: var(--light-gray);
+            font-family: var(--font-main);
+            color: var(--secondary-dark);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Container & Grid */
+        .page-container {
+            width: 100%;
+            background: var(--white);
+            overflow: hidden;
+            min-height: 100vh;
+        }
+
+        /* Main Content */
+        .content-area {
+            padding: 80px 100px;
+            background: #F8F9FB;
+        }
+
+        /* Cover Section */
+        .section-cover {
+            height: 800px;
+            background: linear-gradient(135deg, #001f3f 0%, #007BFF 100%);
+            border-radius: 24px;
+            color: white;
+            padding: 100px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+        }
+
+        .cover-subtitle {
+            font-size: 24px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.8;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .cover-title {
+            font-family: var(--font-display);
+            font-size: 80px;
+            line-height: 1.1;
+            margin-bottom: 60px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .cover-footer {
+            margin-top: auto;
+            display: flex;
+            gap: 60px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 40px;
+        }
+        
+        .cover-item label {
+            display: block;
+            font-size: 12px;
+            opacity: 0.6;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        /* Content Blocks */
+        .section-block {
+            margin-bottom: 100px;
+        }
+
+        .block-header {
+            margin-bottom: 40px;
+            border-left: 6px solid var(--primary-blue);
+            padding-left: 24px;
+        }
+
+        .block-title {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--secondary-dark);
+            margin-bottom: 12px;
+            font-family: 'NotoSansHans-Bold';
+        }
+
+        .block-desc {
+            color: var(--secondary-gray);
+            font-size: 18px;
+            max-width: 800px;
+        }
+
+        /* Brand Overview Grid */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .overview-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .overview-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,123,255,0.1);
+            border-color: rgba(0,123,255,0.2);
+        }
+
+        .overview-icon {
+            font-size: 40px;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            background: rgba(0,123,255,0.1);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .overview-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--secondary-dark);
+        }
+
+        .overview-card p {
+            color: var(--secondary-gray);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Color System */
+        .color-group-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 40px 0 20px;
+            color: var(--secondary-dark);
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .color-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .color-swatch {
+            height: 140px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        .color-swatch.light {
+            color: var(--secondary-dark);
+            border-bottom: 1px solid #eee;
+        }
+
+        .color-info {
+            padding: 24px;
+        }
+
+        .color-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .color-usage {
+            font-size: 13px;
+            color: var(--secondary-gray);
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #eee;
+        }
+
+        .color-codes {
+            font-family: monospace;
+            font-size: 14px;
+            color: #888;
+        }
+
+        /* Typography */
+        .typo-container {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .typo-section h4 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .font-sample {
+            margin-bottom: 30px;
+        }
+
+        .fs-label {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .fs-h1 { font-size: 64px; font-weight: bold; color: var(--primary-blue); line-height: 1.2; font-family: 'NotoSansHans-Bold'; }
+        .fs-h2 { font-size: 48px; font-weight: bold; color: var(--secondary-dark); line-height: 1.3; font-family: 'NotoSansHans-Bold'; }
+        .fs-h3 { font-size: 32px; font-weight: 500; color: var(--secondary-dark); line-height: 1.4; font-family: 'NotoSansHans-Medium'; }
+        .fs-p { font-size: 18px; color: var(--secondary-gray); line-height: 1.6; }
+
+        /* Logo Specification */
+        .logo-specs {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .logo-showcase {
+            display: grid;
+            gap: 20px;
+        }
+
+        .logo-display {
+            background: white;
+            padding: 80px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            position: relative;
+        }
+        
+        .brand-logo-img {
+            width: min(560px, 100%);
+            height: auto;
+            display: block;
+        }
+
+        .brand-logo-img.white-logo {
+            filter: brightness(0) saturate(0) invert(1);
+        }
+
+        .logo-display.dark-surface {
+            background: #111722;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+        }
+
+        .logo-caption {
+            font-size: 14px;
+            color: var(--secondary-gray);
+            margin-bottom: 10px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .safe-area-box {
+            border: 1px dashed var(--primary-blue);
+            padding: 40px;
+            position: relative;
+        }
+        
+        .safe-area-box::after {
+            content: 'x';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+        
+        .safe-area-box::before {
+            content: 'x';
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        .dont-do-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .dont-item {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-left: 4px solid var(--red);
+        }
+
+        .dont-item i {
+            color: var(--red);
+            font-size: 24px;
+        }
+
+        /* UI Kit & Elements */
+        .ui-kit-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .ui-card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .ui-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 24px;
+            color: var(--secondary-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+            display: inline-block;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+            background: transparent;
+            padding: 10px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .badge-success { background: rgba(0,200,83,0.1); color: var(--green); }
+        .badge-warn { background: rgba(255,193,7,0.1); color: var(--yellow); }
+        .badge-error { background: rgba(255,79,61,0.1); color: var(--red); }
+
+        .icon-grid-demo {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            background: var(--light-gray);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--secondary-dark);
+        }
+
+        /* Mockups */
+        .mockup-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .mockup-lg {
+            height: 400px;
+            background: #E3F2FD;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mockup-sm {
+            height: 185px;
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .mockup-sm:last-child { margin-bottom: 0; }
+
+        .mockup-browser {
+            width: 80%;
+            height: 80%;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .browser-header {
+            height: 30px;
+            background: #f0f0f0;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            gap: 6px;
+        }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: #ccc; }
+        .dot.red { background: #FF5F56; }
+        .dot.yellow { background: #FFBD2E; }
+        .dot.green { background: #27C93F; }
+
+        .browser-body {
+            padding: 20px;
+        }
+        
+        .skel-nav { width: 100%; height: 40px; background: #f5f5f5; margin-bottom: 20px; border-radius: 4px; display: flex; align-items: center; padding: 0 20px; justify-content: space-between;}
+        .skel-logo { width: 80px; height: 20px; background: var(--primary-blue); border-radius: 4px; opacity: 0.5;}
+        .skel-hero { width: 100%; height: 120px; background: linear-gradient(135deg, #e3f2fd 0%, #fff 100%); border-radius: 4px; margin-bottom: 20px; display: flex; align-items: center; padding: 20px;}
+        .skel-text-block { flex: 1; }
+        .skel-line { height: 10px; background: #eee; margin-bottom: 8px; border-radius: 2px;}
+        .skel-line.long { width: 80%; }
+        .skel-line.short { width: 40%; }
+        
+        .mobile-frame {
+            width: 100px;
+            height: 160px;
+            border: 4px solid #333;
+            border-radius: 12px;
+            background: white;
+            position: relative;
+        }
+        .mobile-notch { width: 40px; height: 10px; background: #333; position: absolute; top: 0; left: 50%; transform: translateX(-50%); border-radius: 0 0 6px 6px; }
+
+        /* Footer */
+        .doc-footer {
+            margin-top: 100px;
+            border-top: 1px solid #ddd;
+            padding-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--secondary-gray);
+        }
+
+        .checklist {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        
+        .check-item i { color: var(--green); }
+
+        @page {
+            size: A3 landscape;
+            margin: 10mm;
+        }
+
+        @media print {
+            body {
+                width: auto;
+                margin: 0;
+                background: #fff;
+            }
+
+            .page-container {
+                overflow: visible;
+                min-height: auto;
+            }
+
+            .content-area {
+                padding: 20px;
+                background: #fff;
+            }
+
+            .section-cover {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .logo-specs,
+            .ui-kit-grid,
+            .mockup-grid,
+            .typo-container,
+            .overview-grid,
+            .color-grid {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="page-container">
+        <!-- Main Content -->
+        <main class="content-area">
+            
+            <!-- Cover -->
+            <section class="section-cover">
+                <div>
+                    <h2 class="cover-subtitle">Brand Design Guidelines 2026</h2>
+                    <h1 class="cover-title">智感云<br>品牌设计规范文档</h1>
+                </div>
+                
+                <div class="cover-footer">
+                    <div class="cover-item">
+                        <label>Created By</label>
+                        <span>Opmonitor Tec</span>
+                    </div>
+                    <div class="cover-item">
+                        <label>Focus Area</label>
+                        <span>Smart Healthcare & IoT</span>
+                    </div>
+                    <div class="cover-item">
+                        <label>Core Value</label>
+                        <span>Intelligent · Digital · Precise</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 1. Brand Overview -->
+            <section class="section-block">
+                <div class="block-header">
+                    <h2 class="block-title">01 品牌概述</h2>
+                    <p class="block-desc">智感云致力于提供卓越的智慧医疗与物联网解决方案，以专业、科技、简洁、可信赖为核心设计理念。</p>
+                </div>
+                
+                <div class="overview-grid">
+                    <div class="overview-card">
+                        <div class="overview-icon"><i class="ri-brain-line"></i></div>
+                        <h3>专业 Professional</h3>
+                        <p>深耕医疗行业，提供专家级解决方案与服务。</p>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-icon"><i class="ri-cpu-line"></i></div>
+                        <h3>科技 Tech</h3>
+                        <p>运用前沿物联网技术，驱动数字化转型。</p>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-icon"><i class="ri-layout-2-line"></i></div>
+                        <h3>简洁 Clean</h3>
+                        <p>化繁为简，提供直观高效的用户体验。</p>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-icon"><i class="ri-shield-check-line"></i></div>
+                        <h3>可信赖 Reliable</h3>
+                        <p>安全稳定，是客户值得托付的合作伙伴。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Color System -->
+            <section class="section-block">
+                <div class="block-header">
+                    <h2 class="block-title">02 色彩系统</h2>
+                    <p class="block-desc">色彩是品牌识别的重要组成部分。科技蓝代表专业与信赖，辅助色系构建层次，功能色确保交互清晰。</p>
+                </div>
+
+                <h3 class="color-group-title">Primary Colors 主色调</h3>
+                <div class="color-grid">
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: var(--primary-blue);">#007BFF</div>
+                        <div class="color-info">
+                            <div class="color-name">科技蓝 <span>30%</span></div>
+                            <div class="color-codes">RGB: 0, 123, 255</div>
+                            <div class="color-usage">Logo, 按钮, 强调</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch light" style="background: var(--white);">#FFFFFF</div>
+                        <div class="color-info">
+                            <div class="color-name">纯白 <span>40%</span></div>
+                            <div class="color-codes">RGB: 255, 255, 255</div>
+                            <div class="color-usage">主背景, 留白</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch light" style="background: var(--light-gray);">#F5F5F5</div>
+                        <div class="color-info">
+                            <div class="color-name">浅灰 <span>20%</span></div>
+                            <div class="color-codes">RGB: 245, 245, 245</div>
+                            <div class="color-usage">背景, 分区</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: var(--secondary-dark);">#333333</div>
+                        <div class="color-info">
+                            <div class="color-name">深灰 <span>10%</span></div>
+                            <div class="color-codes">RGB: 51, 51, 51</div>
+                            <div class="color-usage">标题, 重要文字</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="color-group-title">Functional Colors 功能色</h3>
+                <div class="color-grid">
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: var(--cyan);">#00C2FF</div>
+                        <div class="color-info">
+                            <div class="color-name">极速青</div>
+                            <div class="color-usage">高光, 交互</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: var(--green);">#00C853</div>
+                        <div class="color-info">
+                            <div class="color-name">安全绿</div>
+                            <div class="color-usage">成功, 正常</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: var(--yellow);">#FFC107</div>
+                        <div class="color-info">
+                            <div class="color-name">提示黄</div>
+                            <div class="color-usage">警告, 待办</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: var(--red);">#FF4F3D</div>
+                        <div class="color-info">
+                            <div class="color-name">警示红</div>
+                            <div class="color-usage">错误, 危险</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Typography -->
+            <section class="section-block">
+                <div class="block-header">
+                    <h2 class="block-title">03 字体规范</h2>
+                    <p class="block-desc">清晰的层级关系能有效传递信息。中文使用思源黑体，英文使用 Helvetica/Arial，强调易读性。</p>
+                </div>
+
+                <div class="typo-container">
+                    <div class="typo-section">
+                        <h4>Chinese Typeface / 中文</h4>
+                        <div class="font-sample">
+                            <div class="fs-label">H1 Headline - Bold 48-72pt</div>
+                            <div class="fs-h1">智感云智慧医疗</div>
+                        </div>
+                        <div class="font-sample">
+                            <div class="fs-label">H2 Subtitle - Bold 36-48pt</div>
+                            <div class="fs-h2">构建万物互联的数字世界</div>
+                        </div>
+                        <div class="font-sample">
+                            <div class="fs-label">Body Text - Regular 24-28pt</div>
+                            <div class="fs-p">智感云致力于通过物联网技术，为医疗机构提供精细化管理方案。我们关注每一个数据的流动，确保信息传达的准确性与及时性。</div>
+                        </div>
+                    </div>
+                    <div class="typo-section">
+                        <h4>English Typeface / 英文</h4>
+                        <div class="font-sample">
+                            <div class="fs-label">Display - Arial Bold</div>
+                            <div class="fs-h1" style="font-family: Arial, sans-serif;">Smart Healthcare</div>
+                        </div>
+                        <div class="font-sample">
+                            <div class="fs-label">Subtitle - Arial Bold</div>
+                            <div class="fs-h2" style="font-family: Arial, sans-serif;">IoT Solutions Provider</div>
+                        </div>
+                        <div class="font-sample">
+                            <div class="fs-label">Body Text - Arial Regular</div>
+                            <div class="fs-p" style="font-family: Arial, sans-serif;">Our mission is to empower healthcare institutions with cutting-edge IoT technology, ensuring data accuracy and operational efficiency.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Logo Usage -->
+            <section class="section-block">
+                <div class="block-header">
+                    <h2 class="block-title">04 Logo规范</h2>
+                    <p class="block-desc">Logo由三条代表数据流的蓝色横线与文字组成。使用时需严格遵守安全空间与最小尺寸规定。</p>
+                </div>
+
+                <div class="logo-specs">
+                    <div class="logo-showcase">
+                        <div>
+                            <div class="logo-caption">标准版 Logo</div>
+                            <div class="logo-display safe-area-box">
+                                <img class="brand-logo-img" src="./opmoniter_logo.png" alt="智感云品牌 Logo" onerror="this.onerror=null;this.src='./opmonitor_logo.png';">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="logo-caption">白色版 Logo（深色背景）</div>
+                            <div class="logo-display dark-surface">
+                                <img class="brand-logo-img white-logo" src="./opmoniter_logo.png" alt="智感云品牌白色 Logo" onerror="this.onerror=null;this.src='./opmonitor_logo.png';">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dont-do-grid">
+                        <div class="dont-item">
+                            <i class="ri-prohibited-line"></i>
+                            <div>
+                                <strong>禁止变形</strong>
+                                <p style="font-size: 12px; color: #666;">Do not stretch</p>
+                            </div>
+                        </div>
+                        <div class="dont-item">
+                            <i class="ri-palette-line"></i>
+                            <div>
+                                <strong>禁止改色</strong>
+                                <p style="font-size: 12px; color: #666;">Do not change colors</p>
+                            </div>
+                        </div>
+                        <div class="dont-item">
+                            <i class="ri-drop-line"></i>
+                            <div>
+                                <strong>禁止特效</strong>
+                                <p style="font-size: 12px; color: #666;">No shadows/glows</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. UI & Application -->
+            <section class="section-block">
+                <div class="block-header">
+                    <h2 class="block-title">05 视觉元素与应用</h2>
+                    <p class="block-desc">统一的UI组件与视觉风格，确保品牌在不同媒介下的一致性。</p>
+                </div>
+
+                <div class="ui-kit-grid">
+                    <div class="ui-card">
+                        <div class="ui-title"><i class="ri-cursor-line"></i> Buttons</div>
+                        <button class="btn-primary">主要按钮</button>
+                        <button class="btn-outline">次要按钮</button>
+                    </div>
+                    <div class="ui-card">
+                        <div class="ui-title"><i class="ri-notification-badge-line"></i> Status</div>
+                        <span class="status-badge badge-success">● 运行中</span>
+                        <span class="status-badge badge-warn">● 待处理</span>
+                        <span class="status-badge badge-error">● 异常</span>
+                    </div>
+                    <div class="ui-card">
+                        <div class="ui-title"><i class="ri-function-line"></i> Icons</div>
+                        <div class="icon-grid-demo">
+                            <div class="icon-box"><i class="ri-home-4-line"></i></div>
+                            <div class="icon-box"><i class="ri-settings-3-line"></i></div>
+                            <div class="icon-box"><i class="ri-user-line"></i></div>
+                            <div class="icon-box"><i class="ri-search-line"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mockup-grid">
+                    <div class="mockup-lg">
+                        <div class="mockup-browser">
+                            <div class="browser-header">
+                                <div class="dot red"></div>
+                                <div class="dot yellow"></div>
+                                <div class="dot green"></div>
+                            </div>
+                            <div class="browser-body">
+                                <div class="skel-nav">
+                                    <div class="skel-logo"></div>
+                                </div>
+                                <div class="skel-hero">
+                                    <div class="skel-text-block">
+                                        <div class="skel-line long" style="height: 16px; width: 60%; background: #007BFF; opacity: 0.8; margin-bottom: 12px;"></div>
+                                        <div class="skel-line short" style="width: 40%;"></div>
+                                        <div class="skel-line short" style="width: 30%;"></div>
+                                    </div>
+                                    <div style="width: 80px; height: 80px; background: #fff; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"></div>
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+                                    <div style="height: 100px; background: #f9f9f9; border-radius: 4px;"></div>
+                                    <div style="height: 100px; background: #f9f9f9; border-radius: 4px;"></div>
+                                    <div style="height: 100px; background: #f9f9f9; border-radius: 4px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="mockup-sm">
+                            <div class="mobile-frame">
+                                <div class="mobile-notch"></div>
+                                <div style="padding: 20px 10px; display: flex; flex-direction: column; gap: 8px;">
+                                    <div style="width: 30px; height: 30px; background: #007BFF; border-radius: 6px;"></div>
+                                    <div style="height: 8px; width: 60px; background: #eee;"></div>
+                                    <div style="height: 60px; background: #f0f0f0; border-radius: 4px; margin-top: 10px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mockup-sm">
+                            <h4 style="margin-bottom: 15px; color: #666;">Document Layout</h4>
+                            <div style="width: 100px; height: 140px; background: white; border: 1px solid #eee; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 10px;">
+                                <div style="width: 100%; height: 30%; background: #007BFF; margin-bottom: 8px;"></div>
+                                <div style="width: 100%; height: 4px; background: #eee; margin-bottom: 4px;"></div>
+                                <div style="width: 80%; height: 4px; background: #eee; margin-bottom: 4px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="doc-footer">
+                <div>
+                    <h4>Checklist</h4>
+                    <div class="checklist">
+                        <div class="check-item"><i class="ri-checkbox-circle-fill"></i> 色彩一致性</div>
+                        <div class="check-item"><i class="ri-checkbox-circle-fill"></i> 字体层级清晰</div>
+                        <div class="check-item"><i class="ri-checkbox-circle-fill"></i> Logo使用规范</div>
+                        <div class="check-item"><i class="ri-checkbox-circle-fill"></i> 留白充足(>30%)</div>
+                    </div>
+                </div>
+                <div style="text-align: right;">
+                    <p style="font-weight: bold; color: var(--secondary-dark); margin-bottom: 8px;">联系我们</p>
+                    <p>www.zhigancloud.com</p>
+                    <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f89c9d8b919f96b88290919f99969b94978d9cd69b9795">[email&#160;protected]</a></p>
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"9da03ab2ffd5682e","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.9.1","token":"aa50fec79b214c0582a0bc0d66f75f48"}' crossorigin="anonymous"></script>
+</body>
+</html>

@@ -16,6 +16,10 @@
             --green: #00C853;
             --red: #FF4F3D;
             --yellow: #FFC107;
+            --industry-dirty: #F08AA6;
+            --industry-clean: #0FAEA4;
+            --industry-waste-yellow: #FFD400;
+            --industry-iot-blue: #3E7BFF;
             
             --font-main: 'Noto Sans SC', 'NotoSansHans-Regular', sans-serif;
             --font-display: 'AlimamaShuHeiTi-Bold', sans-serif;
@@ -562,6 +566,198 @@
         
         .check-item i { color: var(--green); }
 
+        /* Hero Image Guideline */
+        .guideline-panel {
+            margin-top: 32px;
+            background: white;
+            border-radius: 20px;
+            padding: 36px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+        }
+
+        .guideline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 26px;
+            flex-wrap: wrap;
+        }
+
+        .guideline-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--secondary-dark);
+        }
+
+        .guideline-tag {
+            font-size: 12px;
+            color: var(--primary-blue);
+            background: rgba(0, 123, 255, 0.08);
+            border: 1px solid rgba(0, 123, 255, 0.2);
+            border-radius: 999px;
+            padding: 6px 12px;
+        }
+
+        .guideline-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 28px;
+        }
+
+        .guideline-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .guideline-item {
+            background: #F8FAFC;
+            border: 1px solid #E9EEF5;
+            border-radius: 12px;
+            padding: 14px 16px;
+            font-size: 15px;
+            color: #4B5563;
+        }
+
+        .guideline-item strong {
+            color: #1F2937;
+        }
+
+        .hero-example-wrap {
+            display: grid;
+            gap: 16px;
+        }
+
+        .hero-example {
+            border-radius: 14px;
+            border: 1px solid #E5E7EB;
+            height: 210px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-example.white-bg {
+            background: #FFFFFF;
+        }
+
+        .hero-example.transparent-bg {
+            background:
+                linear-gradient(45deg, #F4F6F8 25%, transparent 25%),
+                linear-gradient(-45deg, #F4F6F8 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #F4F6F8 75%),
+                linear-gradient(-45deg, transparent 75%, #F4F6F8 75%);
+            background-size: 22px 22px;
+            background-position: 0 0, 0 11px, 11px -11px, -11px 0;
+            background-color: #ffffff;
+        }
+
+        .hero-device {
+            width: 130px;
+            height: 130px;
+            object-fit: contain;
+            filter: drop-shadow(0 18px 16px rgba(38, 45, 58, 0.22));
+        }
+
+        .hero-caption {
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+            font-size: 12px;
+            color: #5B6574;
+            background: rgba(255,255,255,0.9);
+            border: 1px solid #E5E7EB;
+            padding: 4px 8px;
+            border-radius: 8px;
+        }
+
+        /* Graphic Elements Guideline */
+        .graphic-grid {
+            margin-top: 28px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .graphic-card {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid #E7ECF3;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            overflow: hidden;
+        }
+
+        .graphic-demo {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .topology-demo {
+            background:
+                radial-gradient(circle at 15% 30%, rgba(0, 123, 255, 0.32) 0 4px, transparent 5px),
+                radial-gradient(circle at 40% 18%, rgba(0, 194, 255, 0.35) 0 4px, transparent 5px),
+                radial-gradient(circle at 65% 54%, rgba(0, 123, 255, 0.3) 0 4px, transparent 5px),
+                radial-gradient(circle at 84% 24%, rgba(0, 194, 255, 0.28) 0 4px, transparent 5px),
+                radial-gradient(circle at 28% 70%, rgba(0, 123, 255, 0.26) 0 4px, transparent 5px),
+                linear-gradient(140deg, #F6FAFF 0%, #EAF3FF 100%);
+        }
+
+        .topology-demo::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(33deg, transparent 48%, rgba(0, 123, 255, 0.22) 49%, rgba(0, 123, 255, 0.22) 51%, transparent 52%),
+                linear-gradient(-18deg, transparent 48%, rgba(0, 194, 255, 0.2) 49%, rgba(0, 194, 255, 0.2) 51%, transparent 52%);
+            opacity: 0.65;
+        }
+
+        .fluid-demo {
+            background:
+                radial-gradient(circle at 20% 130%, rgba(0, 123, 255, 0.28) 0%, transparent 45%),
+                radial-gradient(circle at 85% 100%, rgba(0, 194, 255, 0.3) 0%, transparent 48%),
+                linear-gradient(155deg, #0F2248 0%, #174E9A 45%, #2B89D8 100%);
+        }
+
+        .fluid-demo::before,
+        .fluid-demo::after {
+            content: '';
+            position: absolute;
+            left: -10%;
+            width: 120%;
+            border-radius: 45%;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .fluid-demo::before {
+            height: 120px;
+            bottom: -38px;
+        }
+
+        .fluid-demo::after {
+            height: 88px;
+            bottom: -15px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .graphic-info {
+            padding: 16px 18px 18px;
+        }
+
+        .graphic-info h4 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .graphic-info p {
+            font-size: 14px;
+            color: var(--secondary-gray);
+            line-height: 1.7;
+        }
+
         @page {
             size: A3 landscape;
             margin: 10mm;
@@ -736,6 +932,42 @@
                         </div>
                     </div>
                 </div>
+
+                <h3 class="color-group-title">Industry Specific Colors 行业专属状态色</h3>
+                <div class="color-grid">
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: var(--industry-dirty);">#F08AA6</div>
+                        <div class="color-info">
+                            <div class="color-name">污染色 Dirty Pink</div>
+                            <div class="color-codes">RGB: 240, 138, 166</div>
+                            <div class="color-usage">内镜流转污染区、污染标签、污染路径标识</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: var(--industry-clean);">#0FAEA4</div>
+                        <div class="color-info">
+                            <div class="color-name">洁净色 Clean Teal</div>
+                            <div class="color-codes">RGB: 15, 174, 164</div>
+                            <div class="color-usage">洁净区、合格状态、无菌路径与洁污分离引导</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch light" style="background: var(--industry-waste-yellow);">#FFD400</div>
+                        <div class="color-info">
+                            <div class="color-name">医废黄 Waste Alert</div>
+                            <div class="color-codes">RGB: 255, 212, 0</div>
+                            <div class="color-usage">医废硬件涂装、危废容器、现场高可视警示</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: var(--industry-iot-blue);">#3E7BFF</div>
+                        <div class="color-info">
+                            <div class="color-name">物联链路蓝 IoT Link</div>
+                            <div class="color-codes">RGB: 62, 123, 255</div>
+                            <div class="color-usage">数据链路、拓扑节点高亮、设备连通态</div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <!-- 3. Typography -->
@@ -904,6 +1136,56 @@
                                 <div style="width: 80%; height: 4px; background: #eee; margin-bottom: 4px;"></div>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="guideline-panel">
+                    <div class="guideline-header">
+                        <h3 class="guideline-title">05.1 产品主视觉（Hero Image）表现规范</h3>
+                        <span class="guideline-tag">硬件画册 / 官网首屏 / 招投标资料统一执行</span>
+                    </div>
+
+                    <div class="guideline-grid">
+                        <div class="guideline-list">
+                            <div class="guideline-item"><strong>背景规范：</strong>硬件设备渲染图必须使用全透明底或纯白底，禁止复杂场景背景抢夺主体。</div>
+                            <div class="guideline-item"><strong>投影规范：</strong>统一采用深灰柔和接触阴影，建议参数为 <code>drop-shadow(0 18px 16px rgba(38,45,58,0.22))</code>，强调悬浮感与落地感平衡。</div>
+                            <div class="guideline-item"><strong>构图规范：</strong>产品主体在画面占比 55%~70%，保持三维体积感；允许轻微 15°~25° 透视，禁止夸张变形。</div>
+                            <div class="guideline-item"><strong>一致性规范：</strong>转运机器人、便民一体机、医废推车、物联钩秤等全部硬件遵循同一阴影与留白标准，确保跨产品线视觉统一。</div>
+                        </div>
+                        <div class="hero-example-wrap">
+                            <div class="hero-example transparent-bg">
+                                <img class="hero-device" src="https://a.lovart.ai/artifacts/user/7nds1IvEYnE82Xbp.png" alt="透明底产品图示例">
+                                <span class="hero-caption">推荐: 透明底抠图 + 深灰柔阴影</span>
+                            </div>
+                            <div class="hero-example white-bg">
+                                <img class="hero-device" src="https://a.lovart.ai/artifacts/user/HEn0eUHoc66wIL0r.png" alt="白底产品图示例">
+                                <span class="hero-caption">可选: 纯白底 + 统一接触阴影</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="guideline-panel">
+                    <div class="guideline-header">
+                        <h3 class="guideline-title">05.2 辅助图形（Graphic Elements）规范</h3>
+                        <span class="guideline-tag">用于背景点缀，不得弱化产品主体</span>
+                    </div>
+
+                    <div class="graphic-grid">
+                        <article class="graphic-card">
+                            <div class="graphic-demo topology-demo"></div>
+                            <div class="graphic-info">
+                                <h4>数据物联拓扑网</h4>
+                                <p>以点线网络、节点连通、波浪点阵表现 IoT 连接性。用于首页头图、方案页转场、章节分割背景。透明度建议 12%~28%。</p>
+                            </div>
+                        </article>
+                        <article class="graphic-card">
+                            <div class="graphic-demo fluid-demo"></div>
+                            <div class="graphic-info">
+                                <h4>科技光影 / 流体质感</h4>
+                                <p>以科技蓝渐变、水波纹、电路光影强化“智慧感”。适用于水质、感控、监测业务。禁止大面积满版，避免信息噪声。</p>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </section>

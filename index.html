@@ -378,103 +378,347 @@
             margin-top: 14px;
         }
 
-        /* ─── Brand Overview ─── */
-        .overview-grid {
+        /* ─── Module 7: Brand Overview & Vision ─── */
+        .vision-layout {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 20px;
+            gap: 30px;
         }
-        .overview-card {
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: 18px;
-            box-shadow: var(--shadow-crisp);
-            padding: 28px 28px 24px;
-        }
-        .ov-icon {
-            width: 52px; height: 52px;
-            border-radius: 14px;
-            background: #edf5ff;
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 16px;
-            color: var(--blue);
-        }
-        .ov-icon svg { width: 26px; height: 26px; }
-        .overview-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
-        .overview-card p { font-size: 15px; color: var(--muted); line-height: 1.65; }
 
-        /* ─── Logo Section ─── */
-        .logo-pair {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 24px;
-            align-items: start;
-        }
-        .logo-display {
-            border: 1px solid var(--line);
+        .vision-quote {
+            padding: 56px 24px;
+            text-align: center;
+            border: 1px solid #e8edf4;
             border-radius: 18px;
-            padding: 48px 40px;
-            display: flex; align-items: center; justify-content: center;
-            background: #fff;
-            margin-bottom: 16px;
+            background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
         }
-        .logo-display.dashed { border-style: dashed; border-color: var(--blue); }
-        .logo-display.dark-bg { background: #111722; border-color: rgba(255,255,255,0.1); margin-bottom: 0; }
-        .brand-logo-img { max-width: 320px; width: 100%; height: auto; display: block; }
-        .brand-logo-img.inverted { filter: brightness(0) invert(1); }
-        .logo-fallback { font-size: 28px; font-weight: 700; color: var(--blue); letter-spacing: -0.02em; }
-        .logo-fallback.light { color: #ffffff; }
-        .logo-dont-grid { display: flex; flex-direction: column; gap: 12px; }
-        .logo-dont-item {
-            display: flex; align-items: flex-start; gap: 12px;
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            border-left: 4px solid #dc2626;
+
+        .vision-quote blockquote {
+            margin: 0 auto;
+            max-width: 20ch;
+            font-family: "Iowan Old Style", "Times New Roman", serif;
+            font-size: clamp(28px, 3.2vw, 46px);
+            line-height: 1.35;
+            color: #1f2937;
+            letter-spacing: 0.01em;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .value-card {
+            background: #ffffff;
+            border: 1px solid #e7ebf2;
+            border-radius: 16px;
+            padding: 22px 18px 20px;
+            transition: box-shadow 0.25s ease, transform 0.25s ease;
+        }
+
+        .value-card:hover {
+            box-shadow: 0 10px 20px rgba(2, 27, 55, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .value-icon {
+            width: 38px;
+            height: 38px;
+            color: #374151;
+            margin-bottom: 12px;
+        }
+
+        .value-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .value-card h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .value-card p {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.65;
+        }
+
+        /* ─── Module 8: Logo Guidelines ─── */
+        .logo-explain {
+            background: #f8fbff;
+            border: 1px solid #dce9ff;
+            color: #304966;
             border-radius: 12px;
-            padding: 14px 16px;
-        }
-        .logo-dont-item strong { display: block; font-size: 15px; color: #991b1b; margin-bottom: 2px; }
-        .logo-dont-item p { font-size: 13px; color: #7f1d1d; margin: 0; }
-        .dont-bullet {
-            width: 32px; min-width: 32px; height: 32px;
-            background: #fee2e2; border-radius: 8px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 15px; color: #dc2626; font-weight: 700;
+            padding: 12px 14px;
+            margin-bottom: 18px;
+            font-size: 14px;
         }
 
-        /* ─── Icon Design Rules ─── */
-        .icon-rule-grid {
+        .logo-zone-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #475569;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .logo-dos-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
-        .icon-rule-card {
-            background: var(--surface-soft);
-            border: 1px solid var(--line);
+
+        .logo-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 18px;
+            background: #ffffff;
+        }
+
+        .logo-stage {
+            min-height: 140px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+            margin-top: 10px;
+            background: #ffffff;
+        }
+
+        .logo-stage.dark {
+            background: linear-gradient(135deg, #1f2937 0%, #0f4d9d 100%);
+            border-color: #1e3a5f;
+        }
+
+        .brand-logo-img {
+            width: min(280px, 100%);
+            height: auto;
+            display: block;
+        }
+
+        .brand-logo-img.white-logo {
+            filter: brightness(0) invert(1);
+        }
+
+        .logo-fallback {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 30px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--blue);
+        }
+
+        .logo-fallback .bars {
+            display: inline-flex;
+            gap: 4px;
+            transform: skewX(-18deg);
+        }
+
+        .logo-fallback .bars i {
+            display: block;
+            width: 8px;
+            height: 28px;
+            border-radius: 3px;
+            background: currentColor;
+            opacity: 0.95;
+        }
+
+        .logo-fallback.white-logo {
+            color: #ffffff;
+        }
+
+        .logo-donts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .dont-card {
+            position: relative;
+            border: 1px solid #fca5a5;
+            border-left: 4px solid #dc2626;
             border-radius: 14px;
-            padding: 20px;
+            background: #fff7f7;
+            padding: 14px;
         }
-        .icon-rule-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-        .icon-rule-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
-        .icon-size-row {
-            display: flex; align-items: center; gap: 28px;
-            padding: 24px;
-            background: var(--surface-soft);
-            border: 1px solid var(--line);
+
+        .dont-card .x-mark {
+            position: absolute;
+            right: 10px;
+            top: 8px;
+            font-size: 22px;
+            font-weight: 700;
+            color: #dc2626;
+            line-height: 1;
+        }
+
+        .dont-card h4 {
+            font-size: 15px;
+            margin-bottom: 4px;
+            color: #991b1b;
+        }
+
+        .dont-card p {
+            font-size: 12px;
+            color: #7f1d1d;
+            margin-bottom: 12px;
+        }
+
+        .logo-mock {
+            min-height: 86px;
+            border-radius: 10px;
+            border: 1px dashed #f3c3c3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            overflow: hidden;
+        }
+
+        .logo-mock .logo-fallback {
+            font-size: 22px;
+        }
+
+        .logo-mock.stretch .logo-fallback {
+            transform: scaleX(1.5);
+            transform-origin: center;
+        }
+
+        .logo-mock.recolor .logo-fallback {
+            color: #8b5cf6;
+        }
+
+        .logo-mock.recolor .logo-fallback .bars i:nth-child(2) {
+            background: #22c55e;
+        }
+
+        .logo-mock.glow .logo-fallback {
+            color: #007bff;
+            text-shadow: 0 0 14px rgba(59, 130, 246, 0.9), 0 0 24px rgba(59, 130, 246, 0.7);
+            filter: drop-shadow(0 12px 10px rgba(2, 27, 55, 0.4));
+        }
+
+        /* ─── Module 9: Iconography Rules ─── */
+        .icon-ban {
+            border: 1px solid #fecaca;
+            background: #fff1f2;
+            color: #991b1b;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .icon-showcase {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .icon-sample {
+            background: #ffffff;
+            border: 1px solid #e6ebf2;
             border-radius: 14px;
-            flex-wrap: wrap;
+            padding: 14px;
+            text-align: center;
         }
-        .icon-size-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-        .icon-size-item span { font-size: 12px; color: var(--muted); text-align: center; line-height: 1.5; }
+
+        .icon-stage {
+            width: 68px;
+            height: 68px;
+            margin: 0 auto 10px;
+            border-radius: 12px;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-stage svg {
+            width: 38px;
+            height: 38px;
+            fill: none;
+            stroke: #333333;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .icon-stage svg .accent {
+            stroke: #007bff;
+        }
+
+        .icon-sample h4 {
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .icon-sample p {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .icon-rule-list {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .icon-rule-list li {
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 12px 14px;
+            background: #ffffff;
+            font-size: 14px;
+            color: #334155;
+        }
+
+        .icon-rule-list b {
+            color: #111827;
+        }
+
+        .btn-ghost {
+            border: 1px solid #bcd7ff;
+            background: transparent;
+            color: #0f4d9d;
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-ghost:hover {
+            background: #f2f7ff;
+        }
 
         @media (max-width: 960px) {
             .cols-2, .cols-3 { grid-template-columns: 1fr; }
-            .overview-grid, .icon-rule-grid { grid-template-columns: 1fr; }
-            .logo-pair { grid-template-columns: 1fr; }
+            .values-grid,
+            .logo-dos-grid,
+            .logo-donts-grid,
+            .icon-showcase { grid-template-columns: 1fr; }
             .section { padding: 28px 20px; }
             .name-main { font-size: 32px; }
-            .logo-display { padding: 32px 24px; }
+            .vision-quote { padding: 40px 18px; }
+            .vision-quote blockquote { max-width: 100%; }
         }
 
         @media print {
@@ -494,41 +738,6 @@
             <h1 class="h1">智感云品牌设计规范文档<br>Brand Design Guidelines</h1>
             <p class="lead">目标: 构建一套兼顾数字端与 A4 画册的统一设计体系。页面遵循极简、克制、无菌感和高对比的医疗科技视觉语言，以大面积留白保证信息呼吸感。</p>
             <span class="chip">Digital + Print Unified Standard</span>
-        </section>
-
-        <section class="section">
-            <h2 class="section-title">品牌概述</h2>
-            <p class="section-desc">Brand Overview. 智感云致力于提供卓越的智慧医疗与物联网解决方案，以专业、科技、简洁、可信赖为核心理念构建品牌形象。</p>
-            <div class="overview-grid">
-                <article class="overview-card">
-                    <div class="ov-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.84A2.5 2.5 0 0 1 9.5 2"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.84A2.5 2.5 0 0 0 14.5 2"/></svg>
-                    </div>
-                    <h3>专业 Professional</h3>
-                    <p>深耕感控、医废管理与内镜追溯等高专业度场景，提供经过行业验证的物联网整体解决方案。</p>
-                </article>
-                <article class="overview-card">
-                    <div class="ov-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 4v5M9 4v5M9 15v5M15 15v5M4 9h5M15 9h5M4 15h5M15 15h5"/></svg>
-                    </div>
-                    <h3>科技 Tech</h3>
-                    <p>运用前沿 IoT、边缘计算与数字孪生技术，驱动医疗机构精细化数字化管理转型升级。</p>
-                </article>
-                <article class="overview-card">
-                    <div class="ov-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-                    </div>
-                    <h3>简洁 Clean</h3>
-                    <p>化繁为简，以直观高效的操作界面赋能医护人员首日上手，降低认知负担与操作摩擦。</p>
-                </article>
-                <article class="overview-card">
-                    <div class="ov-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-                    </div>
-                    <h3>可信赖 Reliable</h3>
-                    <p>数据精准、系统稳定，是医疗机构、卫健委与监管机构值得长期托付的技术合作伙伴。</p>
-                </article>
-            </div>
         </section>
 
         <section class="section">
@@ -559,54 +768,6 @@
                     <circle cx="12" cy="17" r="1.2" fill="#fff"></circle>
                 </svg>
                 <span>严禁将两者混用或拼写为“Opmonitor Tec”。所有出街文档必须按双轨命名策略执行。</span>
-            </div>
-        </section>
-
-        <section class="section">            <h2 class="section-title">Logo 规范</h2>
-            <p class="section-desc">Logo Usage. Logo 由品牌标识与文字组合构成，使用时须严格遵守安全空间、背景规范与最小尺寸规定，禁止任何形式的二次改造。</p>
-            <div class="logo-pair">
-                <div>
-                    <p style="font-size:13px; font-weight:600; color:var(--muted); margin-bottom:10px; letter-spacing:0.08em; text-transform:uppercase;">标准版（浅色背景 · 安全边距区）</p>
-                    <div class="logo-display dashed">
-                        <img class="brand-logo-img" src="./opmoniter_logo.png" alt="智感云品牌 Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                        <div class="logo-fallback" style="display:none;">opmonitor<span style="color:var(--muted)">.</span></div>
-                    </div>
-                    <p style="font-size:13px; font-weight:600; color:var(--muted); margin-bottom:10px; letter-spacing:0.08em; text-transform:uppercase; margin-top:16px;">白底反白版（深色背景）</p>
-                    <div class="logo-display dark-bg">
-                        <img class="brand-logo-img inverted" src="./opmoniter_logo.png" alt="智感云白色 Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                        <div class="logo-fallback light" style="display:none;">opmonitor<span style="color:rgba(255,255,255,0.4)">.</span></div>
-                    </div>
-                </div>
-                <div class="logo-dont-grid">
-                    <div class="logo-dont-item">
-                        <div class="dont-bullet">✗</div>
-                        <div>
-                            <strong>禁止变形拉伸</strong>
-                            <p>严禁对 Logo 进行任何比例压缩或拉伸。Do not stretch or distort.</p>
-                        </div>
-                    </div>
-                    <div class="logo-dont-item">
-                        <div class="dont-bullet">✗</div>
-                        <div>
-                            <strong>禁止二次改色</strong>
-                            <p>仅允许品牌蓝与白色两版，禁止使用其他颜色。Do not recolor.</p>
-                        </div>
-                    </div>
-                    <div class="logo-dont-item">
-                        <div class="dont-bullet">✗</div>
-                        <div>
-                            <strong>禁止添加特效</strong>
-                            <p>禁止叠加阴影、描边、发光、浮雕等效果。No effects.</p>
-                        </div>
-                    </div>
-                    <div class="logo-dont-item">
-                        <div class="dont-bullet">!</div>
-                        <div>
-                            <strong>最小安全尺寸</strong>
-                            <p>印刷最小宽度 25mm，数字端最小宽度 120px，低于此尺寸不得使用。</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -698,51 +859,6 @@
         </section>
 
         <section class="section">
-            <h2 class="section-title">Icon 专业设计规则</h2>
-            <p class="section-desc">Icon Design Standards. 图标系统采用统一线性风格（Remixicon line 系列），遵循 24×24 栅格，统一描边粗细，保证跨场景视觉一致性。</p>
-            <div class="icon-rule-grid">
-                <article class="icon-rule-card">
-                    <h4>图标家族 / Icon Family</h4>
-                    <p>统一使用 Remixicon line 风格，禁止混用 fill（填充）版本、彩色图标或其他图标库，以保证跨页面视觉一致性。</p>
-                </article>
-                <article class="icon-rule-card">
-                    <h4>描边粗细 / Stroke Weight</h4>
-                    <p>标题配图标使用 Medium（24dp · 2px stroke）；正文内置图标使用 Regular（20dp · 1.5px stroke）。禁止超重或过细描边。</p>
-                </article>
-                <article class="icon-rule-card">
-                    <h4>颜色规则 / Color Rules</h4>
-                    <p>正常态 #333333，激活/强调态 #007BFF，禁用态 #999999。状态图标（警告/错误）使用功能色，禁止纯黑 #000000。</p>
-                </article>
-                <article class="icon-rule-card">
-                    <h4>视觉补偿 / Optical Balance</h4>
-                    <p>圆形图标（刷新、循环）需做 +2px 视觉补偿；三角形图标整体缩小 2px，确保与方形图标视觉等量感，不可机械等尺寸对齐。</p>
-                </article>
-            </div>
-            <div class="icon-size-row">
-                <div class="icon-size-item">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-                    <span>16px<br>Caption</span>
-                </div>
-                <div class="icon-size-item">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h18v18H3z"/><path d="m9 9 6 6M15 9l-6 6"/></svg>
-                    <span>20px<br>Body Text</span>
-                </div>
-                <div class="icon-size-item">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-                    <span>24px<br>Navigation</span>
-                </div>
-                <div class="icon-size-item">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-                    <span>32px<br>Feature Icon</span>
-                </div>
-                <div class="icon-size-item">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.84A2.5 2.5 0 0 1 9.5 2"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.84A2.5 2.5 0 0 0 14.5 2"/></svg>
-                    <span>40px<br>Section Intro</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
             <h2 class="section-title">模块 4: 空间留白与组件解构</h2>
             <p class="section-desc">Layout &amp; Breathing Space. 画册版面需以留白建立秩序，负空间占比目标 50%，以降低医疗信息视觉疲劳。</p>
             <div class="card soft">
@@ -793,6 +909,150 @@
             </div>
         </section>
 
+        <section class="section">
+            <h2 class="section-title">模块 7: 品牌概述与愿景</h2>
+            <p class="section-desc">Brand Overview &amp; Vision. 采用上下分栏结构，上部为克制的愿景引用语，下部为四大核心设计理念卡片。</p>
+
+            <div class="vision-layout">
+                <div class="vision-quote">
+                    <blockquote>
+                        “致力于通过创新的设备、软件、服务，推动医疗与卫监环境的整体智能化升级，支撑精细化管理。”
+                    </blockquote>
+                </div>
+
+                <div class="values-grid">
+                    <article class="value-card">
+                        <div class="value-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                        </div>
+                        <h4>专业 Professional</h4>
+                        <p>深耕医疗行业，提供专家级解决方案。</p>
+                    </article>
+                    <article class="value-card">
+                        <div class="value-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 4v4M9 4v4M9 16v4M15 16v4M4 9h4M16 9h4M4 15h4M16 15h4"/></svg>
+                        </div>
+                        <h4>科技 Tech</h4>
+                        <p>运用前沿物联网技术，驱动数字化转型。</p>
+                    </article>
+                    <article class="value-card">
+                        <div class="value-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 20h8"/><path d="M10 18v2M14 18v2"/></svg>
+                        </div>
+                        <h4>简洁 Clean</h4>
+                        <p>化繁为简，提供直观高效的用户体验。</p>
+                    </article>
+                    <article class="value-card">
+                        <div class="value-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8.7-8 10-4.5-1.3-8-5-8-10V6l8-4z"/><path d="M8.5 12.5 11 15l4.5-5"/></svg>
+                        </div>
+                        <h4>可信赖 Reliable</h4>
+                        <p>安全稳定，是客户值得托付的合作伙伴。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">模块 8: Logo 识别与使用规范</h2>
+            <p class="section-desc">Logo Guidelines. 分为正确使用（Dos）与错误示范（Don'ts）两区，确保品牌识别在所有介质一致且可控。</p>
+            <p class="logo-explain">设计释义: Logo 由代表数据流的三条蓝色倾斜线条与中英文字体组成，传递物联网的数据连通属性。</p>
+
+            <p class="logo-zone-title">Correct Usage (Dos)</p>
+            <div class="logo-dos-grid">
+                <article class="logo-card">
+                    <h4 style="font-size:15px; margin-bottom:4px;">标准版 Logo (科技蓝)</h4>
+                    <p style="font-size:13px; color:var(--muted);">纯白背景展示，保持清晰可读与标准比例。</p>
+                    <div class="logo-stage">
+                        <img class="brand-logo-img" src="./opmoniter_logo.png" alt="标准版 Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'">
+                        <span class="logo-fallback" style="display:none;"><span class="bars"><i></i><i></i><i></i></span>opmonitor</span>
+                    </div>
+                </article>
+                <article class="logo-card">
+                    <h4 style="font-size:15px; margin-bottom:4px;">白色版 Logo (反白)</h4>
+                    <p style="font-size:13px; color:var(--muted);">深灰/科技蓝背景使用白色版本，提高对比度。</p>
+                    <div class="logo-stage dark">
+                        <img class="brand-logo-img white-logo" src="./opmoniter_logo.png" alt="白色版 Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'">
+                        <span class="logo-fallback white-logo" style="display:none;"><span class="bars"><i></i><i></i><i></i></span>opmonitor</span>
+                    </div>
+                </article>
+            </div>
+
+            <p class="logo-zone-title">Don'ts (严格红线)</p>
+            <div class="logo-donts-grid">
+                <article class="dont-card">
+                    <span class="x-mark">✕</span>
+                    <h4>禁止变形</h4>
+                    <p>Do not stretch</p>
+                    <div class="logo-mock stretch">
+                        <span class="logo-fallback"><span class="bars"><i></i><i></i><i></i></span>opmonitor</span>
+                    </div>
+                </article>
+                <article class="dont-card">
+                    <span class="x-mark">✕</span>
+                    <h4>禁止改色</h4>
+                    <p>Do not change colors</p>
+                    <div class="logo-mock recolor">
+                        <span class="logo-fallback"><span class="bars"><i></i><i></i><i></i></span>opmonitor</span>
+                    </div>
+                </article>
+                <article class="dont-card">
+                    <span class="x-mark">✕</span>
+                    <h4>禁止特效</h4>
+                    <p>No shadows/glows</p>
+                    <div class="logo-mock glow">
+                        <span class="logo-fallback"><span class="bars"><i></i><i></i><i></i></span>opmonitor</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">模块 9: Icon 功能图标专业设计规则</h2>
+            <p class="section-desc">Iconography Rules. 面向画册与 UI 的统一图标策略，确保医疗 B2B 语境下的专业感、可读性与克制表达。</p>
+
+            <div class="icon-ban">核心禁令: 医疗 B2B 行业禁用复杂 3D、渐变色或拟物化图标。所有功能 Icon 必须保持高度抽象与克制。</div>
+
+            <div class="icon-showcase">
+                <article class="icon-sample">
+                    <div class="icon-stage">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="6" width="16" height="10" rx="2"/><path d="M7 16v3h10v-3"/><path class="accent" d="M12 9v4"/><path class="accent" d="M10.5 11.5h3"/></svg>
+                    </div>
+                    <h4>智能收集</h4>
+                    <p>电子秤数据采集</p>
+                </article>
+                <article class="icon-sample">
+                    <div class="icon-stage">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7H4z"/><path d="M13 4h7v7h-7z"/><path d="M4 13h7v7H4z"/><path class="accent" d="M14 15c1.2-1.2 3.1-1.2 4.2 0"/><path class="accent" d="M13 17l2 2 5-5"/></svg>
+                    </div>
+                    <h4>扫码交接</h4>
+                    <p>二维码握手交接</p>
+                </article>
+                <article class="icon-sample">
+                    <div class="icon-stage">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18h10a4 4 0 0 0 0-8 5 5 0 0 0-9.7-1.2A4 4 0 0 0 7 18z"/><path class="accent" d="M12 10v7"/><path class="accent" d="M9.5 14.5 12 17l2.5-2.5"/></svg>
+                    </div>
+                    <h4>云端上报</h4>
+                    <p>设备数据实时上传</p>
+                </article>
+                <article class="icon-sample">
+                    <div class="icon-stage">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v6c0 4.2 2.8 7.1 7 9 4.2-1.9 7-4.8 7-9V6l-7-3z"/><path class="accent" d="M9 12.5 11.2 15 15 10.8"/></svg>
+                    </div>
+                    <h4>安全追溯</h4>
+                    <p>监管链路可追踪</p>
+                </article>
+            </div>
+
+            <ol class="icon-rule-list">
+                <li><b>1. 统一线宽 (Consistent Stroke):</b> 统一采用 1.5px - 2px 极简线性描边，端点采用 Round Cap，传达医疗行业亲和力。</li>
+                <li><b>2. 双色调原则 (Dual-Tone):</b> 主体线条使用深灰 #333333，关键点使用科技蓝 #007BFF 局部点缀，切忌全蓝或五颜六色。</li>
+                <li><b>3. 几何面性结合 (Micro-Flat):</b> 可在图标底层加入极浅灰 #F5F5F5 几何托底，增加层次但不抢夺视线。</li>
+            </ol>
+
+            <button id="download-icon-spec" class="btn-ghost" type="button">下载 SVG 图标库规范模板</button>
+        </section>
+
         <p class="footer-note">OpMaster / OpMonitor Brand Design Guidelines - Digital & Print Unified Spec</p>
     </main>
 
@@ -826,9 +1086,18 @@
   <ellipse cx="920" cy="620" rx="480" ry="140" fill="rgba(0,123,255,0.20)"/>
 </svg></script>
 
+        <script id="icon-spec-svg" type="text/plain"><svg width="96" height="96" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#333333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <title>Icon Specification Template</title>
+    <desc>1.5px-2px stroke, dual-tone accent in #007BFF, micro-flat background #F5F5F5.</desc>
+    <rect x="2" y="2" width="20" height="20" rx="4" fill="#F5F5F5" stroke="none"/>
+    <path d="M7 12h10M12 7v10"/>
+    <circle cx="12" cy="12" r="2.2" stroke="#007BFF"/>
+</svg></script>
+
     <script>
         (function () {
             const buttons = document.querySelectorAll(".btn-copy");
+                        const iconDownloadBtn = document.getElementById("download-icon-spec");
 
             function fallbackCopy(text) {
                 const area = document.createElement("textarea");
@@ -865,6 +1134,22 @@
                     }
                 });
             });
+
+            if (iconDownloadBtn) {
+                iconDownloadBtn.addEventListener("click", function () {
+                    const tpl = document.getElementById("icon-spec-svg");
+                    if (!tpl) return;
+                    const blob = new Blob([tpl.textContent.trim()], { type: "image/svg+xml" });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = "opmonitor-icon-spec-template.svg";
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    URL.revokeObjectURL(url);
+                });
+            }
         })();
     </script>
 </body>

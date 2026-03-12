@@ -3,1214 +3,649 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>智感云品牌设计规范文档</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <title>智感云品牌设计规范文档 | Brand Design Guidelines</title>
     <style>
         :root {
-            --primary-blue: #007BFF;
-            --secondary-dark: #333333;
-            --secondary-gray: #666666;
-            --light-gray: #F5F5F5;
-            --white: #FFFFFF;
-            --cyan: #00C2FF;
-            --green: #00C853;
-            --red: #FF4F3D;
-            --yellow: #FFC107;
-            --industry-dirty: #F08AA6;
-            --industry-clean: #0FAEA4;
-            --industry-waste-yellow: #FFD400;
-            --industry-iot-blue: #3E7BFF;
-            
-            --font-main: 'Noto Sans SC', 'NotoSansHans-Regular', sans-serif;
-            --font-display: 'AlimamaShuHeiTi-Bold', sans-serif;
+            --bg: #f6f8fb;
+            --surface: #ffffff;
+            --surface-soft: #f5f7fa;
+            --ink: #111827;
+            --muted: #6b7280;
+            --line: #e5e7eb;
+            --blue: #007bff;
+            --blue-deep: #0059b8;
+            --dirty: #f08aa6;
+            --clean: #0faea4;
+            --waste: #ffd400;
+            --danger: #dc2626;
+            --shadow-soft: 0 20px 40px rgba(9, 30, 66, 0.08);
+            --shadow-crisp: 0 10px 24px rgba(2, 27, 55, 0.08);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            width: 1920px;
-            margin: 0 auto;
-            background-color: var(--light-gray);
-            font-family: var(--font-main);
-            color: var(--secondary-dark);
+            font-family: "IBM Plex Sans", "PingFang SC", "Noto Sans SC", "Segoe UI", sans-serif;
+            color: var(--ink);
+            background: radial-gradient(circle at 5% 0%, #eef5ff 0%, transparent 34%), var(--bg);
+            line-height: 1.65;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Container & Grid */
-        .page-container {
-            width: 100%;
-            background: var(--white);
-            overflow: hidden;
-            min-height: 100vh;
+        .container {
+            width: min(1200px, 92vw);
+            margin-inline: auto;
+            padding: 56px 0 88px;
         }
 
-        /* Main Content */
-        .content-area {
-            padding: 80px 100px;
-            background: #F8F9FB;
+        .space-y-40 > * + * { margin-top: 40px; }
+        .space-y-24 > * + * { margin-top: 24px; }
+        .space-y-16 > * + * { margin-top: 16px; }
+
+        .grid { display: grid; }
+        .g-24 { gap: 24px; }
+        .g-16 { gap: 16px; }
+        .g-12 { gap: 12px; }
+        .cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            box-shadow: var(--shadow-crisp);
+            padding: 28px;
         }
 
-        /* Cover Section */
-        .section-cover {
-            height: 800px;
-            background: linear-gradient(135deg, #001f3f 0%, #007BFF 100%);
-            border-radius: 24px;
-            color: white;
-            padding: 100px;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 100px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        .card.soft {
+            background: var(--surface-soft);
+            border-color: #eef2f7;
+            box-shadow: none;
         }
 
-        .section-cover::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-            border-radius: 50%;
-        }
-
-        .cover-subtitle {
-            font-size: 24px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            opacity: 0.8;
-            margin-bottom: 20px;
-            font-weight: 300;
-        }
-
-        .cover-title {
-            font-family: var(--font-display);
-            font-size: 80px;
-            line-height: 1.1;
-            margin-bottom: 60px;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .cover-footer {
-            margin-top: auto;
-            display: flex;
-            gap: 60px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-            padding-top: 40px;
-        }
-        
-        .cover-item label {
-            display: block;
-            font-size: 12px;
-            opacity: 0.6;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-
-        /* Content Blocks */
-        .section-block {
-            margin-bottom: 100px;
-        }
-
-        .block-header {
-            margin-bottom: 40px;
-            border-left: 6px solid var(--primary-blue);
-            padding-left: 24px;
-        }
-
-        .block-title {
-            font-size: 36px;
-            font-weight: bold;
-            color: var(--secondary-dark);
-            margin-bottom: 12px;
-            font-family: 'NotoSansHans-Bold';
-        }
-
-        .block-desc {
-            color: var(--secondary-gray);
-            font-size: 18px;
-            max-width: 800px;
-        }
-
-        /* Brand Overview Grid */
-        .overview-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-        }
-
-        .overview-card {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-            text-align: center;
-            border: 1px solid rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-        }
-        
-        .overview-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,123,255,0.1);
-            border-color: rgba(0,123,255,0.2);
-        }
-
-        .overview-icon {
-            font-size: 40px;
-            color: var(--primary-blue);
-            margin-bottom: 20px;
-            background: rgba(0,123,255,0.1);
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .overview-card h3 {
-            font-size: 20px;
-            margin-bottom: 12px;
-            color: var(--secondary-dark);
-        }
-
-        .overview-card p {
-            color: var(--secondary-gray);
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        /* Color System */
-        .color-group-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin: 40px 0 20px;
-            color: var(--secondary-dark);
-        }
-
-        .color-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-        }
-
-        .color-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .color-swatch {
-            height: 140px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 24px;
-            letter-spacing: 1px;
-        }
-
-        .color-swatch.light {
-            color: var(--secondary-dark);
-            border-bottom: 1px solid #eee;
-        }
-
-        .color-info {
-            padding: 24px;
-        }
-
-        .color-name {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .color-usage {
-            font-size: 13px;
-            color: var(--secondary-gray);
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #eee;
-        }
-
-        .color-codes {
-            font-family: monospace;
-            font-size: 14px;
-            color: #888;
-        }
-
-        /* Typography */
-        .typo-container {
-            background: white;
-            border-radius: 20px;
-            padding: 60px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-        }
-
-        .typo-section h4 {
-            font-size: 24px;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--light-gray);
-        }
-
-        .font-sample {
-            margin-bottom: 30px;
-        }
-
-        .fs-label {
-            font-size: 12px;
-            color: #999;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .fs-h1 { font-size: 64px; font-weight: bold; color: var(--primary-blue); line-height: 1.2; font-family: 'NotoSansHans-Bold'; }
-        .fs-h2 { font-size: 48px; font-weight: bold; color: var(--secondary-dark); line-height: 1.3; font-family: 'NotoSansHans-Bold'; }
-        .fs-h3 { font-size: 32px; font-weight: 500; color: var(--secondary-dark); line-height: 1.4; font-family: 'NotoSansHans-Medium'; }
-        .fs-p { font-size: 18px; color: var(--secondary-gray); line-height: 1.6; }
-
-        /* Logo Specification */
-        .logo-specs {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 40px;
-        }
-
-        .logo-showcase {
-            display: grid;
-            gap: 20px;
-        }
-
-        .logo-display {
-            background: white;
-            padding: 80px;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
-            position: relative;
-        }
-        
-        .brand-logo-img {
-            width: min(560px, 100%);
-            height: auto;
-            display: block;
-        }
-
-        .brand-logo-img.white-logo {
-            filter: brightness(0) saturate(0) invert(1);
-        }
-
-        .logo-display.dark-surface {
-            background: #111722;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
-        }
-
-        .logo-caption {
-            font-size: 14px;
-            color: var(--secondary-gray);
-            margin-bottom: 10px;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-        }
-
-        .safe-area-box {
-            border: 1px dashed var(--primary-blue);
+        .section {
             padding: 40px;
-            position: relative;
-        }
-        
-        .safe-area-box::after {
-            content: 'x';
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            color: var(--primary-blue);
-            font-weight: bold;
-        }
-        
-        .safe-area-box::before {
-            content: 'x';
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            color: var(--primary-blue);
-            font-weight: bold;
+            border-radius: 26px;
+            background: #ffffffc7;
+            border: 1px solid #e6ebf2;
+            backdrop-filter: blur(2px);
         }
 
-        .dont-do-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
+        .kicker {
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--blue-deep);
+            font-weight: 700;
         }
 
-        .dont-item {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            border-left: 4px solid var(--red);
+        .h1 {
+            font-size: clamp(30px, 4vw, 52px);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            font-weight: 700;
+            max-width: 16ch;
         }
 
-        .dont-item i {
-            color: var(--red);
-            font-size: 24px;
-        }
-
-        /* UI Kit & Elements */
-        .ui-kit-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-
-        .ui-card {
-            background: white;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-        }
-
-        .ui-title {
+        .lead {
+            max-width: 62ch;
+            color: #374151;
             font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 24px;
-            color: var(--secondary-dark);
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        .btn-primary {
-            background: var(--primary-blue);
-            color: white;
-            padding: 12px 32px;
-            border-radius: 8px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,123,255,0.3);
-            display: inline-block;
-        }
-
-        .btn-outline {
-            border: 2px solid var(--primary-blue);
-            color: var(--primary-blue);
-            background: transparent;
-            padding: 10px 30px;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            display: inline-block;
-            margin-left: 10px;
-        }
-
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-            margin-right: 10px;
+        .section-title {
+            font-size: clamp(24px, 2.6vw, 36px);
+            line-height: 1.22;
+            letter-spacing: -0.01em;
+            font-weight: 700;
             margin-bottom: 10px;
         }
-        .badge-success { background: rgba(0,200,83,0.1); color: var(--green); }
-        .badge-warn { background: rgba(255,193,7,0.1); color: var(--yellow); }
-        .badge-error { background: rgba(255,79,61,0.1); color: var(--red); }
 
-        .icon-grid-demo {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-        }
-        
-        .icon-box {
-            width: 48px;
-            height: 48px;
-            background: var(--light-gray);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: var(--secondary-dark);
-        }
-
-        /* Mockups */
-        .mockup-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .mockup-lg {
-            height: 400px;
-            background: #E3F2FD;
-            border-radius: 16px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .mockup-sm {
-            height: 185px;
-            background: white;
-            border-radius: 16px;
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        
-        .mockup-sm:last-child { margin-bottom: 0; }
-
-        .mockup-browser {
-            width: 80%;
-            height: 80%;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            position: relative;
-        }
-        
-        .browser-header {
-            height: 30px;
-            background: #f0f0f0;
-            border-radius: 8px 8px 0 0;
-            display: flex;
-            align-items: center;
-            padding: 0 15px;
-            gap: 6px;
-        }
-        .dot { width: 8px; height: 8px; border-radius: 50%; background: #ccc; }
-        .dot.red { background: #FF5F56; }
-        .dot.yellow { background: #FFBD2E; }
-        .dot.green { background: #27C93F; }
-
-        .browser-body {
-            padding: 20px;
-        }
-        
-        .skel-nav { width: 100%; height: 40px; background: #f5f5f5; margin-bottom: 20px; border-radius: 4px; display: flex; align-items: center; padding: 0 20px; justify-content: space-between;}
-        .skel-logo { width: 80px; height: 20px; background: var(--primary-blue); border-radius: 4px; opacity: 0.5;}
-        .skel-hero { width: 100%; height: 120px; background: linear-gradient(135deg, #e3f2fd 0%, #fff 100%); border-radius: 4px; margin-bottom: 20px; display: flex; align-items: center; padding: 20px;}
-        .skel-text-block { flex: 1; }
-        .skel-line { height: 10px; background: #eee; margin-bottom: 8px; border-radius: 2px;}
-        .skel-line.long { width: 80%; }
-        .skel-line.short { width: 40%; }
-        
-        .mobile-frame {
-            width: 100px;
-            height: 160px;
-            border: 4px solid #333;
-            border-radius: 12px;
-            background: white;
-            position: relative;
-        }
-        .mobile-notch { width: 40px; height: 10px; background: #333; position: absolute; top: 0; left: 50%; transform: translateX(-50%); border-radius: 0 0 6px 6px; }
-
-        /* Footer */
-        .doc-footer {
-            margin-top: 100px;
-            border-top: 1px solid #ddd;
-            padding-top: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--secondary-gray);
-        }
-
-        .checklist {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
-        .check-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-        }
-        
-        .check-item i { color: var(--green); }
-
-        /* Hero Image Guideline */
-        .guideline-panel {
-            margin-top: 32px;
-            background: white;
-            border-radius: 20px;
-            padding: 36px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
-        }
-
-        .guideline-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
+        .section-desc {
+            color: var(--muted);
+            max-width: 72ch;
             margin-bottom: 26px;
-            flex-wrap: wrap;
+            font-size: 16px;
         }
 
-        .guideline-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--secondary-dark);
-        }
-
-        .guideline-tag {
+        .chip {
+            display: inline-block;
             font-size: 12px;
-            color: var(--primary-blue);
-            background: rgba(0, 123, 255, 0.08);
-            border: 1px solid rgba(0, 123, 255, 0.2);
+            font-weight: 700;
+            color: var(--blue-deep);
+            border: 1px solid #b7d4ff;
+            background: #edf5ff;
             border-radius: 999px;
             padding: 6px 12px;
         }
 
-        .guideline-grid {
-            display: grid;
-            grid-template-columns: 1.3fr 1fr;
-            gap: 28px;
+        .name-main {
+            font-size: 40px;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            font-weight: 700;
+            margin-bottom: 8px;
         }
 
-        .guideline-list {
+        .name-sub {
+            color: var(--muted);
+            font-size: 15px;
+            margin-bottom: 14px;
+        }
+
+        .usage {
+            font-size: 14px;
+            color: #334155;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 12px 14px;
+            border-radius: 12px;
+        }
+
+        .alert {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            border: 1px solid #fecaca;
+            background: #fff1f2;
+            color: #991b1b;
+            padding: 14px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .swatch {
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+            background: white;
+        }
+
+        .swatch-color {
+            height: 96px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            padding: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            color: rgba(17, 24, 39, 0.8);
+        }
+
+        .swatch-info {
+            padding: 14px;
+            font-size: 14px;
+        }
+
+        .swatch-info h4 {
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .swatch-info p {
+            color: #4b5563;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .divider {
+            height: 1px;
+            background: #e5e7eb;
+            margin: 18px 0;
+        }
+
+        .typo-spec {
+            border-left: 4px solid #d1d5db;
+            padding-left: 14px;
+            margin-top: 10px;
+        }
+
+        .typo-spec li {
+            list-style: none;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .typo-spec strong { color: #111827; }
+
+        .critical {
+            border: 1px solid #fca5a5;
+            background: #fef2f2;
+            border-radius: 14px;
+            padding: 16px;
+        }
+
+        .critical h4 {
+            color: #b91c1c;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .critical p {
+            color: #7f1d1d;
+            font-size: 14px;
+        }
+
+        .ban-list {
             display: grid;
             gap: 12px;
         }
 
-        .guideline-item {
-            background: #F8FAFC;
-            border: 1px solid #E9EEF5;
+        .ban-item {
+            background: #f9fafb;
+            border: 1px solid #eceff4;
             border-radius: 12px;
             padding: 14px 16px;
+        }
+
+        .ban-item h4 {
             font-size: 15px;
-            color: #4B5563;
+            margin-bottom: 4px;
         }
 
-        .guideline-item strong {
-            color: #1F2937;
+        .ban-item p {
+            font-size: 14px;
+            color: #4b5563;
         }
 
-        .hero-example-wrap {
-            display: grid;
-            gap: 16px;
-        }
-
-        .hero-example {
-            border-radius: 14px;
-            border: 1px solid #E5E7EB;
-            height: 210px;
+        .hero-box {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
+            min-height: 320px;
             position: relative;
-            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
-        .hero-example.white-bg {
-            background: #FFFFFF;
-        }
-
-        .hero-example.transparent-bg {
-            background:
-                linear-gradient(45deg, #F4F6F8 25%, transparent 25%),
-                linear-gradient(-45deg, #F4F6F8 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, #F4F6F8 75%),
-                linear-gradient(-45deg, transparent 75%, #F4F6F8 75%);
-            background-size: 22px 22px;
-            background-position: 0 0, 0 11px, 11px -11px, -11px 0;
-            background-color: #ffffff;
-        }
-
-        .hero-device {
-            width: 130px;
-            height: 130px;
-            object-fit: contain;
-            filter: drop-shadow(0 18px 16px rgba(38, 45, 58, 0.22));
-        }
-
-        .hero-caption {
+        .hero-box::before {
+            content: "";
             position: absolute;
-            left: 10px;
-            bottom: 10px;
-            font-size: 12px;
-            color: #5B6574;
-            background: rgba(255,255,255,0.9);
-            border: 1px solid #E5E7EB;
-            padding: 4px 8px;
-            border-radius: 8px;
+            inset: 20px;
+            border: 1px dashed #e5e7eb;
+            border-radius: 14px;
         }
 
-        /* Graphic Elements Guideline */
-        .graphic-grid {
-            margin-top: 28px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .graphic-card {
-            background: white;
-            border-radius: 16px;
-            border: 1px solid #E7ECF3;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            overflow: hidden;
-        }
-
-        .graphic-demo {
-            height: 200px;
+        .device-3d {
+            width: min(320px, 56vw);
+            height: auto;
             position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 18px 16px rgba(38,45,58,0.22));
+        }
+
+        .hero-note {
+            color: #374151;
+            font-size: 14px;
+            max-width: 72ch;
+            margin-top: 14px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 12px 14px;
+        }
+
+        .hero-note strong { color: #111827; }
+
+        .graphic-panel {
+            position: relative;
+            min-height: 220px;
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
             overflow: hidden;
+            background: white;
         }
 
-        .topology-demo {
+        .topology {
             background:
-                radial-gradient(circle at 15% 30%, rgba(0, 123, 255, 0.32) 0 4px, transparent 5px),
-                radial-gradient(circle at 40% 18%, rgba(0, 194, 255, 0.35) 0 4px, transparent 5px),
-                radial-gradient(circle at 65% 54%, rgba(0, 123, 255, 0.3) 0 4px, transparent 5px),
-                radial-gradient(circle at 84% 24%, rgba(0, 194, 255, 0.28) 0 4px, transparent 5px),
-                radial-gradient(circle at 28% 70%, rgba(0, 123, 255, 0.26) 0 4px, transparent 5px),
-                linear-gradient(140deg, #F6FAFF 0%, #EAF3FF 100%);
+                radial-gradient(circle at 15% 30%, rgba(107, 114, 128, 0.35) 0 3px, transparent 4px),
+                radial-gradient(circle at 45% 68%, rgba(107, 114, 128, 0.28) 0 3px, transparent 4px),
+                radial-gradient(circle at 72% 25%, rgba(107, 114, 128, 0.3) 0 3px, transparent 4px),
+                radial-gradient(circle at 85% 72%, rgba(107, 114, 128, 0.26) 0 3px, transparent 4px),
+                linear-gradient(160deg, #f9fafb 0%, #f3f4f6 100%);
         }
 
-        .topology-demo::before {
-            content: '';
+        .topology::before {
+            content: "";
             position: absolute;
             inset: 0;
             background-image:
-                linear-gradient(33deg, transparent 48%, rgba(0, 123, 255, 0.22) 49%, rgba(0, 123, 255, 0.22) 51%, transparent 52%),
-                linear-gradient(-18deg, transparent 48%, rgba(0, 194, 255, 0.2) 49%, rgba(0, 194, 255, 0.2) 51%, transparent 52%);
-            opacity: 0.65;
+                linear-gradient(20deg, transparent 47%, rgba(107, 114, 128, 0.22) 49%, rgba(107, 114, 128, 0.22) 51%, transparent 53%),
+                linear-gradient(-18deg, transparent 47%, rgba(107, 114, 128, 0.16) 49%, rgba(107, 114, 128, 0.16) 51%, transparent 53%);
+            opacity: 0.9;
         }
 
-        .fluid-demo {
+        .fluid {
             background:
-                radial-gradient(circle at 20% 130%, rgba(0, 123, 255, 0.28) 0%, transparent 45%),
-                radial-gradient(circle at 85% 100%, rgba(0, 194, 255, 0.3) 0%, transparent 48%),
-                linear-gradient(155deg, #0F2248 0%, #174E9A 45%, #2B89D8 100%);
+                radial-gradient(circle at 20% 110%, rgba(0, 123, 255, 0.3) 0%, transparent 45%),
+                radial-gradient(circle at 80% 100%, rgba(0, 123, 255, 0.23) 0%, transparent 42%),
+                linear-gradient(145deg, #ecf4ff 0%, #deedff 46%, #d6e8ff 100%);
         }
 
-        .fluid-demo::before,
-        .fluid-demo::after {
-            content: '';
+        .fluid::before,
+        .fluid::after {
+            content: "";
             position: absolute;
-            left: -10%;
-            width: 120%;
-            border-radius: 45%;
-            background: rgba(255, 255, 255, 0.12);
+            width: 130%;
+            left: -15%;
+            border-radius: 42%;
         }
 
-        .fluid-demo::before {
-            height: 120px;
-            bottom: -38px;
+        .fluid::before {
+            bottom: -30px;
+            height: 140px;
+            background: rgba(0, 123, 255, 0.14);
         }
 
-        .fluid-demo::after {
-            height: 88px;
-            bottom: -15px;
-            background: rgba(255, 255, 255, 0.2);
+        .fluid::after {
+            bottom: -10px;
+            height: 90px;
+            background: rgba(0, 123, 255, 0.2);
         }
 
-        .graphic-info {
-            padding: 16px 18px 18px;
-        }
-
-        .graphic-info h4 {
-            font-size: 18px;
-            margin-bottom: 8px;
-        }
-
-        .graphic-info p {
+        .panel-meta {
+            padding: 14px;
+            border-top: 1px solid #edf0f4;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
             font-size: 14px;
-            color: var(--secondary-gray);
-            line-height: 1.7;
+            color: #374151;
         }
 
-        @page {
-            size: A3 landscape;
-            margin: 10mm;
+        .btn-copy {
+            border: 1px solid #cfe3ff;
+            background: #f3f8ff;
+            color: #0f4d9d;
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-copy:hover { background: #e7f2ff; }
+
+        .footer-note {
+            text-align: center;
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 14px;
+        }
+
+        @media (max-width: 960px) {
+            .cols-2, .cols-3 { grid-template-columns: 1fr; }
+            .section { padding: 28px 20px; }
+            .name-main { font-size: 32px; }
         }
 
         @media print {
-            body {
-                width: auto;
-                margin: 0;
-                background: #fff;
-            }
-
-            .page-container {
-                overflow: visible;
-                min-height: auto;
-            }
-
-            .content-area {
-                padding: 20px;
-                background: #fff;
-            }
-
-            .section-cover {
-                break-inside: avoid;
-                page-break-inside: avoid;
-            }
-
-            .logo-specs,
-            .ui-kit-grid,
-            .mockup-grid,
-            .typo-container,
-            .overview-grid,
-            .color-grid {
-                break-inside: avoid;
-                page-break-inside: avoid;
-            }
+            @page { size: A4 portrait; margin: 16mm 14mm; }
+            body { background: #ffffff; }
+            .container { width: 100%; padding: 0; }
+            .section { break-inside: avoid; border: 1px solid #e5e7eb; box-shadow: none; }
+            .btn-copy { display: none; }
+            .footer-note { margin-top: 30px; }
         }
-
     </style>
 </head>
 <body>
+    <main class="container space-y-40">
+        <section class="section space-y-24">
+            <p class="kicker">Brand Design Guidelines 2026</p>
+            <h1 class="h1">智感云品牌设计规范文档<br>Brand Design Guidelines</h1>
+            <p class="lead">目标: 构建一套兼顾数字端与 A4 画册的统一设计体系。页面遵循极简、克制、无菌感和高对比的医疗科技视觉语言，以大面积留白保证信息呼吸感。</p>
+            <span class="chip">Digital + Print Unified Standard</span>
+        </section>
 
-    <div class="page-container">
-        <!-- Main Content -->
-        <main class="content-area">
-            
-            <!-- Cover -->
-            <section class="section-cover">
-                <div>
-                    <h2 class="cover-subtitle">Brand Design Guidelines 2026</h2>
-                    <h1 class="cover-title">智感云<br>品牌设计规范文档</h1>
-                </div>
-                
-                <div class="cover-footer">
-                    <div class="cover-item">
-                        <label>Created By</label>
-                        <span>Opmonitor Tec</span>
-                    </div>
-                    <div class="cover-item">
-                        <label>Focus Area</label>
-                        <span>Smart Healthcare & IoT</span>
-                    </div>
-                    <div class="cover-item">
-                        <label>Core Value</label>
-                        <span>Intelligent · Digital · Precise</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 1. Brand Overview -->
-            <section class="section-block">
-                <div class="block-header">
-                    <h2 class="block-title">01 品牌概述</h2>
-                    <p class="block-desc">智感云致力于提供卓越的智慧医疗与物联网解决方案，以专业、科技、简洁、可信赖为核心设计理念。</p>
-                </div>
-                
-                <div class="overview-grid">
-                    <div class="overview-card">
-                        <div class="overview-icon"><i class="ri-brain-line"></i></div>
-                        <h3>专业 Professional</h3>
-                        <p>深耕医疗行业，提供专家级解决方案与服务。</p>
-                    </div>
-                    <div class="overview-card">
-                        <div class="overview-icon"><i class="ri-cpu-line"></i></div>
-                        <h3>科技 Tech</h3>
-                        <p>运用前沿物联网技术，驱动数字化转型。</p>
-                    </div>
-                    <div class="overview-card">
-                        <div class="overview-icon"><i class="ri-layout-2-line"></i></div>
-                        <h3>简洁 Clean</h3>
-                        <p>化繁为简，提供直观高效的用户体验。</p>
-                    </div>
-                    <div class="overview-card">
-                        <div class="overview-icon"><i class="ri-shield-check-line"></i></div>
-                        <h3>可信赖 Reliable</h3>
-                        <p>安全稳定，是客户值得托付的合作伙伴。</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 2. Color System -->
-            <section class="section-block">
-                <div class="block-header">
-                    <h2 class="block-title">02 色彩系统</h2>
-                    <p class="block-desc">色彩是品牌识别的重要组成部分。科技蓝代表专业与信赖，辅助色系构建层次，功能色确保交互清晰。</p>
-                </div>
-
-                <h3 class="color-group-title">Primary Colors 主色调</h3>
-                <div class="color-grid">
-                    <div class="color-card">
-                        <div class="color-swatch" style="background: var(--primary-blue);">#007BFF</div>
-                        <div class="color-info">
-                            <div class="color-name">科技蓝 <span>30%</span></div>
-                            <div class="color-codes">RGB: 0, 123, 255</div>
-                            <div class="color-usage">Logo, 按钮, 强调</div>
-                        </div>
-                    </div>
-                    <div class="color-card">
-                        <div class="color-swatch light" style="background: var(--white);">#FFFFFF</div>
-                        <div class="color-info">
-                            <div class="color-name">纯白 <span>40%</span></div>
-                            <div class="color-codes">RGB: 255, 255, 255</div>
-                            <div class="color-usage">主背景, 留白</div>
-                        </div>
-                    </div>
-                    <div class="color-card">
-                        <div class="color-swatch light" style="background: var(--light-gray);">#F5F5F5</div>
-                        <div class="color-info">
-                            <div class="color-name">浅灰 <span>20%</span></div>
-                            <div class="color-codes">RGB: 245, 245, 245</div>
-                            <div class="color-usage">背景, 分区</div>
-                        </div>
-                    </div>
-                    <div class="color-card">
-                        <div class="color-swatch" style="background: var(--secondary-dark);">#333333</div>
-                        <div class="color-info">
-                            <div class="color-name">深灰 <span>10%</span></div>
-                            <div class="color-codes">RGB: 51, 51, 51</div>
-                            <div class="color-usage">标题, 重要文字</div>
-                        </div>
-                    </div>
-                </div>
-
-                <h3 class="color-group-title">Functional Colors 功能色</h3>
-                <div class="color-grid">
-                    <div class="color-card">
-                        <div class="color-swatch" style="background: var(--cyan);">#00C2FF</div>
-                        <div class="color-info">
-                            <div class="color-name">极速青</div>
-                            <div class="color-usage">高光, 交互</div>
-                        </div>
-                    </div>
-                    <div class="color-card">
-                        <div class="color-swatch" style="background: var(--green);">#00C853</div>
-                        <div class="color-info">
-                            <div class="color-name">安全绿</div>
-                            <div class="color-usage">成功, 正常</div>
-                        </div>
-                    </div>
-                    <div class="color-card">
-                        <div class="color-swatch" style="background: var(--yellow);">#FFC107</div>
-                        <div class="color-info">
-                            <div class="color-name">提示黄</div>
-                            <div class="color-usage">警告, 待办</div>
-                        </div>
-                    </div>
-                    <div class="color-card">
-                        <div class="color-swatch" style="background: var(--red);">#FF4F3D</div>
-                        <div class="color-info">
-                            <div class="color-name">警示红</div>
-                            <div class="color-usage">错误, 危险</div>
-                        </div>
-                    </div>
-                </div>
-
-                <h3 class="color-group-title">Industry Specific Colors 行业专属状态色</h3>
-                <div class="color-grid">
-                    <div class="color-card">
-                        <div class="color-swatch" style="background: var(--industry-dirty);">#F08AA6</div>
-                        <div class="color-info">
-                            <div class="color-name">污染色 Dirty Pink</div>
-                            <div class="color-codes">RGB: 240, 138, 166</div>
-                            <div class="color-usage">内镜流转污染区、污染标签、污染路径标识</div>
-                        </div>
-                    </div>
-                    <div class="color-card">
-                        <div class="color-swatch" style="background: var(--industry-clean);">#0FAEA4</div>
-                        <div class="color-info">
-                            <div class="color-name">洁净色 Clean Teal</div>
-                            <div class="color-codes">RGB: 15, 174, 164</div>
-                            <div class="color-usage">洁净区、合格状态、无菌路径与洁污分离引导</div>
-                        </div>
-                    </div>
-                    <div class="color-card">
-                        <div class="color-swatch light" style="background: var(--industry-waste-yellow);">#FFD400</div>
-                        <div class="color-info">
-                            <div class="color-name">医废黄 Waste Alert</div>
-                            <div class="color-codes">RGB: 255, 212, 0</div>
-                            <div class="color-usage">医废硬件涂装、危废容器、现场高可视警示</div>
-                        </div>
-                    </div>
-                    <div class="color-card">
-                        <div class="color-swatch" style="background: var(--industry-iot-blue);">#3E7BFF</div>
-                        <div class="color-info">
-                            <div class="color-name">物联链路蓝 IoT Link</div>
-                            <div class="color-codes">RGB: 62, 123, 255</div>
-                            <div class="color-usage">数据链路、拓扑节点高亮、设备连通态</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 3. Typography -->
-            <section class="section-block">
-                <div class="block-header">
-                    <h2 class="block-title">03 字体规范</h2>
-                    <p class="block-desc">清晰的层级关系能有效传递信息。中文使用思源黑体，英文使用 Helvetica/Arial，强调易读性。</p>
-                </div>
-
-                <div class="typo-container">
-                    <div class="typo-section">
-                        <h4>Chinese Typeface / 中文</h4>
-                        <div class="font-sample">
-                            <div class="fs-label">H1 Headline - Bold 48-72pt</div>
-                            <div class="fs-h1">智感云智慧医疗</div>
-                        </div>
-                        <div class="font-sample">
-                            <div class="fs-label">H2 Subtitle - Bold 36-48pt</div>
-                            <div class="fs-h2">构建万物互联的数字世界</div>
-                        </div>
-                        <div class="font-sample">
-                            <div class="fs-label">Body Text - Regular 24-28pt</div>
-                            <div class="fs-p">智感云致力于通过物联网技术，为医疗机构提供精细化管理方案。我们关注每一个数据的流动，确保信息传达的准确性与及时性。</div>
-                        </div>
-                    </div>
-                    <div class="typo-section">
-                        <h4>English Typeface / 英文</h4>
-                        <div class="font-sample">
-                            <div class="fs-label">Display - Arial Bold</div>
-                            <div class="fs-h1" style="font-family: Arial, sans-serif;">Smart Healthcare</div>
-                        </div>
-                        <div class="font-sample">
-                            <div class="fs-label">Subtitle - Arial Bold</div>
-                            <div class="fs-h2" style="font-family: Arial, sans-serif;">IoT Solutions Provider</div>
-                        </div>
-                        <div class="font-sample">
-                            <div class="fs-label">Body Text - Arial Regular</div>
-                            <div class="fs-p" style="font-family: Arial, sans-serif;">Our mission is to empower healthcare institutions with cutting-edge IoT technology, ensuring data accuracy and operational efficiency.</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 4. Logo Usage -->
-            <section class="section-block">
-                <div class="block-header">
-                    <h2 class="block-title">04 Logo规范</h2>
-                    <p class="block-desc">Logo由三条代表数据流的蓝色横线与文字组成。使用时需严格遵守安全空间与最小尺寸规定。</p>
-                </div>
-
-                <div class="logo-specs">
-                    <div class="logo-showcase">
-                        <div>
-                            <div class="logo-caption">标准版 Logo</div>
-                            <div class="logo-display safe-area-box">
-                                <img class="brand-logo-img" src="./opmoniter_logo.png" alt="智感云品牌 Logo" onerror="this.onerror=null;this.src='./opmonitor_logo.png';">
-                            </div>
-                        </div>
-                        <div>
-                            <div class="logo-caption">白色版 Logo（深色背景）</div>
-                            <div class="logo-display dark-surface">
-                                <img class="brand-logo-img white-logo" src="./opmoniter_logo.png" alt="智感云品牌白色 Logo" onerror="this.onerror=null;this.src='./opmonitor_logo.png';">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dont-do-grid">
-                        <div class="dont-item">
-                            <i class="ri-prohibited-line"></i>
-                            <div>
-                                <strong>禁止变形</strong>
-                                <p style="font-size: 12px; color: #666;">Do not stretch</p>
-                            </div>
-                        </div>
-                        <div class="dont-item">
-                            <i class="ri-palette-line"></i>
-                            <div>
-                                <strong>禁止改色</strong>
-                                <p style="font-size: 12px; color: #666;">Do not change colors</p>
-                            </div>
-                        </div>
-                        <div class="dont-item">
-                            <i class="ri-drop-line"></i>
-                            <div>
-                                <strong>禁止特效</strong>
-                                <p style="font-size: 12px; color: #666;">No shadows/glows</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 5. UI & Application -->
-            <section class="section-block">
-                <div class="block-header">
-                    <h2 class="block-title">05 视觉元素与应用</h2>
-                    <p class="block-desc">统一的UI组件与视觉风格，确保品牌在不同媒介下的一致性。</p>
-                </div>
-
-                <div class="ui-kit-grid">
-                    <div class="ui-card">
-                        <div class="ui-title"><i class="ri-cursor-line"></i> Buttons</div>
-                        <button class="btn-primary">主要按钮</button>
-                        <button class="btn-outline">次要按钮</button>
-                    </div>
-                    <div class="ui-card">
-                        <div class="ui-title"><i class="ri-notification-badge-line"></i> Status</div>
-                        <span class="status-badge badge-success">● 运行中</span>
-                        <span class="status-badge badge-warn">● 待处理</span>
-                        <span class="status-badge badge-error">● 异常</span>
-                    </div>
-                    <div class="ui-card">
-                        <div class="ui-title"><i class="ri-function-line"></i> Icons</div>
-                        <div class="icon-grid-demo">
-                            <div class="icon-box"><i class="ri-home-4-line"></i></div>
-                            <div class="icon-box"><i class="ri-settings-3-line"></i></div>
-                            <div class="icon-box"><i class="ri-user-line"></i></div>
-                            <div class="icon-box"><i class="ri-search-line"></i></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mockup-grid">
-                    <div class="mockup-lg">
-                        <div class="mockup-browser">
-                            <div class="browser-header">
-                                <div class="dot red"></div>
-                                <div class="dot yellow"></div>
-                                <div class="dot green"></div>
-                            </div>
-                            <div class="browser-body">
-                                <div class="skel-nav">
-                                    <div class="skel-logo"></div>
-                                </div>
-                                <div class="skel-hero">
-                                    <div class="skel-text-block">
-                                        <div class="skel-line long" style="height: 16px; width: 60%; background: #007BFF; opacity: 0.8; margin-bottom: 12px;"></div>
-                                        <div class="skel-line short" style="width: 40%;"></div>
-                                        <div class="skel-line short" style="width: 30%;"></div>
-                                    </div>
-                                    <div style="width: 80px; height: 80px; background: #fff; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"></div>
-                                </div>
-                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
-                                    <div style="height: 100px; background: #f9f9f9; border-radius: 4px;"></div>
-                                    <div style="height: 100px; background: #f9f9f9; border-radius: 4px;"></div>
-                                    <div style="height: 100px; background: #f9f9f9; border-radius: 4px;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <section class="section">
+            <h2 class="section-title">模块 1: 品牌名称与英文标识双轨制</h2>
+            <p class="section-desc">Brand Naming Convention. 对外品牌表达必须明确区分企业实体与平台产品，确保法务、市场与技术文档语义一致。</p>
+            <div class="grid cols-2 g-24">
+                <article class="card space-y-16">
+                    <span class="chip">Company Entity</span>
                     <div>
-                        <div class="mockup-sm">
-                            <div class="mobile-frame">
-                                <div class="mobile-notch"></div>
-                                <div style="padding: 20px 10px; display: flex; flex-direction: column; gap: 8px;">
-                                    <div style="width: 30px; height: 30px; background: #007BFF; border-radius: 6px;"></div>
-                                    <div style="height: 8px; width: 60px; background: #eee;"></div>
-                                    <div style="height: 60px; background: #f0f0f0; border-radius: 4px; margin-top: 10px;"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mockup-sm">
-                            <h4 style="margin-bottom: 15px; color: #666;">Document Layout</h4>
-                            <div style="width: 100px; height: 140px; background: white; border: 1px solid #eee; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 10px;">
-                                <div style="width: 100%; height: 30%; background: #007BFF; margin-bottom: 8px;"></div>
-                                <div style="width: 100%; height: 4px; background: #eee; margin-bottom: 4px;"></div>
-                                <div style="width: 80%; height: 4px; background: #eee; margin-bottom: 4px;"></div>
-                            </div>
-                        </div>
+                        <h3 class="name-main">OpMaster</h3>
+                        <p class="name-sub">Beijing OpMaster Technology Co,Ltd.</p>
+                    </div>
+                    <p class="usage">用途: 仅用于公司底部背书、法务信息、合同落款。</p>
+                </article>
+                <article class="card space-y-16">
+                    <span class="chip">Platform &amp; IoT</span>
+                    <div>
+                        <h3 class="name-main">OpMonitor</h3>
+                        <p class="name-sub">Operation Monitor / IoT Platform</p>
+                    </div>
+                    <p class="usage">用途: 用于物联网平台命名、官网网址、服务邮箱。</p>
+                </article>
+            </div>
+            <div class="alert" style="margin-top: 16px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 3L2 21h20L12 3z" fill="#dc2626"></path>
+                    <path d="M12 8v6" stroke="#fff" stroke-width="2" stroke-linecap="round"></path>
+                    <circle cx="12" cy="17" r="1.2" fill="#fff"></circle>
+                </svg>
+                <span>严禁将两者混用或拼写为“Opmonitor Tec”。所有出街文档必须按双轨命名策略执行。</span>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">模块 2: 色彩系统扩充</h2>
+            <p class="section-desc">Color System. 保留科技蓝与浅灰白基础色，并新增面向医疗感控/医废业务的行业专属状态色，以保证跨介质的一致识别。</p>
+
+            <h3 style="font-size: 18px; margin-bottom: 12px;">Foundation Colors</h3>
+            <div class="grid cols-3 g-16">
+                <article class="swatch">
+                    <div class="swatch-color" style="background:#007BFF; color:#fff;">#007BFF</div>
+                    <div class="swatch-info">
+                        <h4>科技蓝</h4>
+                        <p>品牌主色。用于一级标题、按钮、关键强调。</p>
+                    </div>
+                </article>
+                <article class="swatch">
+                    <div class="swatch-color" style="background:#F5F5F5;">#F5F5F5</div>
+                    <div class="swatch-info">
+                        <h4>浅灰白</h4>
+                        <p>页面背景与分区衬底，保证留白和阅读节奏。</p>
+                    </div>
+                </article>
+                <article class="swatch">
+                    <div class="swatch-color" style="background:#FFFFFF;">#FFFFFF</div>
+                    <div class="swatch-info">
+                        <h4>纯白</h4>
+                        <p>高信息区主画布，承载核心模块与产品渲染图。</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="divider"></div>
+
+            <h3 style="font-size: 18px; margin-bottom: 12px;">Industry Specific Colors</h3>
+            <div class="grid cols-3 g-16">
+                <article class="swatch">
+                    <div class="swatch-color" style="background:#F08AA6;">#F08AA6</div>
+                    <div class="swatch-info">
+                        <h4>污染色 (Dirty Pink)</h4>
+                        <p>用于内镜流转污染区、污染标签、污车路线。</p>
+                    </div>
+                </article>
+                <article class="swatch">
+                    <div class="swatch-color" style="background:#0FAEA4; color:#fff;">#0FAEA4</div>
+                    <div class="swatch-info">
+                        <h4>洁净色 (Clean Teal)</h4>
+                        <p>用于内镜洁净状态、无菌路径与洁污分离。</p>
+                    </div>
+                </article>
+                <article class="swatch">
+                    <div class="swatch-color" style="background:#FFD400;">#FFD400</div>
+                    <div class="swatch-info">
+                        <h4>医废黄 (Waste Alert)</h4>
+                        <p>医废推车、危废硬件专属高可视警示色。</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">模块 3: 排版与字号系统绝对隔离</h2>
+            <p class="section-desc">Typography - CRITICAL. 所有设计文件必须区分数字屏幕端与纸质印刷端，两套参数不可混用。</p>
+            <div class="grid cols-2 g-24">
+                <article class="card">
+                    <h3 style="font-size:22px; margin-bottom:8px;">数字屏幕端 (Web/UI)</h3>
+                    <p style="font-size:14px; color:#6b7280; margin-bottom:12px;">适用于官网、H5、平台界面。重点是层级清晰与触控可读性。</p>
+                    <ul class="typo-spec">
+                        <li><strong>H1:</strong> 40px - 56px, Bold, 行高 1.15</li>
+                        <li><strong>H2:</strong> 24px - 36px, SemiBold, 行高 1.25</li>
+                        <li><strong>Body:</strong> 16px - 20px, Regular, 行高 1.6</li>
+                        <li><strong>Caption:</strong> 12px - 14px, Medium</li>
+                    </ul>
+                </article>
+                <article class="card">
+                    <h3 style="font-size:22px; margin-bottom:8px;">纸质印刷端 (Print/Brochure - A4尺寸)</h3>
+                    <p style="font-size:14px; color:#6b7280; margin-bottom:12px;">适用于招商画册、方案集、招投标附件。严格遵循以下红线。</p>
+                    <div class="critical space-y-16">
+                        <h4>红线标准 (必须执行)</h4>
+                        <ul class="typo-spec" style="border-left-color:#fca5a5;">
+                            <li><strong>H1 封面主标题:</strong> <span style="color:#b91c1c;">32pt - 42pt</span> (加粗)</li>
+                            <li><strong>H2 模块小标题:</strong> <span style="color:#b91c1c;">14pt - 18pt</span> (中黑)</li>
+                            <li><strong>Body Text 正文描述:</strong> <span style="color:#b91c1c;">8pt - 10pt</span> (常规体, 行距1.5倍)</li>
+                            <li><strong>Caption 参数表格:</strong> <span style="color:#b91c1c;">6.5pt - 7.5pt</span></li>
+                        </ul>
+                        <p>特别提示: 这是画册呼吸感的生命线，正文字号绝不可超过 10pt，单段文字控制在 2-3 行。</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">模块 4: 空间留白与组件解构</h2>
+            <p class="section-desc">Layout &amp; Breathing Space. 画册版面需以留白建立秩序，负空间占比目标 50%，以降低医疗信息视觉疲劳。</p>
+            <div class="card soft">
+                <div class="ban-list">
+                    <div class="ban-item">
+                        <h4>禁令 1: 禁用粗边框</h4>
+                        <p>画册中慎用封闭描边卡片，改用留白或极淡无边框浅灰底（如 #F5F5F5）进行区域分组。</p>
+                    </div>
+                    <div class="ban-item">
+                        <h4>禁令 2: 数字降级</h4>
+                        <p>序列号（如 01, 02）不可使用巨大品牌蓝，建议用浅灰底纹或细线体，降低视觉噪音。</p>
+                    </div>
+                    <div class="ban-item">
+                        <h4>禁令 3: 强迫内边距 (Padding)</h4>
+                        <p>图文组合四周留白面积必须大于等于图文本身占据面积，强制形成呼吸带。</p>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="guideline-panel">
-                    <div class="guideline-header">
-                        <h3 class="guideline-title">05.1 产品主视觉（Hero Image）表现规范</h3>
-                        <span class="guideline-tag">硬件画册 / 官网首屏 / 招投标资料统一执行</span>
+        <section class="section">
+            <h2 class="section-title">模块 5: 产品主视觉渲染规范</h2>
+            <p class="section-desc">Hero Image. 所有硬件主视觉必须采用统一的白底/透明底策略，并叠加标准落地阴影，建立稳定、无菌、可信的设备质感。</p>
+            <div class="hero-box">
+                <img src="https://a.lovart.ai/artifacts/user/7nds1IvEYnE82Xbp.png" alt="产品主视觉示例" class="device-3d">
+            </div>
+            <p class="hero-note"><strong>强制说明:</strong> 严禁使用杂乱的医院实景背景。所有硬件（转运机器人、医废推车等）必须采用透明底/白底，并严格叠加标准深灰柔和落地阴影 <code>drop-shadow(0 18px 16px rgba(38,45,58,0.22))</code>，确保医疗器械的稳固感与无菌感。</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">模块 6: 物联网辅助图形规范</h2>
+            <p class="section-desc">IoT Graphic Elements. 辅助图形用于表达数据互联与科技感，需弱化存在感，避免干扰核心信息层。</p>
+            <div class="grid cols-2 g-24">
+                <article class="card" style="padding:0; overflow:hidden;">
+                    <div class="graphic-panel topology" aria-label="数据物联拓扑网"></div>
+                    <div class="panel-meta">
+                        <span>数据物联拓扑网 (Copy CSS)</span>
+                        <button class="btn-copy" data-copy="#topology-css">Copy CSS</button>
                     </div>
-
-                    <div class="guideline-grid">
-                        <div class="guideline-list">
-                            <div class="guideline-item"><strong>背景规范：</strong>硬件设备渲染图必须使用全透明底或纯白底，禁止复杂场景背景抢夺主体。</div>
-                            <div class="guideline-item"><strong>投影规范：</strong>统一采用深灰柔和接触阴影，建议参数为 <code>drop-shadow(0 18px 16px rgba(38,45,58,0.22))</code>，强调悬浮感与落地感平衡。</div>
-                            <div class="guideline-item"><strong>构图规范：</strong>产品主体在画面占比 55%~70%，保持三维体积感；允许轻微 15°~25° 透视，禁止夸张变形。</div>
-                            <div class="guideline-item"><strong>一致性规范：</strong>转运机器人、便民一体机、医废推车、物联钩秤等全部硬件遵循同一阴影与留白标准，确保跨产品线视觉统一。</div>
-                        </div>
-                        <div class="hero-example-wrap">
-                            <div class="hero-example transparent-bg">
-                                <img class="hero-device" src="https://a.lovart.ai/artifacts/user/7nds1IvEYnE82Xbp.png" alt="透明底产品图示例">
-                                <span class="hero-caption">推荐: 透明底抠图 + 深灰柔阴影</span>
-                            </div>
-                            <div class="hero-example white-bg">
-                                <img class="hero-device" src="https://a.lovart.ai/artifacts/user/HEn0eUHoc66wIL0r.png" alt="白底产品图示例">
-                                <span class="hero-caption">可选: 纯白底 + 统一接触阴影</span>
-                            </div>
-                        </div>
+                </article>
+                <article class="card" style="padding:0; overflow:hidden;">
+                    <div class="graphic-panel fluid" aria-label="科技流体质感"></div>
+                    <div class="panel-meta">
+                        <span>科技流体质感 (Copy SVG)</span>
+                        <button class="btn-copy" data-copy="#fluid-svg">Copy SVG</button>
                     </div>
-                </div>
+                </article>
+            </div>
+        </section>
 
-                <div class="guideline-panel">
-                    <div class="guideline-header">
-                        <h3 class="guideline-title">05.2 辅助图形（Graphic Elements）规范</h3>
-                        <span class="guideline-tag">用于背景点缀，不得弱化产品主体</span>
-                    </div>
+        <p class="footer-note">OpMaster / OpMonitor Brand Design Guidelines - Digital & Print Unified Spec</p>
+    </main>
 
-                    <div class="graphic-grid">
-                        <article class="graphic-card">
-                            <div class="graphic-demo topology-demo"></div>
-                            <div class="graphic-info">
-                                <h4>数据物联拓扑网</h4>
-                                <p>以点线网络、节点连通、波浪点阵表现 IoT 连接性。用于首页头图、方案页转场、章节分割背景。透明度建议 12%~28%。</p>
-                            </div>
-                        </article>
-                        <article class="graphic-card">
-                            <div class="graphic-demo fluid-demo"></div>
-                            <div class="graphic-info">
-                                <h4>科技光影 / 流体质感</h4>
-                                <p>以科技蓝渐变、水波纹、电路光影强化“智慧感”。适用于水质、感控、监测业务。禁止大面积满版，避免信息噪声。</p>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-            </section>
+    <script id="topology-css" type="text/plain">.topology-bg {
+  background:
+    radial-gradient(circle at 15% 30%, rgba(107,114,128,.35) 0 3px, transparent 4px),
+    radial-gradient(circle at 45% 68%, rgba(107,114,128,.28) 0 3px, transparent 4px),
+    radial-gradient(circle at 72% 25%, rgba(107,114,128,.30) 0 3px, transparent 4px),
+    radial-gradient(circle at 85% 72%, rgba(107,114,128,.26) 0 3px, transparent 4px),
+    linear-gradient(160deg, #f9fafb 0%, #f3f4f6 100%);
+}
+.topology-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(20deg, transparent 47%, rgba(107,114,128,.22) 49%, rgba(107,114,128,.22) 51%, transparent 53%),
+    linear-gradient(-18deg, transparent 47%, rgba(107,114,128,.16) 49%, rgba(107,114,128,.16) 51%, transparent 53%);
+}</script>
 
-            <!-- Footer -->
-            <footer class="doc-footer">
-                <div>
-                    <h4>Checklist</h4>
-                    <div class="checklist">
-                        <div class="check-item"><i class="ri-checkbox-circle-fill"></i> 色彩一致性</div>
-                        <div class="check-item"><i class="ri-checkbox-circle-fill"></i> 字体层级清晰</div>
-                        <div class="check-item"><i class="ri-checkbox-circle-fill"></i> Logo使用规范</div>
-                        <div class="check-item"><i class="ri-checkbox-circle-fill"></i> 留白充足(>30%)</div>
-                    </div>
-                </div>
-                <div style="text-align: right;">
-                    <p style="font-weight: bold; color: var(--secondary-dark); margin-bottom: 8px;">联系我们</p>
-                    <p>www.zhigancloud.com</p>
-                    <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f89c9d8b919f96b88290919f99969b94978d9cd69b9795">[email&#160;protected]</a></p>
-                </div>
-            </footer>
+    <script id="fluid-svg" type="text/plain"><svg width="1200" height="640" viewBox="0 0 1200 640" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ecf4ff"/>
+      <stop offset="45%" stop-color="#deedff"/>
+      <stop offset="100%" stop-color="#d6e8ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="640" fill="url(#g1)"/>
+  <ellipse cx="380" cy="640" rx="520" ry="160" fill="rgba(0,123,255,0.14)"/>
+  <ellipse cx="920" cy="620" rx="480" ry="140" fill="rgba(0,123,255,0.20)"/>
+</svg></script>
 
-        </main>
-    </div>
+    <script>
+        (function () {
+            const buttons = document.querySelectorAll(".btn-copy");
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"9da03ab2ffd5682e","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.9.1","token":"aa50fec79b214c0582a0bc0d66f75f48"}' crossorigin="anonymous"></script>
+            function fallbackCopy(text) {
+                const area = document.createElement("textarea");
+                area.value = text;
+                area.style.position = "fixed";
+                area.style.opacity = "0";
+                document.body.appendChild(area);
+                area.focus();
+                area.select();
+                try {
+                    document.execCommand("copy");
+                } catch (e) {
+                    console.error(e);
+                }
+                document.body.removeChild(area);
+            }
+
+            buttons.forEach((btn) => {
+                btn.addEventListener("click", async function () {
+                    const target = document.querySelector(btn.dataset.copy);
+                    if (!target) return;
+                    const text = target.textContent.trim();
+                    try {
+                        if (navigator.clipboard && window.isSecureContext) {
+                            await navigator.clipboard.writeText(text);
+                        } else {
+                            fallbackCopy(text);
+                        }
+                        const old = btn.textContent;
+                        btn.textContent = "Copied";
+                        setTimeout(() => { btn.textContent = old; }, 1200);
+                    } catch (e) {
+                        console.error(e);
+                    }
+                });
+            });
+        })();
+    </script>
 </body>
 </html>

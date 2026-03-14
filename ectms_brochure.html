@@ -1,0 +1,3243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECTMS 内镜综合追溯管理系统 | 专业画册</title>
+    <style>
+        :root {
+            --bg: #edf2f7;
+            --paper: #ffffff;
+            --surface: #f5f7fa;
+            --surface-blue: #eef5ff;
+            --ink: #1f2937;
+            --muted: #67758a;
+            --muted-light: #98a2b3;
+            --line: #dbe3ee;
+            --line-soft: #e7edf4;
+            --blue: #007bff;
+            --blue-deep: #0f4c81;
+            --blue-soft: #eaf3ff;
+            --danger: #dc2626;
+            --danger-soft: #fff2f2;
+            --shadow-paper: 0 18px 34px rgba(15, 23, 42, 0.10);
+            --shadow-soft: 0 14px 22px rgba(15, 23, 42, 0.06);
+            --shadow-contact: 0 18px 16px rgba(38, 45, 58, 0.18);
+            --shadow-card: 0 8px 16px rgba(15, 23, 42, 0.04);
+            --radius-card: 3.4mm;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "IBM Plex Sans", "PingFang SC", "Noto Sans SC", "Segoe UI", sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 16% 0%, #f9fbff 0%, #edf2f7 44%),
+                linear-gradient(180deg, #f6f9fc 0%, #edf2f7 100%);
+            padding: 22px 0 42px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            word-break: normal;
+        }
+
+        .brochure {
+            width: min(96vw, 230mm);
+            margin: 0 auto;
+            display: grid;
+            gap: 20px;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            background: var(--paper);
+            border: 1px solid #dbe4ef;
+            border-radius: 8px;
+            box-shadow: var(--shadow-paper);
+            position: relative;
+            overflow: hidden;
+            padding: 14mm 14mm 12mm;
+        }
+
+        .page::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10mm;
+            background: linear-gradient(90deg, rgba(0, 123, 255, 0.06) 0%, rgba(0, 123, 255, 0.01) 42%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+        }
+
+        .page::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(0, 123, 255, 0.04);
+            pointer-events: none;
+        }
+
+        .page-no {
+            position: absolute;
+            right: 12mm;
+            bottom: 7mm;
+            font-size: 9.4px;
+            color: #8fa0b3;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .logo {
+            position: absolute;
+            right: 14mm;
+            top: 11mm;
+            width: 22mm;
+            height: auto;
+            z-index: 4;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            min-height: 7mm;
+            padding: 0 3mm;
+            border-radius: 999px;
+            border: 1px solid #e2e9f3;
+            background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+            font-size: 10px;
+            line-height: 1.4;
+            letter-spacing: 0.06em;
+            text-transform: none;
+            color: var(--muted-light);
+            margin-bottom: 4.2mm;
+            font-weight: 500;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            min-height: 7mm;
+            padding: 0 3mm;
+            border-radius: 999px;
+            border: 1px solid #dce9fb;
+            background: linear-gradient(180deg, #ffffff 0%, #f5f9ff 100%);
+            font-size: 10px;
+            line-height: 1.4;
+            letter-spacing: 0.06em;
+            text-transform: none;
+            color: #8ea0b5;
+            font-weight: 600;
+        }
+
+        .title {
+            font-size: 30px;
+            line-height: 1.16;
+            letter-spacing: -0.028em;
+            font-weight: 700;
+            color: #16283d;
+            word-break: keep-all;
+            overflow-wrap: break-word;
+            text-wrap: balance;
+        }
+
+        .subtitle {
+            margin-top: 2.6mm;
+            font-size: 16px;
+            color: var(--blue);
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            word-break: keep-all;
+        }
+
+        .body {
+            font-size: 12.4px;
+            line-height: 1.7;
+            color: #415063;
+        }
+
+        .body.small {
+            font-size: 11.5px;
+            line-height: 1.66;
+        }
+
+        .summary-strip {
+            margin-top: 4mm;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 2.8mm;
+            align-items: stretch;
+        }
+
+        .summary-strip.four {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .summary-item {
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius-card);
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            padding: 3.1mm 3.3mm;
+            min-height: 18.5mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: var(--shadow-card);
+        }
+
+        .summary-label {
+            display: block;
+            font-size: 9.2px;
+            letter-spacing: 0.03em;
+            text-transform: none;
+            color: #8a97a8;
+            margin-bottom: 1.1mm;
+            font-weight: 600;
+        }
+
+        .summary-value {
+            display: block;
+            font-size: 11.8px;
+            line-height: 1.48;
+            color: #1f344c;
+            font-weight: 600;
+            word-break: keep-all;
+            overflow-wrap: break-word;
+        }
+
+        .insight-bar {
+            margin-top: 4mm;
+            border: 1px solid #dbe7f7;
+            background: linear-gradient(180deg, #f8fbff 0%, #f1f7ff 100%);
+            color: #314761;
+            border-radius: 3.5mm;
+            padding: 3.1mm 3.6mm;
+            font-size: 11px;
+            line-height: 1.62;
+            box-shadow: var(--shadow-card);
+            border-left: 2.5px solid #7bb1ff;
+        }
+
+        .insight-bar strong {
+            color: #0f4c81;
+        }
+
+        .mini-tag-list {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 2mm;
+        }
+
+        .mini-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: 999px;
+            border: 1px solid #d6e4f8;
+            background: #f4f8ff;
+            color: #355174;
+            font-size: 9.8px;
+            font-weight: 600;
+        }
+
+        .cover {
+            padding-top: 24mm;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            min-height: 100%;
+            position: relative;
+        }
+
+        .cover > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cover::before,
+        .cover::after {
+            content: "";
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .cover::before {
+            top: 26mm;
+            right: 4mm;
+            width: 74mm;
+            height: 46mm;
+            background:
+                linear-gradient(120deg, rgba(77, 136, 214, 0.18) 0 1px, transparent 1px 100%),
+                linear-gradient(160deg, rgba(119, 171, 236, 0.14) 0 1px, transparent 1px 100%),
+                repeating-linear-gradient(135deg, rgba(97, 151, 224, 0.11) 0 1px, transparent 1px 12px);
+            border-radius: 8mm;
+            opacity: 0.35;
+        }
+
+        .cover::after {
+            left: 2mm;
+            bottom: 34mm;
+            width: 70mm;
+            height: 38mm;
+            background:
+                radial-gradient(circle at 10% 30%, rgba(0, 123, 255, 0.16) 0 1.2px, transparent 2px),
+                radial-gradient(circle at 42% 58%, rgba(0, 123, 255, 0.13) 0 1.2px, transparent 2px),
+                radial-gradient(circle at 76% 26%, rgba(0, 123, 255, 0.12) 0 1.2px, transparent 2px),
+                linear-gradient(110deg, rgba(98, 150, 219, 0.16) 0 1px, transparent 1px 100%);
+            border-radius: 7mm;
+            opacity: 0.3;
+        }
+
+        .cover-copy {
+            max-width: 172mm;
+            padding-right: 0;
+        }
+
+        .cover-copy .title {
+            font-size: 32px;
+            white-space: nowrap;
+        }
+
+        .en-subtitle {
+            margin-top: 2mm;
+            font-size: 12.2px;
+            line-height: 1.5;
+            letter-spacing: 0.02em;
+            color: #6a7b8f;
+            font-weight: 600;
+            text-transform: none;
+        }
+
+        .cover-badges {
+            margin-top: 4.2mm;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0;
+            width: fit-content;
+            padding-top: 3.5mm;
+            border-top: 1.5px solid rgba(0, 123, 255, 0.25);
+        }
+
+        .cover-badge {
+            display: inline;
+            font-size: 18px;
+            color: #007bff;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .cover-badge + .cover-badge::before {
+            content: " | ";
+            color: rgba(0, 123, 255, 0.35);
+            font-weight: 400;
+        }
+
+        .cover-copy .body {
+            margin-top: 5mm;
+            max-width: 142mm;
+        }
+
+        .cover-footer {
+            margin-top: 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3mm;
+            align-items: stretch;
+        }
+
+        .cover-transition {
+            height: 12mm;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-transition::before,
+        .cover-transition::after {
+            content: "";
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .cover-transition::before {
+            left: 0;
+            right: 12mm;
+            top: 3mm;
+            bottom: 0;
+            background:
+                linear-gradient(108deg, rgba(91, 150, 223, 0.16) 0 1px, transparent 1px 100%),
+                linear-gradient(145deg, rgba(91, 150, 223, 0.10) 0 1px, transparent 1px 100%),
+                radial-gradient(circle at 12% 44%, rgba(91, 150, 223, 0.16) 0 1.2px, transparent 2px),
+                radial-gradient(circle at 36% 68%, rgba(91, 150, 223, 0.12) 0 1.2px, transparent 2px),
+                radial-gradient(circle at 62% 28%, rgba(91, 150, 223, 0.14) 0 1.2px, transparent 2px);
+            opacity: 0.22;
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.72), transparent 100%);
+        }
+
+        .cover-transition::after {
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(180, 198, 220, 0) 0%, rgba(180, 198, 220, 0.72) 14%, rgba(180, 198, 220, 0.24) 58%, rgba(180, 198, 220, 0) 100%);
+        }
+
+        .cover-products {
+            padding: 0;
+        }
+
+        .cover-products h3 {
+            font-size: 13.8px;
+            color: #5a6d84;
+            margin-bottom: 2.8mm;
+            letter-spacing: 0.06em;
+            font-weight: 800;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 2.2mm 7mm;
+        }
+
+        .service-item {
+            position: relative;
+            padding-left: 3.6mm;
+            font-size: 12.1px;
+            color: #425366;
+            line-height: 1.65;
+            font-weight: 500;
+        }
+
+        .service-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.72em;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #4b95ff;
+            box-shadow: 0 0 0 3px rgba(75, 149, 255, 0.12);
+        }
+
+        .cover-brand {
+            justify-self: stretch;
+            width: 100%;
+            border-top: 1px solid #d8dee7;
+            padding-top: 3mm;
+        }
+
+        .cover-brand-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 3mm;
+        }
+
+        .cover-brand-logo {
+            width: 22mm;
+            height: auto;
+        }
+
+        .cover-brand-info {
+            font-size: 10.3px;
+            color: var(--blue);
+            line-height: 1.5;
+            letter-spacing: 0.03em;
+            text-align: right;
+        }
+
+        .cover-achievements {
+            margin-top: 5mm;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 2.5mm 5mm;
+            max-width: 100mm;
+        }
+
+        .cover-achievements span {
+            display: inline-flex;
+            align-items: center;
+            min-height: 9mm;
+            padding: 0 3mm;
+            border-radius: 999px;
+            border: 1px solid #dce7f5;
+            background: linear-gradient(180deg, #ffffff 0%, #f6faff 100%);
+            font-size: 11.4px;
+            color: #1f344c;
+            font-weight: 600;
+        }
+
+        .cover-visual {
+            margin: 12mm 0 0;
+            width: 100%;
+            height: 138mm;
+            position: relative;
+            background: transparent;
+            border: 0;
+            border-radius: 7mm;
+            overflow: visible;
+        }
+
+        .cover-visual-tech {
+            position: absolute;
+            inset: 8mm 0 8mm 0;
+            z-index: 1;
+            background:
+                radial-gradient(circle at 16% 28%, rgba(85, 148, 224, 0.12) 0 1.8px, transparent 2px),
+                radial-gradient(circle at 82% 24%, rgba(85, 148, 224, 0.10) 0 1.8px, transparent 2px),
+                linear-gradient(115deg, rgba(100, 157, 226, 0.12) 0 1px, transparent 1px 100%),
+                linear-gradient(145deg, rgba(100, 157, 226, 0.08) 0 1px, transparent 1px 100%);
+            opacity: 0.2;
+        }
+
+        .cover-hero-image {
+            position: absolute;
+            top: 12mm;
+            right: -6mm;
+            bottom: -4mm;
+            left: -6mm;
+            width: calc(100% + 12mm);
+            height: calc(100% - 8mm);
+            object-fit: contain;
+            object-position: center 58%;
+            z-index: 2;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            box-shadow: drop-shadow(0 18px 24px rgba(15, 23, 42, 0.08));
+        }
+
+        .cover-visual::before {
+            content: none;
+        }
+
+        .cover-visual::after {
+            content: none;
+        }
+
+        .device-ground {
+            position: absolute;
+            left: 50%;
+            bottom: 7mm;
+            transform: translateX(-50%);
+            width: 156mm;
+            height: 16mm;
+            border-radius: 999px;
+            background: radial-gradient(ellipse at center, rgba(30, 41, 59, 0.16) 0%, rgba(30, 41, 59, 0) 74%);
+        }
+
+        .monitor {
+            position: absolute;
+            left: 50%;
+            top: 21mm;
+            transform: translateX(-50%);
+            width: 118mm;
+            height: 67mm;
+            border-radius: 5mm;
+            background: #152740;
+            box-shadow: var(--shadow-contact);
+            z-index: 3;
+        }
+
+        .monitor::before {
+            content: "";
+            position: absolute;
+            inset: 3mm;
+            border-radius: 3mm;
+            background: linear-gradient(145deg, #0f2a4f 0%, #173a6b 40%, #0f274a 100%);
+        }
+
+        .monitor::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -10mm;
+            transform: translateX(-50%);
+            width: 28mm;
+            height: 12mm;
+            border-radius: 0 0 4mm 4mm;
+            background: linear-gradient(180deg, #d9e3ef 0%, #bccada 100%);
+            box-shadow: 0 6px 12px rgba(30, 41, 59, 0.12);
+        }
+
+        .monitor-ui {
+            position: absolute;
+            inset: 7mm 8mm;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1.25fr 0.9fr;
+            gap: 5mm;
+        }
+
+        .ui-pane {
+            border-radius: 3mm;
+            border: 1px solid rgba(197, 220, 255, 0.28);
+            background: rgba(8, 18, 36, 0.24);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ui-pane::before {
+            content: "";
+            position: absolute;
+            inset: 10px;
+            border-radius: 10px;
+            background: linear-gradient(180deg, rgba(14, 81, 176, 0.20) 0%, rgba(255, 255, 255, 0.05) 100%);
+        }
+
+        .washer,
+        .sink,
+        .cabinet {
+            position: absolute;
+            bottom: 16mm;
+            background: linear-gradient(180deg, #ffffff 0%, #edf3f9 100%);
+            border: 1px solid #d7e0ea;
+            box-shadow: var(--shadow-contact);
+        }
+
+        .washer {
+            left: 16mm;
+            width: 44mm;
+            height: 74mm;
+            border-radius: 5mm;
+            z-index: 2;
+        }
+
+        .washer::before {
+            content: "";
+            position: absolute;
+            left: 6mm;
+            right: 6mm;
+            top: 9mm;
+            height: 34mm;
+            border-radius: 3mm;
+            border: 1px solid #cfdae7;
+            background: linear-gradient(180deg, #f7fbff 0%, #ebf2fb 100%);
+        }
+
+        .washer::after {
+            content: "";
+            position: absolute;
+            left: 10mm;
+            right: 10mm;
+            bottom: 14mm;
+            height: 6mm;
+            border-radius: 999px;
+            background: #dfe8f2;
+        }
+
+        .sink {
+            left: 72mm;
+            width: 54mm;
+            height: 54mm;
+            border-radius: 5mm;
+            z-index: 2;
+        }
+
+        .sink::before {
+            content: "";
+            position: absolute;
+            inset: 8mm;
+            border-radius: 3mm;
+            border: 1px solid #cfd9e7;
+            background: linear-gradient(180deg, #f8fbff 0%, #ebf2fa 100%);
+            box-shadow: inset 0 -10px 14px rgba(38, 64, 96, 0.08);
+        }
+
+        .sink::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -40%);
+            width: 16mm;
+            height: 8mm;
+            border-radius: 999px;
+            border: 1px dashed rgba(0, 123, 255, 0.48);
+            box-shadow: 0 0 0 6px rgba(0, 123, 255, 0.08), 0 0 0 12px rgba(0, 123, 255, 0.04);
+        }
+
+        .cabinet {
+            right: 18mm;
+            width: 42mm;
+            height: 92mm;
+            border-radius: 5mm;
+            z-index: 2;
+        }
+
+        .cabinet::before {
+            content: "";
+            position: absolute;
+            left: 5mm;
+            right: 5mm;
+            top: 10mm;
+            bottom: 10mm;
+            border-radius: 2mm;
+            border: 1px solid #c7d4e3;
+        }
+
+        .page-2,
+        .page-3,
+        .page-4,
+        .page-5,
+        .page-6 {
+            padding-top: 20mm;
+        }
+
+        .value-layout {
+            margin-top: 7mm;
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 6mm;
+            min-height: 214mm;
+        }
+
+        .page-2 .value-layout {
+            min-height: 176mm;
+        }
+
+        .page-2-intro {
+            margin-top: 4.8mm;
+            max-width: 168mm;
+            font-size: 12px;
+            line-height: 1.8;
+            color: #58677a;
+        }
+
+        .page-2 .subtitle {
+            letter-spacing: 0.08em;
+        }
+
+        .title-sep {
+            display: inline-block;
+            margin: 0 0.34em;
+            color: #93a1b2;
+            font-weight: 300;
+        }
+
+        .page-2-flow {
+            margin-top: 5.4mm;
+            display: grid;
+            gap: 4.2mm;
+        }
+
+        .policy-board {
+            border: 1px solid #d9e7f7;
+            border-left: 4px solid #0f4c81;
+            border-radius: 4.6mm;
+            background: linear-gradient(180deg, #f7fafe 0%, #f3f7fc 100%);
+            padding: 4.2mm 4.6mm 4.4mm;
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+        }
+
+        .policy-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 4mm;
+            margin-bottom: 3.2mm;
+        }
+
+        .policy-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 0.68fr) minmax(0, 1.32fr);
+            gap: 4mm;
+            align-items: stretch;
+        }
+
+        .policy-cover-slice {
+            position: relative;
+            min-height: 0;
+            height: 100%;
+            border-radius: 3.8mm;
+            overflow: hidden;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.78) 0%, rgba(244, 248, 255, 0.9) 100%);
+            box-shadow: inset 0 0 0 1px rgba(219, 231, 247, 0.65);
+        }
+
+        .policy-cover-slice::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 28%;
+            background: linear-gradient(90deg, rgba(243, 247, 252, 0) 0%, rgba(243, 247, 252, 0.88) 68%, rgba(243, 247, 252, 1) 100%);
+            pointer-events: none;
+        }
+
+        .policy-cover-slice img {
+            position: absolute;
+            top: 4mm;
+            right: 0;
+            bottom: 4mm;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 8mm);
+            object-fit: cover;
+            object-position: 52% 18%;
+            opacity: 0.88;
+            mix-blend-mode: multiply;
+            filter: grayscale(8%);
+        }
+
+        .policy-right {
+            display: grid;
+            align-content: start;
+            gap: 3mm;
+        }
+
+        .policy-title {
+            font-size: 12.2px;
+            color: #183651;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .policy-source {
+            font-size: 9.8px;
+            color: #8a98ab;
+            white-space: nowrap;
+        }
+
+        .policy-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 3mm 3.2mm;
+        }
+
+        .policy-item {
+            position: relative;
+            min-height: 30mm;
+            padding: 3.2mm 3.2mm 3.2mm 10.5mm;
+            border: 0;
+            border-radius: var(--radius-card);
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 8px 16px rgba(15, 23, 42, 0.04);
+        }
+
+        .policy-item::before {
+            content: "☑";
+            position: absolute;
+            left: 3.2mm;
+            top: 2.9mm;
+            font-size: 15px;
+            line-height: 1;
+            color: #1971e6;
+            font-weight: 700;
+        }
+
+        .policy-item h3 {
+            font-size: 11.6px;
+            color: #1d3954;
+            margin-bottom: 1.1mm;
+            line-height: 1.45;
+        }
+
+        .policy-item h3 span {
+            color: #9ea9b8;
+            font-weight: 600;
+            font-size: 10px;
+        }
+
+        .policy-item p {
+            font-size: 10.5px;
+            color: #4c5e73;
+            line-height: 1.58;
+        }
+
+        .contrast-stack {
+            display: grid;
+            gap: 2.8mm;
+        }
+
+        .contrast-row {
+            display: grid;
+            grid-template-columns: minmax(0, 0.98fr) 9mm minmax(0, 1.02fr);
+            gap: 2.8mm;
+            align-items: stretch;
+        }
+
+        .contrast-card {
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius-card);
+            padding: 3.4mm 3.6mm;
+            min-height: 35mm;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .contrast-card.pain {
+            background: #ffffff;
+            border-color: #e4e8ee;
+            box-shadow: 0 10px 18px rgba(194, 85, 33, 0.06);
+        }
+
+        .contrast-card.solution {
+            background: linear-gradient(180deg, #f3f7ff 0%, #eef4ff 100%);
+            border-color: transparent;
+        }
+
+        .contrast-label {
+            display: inline-flex;
+            align-items: center;
+            min-height: 6.8mm;
+            padding: 0 2.6mm;
+            border-radius: 999px;
+            margin-bottom: 3.6mm;
+            font-size: 9.2px;
+            letter-spacing: 0.03em;
+            font-weight: 700;
+        }
+
+        .contrast-card.pain .contrast-label {
+            background: #fff5ef;
+            color: #c2410c;
+        }
+
+        .contrast-card.solution .contrast-label {
+            background: #e0eaff;
+            color: #1d4ed8;
+        }
+
+        .contrast-title {
+            display: flex;
+            align-items: center;
+            gap: 2.2mm;
+            margin-bottom: 1.1mm;
+        }
+
+        .contrast-icon {
+            width: 7mm;
+            height: 7mm;
+            flex: 0 0 auto;
+        }
+
+        .contrast-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke-width: 1.7;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .contrast-card.pain .contrast-icon svg {
+            stroke: #9a3412;
+        }
+
+        .contrast-card.solution .contrast-icon {
+            border-radius: 2.2mm;
+            background: linear-gradient(180deg, rgba(86, 146, 255, 0.18) 0%, rgba(86, 146, 255, 0.08) 100%);
+            display: grid;
+            place-items: center;
+        }
+
+        .contrast-card.solution .contrast-icon svg {
+            stroke: #1d4ed8;
+        }
+
+        .contrast-card h3 {
+            font-size: 11.6px;
+            color: #203851;
+            margin-bottom: 0;
+            line-height: 1.42;
+        }
+
+        .contrast-card p {
+            font-size: 10.6px;
+            color: #495b70;
+            line-height: 1.58;
+        }
+
+        .contrast-arrow {
+            align-self: center;
+            justify-self: center;
+            width: 9mm;
+            height: 9mm;
+            border-radius: 50%;
+            background: #2e80ef;
+            border: 0;
+            position: relative;
+            box-shadow: 0 10px 18px rgba(41, 126, 240, 0.22);
+        }
+
+        .contrast-arrow::before {
+            content: "";
+            position: absolute;
+            left: 2.2mm;
+            right: 2.6mm;
+            top: 50%;
+            height: 1.8px;
+            transform: translateY(-50%);
+            background: #ffffff;
+        }
+
+        .contrast-arrow::after {
+            content: "";
+            position: absolute;
+            right: 2.1mm;
+            top: 50%;
+            width: 4.2px;
+            height: 4.2px;
+            border-top: 1.8px solid #ffffff;
+            border-right: 1.8px solid #ffffff;
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        .page-2 .insight-bar {
+            margin-top: 0.2mm;
+            font-size: 10.9px;
+            line-height: 1.64;
+            background: linear-gradient(180deg, #f4f8ff 0%, #eef4ff 100%);
+            border-color: #d9e6fa;
+            color: #38506a;
+            border-left-color: #3b82f6;
+        }
+
+        .page-2 .insight-bar strong {
+            color: #1661c4;
+        }
+
+        .insight-accent {
+            font-weight: 700;
+            color: #1d4ed8;
+        }
+
+        .context-block {
+            margin-top: 4.6mm;
+            border: 1px solid var(--line-soft);
+            border-radius: 4mm;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            padding: 3.6mm 4mm;
+            box-shadow: var(--shadow-card);
+        }
+
+        .context-block .body {
+            margin-top: 0;
+        }
+
+        .context-block .cover-achievements {
+            margin-top: 3mm;
+            max-width: none;
+        }
+
+        .challenge-panel,
+        .value-panel {
+            border: 1px solid var(--line-soft);
+            border-radius: 5mm;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 12px 20px rgba(15, 23, 42, 0.04);
+        }
+
+        .challenge-panel {
+            background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
+        }
+
+        .panel-title {
+            padding: 4.2mm 4.5mm 3.2mm;
+            font-size: 11.2px;
+            color: #708095;
+            letter-spacing: 0.04em;
+            text-transform: none;
+            border-bottom: 1px solid var(--line-soft);
+            font-weight: 700;
+            background: linear-gradient(180deg, #fcfdff 0%, #f8fbff 100%);
+        }
+
+        .challenge-list,
+        .value-grid,
+        .feature-stack,
+        .hardware-stack {
+            padding: 4mm;
+            display: grid;
+            gap: 3.2mm;
+        }
+
+        .challenge-item,
+        .value-card {
+            display: grid;
+            grid-template-columns: 10mm 1fr;
+            gap: 3mm;
+            padding: 3.4mm;
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius-card);
+            background: #fff;
+            min-height: 34mm;
+        }
+
+        .value-card {
+            background: var(--surface);
+            box-shadow: var(--shadow-card);
+            border-color: #dce7f4;
+        }
+
+        .challenge-icon,
+        .value-icon {
+            width: 9mm;
+            height: 9mm;
+        }
+
+        .challenge-icon svg,
+        .value-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: #333333;
+            stroke-width: 1.7;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .challenge-icon .accent,
+        .value-icon .accent {
+            stroke: var(--blue);
+        }
+
+        .challenge-item h4,
+        .value-card h4,
+        .feature-card h4,
+        .hardware-card h4,
+        .step-card h4,
+        .tier-card h4 {
+            font-size: 12px;
+            color: #1f344c;
+            margin-bottom: 1.4mm;
+            word-break: keep-all;
+            overflow-wrap: break-word;
+        }
+
+        .challenge-item p,
+        .value-card p,
+        .feature-card p,
+        .hardware-card p,
+        .step-card p,
+        .tier-card p {
+            font-size: 10.9px;
+            color: #46576b;
+            line-height: 1.58;
+        }
+
+        .page-3-grid {
+            margin-top: 7mm;
+            display: grid;
+            grid-template-rows: 1.05fr 0.95fr;
+            gap: 5mm;
+        }
+
+        .flow-board {
+            border: 1px solid var(--line-soft);
+            border-radius: 5mm;
+            background: linear-gradient(180deg, #fbfdff 0%, #ffffff 100%);
+            padding: 7mm 5mm 5mm;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 12px 20px rgba(15, 23, 42, 0.04);
+        }
+
+        .flow-board::before {
+            content: "";
+            position: absolute;
+            left: 7mm;
+            right: 7mm;
+            top: 22mm;
+            height: 2px;
+            background: linear-gradient(90deg, #b6d3ff 0%, #007bff 48%, #b6d3ff 100%);
+        }
+
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 3mm;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step {
+            text-align: center;
+            padding-top: 8mm;
+            position: relative;
+        }
+
+        .step::before {
+            content: "";
+            position: absolute;
+            top: 16mm;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid #0d72e6;
+            box-shadow: 0 0 0 3px #eaf3ff;
+        }
+
+        .step.danger::before {
+            border-color: var(--danger);
+            box-shadow: 0 0 0 3px #fee2e2;
+        }
+
+        .time {
+            font-size: 9.6px;
+            color: #92a1b2;
+            letter-spacing: 0.06em;
+            margin-bottom: 16mm;
+        }
+
+        .step-card {
+            background: #fff;
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius-card);
+            padding: 3.2mm 2.8mm;
+            min-height: 44mm;
+            box-shadow: 0 6px 12px rgba(15, 23, 42, 0.03);
+        }
+
+        .step.danger .step-card {
+            background: linear-gradient(180deg, #fffefe 0%, #fff6f6 100%);
+            border-color: #f2caca;
+        }
+
+        .step-card .warn {
+            margin-top: 2mm;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 2px 8px;
+            font-size: 10px;
+            border-radius: 999px;
+            border: 1px solid #f6b8b8;
+            background: var(--danger-soft);
+            color: #9f1f1f;
+            font-weight: 600;
+        }
+
+        .tier-board {
+            border: 1px solid var(--line-soft);
+            border-radius: 5mm;
+            background: linear-gradient(180deg, #f9fbff 0%, #ffffff 100%);
+            padding: 5mm;
+            box-shadow: 0 12px 20px rgba(15, 23, 42, 0.04);
+        }
+
+        .tier-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 3mm;
+            align-items: stretch;
+        }
+
+        .tier-card {
+            border: 1px solid #dbe5f1;
+            border-radius: 4mm;
+            background: #fff;
+            padding: 3.5mm 3mm;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            min-height: 68mm;
+        }
+
+        .tier-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 2.5mm;
+            background: linear-gradient(90deg, #dbe8fb 0%, #9fc4ff 52%, #dbe8fb 100%);
+            border-radius: 4mm 4mm 0 0;
+        }
+
+        .tier-label {
+            font-size: 10px;
+            color: #6c7b8f;
+            margin-bottom: 1.4mm;
+            text-transform: none;
+            letter-spacing: 0.03em;
+            padding-top: 1mm;
+        }
+
+        .tier-meta {
+            margin-top: 2mm;
+            padding-top: 2mm;
+            border-top: 1px solid #e7edf4;
+            font-size: 10px;
+            color: #7b899b;
+            line-height: 1.5;
+        }
+
+        .page-3-intro {
+            margin-top: 2.2mm;
+            max-width: 168mm;
+            font-size: 10.8px;
+            line-height: 1.45;
+            color: #556579;
+        }
+
+        .page-3-stack {
+            margin-top: 4.2mm;
+            display: grid;
+            gap: 3mm;
+        }
+
+        .reframe-board,
+        .matrix-board {
+            border: 1px solid var(--line-soft);
+            border-radius: 5mm;
+            background: linear-gradient(180deg, #fbfdff 0%, #ffffff 100%);
+            box-shadow: 0 12px 20px rgba(15, 23, 42, 0.04);
+        }
+
+        .reframe-board {
+            padding: 5.2mm 4.2mm 3.8mm;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reframe-board::before {
+            content: "";
+            position: absolute;
+            left: 11mm;
+            right: 11mm;
+            top: 20.8mm;
+            height: 2px;
+            background: linear-gradient(90deg, #cfe1ff 0%, #2f83f6 50%, #cfe1ff 100%);
+        }
+
+        .reframe-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 4mm;
+            margin-bottom: 3.6mm;
+            position: relative;
+            z-index: 2;
+        }
+
+        .reframe-title {
+            font-size: 12px;
+            color: #1f3954;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .reframe-note {
+            font-size: 9.8px;
+            color: #8898aa;
+        }
+
+        .reframe-grid {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 2.4mm;
+            position: relative;
+            z-index: 2;
+            align-items: start;
+        }
+
+        .flow-node {
+            position: relative;
+            padding-top: 8.5mm;
+            text-align: center;
+        }
+
+        .flow-node::before {
+            content: "";
+            position: absolute;
+            top: 11.8mm;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid #2f83f6;
+            box-shadow: 0 0 0 3px #eaf3ff;
+        }
+
+        .flow-node.danger::before {
+            border-color: #dc2626;
+            box-shadow: 0 0 0 3px #fee2e2;
+        }
+
+        .flow-index {
+            font-size: 9.4px;
+            color: #93a2b3;
+            letter-spacing: 0.05em;
+            margin-bottom: 12mm;
+        }
+
+        .flow-icon {
+            width: 9mm;
+            height: 9mm;
+            margin: 0 auto 2mm;
+        }
+
+        .flow-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: #2f83f6;
+            stroke-width: 1.7;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .flow-node.danger .flow-icon svg {
+            stroke: #dc2626;
+        }
+
+        .flow-card {
+            min-height: 40mm;
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius-card);
+            background: #fff;
+            padding: 2.5mm 2.3mm;
+            box-shadow: 0 6px 12px rgba(15, 23, 42, 0.03);
+        }
+
+        .flow-node.danger .flow-card {
+            background: linear-gradient(180deg, #fffefe 0%, #fff6f6 100%);
+            border-color: #f2caca;
+        }
+
+        .flow-card h3 {
+            font-size: 10.5px;
+            color: #1f344c;
+            margin-bottom: 1.1mm;
+            line-height: 1.4;
+        }
+
+        .flow-card p {
+            font-size: 9.7px;
+            color: #4a5b70;
+            line-height: 1.48;
+        }
+
+        .flow-emphasis {
+            margin-top: 2mm;
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: 999px;
+            border: 1px solid #f3bbbb;
+            background: #fff3f3;
+            font-size: 9.4px;
+            color: #a12525;
+            font-weight: 700;
+        }
+
+        .matrix-board {
+            padding: 2.2mm 3.2mm 2.6mm;
+        }
+
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        .matrix-table col:first-child {
+            width: 58mm;
+        }
+
+        .matrix-table td {
+            padding: 1.72mm 1.5mm;
+            font-size: 9.1px;
+            line-height: 1.36;
+            color: #45566a;
+            text-align: center;
+            border-bottom: 1px solid #eef2f6;
+        }
+
+        .matrix-table td:first-child {
+            text-align: left;
+            color: #23384f;
+            font-weight: 600;
+            white-space: nowrap;
+            font-size: 8.5px;
+        }
+
+        .matrix-table .matrix-header td {
+            background: #f7faff;
+            color: #20364e;
+            font-weight: 700;
+            font-size: 8px;
+            letter-spacing: 0.01em;
+            white-space: nowrap;
+            border-bottom-color: #e1e8f1;
+            padding-top: 2.1mm;
+            padding-bottom: 2.1mm;
+        }
+
+        .matrix-table .matrix-header td:first-child {
+            color: #8b99ac;
+            font-weight: 600;
+            font-size: 9px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .matrix-table .group-row td {
+            padding-top: 1.8mm;
+            padding-bottom: 1.2mm;
+            background: #f4f7fb;
+            color: #1d4f8f;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            border-bottom-color: #e4ebf3;
+        }
+
+        .matrix-table .feature-row.alt td {
+            background: #f9fbff;
+        }
+
+        .matrix-yes,
+        .matrix-no {
+            display: inline;
+            font-size: 11px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .matrix-yes {
+            color: #1f6fd8;
+        }
+
+        .matrix-no {
+            color: #8e9aad;
+        }
+
+        .matrix-foot {
+            margin-top: 1.4mm;
+            font-size: 8.9px;
+            color: #718198;
+            line-height: 1.35;
+        }
+
+        .matrix-foot strong {
+            color: #1d4f8f;
+        }
+
+        .page-3-split {
+            margin-top: 3.4mm;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+            gap: 3mm;
+            align-items: center;
+        }
+
+        .page.page-3 {
+            padding-top: 13.2mm;
+        }
+
+        .page-3-flow-panel {
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            box-shadow: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0;
+            overflow: hidden;
+        }
+
+        .page-3-flow-label {
+            font-size: 9.2px;
+            color: #8a9aaf;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .page-3-flow-image {
+            width: 100%;
+            height: 100%;
+            min-height: 0;
+            border-radius: 0;
+            object-fit: contain;
+            object-position: center top;
+            border: 0;
+            background: transparent;
+            transform: scale(1.01);
+            transform-origin: center;
+        }
+
+
+        .platform-layout {
+            margin-top: 7mm;
+            display: grid;
+            grid-template-rows: 94mm 1fr;
+            gap: 5mm;
+            min-height: 208mm;
+        }
+
+        .platform-top {
+            position: relative;
+            border: 1px solid var(--line-soft);
+            border-radius: 6mm;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            overflow: hidden;
+            box-shadow: 0 12px 20px rgba(15, 23, 42, 0.04);
+        }
+
+        .platform-top::before {
+            content: "";
+            position: absolute;
+            inset: 6mm;
+            border: 1px dashed #e2e9f1;
+            border-radius: 4mm;
+        }
+
+        .platform-bottom {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 3mm;
+            align-items: stretch;
+        }
+
+        .feature-card,
+        .hardware-card {
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius-card);
+            background: #fff;
+            padding: 3.6mm;
+            box-shadow: var(--shadow-card);
+            height: 100%;
+        }
+
+        .feature-card {
+            display: grid;
+            grid-template-columns: 9mm 1fr;
+            gap: 3mm;
+            align-items: start;
+        }
+
+        .feature-icon {
+            width: 8mm;
+            height: 8mm;
+            margin-top: 0.6mm;
+        }
+
+        .feature-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: #333333;
+            stroke-width: 1.7;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .feature-icon .accent {
+            stroke: var(--blue);
+        }
+
+        .feature-card .body,
+        .hardware-card .body {
+            font-size: 10.8px;
+            line-height: 1.58;
+        }
+
+        .platform-visual {
+            position: relative;
+            height: 100%;
+        }
+
+        .big-screen {
+            position: absolute;
+            left: 50%;
+            top: 10mm;
+            transform: translateX(-50%);
+            width: 90mm;
+            height: 58mm;
+            border-radius: 4mm;
+            border: 1px solid #d9e2ee;
+            background: linear-gradient(180deg, #ffffff 0%, #f4f8ff 100%);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .big-screen::before {
+            content: "";
+            position: absolute;
+            inset: 4mm;
+            border-radius: 3mm;
+            background-image:
+                linear-gradient(rgba(0, 123, 255, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 123, 255, 0.06) 1px, transparent 1px);
+            background-size: 14px 14px;
+            background-color: #fcfdff;
+        }
+
+        .big-screen::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -8mm;
+            transform: translateX(-50%);
+            width: 20mm;
+            height: 9mm;
+            border-radius: 0 0 4mm 4mm;
+            background: #dce5f1;
+        }
+
+        .screen-zones {
+            position: absolute;
+            inset: 9mm 8mm;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3mm;
+        }
+
+        .zone {
+            border-radius: 2.6mm;
+            border: 1px solid #dbe4ef;
+            background: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .zone::before {
+            content: "";
+            position: absolute;
+            left: 8px;
+            right: 8px;
+            top: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #d7e7ff 0%, #8abbff 60%, #d7e7ff 100%);
+        }
+
+        .phone {
+            position: absolute;
+            left: 50%;
+            bottom: 10mm;
+            transform: translateX(-50%);
+            width: 34mm;
+            height: 70mm;
+            border-radius: 5mm;
+            border: 2px solid #1f2937;
+            background: #fff;
+            box-shadow: 0 12px 20px rgba(15, 23, 42, 0.16);
+            z-index: 3;
+        }
+
+        .phone::before {
+            content: "";
+            position: absolute;
+            top: 3mm;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 13mm;
+            height: 2mm;
+            border-radius: 999px;
+            background: #1f2937;
+        }
+
+        .phone-ui {
+            position: absolute;
+            inset: 9mm 3mm 4mm;
+            border-radius: 3mm;
+            border: 1px solid #dbe4ef;
+            background: linear-gradient(180deg, #ffffff 0%, #f4f8ff 100%);
+        }
+
+        .phone-ui::before,
+        .phone-ui::after {
+            content: "";
+            position: absolute;
+            left: 3mm;
+            right: 3mm;
+            height: 6mm;
+            border-radius: 999px;
+            background: #e8f1ff;
+        }
+
+        .phone-ui::before { top: 4mm; }
+        .phone-ui::after { top: 14mm; }
+
+        .connect-line {
+            position: absolute;
+            height: 1.4px;
+            background: linear-gradient(90deg, rgba(0, 123, 255, 0) 0%, rgba(0, 123, 255, 0.85) 50%, rgba(0, 123, 255, 0) 100%);
+            z-index: 2;
+        }
+
+        .connect-line.left {
+            width: 44mm;
+            left: 8mm;
+            top: 81mm;
+            transform: rotate(18deg);
+        }
+
+        .connect-line.right {
+            width: 44mm;
+            right: 8mm;
+            top: 81mm;
+            transform: rotate(-18deg);
+        }
+
+        .hardware-layout {
+            margin-top: 4.8mm;
+            display: grid;
+            grid-template-rows: auto 80mm;
+            gap: 3mm;
+            min-height: 0;
+        }
+
+        .hardware-top {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 2.6mm;
+            align-items: stretch;
+        }
+
+        .hardware-card {
+            border: 1px solid #f7f9fc;
+            border-radius: 4.2mm;
+            background: #ffffff;
+            padding: 3.1mm 3.3mm;
+            box-shadow: 0 10px 34px -14px rgba(15, 23, 42, 0.12);
+            height: 100%;
+        }
+
+        .hardware-head {
+            display: flex;
+            align-items: center;
+            gap: 1.8mm;
+            margin-bottom: 1.1mm;
+        }
+
+        .hardware-icon {
+            width: 6mm;
+            height: 6mm;
+            border-radius: 1.6mm;
+            background: rgba(31, 111, 216, 0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .hardware-icon svg {
+            width: 4.1mm;
+            height: 4.1mm;
+            stroke: #1f6fd8;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        .hardware-card h4 {
+            font-size: 11.6px;
+            color: #1e344d;
+            margin: 0;
+            line-height: 1.35;
+        }
+
+        .hardware-card p {
+            font-size: 9.8px;
+            color: #475569;
+            line-height: 1.58;
+        }
+
+        .mini-tag-list {
+            margin-top: 1.4mm;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.1mm;
+        }
+
+        .mini-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.7mm 1.9mm;
+            border-radius: 999px;
+            background: rgba(29, 78, 216, 0.08);
+            color: #1e4d92;
+            font-size: 8.4px;
+            font-weight: 650;
+            letter-spacing: 0.01em;
+            border: 0;
+        }
+
+        .hardware-matrix {
+            border: 1px solid #e8eff8;
+            border-radius: 5mm;
+            background: linear-gradient(180deg, #fbfdff 0%, #f6f9ff 100%);
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+            padding: 3.2mm 3.6mm;
+            min-height: 0;
+        }
+
+        .hardware-matrix-title {
+            font-size: 13px;
+            color: #334a65;
+            letter-spacing: 0.02em;
+            margin-bottom: 2.4mm;
+            font-weight: 800;
+        }
+
+        .hardware-showcase {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 3.4mm;
+            height: calc(100% - 8mm);
+        }
+
+        .scene-stage {
+            position: relative;
+            height: 100%;
+            border-radius: 4.2mm;
+            overflow: hidden;
+            background: #e8eff8;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .scene-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(10, 20, 40, 0.52));
+            color: #ffffff;
+            font-size: 8.2px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            padding: 4mm 3mm 2.4mm;
+            border-radius: 0 0 4.2mm 4.2mm;
+            z-index: 4;
+            text-align: center;
+        }
+
+        .scene-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 52% center;
+            display: block;
+        }
+
+        .scene-sensor {
+            position: absolute;
+            left: 57%;
+            top: 65%;
+            width: 11mm;
+            height: 11mm;
+            border-radius: 50%;
+            border: 1.6px dashed rgba(30, 111, 216, 0.95);
+            background: radial-gradient(circle at center, rgba(37, 125, 236, 0.22) 0%, rgba(37, 125, 236, 0.1) 40%, rgba(37, 125, 236, 0) 75%);
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            box-shadow: 0 0 14px rgba(37, 125, 236, 0.25);
+        }
+
+        .scene-sensor::before,
+        .scene-sensor::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            border: 1.4px solid rgba(37, 125, 236, 0.38);
+        }
+
+        .scene-sensor::before {
+            width: 16mm;
+            height: 16mm;
+        }
+
+        .scene-sensor::after {
+            width: 21mm;
+            height: 21mm;
+            border-style: dashed;
+            animation: pulse-ring 2.8s ease-out infinite;
+        }
+
+        .scene-connector {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            pointer-events: none;
+            overflow: visible;
+        }
+
+        .hardware-device-stack {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-rows: repeat(2, minmax(0, 1fr));
+            gap: 2.2mm;
+            height: 100%;
+        }
+
+        .hardware-device-card {
+            background: #ffffff;
+            border-radius: 3.6mm;
+            box-shadow: 0 10px 24px -14px rgba(15, 23, 42, 0.2);
+            padding: 2.1mm 1.8mm 1.9mm;
+            min-height: 0;
+            display: grid;
+            grid-template-rows: 1fr auto;
+            gap: 1.2mm;
+        }
+
+
+
+        .hardware-device-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hardware-device-visual::after {
+            content: "";
+            position: absolute;
+            bottom: 1.4mm;
+            width: 18mm;
+            height: 3mm;
+            border-radius: 999px;
+            background: radial-gradient(ellipse at center, rgba(30, 41, 59, 0.2) 0%, rgba(30, 41, 59, 0.03) 68%, rgba(30, 41, 59, 0) 100%);
+        }
+
+        .shape-reader,
+        .shape-gateway,
+        .shape-usb {
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 8px 14px rgba(15, 23, 42, 0.12);
+        }
+
+        .shape-reader {
+            width: 15mm;
+            height: 15mm;
+            border-radius: 3.4mm;
+            background: linear-gradient(150deg, #ffffff 0%, #e7eef8 100%);
+            border: 1px solid #d8e1ed;
+        }
+
+        .shape-gateway {
+            width: 12.8mm;
+            height: 12.8mm;
+            border-radius: 3.2mm;
+            background: linear-gradient(160deg, #ffffff 0%, #edf3fb 100%);
+            border: 1px solid #d8e2ef;
+        }
+
+        .shape-gateway::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 5.6mm;
+            height: 5.6mm;
+            border-radius: 50%;
+            border: 1.6px solid #b9cbe4;
+        }
+
+        .shape-usb {
+            width: 15.8mm;
+            height: 7.8mm;
+            border-radius: 2.4mm;
+            background: linear-gradient(90deg, #0f4c81 0%, #1d63b3 48%, #dbe8fb 48%, #f4f8ff 100%);
+            border: 1px solid #bfd1ea;
+        }
+
+        .hardware-device-label {
+            font-size: 8.5px;
+            color: #334a65;
+            line-height: 1.42;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .hw-product-img {
+            width: 100%;
+            max-width: 22mm;
+            height: auto;
+            object-fit: contain;
+            border-radius: 2.4mm;
+            display: block;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                opacity: 0.65;
+                transform: translate(-50%, -50%) scale(0.92);
+            }
+            70% {
+                opacity: 0.15;
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.15);
+            }
+        }
+
+        .page4-intro {
+            margin-top: 2.6mm;
+            max-width: 170mm;
+            font-size: 10.8px;
+            line-height: 1.5;
+            color: #5a6b80;
+        }
+
+        .page4-layout {
+            margin-top: 3mm;
+            display: grid;
+            grid-template-rows: 92mm 100mm;
+            gap: 2.2mm;
+            min-height: 0;
+        }
+
+        .page4-visual-zone {
+            position: relative;
+            border: 1px solid #e6edf6;
+            border-radius: 5mm;
+            background:
+                radial-gradient(circle at 18% 22%, rgba(27, 99, 201, 0.08), transparent 28%),
+                radial-gradient(circle at 78% 18%, rgba(66, 153, 225, 0.08), transparent 26%),
+                linear-gradient(180deg, #fbfdff 0%, #f4f8ff 100%);
+            box-shadow: 0 10px 26px rgba(15, 23, 42, 0.05);
+            overflow: hidden;
+            padding: 4mm;
+        }
+
+        .page4-visual-zone::before {
+            content: none;
+        }
+
+        .page4-stage {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 4.2mm;
+            border: 1px solid #eef3f8;
+            background: #f8fafc;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+            padding: 1.8mm;
+        }
+
+        .page4-device-cluster {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .device {
+            position: absolute;
+            border-radius: 3.2mm;
+            border: 1px solid #cfdbea;
+            background: #ffffff;
+            box-shadow: 0 10px 18px rgba(15, 23, 42, 0.08);
+            overflow: hidden;
+        }
+
+        .device::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+            pointer-events: none;
+        }
+
+        .device-screen {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        .device-monitor {
+            width: 84mm;
+            height: 48mm;
+            left: 50%;
+            top: 11mm;
+            transform: translateX(-50%) translateZ(0);
+        }
+
+        .device-monitor .device-screen {
+            background-image:
+                linear-gradient(165deg, rgba(30, 58, 95, 0.08), rgba(17, 24, 39, 0.02)),
+                url("./assets/images/ectms/内镜监控大屏.png");
+        }
+
+        .device-laptop {
+            width: 60mm;
+            height: 37mm;
+            left: 8mm;
+            top: 34mm;
+            transform: rotate(-2.6deg) translateZ(0);
+        }
+
+        .device-laptop .device-screen {
+            background-image:
+                linear-gradient(170deg, rgba(18, 48, 82, 0.07), rgba(17, 24, 39, 0.02)),
+                url("./assets/images/ectms/管理后台数据概览.png");
+        }
+
+        .device-phone {
+            width: 25mm;
+            height: 47mm;
+            right: 12mm;
+            top: 29mm;
+            border-radius: 4mm;
+            transform: rotate(3deg) translateZ(0);
+        }
+
+        .device-phone .device-screen {
+            background-image:
+                linear-gradient(165deg, rgba(20, 43, 79, 0.08), rgba(17, 24, 39, 0.02)),
+                url("./assets/images/ectms/手机端2.png");
+        }
+
+        .interop-card {
+            position: absolute;
+            min-width: 33mm;
+            max-width: 40mm;
+            padding: 1.8mm 2.1mm;
+            border: 1px solid rgba(111, 166, 255, 0.55);
+            border-radius: 2.6mm;
+            background: rgba(255, 255, 255, 0.86);
+            backdrop-filter: blur(1.8px);
+            box-shadow: 0 8px 14px rgba(18, 42, 79, 0.12);
+            z-index: 3;
+        }
+
+        .interop-card::before {
+            content: "";
+            position: absolute;
+            width: 10mm;
+            height: 1px;
+            background: linear-gradient(90deg, #7aa8f2 0%, rgba(122, 168, 242, 0) 100%);
+            top: 50%;
+        }
+
+        .interop-card.his {
+            left: 5mm;
+            top: 7mm;
+        }
+
+        .interop-card.his::before {
+            right: -9.8mm;
+        }
+
+        .interop-card.pacs {
+            right: 5mm;
+            bottom: 7mm;
+        }
+
+        .interop-card.pacs::before {
+            left: -9.8mm;
+            transform: scaleX(-1);
+        }
+
+        .interop-tag {
+            font-size: 8.3px;
+            letter-spacing: 0.04em;
+            color: #6a87ad;
+            text-transform: uppercase;
+            margin-bottom: 0.8mm;
+            font-weight: 700;
+        }
+
+        .interop-line {
+            font-size: 8.8px;
+            line-height: 1.35;
+            color: #2e435d;
+        }
+
+        .page4-matrix {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-rows: repeat(2, minmax(0, 1fr));
+            gap: 2.2mm;
+            align-items: stretch;
+        }
+
+        .page4-card {
+            border: 0;
+            border-radius: 3.2mm;
+            background: #ffffff;
+            box-shadow: 0 10px 34px -14px rgba(15, 23, 42, 0.12);
+            padding: 2.1mm 2.2mm 1.6mm;
+            height: 100%;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            position: relative;
+        }
+
+        .page4-card::before {
+            content: "";
+            position: absolute;
+            left: 2.2mm;
+            right: 2.2mm;
+            top: 0;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(31, 111, 216, 0.08) 0%, rgba(31, 111, 216, 0.38) 50%, rgba(31, 111, 216, 0.08) 100%);
+        }
+
+        .page4-head {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1.6mm;
+            margin-bottom: 1mm;
+            padding-bottom: 0.8mm;
+            border-bottom: 1px dashed #dbe6f2;
+        }
+
+        .page4-head-icon {
+            width: 5.2mm;
+            height: 5.2mm;
+            border-radius: 1.8mm;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, #f2f7ff 0%, #e6f0ff 100%);
+        }
+
+        .page4-head-icon svg {
+            width: 3.4mm;
+            height: 3.4mm;
+            fill: none;
+            stroke: #1f6fd8;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .page4-card h4 {
+            font-size: 10.4px;
+            color: #0f172a;
+            margin: 0;
+            line-height: 1.32;
+        }
+
+        .page4-list {
+            list-style: none;
+            display: grid;
+            gap: 0.9mm;
+            align-content: start;
+        }
+
+        .page4-list li {
+            position: relative;
+            padding-left: 3.5mm;
+            padding-top: 0;
+            font-size: 9px;
+            color: #4a5f77;
+            line-height: 1.52;
+        }
+
+        .page4-list li:not(:last-child) {
+            border-bottom: 1px dashed #edf2f7;
+            padding-bottom: 0.6mm;
+        }
+
+        .page4-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #1f6fd8;
+            font-weight: 800;
+            font-size: 9px;
+        }
+
+        .page4-list li strong {
+            display: inline;
+            margin-bottom: 0;
+            color: #0f172a;
+            font-weight: 700;
+        }
+
+        .page4-insight {
+            margin-top: 3.6mm;
+            margin-bottom: 8mm;
+            border: 0;
+            border-left: 0;
+            background: rgba(31, 111, 216, 0.1);
+            color: #38506c;
+        }
+
+        .page4-insight strong {
+            color: #1f6fd8;
+        }
+
+
+
+        .param-card .summary-value {
+            font-size: 11.2px;
+        }
+
+        .page6-shell {
+            position: relative;
+            z-index: 2;
+            min-height: 100%;
+            padding-top: 16mm;
+        }
+
+        .page6-vision {
+            display: grid;
+            gap: 6mm;
+            margin-bottom: 10mm;
+        }
+
+        .page6-brand-name {
+            font-size: 24px;
+            line-height: 1;
+            font-weight: 800;
+            letter-spacing: 0.01em;
+            color: #007bff;
+        }
+
+        .page6-vision-copy {
+            max-width: 145mm;
+            font-size: 15px;
+            line-height: 2.0;
+            color: #007bff;
+            font-weight: 700;
+        }
+
+        .page6-strength {
+            display: grid;
+            gap: 3.2mm;
+            margin-top: 8mm;
+        }
+
+        .page6-strength-title {
+            text-align: center;
+            font-size: 19px;
+            line-height: 1.25;
+            color: #0f172a;
+            font-weight: 600;
+            margin-bottom: 3.5mm;
+        }
+
+        .page6-strength-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 3.8mm;
+        }
+
+        .page6-strength-card {
+            background: #ffffff;
+            border: 1px solid #e9eef5;
+            border-radius: 3.4mm;
+            padding: 5.2mm;
+            box-shadow: 0 14px 30px -24px rgba(15, 23, 42, 0.32);
+            min-height: 39mm;
+        }
+
+        .page6-strength-head {
+            display: flex;
+            align-items: center;
+            gap: 2.2mm;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 2.6mm;
+            margin-bottom: 2.8mm;
+        }
+
+        .page6-strength-icon {
+            width: 24px;
+            height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 24px;
+        }
+
+        .page6-strength-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: #334155;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .page6-strength-heading {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 1.8mm;
+            min-width: 0;
+        }
+
+        .page6-strength-title-cn {
+            font-size: 15.5px;
+            line-height: 1.2;
+            color: #0f172a;
+            font-weight: 700;
+        }
+
+        .page6-strength-title-en {
+            font-size: 11px;
+            line-height: 1.2;
+            color: #94a3b8;
+            font-weight: 300;
+        }
+
+        .page6-strength-card p {
+            font-size: 12.2px;
+            line-height: 1.56;
+            color: #475569;
+        }
+
+        .page6-strength-card p strong {
+            color: var(--blue);
+            font-weight: 700;
+        }
+
+
+        .page6-network {
+            margin-top: 19mm;
+            background: #f8fafc;
+            border-radius: 4mm;
+            padding: 7.2mm 5.5mm;
+        }
+
+        .page6-network-group {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.3mm;
+            align-content: start;
+        }
+
+        .page6-contact-panel,
+        .page6-office-panel {
+            padding: 0;
+        }
+
+        .page6-contact-panel {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.2mm;
+            padding-top: 0;
+        }
+
+        .page6-brand-signature {
+            display: inline-grid;
+            justify-items: start;
+            align-content: start;
+            gap: 0.8mm;
+        }
+
+        .page6-company-cn {
+            font-size: 13.2px;
+            line-height: 1.24;
+            color: #0f172a;
+            font-weight: 800;
+        }
+
+        .page6-company-en {
+            font-size: 9.2px;
+            line-height: 1.3;
+            color: #63758a;
+            letter-spacing: 0.02em;
+        }
+
+        .page6-contact-inline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2mm;
+            align-items: center;
+            font-size: 12.2px;
+            line-height: 1.6;
+            color: var(--blue);
+            font-weight: 700;
+            padding-top: 0;
+        }
+
+        .page6-contact-inline span {
+            color: var(--blue);
+            font-weight: 500;
+        }
+
+        .page6-qr-wrap {
+            display: none;
+        }
+
+        .page6-office-grid {
+            margin-top: 1mm;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.6mm;
+        }
+
+        .page6-office-card {
+            padding: 0;
+        }
+
+        .page6-office-card h4 {
+            font-size: 12.2px;
+            color: #15263a;
+            margin-bottom: 1.5mm;
+            font-weight: 800;
+        }
+
+        .page6-office-card p + p {
+            margin-top: 1.2mm;
+        }
+
+        .page6-office-card p {
+            font-size: 12.2px;
+            line-height: 1.6;
+            color: #63758a;
+        }
+
+        .page-2 .title,
+        .page-3 .title,
+        .page-4 .title,
+        .page-5 .title,
+        .page-6 .title {
+            max-width: 132mm;
+        }
+
+        .page-2 .subtitle,
+        .page-3 .subtitle,
+        .page-4 .subtitle,
+        .page-5 .subtitle,
+        .page-6 .subtitle {
+            margin-bottom: 0.6mm;
+        }
+
+        .page5-intro {
+            margin-top: 1.8mm;
+            margin-bottom: 0;
+            max-width: 175mm;
+            font-size: 10.2px;
+            line-height: 1.62;
+            color: #4e6480;
+        }
+
+        .page-6 .summary-strip.four {
+            max-width: 118mm;
+        }
+
+        .quote {
+            margin-top: 4mm;
+            font-size: 15px;
+            line-height: 1.66;
+            color: #2d3d52;
+            max-width: 126mm;
+        }
+
+        .guarantee-list {
+            margin-top: 5mm;
+            display: grid;
+            gap: 2.5mm;
+        }
+
+        .guarantee-list p {
+            font-size: 12px;
+            color: #425265;
+        }
+
+        .guarantee-list strong {
+            color: #1f344c;
+        }
+
+        .footer-block {
+            align-self: end;
+            display: grid;
+            justify-items: center;
+            gap: 4mm;
+            padding-bottom: 20mm;
+            text-align: center;
+        }
+
+        .brand-logo {
+            width: 42mm;
+            height: auto;
+        }
+
+        .qr {
+            width: 34mm;
+            height: 34mm;
+            border-radius: 2.4mm;
+            border: 1px solid #c7d6e8;
+            background:
+                linear-gradient(90deg, #0f4c81 0 14%, transparent 14% 28%, #0f4c81 28% 42%, transparent 42% 56%, #0f4c81 56% 70%, transparent 70% 84%, #0f4c81 84%),
+                linear-gradient(#0f4c81 0 14%, transparent 14% 28%, #0f4c81 28% 42%, transparent 42% 56%, #0f4c81 56% 70%, transparent 70% 84%, #0f4c81 84%),
+                #fff;
+            background-size: 8mm 8mm, 8mm 8mm, auto;
+        }
+
+        .contact {
+            font-size: 12px;
+            line-height: 1.8;
+            color: #425265;
+        }
+
+        .contact strong {
+            color: #20344c;
+        }
+
+        @media print {
+            @page { size: A4 portrait; margin: 0; }
+            body { background: #fff; padding: 0; }
+            .brochure { width: auto; gap: 0; }
+            * {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .page {
+                width: 210mm;
+                height: 297mm;
+                min-height: 297mm;
+                border: 0;
+                border-radius: 0;
+                margin: 0;
+                box-shadow: none;
+                page-break-after: always;
+                break-after: page;
+            }
+            .page:last-child {
+                page-break-after: auto;
+                break-after: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="brochure">
+        <section class="page">
+            <div class="cover">
+                <div class="cover-copy">
+                    <h1 class="title">ECTMS 内镜综合追溯管理系统</h1>
+                    <p class="en-subtitle">Endoscope Traceability Management System</p>
+                    <div class="cover-badges" aria-label="核心卖点">
+                        <span class="cover-badge">全流程质控</span><span class="cover-badge">全流程追溯</span><span class="cover-badge">多设备接入</span><span class="cover-badge">多系统对接</span>
+                    </div>
+                </div>
+
+                <div class="cover-visual" aria-label="内镜洗消现场主视觉示意">
+                    <div class="cover-visual-tech" aria-hidden="true"></div>
+                    <img src="./assets/images/ectms/hero-cover-v01.jpeg" alt="ECTMS 首页主视觉" class="cover-hero-image">
+                </div>
+
+                <div class="cover-footer">
+                    <div class="cover-transition" aria-hidden="true"></div>
+                    <div class="cover-products">
+                        <h3>我们的产品&amp;服务</h3>
+                        <div class="service-grid">
+                            <p class="service-item">内镜中心整体物联网解决方案</p>
+                            <p class="service-item">内镜综合追溯管理系统</p>
+                            <p class="service-item">内镜洗消、干燥、储存、转运、储运设备智能控制模组</p>
+                            <p class="service-item">内镜中心清洗间智能化改造</p>
+                            <p class="service-item">内镜智能转运机器人</p>
+                        </div>
+                    </div>
+                    <div class="cover-brand">
+                        <div class="cover-brand-row">
+                            <img src="./opmoniter_logo.png" alt="OpMonitor Logo" class="cover-brand-logo">
+                            <p class="cover-brand-info">www.opmonitor.com | info@opmonitor.com | 400 160 1008</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page page-2">
+            <img src="./opmoniter_logo.png" alt="OpMonitor Logo" class="logo">
+            <p class="eyebrow">行业洞察与系统价值</p>
+            <h2 class="title">响应合规要求<span class="title-sep">|</span>筑牢感控防线</h2>
+            <p class="subtitle">规范内化 · 闭环管理</p>
+            <p class="page-2-intro">为贯彻落实《WS507-2016 软式内镜清洗消毒技术规范》，ECTMS 系统基于物联网与边缘计算技术，构建全业务闭环，协助医疗机构实现内镜流转的全流程智能化与精准可追溯。</p>
+
+            <div class="page-2-flow">
+                <section class="policy-board">
+                    <div class="policy-head">
+                        <h3 class="policy-title">核心合规要求与质控指标</h3>
+                        <p class="policy-source">摘自 WS507-2016 第 7.6 款</p>
+                    </div>
+                    <div class="policy-layout">
+                        <div class="policy-cover-slice">
+                            <img src="./assets/images/ectms/图片1.png" alt="WS 507-2016 标准封面节选">
+                        </div>
+                        <div class="policy-right">
+                            <div class="policy-grid">
+                                <article class="policy-item">
+                                    <h3>人机患精准绑定 <span>(7.6.1)</span></h3>
+                                    <p>记录诊疗日期、患者标识、内镜唯一编号、清洗消毒起止时间及操作人员。</p>
+                                </article>
+                                <article class="policy-item">
+                                    <h3>设备与参数留痕 <span>(7.6.4)</span></h3>
+                                    <p>留存内镜清洗消毒机运行参数资料，形成完整设备执行证据链。</p>
+                                </article>
+                                <article class="policy-item">
+                                    <h3>耗材与环境监测 <span>(7.6.2 / 7.6.3 / 7.6.5)</span></h3>
+                                    <p>记录消毒剂浓度及染菌量、生物学监测、手卫生和环境消毒质量监测结果。</p>
+                                </article>
+                                <article class="policy-item">
+                                    <h3>长期合规存档 <span>(7.6.6)</span></h3>
+                                    <p>数据具备可追溯性，监测记录合规保存 6 个月至 3 年以上。</p>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contrast-stack" aria-label="传统痛点与 ECTMS 方案对撞">
+                    <article class="contrast-row">
+                        <div class="contrast-card pain">
+                            <span class="contrast-label">传统痛点</span>
+                            <div class="contrast-title">
+                                <span class="contrast-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"></path><path d="M14 3v6h5"></path><path d="M10 12h6"></path><path d="M10 16h4"></path><path d="M5 10 8 13"></path><path d="M8 10 5 13"></path></svg></span>
+                                <h3>纸质记录极易遗漏</h3>
+                            </div>
+                            <p>飞检抽查、院感追溯或疑似事件取证时，记录分散且证据链不连续。</p>
+                        </div>
+                        <div class="contrast-arrow" aria-hidden="true"></div>
+                        <div class="contrast-card solution">
+                            <span class="contrast-label">闭环管控</span>
+                            <div class="contrast-title">
+                                <span class="contrast-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3a8 8 0 1 1-7.4 11"></path><path d="M4 8V4h4"></path><path d="M9 12l2 2 4-4"></path></svg></span>
+                                <h3>全要素自动留痕</h3>
+                            </div>
+                            <p>建立“一槽一机两诊疗”标准数据闭环，让人、机、患、流程节点全部留痕可查。</p>
+                        </div>
+                    </article>
+
+                    <article class="contrast-row">
+                        <div class="contrast-card pain">
+                            <span class="contrast-label">传统痛点</span>
+                            <div class="contrast-title">
+                                <span class="contrast-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle><path d="M12 8v5"></path><path d="M12 16h.01"></path><path d="M4 4l16 16"></path></svg></span>
+                                <h3>人工洗消依赖自觉</h3>
+                            </div>
+                            <p>浸泡时长不足、工序跳步等问题不易被及时发现，院感隐患持续累积。</p>
+                        </div>
+                        <div class="contrast-arrow" aria-hidden="true"></div>
+                        <div class="contrast-card solution">
+                            <span class="contrast-label">防错拦截</span>
+                            <div class="contrast-title">
+                                <span class="contrast-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 5 3.5 8 7 10 3.5-2 7-5 7-10V6z"></path><path d="M9.5 12.5 12 15l2.5-2.5"></path></svg></span>
+                                <h3>事前预防替代事后补救</h3>
+                            </div>
+                            <p>通过物联网 AI 判读、语音引导与时长强制卡控，把风险拦截在诊疗发生之前。</p>
+                        </div>
+                    </article>
+
+                    <article class="contrast-row">
+                        <div class="contrast-card pain">
+                            <span class="contrast-label">传统痛点</span>
+                            <div class="contrast-title">
+                                <span class="contrast-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 8h4v4H8zM12 12h4v4h-4z"></path><path d="M12 10h4"></path><path d="M8 14H4"></path><path d="M16 6h4"></path><path d="M4 18h4"></path></svg></span>
+                                <h3>底层设备数据难自动获取</h3>
+                            </div>
+                            <p>洗消室与诊疗室信息割裂，系统之间缺乏联动，形成持续性管理盲区。</p>
+                        </div>
+                        <div class="contrast-arrow" aria-hidden="true"></div>
+                        <div class="contrast-card solution">
+                            <span class="contrast-label">系统集成</span>
+                            <div class="contrast-title">
+                                <span class="contrast-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="2"></circle><circle cx="12" cy="6" r="2"></circle><circle cx="18" cy="12" r="2"></circle><circle cx="12" cy="18" r="2"></circle><path d="M8 12h8M12 8v8"></path></svg></span>
+                                <h3>打通设备与院内系统孤岛</h3>
+                            </div>
+                            <p>平滑对接 HIS/PACS 及各类底层洗消设备，实现全院互联互通与统一监管。</p>
+                        </div>
+                    </article>
+                </section>
+
+                <div class="insight-bar">ECTMS 的核心价值并不止于“记录更多数据”，而是将严格的规范要求，转化为院感科可执行、可校验、可追溯的<span class="insight-accent">自动化管理闭环</span>。</div>
+            </div>
+            <span class="page-no">Page 02</span>
+        </section>
+
+        <section class="page page-3">
+            <img src="./opmoniter_logo.png" alt="OpMonitor Logo" class="logo">
+            <p class="eyebrow">全场景适配 · 按需灵活部署</p>
+            <h2 class="title">全景业务闭环 | 阶梯化解决方案</h2>
+            <p class="subtitle">贴合临床真实动线，精准匹配科室发展</p>
+            <p class="page-3-intro">ECTMS 深入剖析内镜中心实际运转流程，将严苛的质控规范无感融入日常物理动线。我们提供从“轻量级起步”到“中心级智慧治理”的四阶产品矩阵，帮助医疗机构按需部署、高效升级。</p>
+
+            <div class="page-3-split">
+                <section class="page-3-flow-panel">
+                    <img src="./assets/images/ectms/内镜追溯流程图.png" alt="内镜追溯流程图参考" class="page-3-flow-image">
+                </section>
+
+                <section class="matrix-board">
+                    <table class="matrix-table" aria-label="版本功能矩阵">
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                        <tbody>
+                            <tr class="matrix-header"><td>功能配置</td><td>ECTMS Mini<br>（机洗版）</td><td>ECTMS<br>（标准版）</td><td>ECTMS Plus<br>（专业版）</td><td>ECTMS Pro<br>（定制版）</td></tr>
+                            <tr class="group-row"><td colspan="5">基础配置</td></tr>
+                            <tr class="feature-row"><td>内镜综合追溯系统</td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row alt"><td>现场服务器</td><td><span class="matrix-no">—</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row"><td>现场大屏（21.5寸）</td><td><span class="matrix-no">—</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-no">—</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row alt"><td>现场大屏（55寸）</td><td><span class="matrix-no">—</span></td><td><span class="matrix-no">—</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row"><td>清洗槽采集模块（RFID读卡器）</td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row alt"><td>清洗机采集模块（RFID读卡器）</td><td><span class="matrix-no">—</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row"><td>主机采集模块（RFID读卡器）</td><td><span class="matrix-no">—</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row alt"><td>内镜识别卡（RFID卡片）</td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row"><td>清洗人识别卡（RFID卡片）</td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row alt"><td>HIS对接（标准接口对接）</td><td><span class="matrix-no">—</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row"><td>8口交换机</td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td></tr>
+
+                            <tr class="group-row"><td colspan="5">软件定制</td></tr>
+                            <tr class="feature-row"><td>清洗机数据解析</td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row alt"><td>诊疗系统数据交换</td><td><span class="matrix-no">—</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row"><td>镜柜数据解析</td><td><span class="matrix-no">—</span></td><td><span class="matrix-no">—</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row alt"><td>纯水机数据解析</td><td><span class="matrix-no">—</span></td><td><span class="matrix-no">—</span></td><td><span class="matrix-no">—</span></td><td><span class="matrix-yes">✓</span></td></tr>
+
+                            <tr class="group-row"><td colspan="5">选配组件</td></tr>
+                            <tr class="feature-row"><td>PDA手持终端</td><td><span class="matrix-no">—</span></td><td><span class="matrix-no">—</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row alt"><td>清洗机采集模块（内置采集器）</td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row"><td>镜柜采集模块（采集器和RFID读卡器）</td><td><span class="matrix-no">—</span></td><td><span class="matrix-no">—</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row alt"><td>镜子进出维修登记用读卡器</td><td><span class="matrix-no">—</span></td><td><span class="matrix-no">—</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row"><td>纯水机采集模块</td><td><span class="matrix-no">—</span></td><td><span class="matrix-no">—</span></td><td><span class="matrix-no">—</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row alt"><td>手卫生监测</td><td><span class="matrix-no">—</span></td><td><span class="matrix-no">—</span></td><td><span class="matrix-no">—</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row"><td>感应及脚踏改造</td><td><span class="matrix-no">—</span></td><td><span class="matrix-no">—</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row alt"><td>语音提醒</td><td><span class="matrix-no">—</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row"><td>纯水机及清洗间 漏水监测</td><td><span class="matrix-no">—</span></td><td><span class="matrix-no">—</span></td><td><span class="matrix-no">—</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                            <tr class="feature-row alt"><td>漏水监测+摄像头</td><td><span class="matrix-no">—</span></td><td><span class="matrix-no">—</span></td><td><span class="matrix-no">—</span></td><td><span class="matrix-yes">✓</span></td></tr>
+                        </tbody>
+                    </table>
+
+                    <p class="matrix-foot"><strong>架构理念：</strong>ECTMS 全系列基于统一的数据底座构建。各版本之间并非孤立割裂，而是随着医院内镜中心的扩建与升级，支持从“单点数据直采”、“科室高效协同”向“全院级智慧治理”的无缝平滑演进。</p>
+                </section>
+            </div>
+            <span class="page-no">Page 03</span>
+        </section>
+
+        <section class="page page-4">
+            <img src="./opmoniter_logo.png" alt="OpMonitor Logo" class="logo">
+            <p class="eyebrow">平台系统与在线监管</p>
+            <h2 class="title">多端协同监管 | 精细化质控</h2>
+            <p class="subtitle">全景可视互联，动态追溯预警</p>
+            <p class="page4-intro">打破科室信息孤岛，ECTMS 将现场设备感知、后台数据分析与全院级 HIS/PACS 系统无缝融合。通过多终端、全维度的协同监管，让内镜流转的每一步都在阳光下运行。</p>
+
+            <div class="page4-layout">
+                <section class="page4-visual-zone" aria-label="多端协同视觉中心">
+                    <div class="page4-stage">
+                        <div class="page4-device-cluster">
+                            <div class="device device-monitor"><div class="device-screen" aria-label="内镜监控大屏界面"></div></div>
+                            <div class="device device-laptop"><div class="device-screen" aria-label="管理后台数据概览"></div></div>
+                            <div class="device device-phone"><div class="device-screen" aria-label="移动端小程序界面"></div></div>
+
+                            <div class="interop-card his" aria-label="HIS 对接关键信息卡">
+                                <p class="interop-tag">HIS Link</p>
+                                <p class="interop-line">姓名: 王某某</p>
+                                <p class="interop-line">内镜号: EN-2026-0313</p>
+                                <p class="interop-line">检查项目: 胃镜筛查</p>
+                            </div>
+
+                            <div class="interop-card pacs" aria-label="PACS 对接关键信息卡">
+                                <p class="interop-tag">PACS Link</p>
+                                <p class="interop-line">患者ID: 20260313018</p>
+                                <p class="interop-line">报告号: PACS-IM-88021</p>
+                                <p class="interop-line">检查结论: 已回传归档</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="page4-matrix" aria-label="核心能力矩阵">
+                    <article class="page4-card">
+                        <div class="page4-head">
+                            <span class="page4-head-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v4"></path><path d="M12 17v4"></path><path d="M3 12h4"></path><path d="M17 12h4"></path><circle cx="12" cy="12" r="5"></circle></svg></span>
+                            <h4>全景可视 &amp; 多端协同监管</h4>
+                        </div>
+                        <ul class="page4-list">
+                            <li><strong>多端数据查看：</strong>支持手机/PDA、大屏看板、电脑等多端数据查看，掌握内镜洗消、存储状态。</li>
+                            <li><strong>统计分析报告：</strong>提供各流程环节详细工作量统计、质量分析、效率分析数据报告。</li>
+                            <li><strong>可视化数据看板：</strong>支持可视化数据分析统计，包括折线图、直方图、扇形图等多种形式，有效显示操作相关数据。</li>
+                        </ul>
+                    </article>
+
+                    <article class="page4-card">
+                        <div class="page4-head">
+                            <span class="page4-head-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.5"></circle><circle cx="18" cy="6" r="2.5"></circle><circle cx="18" cy="18" r="2.5"></circle><path d="M8.3 11 15.5 7.2"></path><path d="M8.3 13 15.5 16.8"></path></svg></span>
+                            <h4>系统互联 &amp; 软硬一体化</h4>
+                        </div>
+                        <ul class="page4-list">
+                            <li><strong>全院信息互通：</strong>支持以数据库表或视图、WEB SERVICE等方式与医院 HIS、PACS 信息系统之间的信息交换。</li>
+                            <li><strong>底层数据直采：</strong>支持对手工清洗过程、清洗消毒机的全程采集与记录，支持记录内镜诊疗信息。</li>
+                            <li><strong>底层设备对接：</strong>支持对内镜中心设备设施，包括纯水机、镜柜等进行数据对接；支持手卫生智能化监测，判别手卫生执行时机，及时提醒。</li>
+                        </ul>
+                    </article>
+
+                    <article class="page4-card">
+                        <div class="page4-head">
+                            <span class="page4-head-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.5 2.8 7.2 7 9 4.2-1.8 7-4.5 7-9V6z"></path><path d="M9 12.5 11 14.5 15 10.5"></path></svg></span>
+                            <h4>严格合规 &amp; 动态追溯预警</h4>
+                        </div>
+                        <ul class="page4-list">
+                            <li><strong>全流程覆盖规范：</strong>贴合最新规范，覆盖预处理、测漏、清洗、漂洗、消毒、终末漂洗、干燥、存储、发放、使用、维护等环节。</li>
+                            <li><strong>多维度明细追溯：</strong>支持病人使用的内镜使用前和使用后的内镜洗消过程明细，覆盖病人、内镜、操作人员、设备等多维度追溯。</li>
+                            <li><strong>洗消流程拦截：</strong>满足院感管理诉求，支持洗消流程顺序，洗消时长，数据漏登记等预警。</li>
+                            <li><strong>异常消息触达：</strong>支持消息提醒，所有质量异常信息，消毒液倒计时报警、机器维护耗材更换提醒、实时推送给相应的工作台操作人员；支持多端推送；支持周期性监测提醒。</li>
+                        </ul>
+                    </article>
+
+                    <article class="page4-card">
+                        <div class="page4-head">
+                            <span class="page4-head-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3a4 4 0 0 1 4 4v1h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h1V7a4 4 0 0 1 4-4z"></path><path d="M9 8h6"></path><path d="M12 12v3"></path></svg></span>
+                            <h4>质控闭环 &amp; 权限精细管控</h4>
+                        </div>
+                        <ul class="page4-list">
+                            <li><strong>监测结果填报：</strong>支持内镜质量控制的监测结果填报，包括：消毒剂浓度、杂菌量、生物学监测结果、手卫生消毒结果、环境消毒质量监测结果。</li>
+                            <li><strong>自定义角色权限：</strong>支持精细化模块权限管理，支持自定义角色功能，可自行定义角色，并且分配自定义角色的明细权限。</li>
+                        </ul>
+                    </article>
+                </section>
+            </div>
+            <div class="insight-bar page4-insight"><strong>监管价值：</strong>从现场设备到院内系统的多端协同，不是信息堆叠，而是让关键数据在同一业务链路中实时可见、可控、可追溯。</div>
+            <span class="page-no">Page 04</span>
+        </section>
+
+        <section class="page page-5">
+            <img src="./opmoniter_logo.png" alt="OpMonitor Logo" class="logo">
+            <p class="eyebrow">核心硬件与感知技术</p>
+            <h2 class="title">隐蔽暗装部署 | 底层数据直读</h2>
+            <p class="subtitle">杜绝交叉污染，突破物联壁垒，构建全院级感知网络。</p>
+            <p class="page5-intro">依托自主研发的底层物联感知架构，系统采用隐蔽式暗装工艺与多源硬件无损直读技术。在降低线缆暴露与交叉污染风险的同时，精准提取主流洗消设备的真实运行参数，为内镜中心构建极具安全性与稳定性的数据基座。</p>
+
+            <div class="hardware-layout">
+                <div class="hardware-top">
+                    <article class="hardware-card">
+                        <div class="hardware-head">
+                            <span class="hardware-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 4v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V7l7-4z"></path><path d="M9.5 12l2 2 3-3"></path></svg></span>
+                            <h4>隐蔽式暗装传感部署</h4>
+                        </div>
+                        <div class="mini-tag-list"><span class="mini-tag">规范布线</span><span class="mini-tag">零线缆外露</span></div>
+                        <p>严格遵循感控高标准，自研专用读卡器嵌入清洗槽内壁暗装部署。操作人员隔池壁即可无接触刷卡，实现洗消工作站线缆零暴露，降低传统明装设备的交叉污染风险。</p>
+                    </article>
+
+                    <article class="hardware-card">
+                        <div class="hardware-head">
+                            <span class="hardware-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"></rect><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"></path><path d="M9 14l2-2 2 2 2-2"></path></svg></span>
+                            <h4>多源设备硬件无损直读</h4>
+                        </div>
+                        <div class="mini-tag-list"><span class="mini-tag">vibrates-Dect 传感</span><span class="mini-tag">跨品牌采集</span></div>
+                        <p>配置自主研发的电流与振动多维传感模块。跨越传统设备厂家的封闭限制，直接、无损地采集市面主流全自动清洗机的真实运行状态与底层参数，保障核心数据的绝对真实。</p>
+                    </article>
+
+                    <article class="hardware-card">
+                        <div class="hardware-head">
+                            <span class="hardware-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"></circle><circle cx="19" cy="6" r="2"></circle><circle cx="19" cy="18" r="2"></circle><path d="M7 12h6l4-6"></path><path d="M13 12l4 6"></path></svg></span>
+                            <h4>“有线+无线”混合物联架构</h4>
+                        </div>
+                        <div class="mini-tag-list"><span class="mini-tag">POE+LoRa网络</span><span class="mini-tag">高穿透传输</span></div>
+                        <p>构建“有线 POE 交换机 + 无线 LoRa 网关”混合拓扑架构。针对内镜中心厚墙体、布线难的复杂环境，通过 Sub1G 高穿透网络直连洗消终端，保障设备秒级稳定并网。</p>
+                    </article>
+
+                    <article class="hardware-card">
+                        <div class="hardware-head">
+                            <span class="hardware-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"></path><path d="M5 12h14"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect></svg></span>
+                            <h4>医用级专业配套外设定制</h4>
+                        </div>
+                        <div class="mini-tag-list"><span class="mini-tag">2.4G 即插即用</span><span class="mini-tag">防污交互外设</span></div>
+                        <p>提供专为临床诊疗工作站定制的 2.4G 轻量化无线 USB 读卡器，免驱接入。配套大号无菌水晶标贴、防污弹簧绳等专业周边，全面适配医院复杂场景的物理交互需求。</p>
+                    </article>
+                </div>
+
+                <section class="hardware-matrix" aria-label="自研硬件矩阵展示图注">
+                    <p class="hardware-matrix-title">自研硬件产品矩阵</p>
+                    <div class="hardware-showcase">
+                        <figure class="scene-stage" aria-label="现场清洗槽安装图">
+                            <img src="./assets/images/ectms/现场安装图02.png" alt="现场清洗槽安装示意" class="scene-photo">
+                            <span class="scene-sensor" aria-hidden="true"></span>
+                            <figcaption class="scene-caption">隐式安装现场图</figcaption>
+                        </figure>
+
+                        <div class="hardware-device-stack">
+                            <article class="hardware-device-card">
+                                <div class="hardware-device-visual"><img src="./assets/images/ectms/hw-reader.png" alt="自研隐蔽式读卡器" class="hw-product-img"></div>
+                                <p class="hardware-device-label">自研隐蔽式读卡器</p>
+                            </article>
+                            <article class="hardware-device-card">
+                                <div class="hardware-device-visual"><img src="./assets/images/ectms/hw-gateway.png" alt="工业级无线 LoRa 网关" class="hw-product-img"></div>
+                                <p class="hardware-device-label">工业级无线 LoRa 网关</p>
+                            </article>
+                            <article class="hardware-device-card">
+                                <div class="hardware-device-visual"><img src="./assets/images/ectms/hw-usb.png" alt="临床专属 2.4G 无线接收器" class="hw-product-img"></div>
+                                <p class="hardware-device-label">临床专属 2.4G 无线接收器</p>
+                            </article>
+                            <article class="hardware-device-card">
+                                <div class="hardware-device-visual"><img src="./assets/images/ectms/hw-usb-cardreader.png" alt="自研轻量化无线 USB 读卡器" class="hw-product-img"></div>
+                                <p class="hardware-device-label">自研轻量化无线 USB 读卡器 (2.4G)</p>
+                            </article>
+                        </div>
+
+
+                    </div>
+                </section>
+            </div>
+            <div class="insight-bar">ECTMS 的硬件价值不在“多装几个设备”，而在以更洁净的部署方式和更真实的底层采集能力，为系统闭环提供可信输入。</div>
+            <span class="page-no">Page 05</span>
+        </section>
+
+        <section class="page page-6">
+            <img src="./opmoniter_logo.png" alt="OpMonitor Logo" class="logo">
+            <div class="page6-shell">
+                <section class="page6-vision">
+                    <div class="page6-brand-name">智感云</div>
+                    <p class="page6-vision-copy">致力于通过创新的设备、软件、服务<br>推动内镜中心设备、设施、环境的整体智能化升级<br>支撑内镜洗消质量控制精细化管理</p>
+                </section>
+
+                <section class="page6-strength" aria-label="核心实力与保障体系">
+                    <h3 class="page6-strength-title">核心实力与保障体系</h3>
+                    <div class="page6-strength-grid">
+                        <article class="page6-strength-card">
+                            <div class="page6-strength-head">
+                                <span class="page6-strength-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3a14 14 0 0 1 0 18"></path><path d="M12 3a14 14 0 0 0 0 18"></path></svg></span>
+                                <div class="page6-strength-heading"><span class="page6-strength-title-cn">专业</span><span class="page6-strength-title-en">Professional</span></div>
+                            </div>
+                            <p>深耕医疗物联网与感控领域，构建涵盖北京研发总部与<strong>全国多省市</strong>（苏、皖、鲁、粤、川渝、疆）的直属分支机构服务体系。</p>
+                        </article>
+
+                        <article class="page6-strength-card">
+                            <div class="page6-strength-head">
+                                <span class="page6-strength-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"></rect><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4"></path></svg></span>
+                                <div class="page6-strength-heading"><span class="page6-strength-title-cn">科技</span><span class="page6-strength-title-en">Tech</span></div>
+                            </div>
+                            <p>核心研发团队源自国内顶尖高校，企业拥有<strong>百项医疗核心知识产权</strong>，并全面通过<strong>ISO9001</strong>质量管理、信息安全、信息技术服务等多项国家级体系认证。</p>
+                        </article>
+
+                        <article class="page6-strength-card">
+                            <div class="page6-strength-head">
+                                <span class="page6-strength-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.5 2.8 7.2 7 9 4.2-1.8 7-4.5 7-9V6z"></path><path d="M9.5 12.5 11.5 14.5 15 11"></path></svg></span>
+                                <div class="page6-strength-heading"><span class="page6-strength-title-cn">信赖</span><span class="page6-strength-title-en">Reliable</span></div>
+                            </div>
+                            <p>打造医疗界规范化先进产品，系统方案已全面覆盖<strong>全国 30 个省份</strong>，成为<strong>近千家三甲综合医院</strong>与各级标杆医疗机构的共同信赖选择。</p>
+                        </article>
+
+                        <article class="page6-strength-card">
+                            <div class="page6-strength-head">
+                                <span class="page6-strength-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v16"></path><path d="M4 12h16"></path><circle cx="12" cy="12" r="9"></circle></svg></span>
+                                <div class="page6-strength-heading"><span class="page6-strength-title-cn">服务</span><span class="page6-strength-title-en">Service</span></div>
+                            </div>
+                            <p>建立专职实施与售后技术团队。拥有完善的备品备件库，提供标准化入科实施、定期主动巡检与<strong>7×24 小时</strong>在线技术响应，全面保障科室系统稳定运行。</p>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="page6-network" aria-label="服务网络与联系矩阵">
+                    <div class="page6-network-group">
+                        <div class="page6-contact-panel">
+                            <div class="page6-brand-signature">
+                                <div class="page6-company-cn">北京智感云科技有限公司</div>
+                                <div class="page6-company-en">Beijing OpMaster Technology Co, Ltd.</div>
+                                <div class="page6-contact-inline">www.opmonitor.com <span>|</span> info@opmonitor.com <span>|</span> 400 160 1008</div>
+                            </div>
+                        </div>
+
+                        <div class="page6-office-panel">
+                            <div class="page6-office-grid">
+                                <article class="page6-office-card">
+                                    <h4>北京总部</h4>
+                                    <p>地址：北京市北京经济技术开发区嘉创路5号1号楼8层918-A44</p>
+                                    <p>电话：010 - 6780 3037 / 185 0039 4278（张）</p>
+                                    <p>邮箱：bj@opmonitor.com</p>
+                                </article>
+                                <article class="page6-office-card">
+                                    <h4>江苏办事处</h4>
+                                    <p>地址：南京市高淳区东坝信息新材料产业园832号</p>
+                                    <p>电话：189 5117 0876（王）</p>
+                                    <p>邮箱：js@opmonitor.com</p>
+                                </article>
+                                <article class="page6-office-card">
+                                    <h4>安徽办事处</h4>
+                                    <p>地址：合肥市蜀山区潜山南路188号蔚蓝商务港D幢1111号</p>
+                                    <p>电话：187 3030 6171（刘）</p>
+                                    <p>邮箱：ah@opmonitor.com</p>
+                                </article>
+                                <article class="page6-office-card">
+                                    <h4>广东办事处</h4>
+                                    <p>地址：广州市白云区大金钟路40号四层412室</p>
+                                    <p>电话：133 5289 6600（朱）</p>
+                                    <p>邮箱：gd@opmonitor.com</p>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>

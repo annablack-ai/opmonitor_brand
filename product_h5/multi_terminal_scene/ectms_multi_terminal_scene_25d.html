@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECTMS 多端协同 2.5D 组合图</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-0: #f5f9ff;
+      --bg-1: #edf4ff;
+      --bg-2: #f7fbff;
+      --ink-main: #102345;
+      --ink-sub: #4b5563;
+      --line-blue: #3b82f6;
+      --line-cyan: #22d3ee;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+      color: var(--ink-main);
+      background:
+        radial-gradient(1200px 500px at 12% -10%, rgba(96, 165, 250, 0.22), transparent 64%),
+        radial-gradient(1000px 420px at 100% 8%, rgba(34, 211, 238, 0.14), transparent 62%),
+        linear-gradient(160deg, var(--bg-0), var(--bg-1) 50%, var(--bg-2));
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .page {
+      width: min(1180px, 100%);
+    }
+
+    .title {
+      font-family: "Manrope", "Noto Sans SC", sans-serif;
+      font-size: clamp(22px, 2.9vw, 34px);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: var(--ink-main);
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      font-size: 14px;
+      color: var(--ink-sub);
+    }
+
+    /* Core requested container: relative w-full h-[320px] mt-8 flex justify-center items-center overflow-visible */
+    .scene-combo {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: visible;
+      perspective: 1800px;
+      isolation: isolate;
+    }
+
+    .scene-combo::before,
+    .scene-combo::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+      filter: blur(24px);
+      z-index: 0;
+    }
+
+    .scene-combo::before {
+      width: 64%;
+      height: 140px;
+      bottom: 10%;
+      left: 18%;
+      background: radial-gradient(ellipse at center, rgba(29, 78, 216, 0.15), transparent 72%);
+    }
+
+    .scene-combo::after {
+      width: 54%;
+      height: 120px;
+      bottom: 3%;
+      left: 24%;
+      background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.1), transparent 72%);
+    }
+
+    .layer-img {
+      position: relative;
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* 后台台账 (远景/左后): absolute left-[-5%] top-[10%] w-[60%] z-10 + opacity-80 scale-90 shadow-lg rounded-lg */
+    .backlog-layer {
+      position: absolute;
+      left: 8%;
+      top: 22%;
+      width: 25%;
+      z-index: 20;
+      opacity: 0.8;
+      filter: blur(1.1px);
+      transform: rotateY(12deg) scale(0.98);
+      border-radius: 14px;
+      box-shadow: 0 30px 70px rgba(29, 78, 216, 0.12);
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    /* 追溯大屏 (中景/C位): absolute left-[15%] top-[15%] w-[70%] z-20 + shadow-2xl shadow-blue-900/40 rounded-xl border */
+    .screen-layer {
+      position: absolute;
+      left: 20%;
+      top: 13%;
+      width: 60%;
+      z-index: 30;
+      border-radius: 14px;
+      border: 1px solid #334155;
+      box-shadow:
+        0 42px 90px rgba(29, 78, 216, 0.18),
+        0 16px 48px rgba(59, 130, 246, 0.12);
+      overflow: hidden;
+      transform: translateZ(16px);
+      background: #0b1220;
+    }
+
+    .screen-layer::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(96, 165, 250, 0.1), rgba(16, 185, 129, 0.04));
+      pointer-events: none;
+    }
+
+    /* 手机端 (前景/右下): absolute right-[5%] bottom-[5%] w-[25%] z-30 + shadow-2xl rounded-2xl */
+    .phone-layer {
+      position: absolute;
+      right: 17%;
+      bottom: 16%;
+      width: 15%;
+      z-index: 40;
+      border-radius: 24px;
+      padding: 6px;
+      background: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      overflow: hidden;
+      box-shadow:
+        0 34px 72px rgba(29, 78, 216, 0.16),
+        0 12px 30px rgba(59, 130, 246, 0.1);
+      transform: rotate(-3deg) translateZ(28px);
+    }
+
+    .line-link {
+      position: absolute;
+      z-index: 55;
+      pointer-events: none;
+      filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5));
+    }
+
+    .line-link.left {
+      left: 14%;
+      bottom: 15%;
+      width: 240px;
+      height: 120px;
+    }
+
+    .line-link.right {
+      right: 16%;
+      top: 13%;
+      width: 220px;
+      height: 120px;
+    }
+
+    /* HIS 悬浮卡: absolute left-4 top-2 z-40 + bounce + glass + p-2 + text-[10px] */
+    .float-card {
+      position: absolute;
+      z-index: 60;
+      width: min(230px, 42vw);
+      padding: 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      background: rgba(255, 255, 255, 0.66);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow:
+        0 22px 45px rgba(29, 78, 216, 0.13),
+        inset 0 1px 0 rgba(255, 255, 255, 0.78);
+      color: #0f2a52;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .float-card.his {
+      left: 2%;
+      bottom: 8%;
+      animation: bounce 3.2s ease-in-out infinite;
+    }
+
+    /* PACS 悬浮卡: absolute right-2 bottom-12 z-40 + bounce with 500ms delay */
+    .float-card.pacs {
+      right: 3%;
+      top: 6%;
+      animation: bounce 3.2s ease-in-out infinite 600ms;
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 3px;
+      color: #12447f;
+      letter-spacing: 0.02em;
+    }
+
+    .chip {
+      width: 10px;
+      height: 10px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, #19d3b8, #3b82f6);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.52);
+      flex: none;
+    }
+
+    .chip.pacs {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.52);
+    }
+
+    .float-card p {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #0f2a52;
+    }
+
+    .float-card strong {
+      color: #0d2d57;
+    }
+
+    .ok-line {
+      margin-top: 3px;
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 7px;
+      color: #f2fff7;
+      background: linear-gradient(135deg, #16a34a, #15803d);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .legend {
+      margin-top: 16px;
+      font-size: 12px;
+      color: #3f4e65;
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+
+    @keyframes bounce {
+      0%,
+      100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @media (max-width: 960px) {
+      .scene-combo { height: 500px; }
+      .screen-layer { width: 68%; left: 16%; top: 16%; }
+      .backlog-layer { width: 30%; left: 3%; top: 25%; }
+      .phone-layer { width: 20%; right: 12%; bottom: 14%; }
+      .line-link.left { left: 10%; }
+      .line-link.right { right: 13%; }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 14px;
+      }
+
+      .scene-combo { height: 620px; }
+      .screen-layer { width: 84%; left: 8%; top: 22%; }
+      .backlog-layer { width: 44%; left: 2%; top: 30%; }
+      .phone-layer { width: 28%; right: 7%; bottom: 28%; }
+      .float-card { width: min(200px, 48vw); }
+      .float-card.his { left: 1%; bottom: 5%; }
+      .float-card.pacs { right: 1%; top: 6%; }
+
+      .line-link {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <h1 class="title">业务场景还原：2.5D 多端透视组合图</h1>
+    <p class="subtitle">错层空间感 + 极致轻盈的 SaaS 主视觉表达。</p>
+
+    <section class="scene-combo" aria-label="2.5D 多端组合图">
+      <figure class="backlog-layer" aria-label="后台台账图（远景）">
+        <img class="layer-img" src="../../../assets/images/ectms/管理后台数据概览.png" alt="浅色管理后台追溯台账界面">
+      </figure>
+
+      <figure class="screen-layer" aria-label="追溯大屏图（中景核心）">
+        <img class="layer-img" src="../../../assets/images/ectms/内镜监控大屏.png" alt="深色内镜中心监控大屏">
+      </figure>
+
+      <div class="line-link left" aria-hidden="true">
+        <svg viewBox="0 0 360 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 108C86 98 112 85 150 63C188 41 198 30 236 10" stroke="url(#linkA)" stroke-width="1.8" stroke-dasharray="5 6" stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="linkA" x1="8" y1="108" x2="236" y2="10" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#48e8d4"/>
+              <stop offset="1" stop-color="#5ec6ff"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="line-link right" aria-hidden="true">
+        <svg viewBox="0 0 300 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 8C56 16 92 27 128 46C164 65 184 82 214 112" stroke="url(#linkB)" stroke-width="1.8" stroke-dasharray="5 6" stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="linkB" x1="6" y1="8" x2="214" y2="112" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#5ec6ff"/>
+              <stop offset="1" stop-color="#48e8d4"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <figure class="phone-layer" aria-label="移动端小程序图（前景）">
+        <img class="layer-img" src="../../../assets/images/ectms/手机端2.png" alt="移动端小程序界面，包含扫码成功和预警信息">
+      </figure>
+
+      <aside class="float-card his" aria-label="HIS 悬浮卡">
+        <h2 class="card-head"><i class="chip" aria-hidden="true"></i>HIS 互联</h2>
+        <p><strong>姓名:</strong> 王某某</p>
+        <p><strong>内镜号:</strong> EN-2026-0313</p>
+        <p><strong>检查项目:</strong> 胃镜筛查</p>
+      </aside>
+
+      <aside class="float-card pacs" aria-label="PACS 悬浮卡">
+        <h2 class="card-head"><i class="chip pacs" aria-hidden="true"></i>PACS 同步</h2>
+        <p><strong>患者ID:</strong> 20260313018</p>
+        <p><strong>报告号:</strong> PACS-IM-88021</p>
+        <p class="ok-line">检查结论: 已回传归档</p>
+      </aside>
+    </section>
+
+    <p class="legend">深色大屏居中主导，浅色后台退后支撑，手机右前执行，双侧毛玻璃数据卡联通中心链路。</p>
+  </main>
+</body>
+</html>

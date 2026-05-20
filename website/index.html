@@ -877,20 +877,8 @@
   </div>
 </footer>
 
+<script src="assets/js/navigation.js"></script>
 <script>
-// Sticky nav shadow
-const nav = document.getElementById('mainNav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 10);
-});
-
-// Mobile hamburger
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-hamburger.addEventListener('click', () => {
-  mobileMenu.classList.toggle('open');
-});
-
 // Stat counter animation
 function animateCount(el, target, suffix) {
   const isNumber = !isNaN(parseInt(target));

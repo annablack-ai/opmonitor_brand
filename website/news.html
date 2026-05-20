@@ -197,24 +197,33 @@
     <div class="footer-bottom"><span>© 2025 北京智感云科技有限公司 版权所有</span><span class="footer-icp"><a href="#">以上线备案信息为准</a></span></div>
   </div>
 </footer>
+<script src="assets/js/navigation.js"></script>
 <script>
-const nav=document.getElementById('mainNav');
-window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>10));
-document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
-
-// News filter
 const filterBtns=document.querySelectorAll('.news-filter-btn');
 const cards=document.querySelectorAll('.news-card-full');
+const categoryMap={policy:'行业政策',company:'公司动态'};
+
+function applyNewsFilter(categoryKey){
+  const mappedCategory=categoryMap[categoryKey] || 'all';
+  filterBtns.forEach(btn=>{
+    const isActive = btn.dataset.cat === mappedCategory || (mappedCategory === 'all' && btn.dataset.cat === 'all');
+    btn.classList.toggle('active', isActive);
+  });
+  cards.forEach(card=>{
+    card.style.display=(mappedCategory==='all'||card.dataset.cat===mappedCategory)?'':'none';
+  });
+}
+
 filterBtns.forEach(btn=>{
   btn.addEventListener('click',()=>{
-    filterBtns.forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const cat=btn.dataset.cat;
-    cards.forEach(card=>{
-      card.style.display=(cat==='all'||card.dataset.cat===cat)?'':'none';
-    });
+    const key = btn.dataset.cat === '行业政策' ? 'policy' : btn.dataset.cat === '公司动态' ? 'company' : 'all';
+    const url = key === 'all' ? 'news.html' : `news.html?category=${key}`;
+    history.replaceState(null, '', url);
+    applyNewsFilter(key);
   });
 });
+
+applyNewsFilter(new URLSearchParams(window.location.search).get('category') || 'all');
 </script>
 </body>
 </html>

@@ -200,19 +200,19 @@
 </section>
 
 <!-- CAPABILITIES BRIEF -->
-<section class="section capabilities-section">
+<section class="section capabilities-section" id="aiot">
   <div class="container">
     <div class="section-header center">
       <span class="section-label">软硬一体能力</span>
       <h2 class="section-title">从智能终端到业务系统，一体化交付</h2>
     </div>
     <div class="capabilities-grid">
-      <div class="capability-card">
+      <div class="capability-card" id="traceability">
         <div class="capability-icon icon-badge tone-cyan"><svg viewBox="0 0 24 24"><path d="M12 18h.01"/><path d="M8.5 14.5a5 5 0 0 1 7 0"/><path d="M5.5 11.5a9 9 0 0 1 13 0"/><path d="M12 21v-1"/></svg></div>
         <h3 class="capability-title">智能感知</h3>
         <p class="capability-desc">二维码、RFID、电子秤、温压传感器、物联网关、移动端等多种采集方式。</p>
       </div>
-      <div class="capability-card">
+      <div class="capability-card" id="compliance">
         <div class="capability-icon icon-badge tone-blue"><svg viewBox="0 0 24 24"><path d="M9 4h6"/><path d="M9 6H7a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-2"/><path d="M9 12h6"/><path d="M9 16h4"/></svg></div>
         <h3 class="capability-title">业务留痕</h3>
         <p class="capability-desc">对关键环节进行过程记录和责任留痕，支持全链路追溯。</p>
@@ -292,10 +292,8 @@
     </div>
   </div>
 </footer>
+<script src="assets/js/navigation.js"></script>
 <script>
-const nav=document.getElementById('mainNav');
-window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>10));
-document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)'}}),{threshold:0.1});
 document.querySelectorAll('.product-card,.capability-card').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity 0.5s ease,transform 0.5s ease';obs.observe(el)});
 </script>

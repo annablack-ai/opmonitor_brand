@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>新闻动态 — 智感云</title>
+  <meta name="description" content="聚焦医疗废物、危险废物、卫生监督、消毒灭菌、内镜合规与减污降碳相关政策趋势，分享产品动态与行业洞察。"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <style>
+    .news-filter{display:flex;gap:12px;margin-bottom:40px;flex-wrap:wrap}
+    .news-filter-btn{padding:8px 22px;border-radius:100px;border:1.5px solid var(--color-line);background:#fff;cursor:pointer;font-size:.95rem;color:var(--color-muted);transition:all .2s}
+    .news-filter-btn.active,.news-filter-btn:hover{background:var(--color-primary);color:#fff;border-color:var(--color-primary)}
+    .news-grid-full{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+    .news-card-full{background:#fff;border:1px solid var(--color-line);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-card);transition:box-shadow .2s,transform .2s}
+    .news-card-full:hover{box-shadow:var(--shadow-card-hover);transform:translateY(-4px)}
+    .news-card-img{height:180px;background:linear-gradient(135deg,#dbeeff 0%,#c8e6ff 100%)}
+    .news-card-body{padding:24px}
+    .news-meta{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+    .news-date{font-size:.82rem;color:var(--color-muted)}
+    .news-card-title-full{font-size:1rem;font-weight:700;line-height:1.5;margin-bottom:10px;color:var(--color-ink)}
+    .news-card-desc{font-size:.875rem;line-height:1.65;color:var(--color-muted)}
+    .news-pagination{display:flex;justify-content:center;gap:8px;margin-top:48px}
+    .page-btn{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--color-line);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;transition:all .2s}
+    .page-btn.active,.page-btn:hover{background:var(--color-primary);color:#fff;border-color:var(--color-primary)}
+    @media(max-width:1023px){.news-grid-full{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:767px){.news-grid-full{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<header class="nav" id="mainNav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><div class="nav-logo-icon">智感</div><span>智感云</span></a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">首页</a>
+        <a href="products.html" class="nav-link">产品与解决方案</a>
+        <a href="cases.html" class="nav-link">客户案例</a>
+        <a href="news.html" class="nav-link active">新闻动态</a>
+        <a href="about.html" class="nav-link">关于我们</a>
+        <a href="contact.html" class="nav-link">联系我们</a>
+      </nav>
+      <a href="contact.html" class="btn btn-primary btn-sm nav-cta">预约产品演示</a>
+      <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="nav-mobile" id="mobileMenu">
+    <a href="index.html" class="nav-link">首页</a>
+    <a href="products.html" class="nav-link">产品与解决方案</a>
+    <a href="cases.html" class="nav-link">客户案例</a>
+    <a href="news.html" class="nav-link active">新闻动态</a>
+    <a href="about.html" class="nav-link">关于我们</a>
+    <a href="contact.html" class="nav-link">联系我们</a>
+    <a href="contact.html" class="btn btn-primary" style="margin-top:8px">预约产品演示</a>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html">首页</a><span class="breadcrumb-sep">/</span>
+      <span>新闻动态</span>
+    </div>
+    <div class="page-hero-inner">
+      <div class="page-hero-text">
+        <span class="section-label">新闻动态</span>
+        <h1 class="page-hero-title">新闻动态</h1>
+        <p class="page-hero-subtitle">聚焦医疗废物、危险废物、卫生监督、消毒灭菌、内镜合规与减污降碳相关政策趋势，分享产品动态与行业洞察。</p>
+      </div>
+      <div class="page-hero-img" style="background:linear-gradient(135deg,#c8e6ff 0%,#a8d4f5 100%)"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="news-filter" id="newsFilter">
+      <button class="news-filter-btn active" data-cat="all">全部</button>
+      <button class="news-filter-btn" data-cat="行业政策">行业政策</button>
+      <button class="news-filter-btn" data-cat="公司动态">公司动态</button>
+    </div>
+    <div class="news-grid-full" id="newsGrid">
+      <!-- 行业政策 -->
+      <article class="news-card-full" data-cat="行业政策">
+        <div class="news-card-img"></div>
+        <div class="news-card-body">
+          <div class="news-meta"><span class="news-card-cat tone-blue">行业政策</span><span class="news-date">2025-05</span></div>
+          <h3 class="news-card-title-full">医疗废物精细化全程管理的政策要求与建设要点</h3>
+          <p class="news-card-desc">梳理医疗废物全程精细化管理相关政策要求，解析从分类收集、院内转运、暂存管理到处置交接的建设重点与合规路径。</p>
+        </div>
+      </article>
+      <article class="news-card-full" data-cat="行业政策">
+        <div class="news-card-img"></div>
+        <div class="news-card-body">
+          <div class="news-meta"><span class="news-card-cat tone-blue">行业政策</span><span class="news-date">2025-04</span></div>
+          <h3 class="news-card-title-full">危险废物"五即一码"规范化建设趋势解读</h3>
+          <p class="news-card-desc">解读危废"五即一码"规范化管理要求的政策背景与推进趋势，分析区域医疗机构和产废单位如何有效落地合规建设。</p>
+        </div>
+      </article>
+      <article class="news-card-full" data-cat="行业政策">
+        <div class="news-card-img"></div>
+        <div class="news-card-body">
+          <div class="news-meta"><span class="news-card-cat tone-blue">行业政策</span><span class="news-date">2025-04</span></div>
+          <h3 class="news-card-title-full">医疗机构危险废物全过程追溯如何落地</h3>
+          <p class="news-card-desc">围绕医疗机构危废全过程追溯的合规要求，从产生赋码到转移交接，分析实施路径和关键技术选型要点。</p>
+        </div>
+      </article>
+      <article class="news-card-full" data-cat="行业政策">
+        <div class="news-card-img"></div>
+        <div class="news-card-body">
+          <div class="news-meta"><span class="news-card-cat tone-blue">行业政策</span><span class="news-date">2025-03</span></div>
+          <h3 class="news-card-title-full">卫生监督非现场执法的数字化建设思路</h3>
+          <p class="news-card-desc">探讨卫生监督机构如何利用物联网、在线监测与风险预警能力推动非现场执法模式升级，提升监管效率。</p>
+        </div>
+      </article>
+      <article class="news-card-full" data-cat="行业政策">
+        <div class="news-card-img"></div>
+        <div class="news-card-body">
+          <div class="news-meta"><span class="news-card-cat tone-blue">行业政策</span><span class="news-date">2025-03</span></div>
+          <h3 class="news-card-title-full">消毒灭菌在线监测在基层医疗机构中的应用价值</h3>
+          <p class="news-card-desc">分析基层医疗机构和口腔诊所消毒灭菌过程规范化管理的政策背景，探讨在线监测系统的部署方式与实际价值。</p>
+        </div>
+      </article>
+      <article class="news-card-full" data-cat="行业政策">
+        <div class="news-card-img"></div>
+        <div class="news-card-body">
+          <div class="news-meta"><span class="news-card-cat tone-blue">行业政策</span><span class="news-date">2025-02</span></div>
+          <h3 class="news-card-title-full">内镜中心洗消记录合规对接的建设重点</h3>
+          <p class="news-card-desc">梳理内镜中心洗消记录合规化对接的政策要求，分析信息字段管理、流程记录和区域平台对接的建设路径。</p>
+        </div>
+      </article>
+      <article class="news-card-full" data-cat="行业政策">
+        <div class="news-card-img"></div>
+        <div class="news-card-body">
+          <div class="news-meta"><span class="news-card-cat tone-blue">行业政策</span><span class="news-date">2025-01</span></div>
+          <h3 class="news-card-title-full">从固废管理到减污降碳：园区数字化治理的新方向</h3>
+          <p class="news-card-desc">探讨园区如何在固废、危废、医废过程管理基础上拓展减污降碳协同分析能力，开辟绿色低碳治理的新路径。</p>
+        </div>
+      </article>
+      <!-- 公司动态 -->
+      <article class="news-card-full" data-cat="公司动态">
+        <div class="news-card-img"><svg class="news-card-glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13v-2l11-5v12L4 13z"/><path d="M15 9h1a3 3 0 0 1 0 6h-1"/><path d="M7 14v4a2 2 0 0 0 2 2h1"/></svg></div>
+        <div class="news-card-body">
+          <div class="news-meta"><span class="news-card-cat tone-green">公司动态</span><span class="news-date">2025-05</span></div>
+          <h3 class="news-card-title-full">智感云医疗废物精细化追溯系统服务客户突破新阶段</h3>
+          <p class="news-card-desc">智感云医疗废物精细化追溯系统持续迭代升级，服务医疗机构客户数量迈上新台阶，覆盖场景和服务能力进一步增强。</p>
+        </div>
+      </article>
+      <article class="news-card-full" data-cat="公司动态">
+        <div class="news-card-img"><svg class="news-card-glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13v-2l11-5v12L4 13z"/><path d="M15 9h1a3 3 0 0 1 0 6h-1"/><path d="M7 14v4a2 2 0 0 0 2 2h1"/></svg></div>
+        <div class="news-card-body">
+          <div class="news-meta"><span class="news-card-cat tone-green">公司动态</span><span class="news-date">2025-04</span></div>
+          <h3 class="news-card-title-full">智感云危废"五即一码"解决方案在区域场景快速落地</h3>
+          <p class="news-card-desc">智感云危险废物"五即一码"规范化管理系统在区域医疗机构及产废单位场景中快速推进，为区域危废规范化建设提供有效支撑。</p>
+        </div>
+      </article>
+      <article class="news-card-full" data-cat="公司动态">
+        <div class="news-card-img"><svg class="news-card-glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13v-2l11-5v12L4 13z"/><path d="M15 9h1a3 3 0 0 1 0 6h-1"/><path d="M7 14v4a2 2 0 0 0 2 2h1"/></svg></div>
+        <div class="news-card-body">
+          <div class="news-meta"><span class="news-card-cat tone-green">公司动态</span><span class="news-date">2025-03</span></div>
+          <h3 class="news-card-title-full">智感云智慧卫监解决方案助力监管数字化升级</h3>
+          <p class="news-card-desc">智感云智慧卫监解决方案持续服务多地卫生监督机构，在监管对象管理、在线监测和非现场执法辅助等方向取得积极进展。</p>
+        </div>
+      </article>
+      <article class="news-card-full" data-cat="公司动态">
+        <div class="news-card-img"><svg class="news-card-glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13v-2l11-5v12L4 13z"/><path d="M15 9h1a3 3 0 0 1 0 6h-1"/><path d="M7 14v4a2 2 0 0 0 2 2h1"/></svg></div>
+        <div class="news-card-body">
+          <div class="news-meta"><span class="news-card-cat tone-green">公司动态</span><span class="news-date">2025-02</span></div>
+          <h3 class="news-card-title-full">智感云持续完善内镜合规与院感相关产品能力</h3>
+          <p class="news-card-desc">智感云在内镜合规平台功能和院感相关产品能力方面持续投入，进一步提升洗消记录规范化、接口对接和合规上报的支撑能力。</p>
+        </div>
+      </article>
+    </div>
+    <div class="news-pagination">
+      <button class="page-btn active">1</button>
+    </div>
+  </div>
+</section>
+
+<section class="section cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <h2 class="cta-title">关注智感云产品动态与行业资讯</h2>
+      <p class="cta-desc">了解最新政策解读、产品进展和行业实践，欢迎预约与我们沟通。</p>
+      <a href="contact.html" class="btn btn-primary btn-lg">预约产品演示</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="footer-logo"><div class="nav-logo-icon">智感</div><span>北京智感云科技有限公司</span></div><p>面向医疗卫生、生态环境、公共卫生监督、院感合规与减污降碳场景的 AIoT 软硬一体数字化解决方案服务商。</p></div>
+      <div><div class="footer-nav-title">产品与方案</div><div class="footer-nav-links"><a href="products/medical-waste.html" class="footer-nav-link">医疗废物精细化追溯</a><a href="products/hazardous-waste.html" class="footer-nav-link">危险废物五即一码</a><a href="products/health-supervision.html" class="footer-nav-link">智慧卫监解决方案</a><a href="products/sterilization-monitoring.html" class="footer-nav-link">消毒灭菌监测系统</a><a href="products/endoscope-compliance.html" class="footer-nav-link">内镜合规平台</a><a href="products/carbon-management.html" class="footer-nav-link">碳管理与减污降碳</a></div></div>
+      <div><div class="footer-nav-title">公司</div><div class="footer-nav-links"><a href="cases.html" class="footer-nav-link">客户案例</a><a href="news.html" class="footer-nav-link">新闻动态</a><a href="about.html" class="footer-nav-link">关于我们</a><a href="contact.html" class="footer-nav-link">联系我们</a></div></div>
+      <div><div class="footer-nav-title">联系我们</div><div class="footer-contact-item"><span class="footer-contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 11.2 19a19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3.3a2 2 0 0 1-.6 1.8l-1.6 1.6a16 16 0 0 0 6 6l1.6-1.6a2 2 0 0 1 1.8-.6l3.3.5a2 2 0 0 1 1.7 2Z"/></svg></span><span>400-160-1008</span></div><div class="footer-contact-item"><span class="footer-contact-icon"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></span><span>info@opmonitor.com</span></div></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 北京智感云科技有限公司 版权所有</span><span class="footer-icp"><a href="#">以上线备案信息为准</a></span></div>
+  </div>
+</footer>
+<script>
+const nav=document.getElementById('mainNav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>10));
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
+
+// News filter
+const filterBtns=document.querySelectorAll('.news-filter-btn');
+const cards=document.querySelectorAll('.news-card-full');
+filterBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    filterBtns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat=btn.dataset.cat;
+    cards.forEach(card=>{
+      card.style.display=(cat==='all'||card.dataset.cat===cat)?'':'none';
+    });
+  });
+});
+</script>
+</body>
+</html>

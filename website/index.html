@@ -1,0 +1,927 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>智感云 | AIoT 软硬一体数字化解决方案 — 北京智感云科技有限公司</title>
+  <meta name="description" content="北京智感云科技有限公司，面向医疗废物、危险废物、卫生监督、消毒灭菌、内镜合规与减污降碳场景，提供 AIoT 软硬一体数字化解决方案。800+ 客户服务经验。"/>
+  <meta name="keywords" content="医疗废物追溯,危险废物五即一码,智慧卫监,消毒灭菌监测,内镜合规,碳管理,AIoT,软硬一体,合规管理"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <style>
+    .home-page .hero {
+      padding: 56px 0 36px;
+    }
+    .home-page .hero-inner {
+      gap: 28px;
+      min-height: 460px;
+      position: relative;
+      z-index: 1;
+    }
+    .home-page .hero-subtitle,
+    .home-page .hero-note {
+      max-width: 620px;
+    }
+    .home-page .hero-note {
+      margin-bottom: 28px;
+    }
+    .stats-section .stat-number {
+      white-space: nowrap;
+      word-break: keep-all;
+    }
+    .hero-tech-visual {
+      position: relative;
+      min-height: 340px;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 24% 22%, rgba(0, 123, 255, 0.18) 0, rgba(0, 123, 255, 0) 22%),
+        radial-gradient(circle at 74% 30%, rgba(0, 194, 255, 0.14) 0, rgba(0, 194, 255, 0) 24%),
+        linear-gradient(145deg, rgba(246, 251, 255, 0.96) 0%, rgba(231, 241, 251, 0.92) 100%);
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
+      border: 1px solid rgba(156, 194, 225, 0.32);
+      overflow: hidden;
+      padding: 18px;
+      isolation: isolate;
+    }
+    .hero-tech-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(17, 86, 145, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17, 86, 145, 0.06) 1px, transparent 1px);
+      background-size: 26px 26px;
+      opacity: 0.55;
+      z-index: -1;
+    }
+    .hero-tech-visual::after {
+      content: "";
+      position: absolute;
+      inset: 12% 10% 12% 10%;
+      border-radius: 24px;
+      border: 1px solid rgba(84, 147, 198, 0.12);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.24)),
+        radial-gradient(circle at 50% 50%, rgba(0, 123, 255, 0.08), rgba(0, 123, 255, 0) 62%);
+      box-shadow: 0 10px 22px rgba(12, 78, 136, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.24);
+      z-index: -1;
+    }
+    .hero-core {
+      position: absolute;
+      left: 38%;
+      top: 47%;
+      transform: translate(-50%, -50%);
+      width: 126px;
+      height: 126px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .core-ring,
+    .core-ring::after {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px solid rgba(37, 129, 199, 0.24);
+      content: "";
+    }
+    .core-ring::after {
+      inset: 12px;
+      border-color: rgba(37, 129, 199, 0.18);
+    }
+    .core-ring.ring-2 {
+      inset: 16px;
+      border: 1px dashed rgba(37, 129, 199, 0.22);
+      animation: spin-ring 16s linear infinite;
+    }
+    .core-chip {
+      width: 68px;
+      height: 68px;
+      border-radius: 20px;
+      background: linear-gradient(145deg, #1178c3, #2aa4e6);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      box-shadow: 0 14px 24px rgba(17, 120, 195, 0.24);
+    }
+    .data-pill {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(109, 164, 214, 0.28);
+      color: #215d8b;
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: 0 10px 18px rgba(11, 92, 160, 0.08);
+      backdrop-filter: blur(8px);
+    }
+    .data-pill::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #1aa0df;
+      box-shadow: 0 0 0 5px rgba(26, 160, 223, 0.12);
+    }
+    .pill-top { left: 44%; top: 14%; }
+    .pill-right { right: 12%; top: 48%; }
+    .pill-bottom { left: 30%; bottom: 14%; }
+    .tech-panel {
+      position: absolute;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid rgba(109, 164, 214, 0.26);
+      box-shadow: 0 12px 28px rgba(11, 92, 160, 0.08);
+      backdrop-filter: blur(10px);
+    }
+    .tech-panel.dashboard {
+      left: 42%;
+      top: 16%;
+      width: 42%;
+      padding: 14px 12px;
+    }
+    .tech-panel.dashboard .panel-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #115287;
+      margin-bottom: 10px;
+    }
+    .panel-bars {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .panel-bars span {
+      height: 26px;
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(0, 123, 255, 0.35), rgba(0, 123, 255, 0.06));
+    }
+    .panel-wave {
+      position: relative;
+      height: 28px;
+      border-radius: 10px;
+      background: linear-gradient(90deg, rgba(0, 194, 255, 0.2), rgba(0, 123, 255, 0.33), rgba(0, 194, 255, 0.2));
+      overflow: hidden;
+    }
+    .panel-wave::after {
+      content: "";
+      position: absolute;
+      left: -20%;
+      top: 0;
+      width: 40%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.55);
+      transform: skewX(-20deg);
+      animation: wave-scan 4.4s linear infinite;
+    }
+    .tech-panel.device {
+      left: 8%;
+      bottom: 12%;
+      width: 32%;
+      padding: 12px;
+    }
+    .device-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 8px;
+      height: 82px;
+      border-radius: 14px;
+      background: linear-gradient(145deg, #e6f3ff, #f7fbff);
+      border: 1px solid rgba(104, 153, 201, 0.34);
+    }
+    .device-box span {
+      border-radius: 8px;
+      background: rgba(0, 123, 255, 0.15);
+    }
+    .tech-panel.qr {
+      right: 10%;
+      top: 12%;
+      width: 21%;
+      min-width: 118px;
+      padding: 10px;
+      text-align: center;
+    }
+    .qr-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 2px;
+      width: 78px;
+      height: 78px;
+      margin: 0 auto 8px;
+    }
+    .qr-grid i {
+      display: block;
+      background: #1674c0;
+      opacity: 0.16;
+    }
+    .qr-grid i:nth-child(3n),
+    .qr-grid i:nth-child(5n + 2) {
+      opacity: 0.8;
+    }
+    .sensor-node {
+      position: absolute;
+      right: 14%;
+      bottom: 14%;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 2px solid rgba(0, 123, 255, 0.5);
+      box-shadow: 0 0 0 10px rgba(0, 123, 255, 0.09);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0f76be;
+      background: rgba(255, 255, 255, 0.82);
+    }
+    .sensor-node svg {
+      width: 28px;
+      height: 28px;
+      stroke: currentColor;
+      stroke-width: 1.9;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .flow-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.72;
+    }
+    .flow-svg path {
+      fill: none;
+      stroke: rgba(0, 123, 255, 0.5);
+      stroke-width: 2;
+      stroke-dasharray: 7 7;
+      animation: dash-move 16s linear infinite;
+    }
+    .home-cases {
+      background: linear-gradient(180deg, #f7fbff 0%, #eff6ff 100%);
+    }
+    .section[style*="background:var(--color-surface)"] {
+      background: linear-gradient(180deg, #f6fbff 0%, #f3f8ff 100%) !important;
+    }
+    @keyframes wave-scan {
+      to { left: 120%; }
+    }
+    @keyframes dash-move {
+      to { stroke-dashoffset: -240; }
+    }
+    @keyframes spin-ring {
+      to { transform: rotate(360deg); }
+    }
+    @media (max-width: 1199px) {
+      .home-page .hero-inner { gap: 24px; }
+    }
+    @media (max-width: 1023px) {
+      .home-page .hero {
+        padding: 44px 0 32px;
+      }
+      .home-page .hero-inner {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding: 28px;
+      }
+      .hero-tech-visual { min-height: 380px; }
+      .pill-top { left: 48%; top: 12%; }
+      .pill-right { right: 8%; top: 46%; }
+    }
+    @media (max-width: 767px) {
+      .hero-tech-visual { min-height: 330px; padding: 18px; }
+      .hero-core { left: 42%; top: 48%; width: 98px; height: 98px; }
+      .core-chip { width: 56px; height: 56px; font-size: 13px; }
+      .tech-panel.dashboard { left: 14%; width: 66%; }
+      .tech-panel.device { width: 46%; left: 6%; }
+      .tech-panel.qr { width: 32%; right: 6%; }
+      .sensor-node { width: 66px; height: 66px; right: 10%; }
+      .data-pill { font-size: 11px; padding: 6px 9px; }
+      .pill-top { left: 46%; top: 14%; }
+      .pill-right { right: 6%; top: 52%; }
+      .pill-bottom { left: 22%; bottom: 12%; }
+    }
+  </style>
+</head>
+<body class="home-page">
+
+<!-- ══ NAV ══════════════════════════════════════════════ -->
+<header class="nav" id="mainNav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">智感</div>
+        <span>智感云</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link active">首页</a>
+        <a href="products.html" class="nav-link">产品与解决方案</a>
+        <a href="cases.html" class="nav-link">客户案例</a>
+        <a href="news.html" class="nav-link">新闻动态</a>
+        <a href="about.html" class="nav-link">关于我们</a>
+        <a href="contact.html" class="nav-link">联系我们</a>
+      </nav>
+      <a href="contact.html" class="btn btn-primary btn-sm nav-cta">预约产品演示</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="菜单">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav class="nav-mobile" id="mobileMenu">
+    <a href="index.html" class="nav-link active">首页</a>
+    <a href="products.html" class="nav-link">产品与解决方案</a>
+    <a href="cases.html" class="nav-link">客户案例</a>
+    <a href="news.html" class="nav-link">新闻动态</a>
+    <a href="about.html" class="nav-link">关于我们</a>
+    <a href="contact.html" class="nav-link">联系我们</a>
+    <a href="contact.html" class="btn btn-primary" style="margin-top:8px">预约产品演示</a>
+  </nav>
+</header>
+
+<!-- ══ HERO ═════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-tags">
+          <span class="tag">软硬一体</span>
+          <span class="tag">业务过程留痕</span>
+          <span class="tag">合规闭环</span>
+        </div>
+        <h1 class="hero-title"><em>AIoT</em> 赋能医疗卫生<br/>与生态环境智慧合规</h1>
+        <p class="hero-subtitle">围绕医疗废物、危险废物、卫生监督、消毒灭菌、内镜合规与减污降碳等场景，提供智能终端、业务系统、监管驾驶舱与合规闭环的一体化解决方案。</p>
+        <p class="hero-note">从现场作业到监管驾驶舱，从智能感知到责任追溯，帮助医疗机构、监管部门及相关单位提升业务规范性、风险响应能力和合规管理效率。</p>
+        <div class="hero-btns">
+          <a href="contact.html" class="btn btn-primary btn-lg">预约产品演示</a>
+          <a href="products.html" class="btn btn-secondary btn-lg">查看解决方案</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-tech-visual" aria-label="AIoT 科技主视觉">
+          <svg class="flow-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M10,76 C22,60 34,58 46,48 C54,42 63,30 82,28"/>
+            <path d="M14,34 C28,42 44,42 58,52 C68,60 76,72 88,74"/>
+            <path d="M24,20 C36,28 38,42 48,48 C58,54 69,54 84,54"/>
+          </svg>
+
+          <div class="hero-core">
+            <span class="core-ring"></span>
+            <span class="core-ring ring-2"></span>
+            <span class="core-chip">AIoT</span>
+          </div>
+
+          <div class="data-pill pill-top">业务留痕</div>
+          <div class="data-pill pill-right">扫码交接</div>
+          <div class="data-pill pill-bottom">在线监测</div>
+
+          <div class="tech-panel dashboard">
+            <div class="panel-title">监管驾驶舱</div>
+            <div class="panel-bars"><span></span><span></span><span></span><span></span></div>
+            <div class="panel-wave"></div>
+          </div>
+
+          <div class="tech-panel device">
+            <div class="panel-title" style="font-size:12px;margin-bottom:8px;color:#24618f">智能终端</div>
+            <div class="device-box"><span></span><span></span><span></span><span></span></div>
+          </div>
+
+          <div class="tech-panel qr">
+            <div class="qr-grid">
+              <i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <div style="font-size:12px;color:#2f678f;font-weight:600">二维码标签</div>
+          </div>
+
+          <div class="sensor-node" title="在线传感器" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3v4"/>
+              <path d="M12 17v4"/>
+              <path d="M3 12h4"/>
+              <path d="M17 12h4"/>
+              <circle cx="12" cy="12" r="4"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DATA STATS ════════════════════════════════════════ -->
+<section class="section stats-section">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-label">数据背书</span>
+      <h2 class="section-title">800+ 客户选择智感云</h2>
+      <p class="section-subtitle">这些数字，来自真实客户的长期使用。智感云围绕医疗废物、危险废物、智慧卫监、消毒灭菌监测等业务，持续服务医疗机构、监管部门、生态环境 / 危废相关单位及园区集团客户。</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">800+</div>
+        <div class="stat-label">累计服务客户</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">近 30 个</div>
+        <div class="stat-label">覆盖省市 / 地区</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">5000 万+</div>
+        <div class="stat-label">累计业务追溯记录</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">10 万吨+</div>
+        <div class="stat-label">累计追踪医疗废物重量</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">5000 台+</div>
+        <div class="stat-label">接入智能终端与监测设备</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">80+ 项</div>
+        <div class="stat-label">知识产权、软著及资质成果</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRODUCTS ══════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-label">产品与解决方案</span>
+      <h2 class="section-title">面向不同机构的合规管理需求</h2>
+      <p class="section-subtitle">面向医疗机构、监管部门、危废相关单位和园区集团，提供可部署、可追溯、可扩展的数字化解决方案。</p>
+    </div>
+    <div class="products-grid">
+
+      <div class="product-card">
+        <div class="product-visual">
+          <div class="product-card-icon tone-blue" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5h6"/><path d="M10 5V3h4v2"/><path d="M7 9h10"/><path d="M8 9l1 10h6l1-10"/><path d="M12 11v5"/><path d="M10 14h4"/></svg>
+          </div>
+          <div class="pv-med"><span></span><span></span><span></span><b></b></div>
+        </div>
+        <h3 class="product-card-title">医疗废物精细化追溯系统</h3>
+        <p class="product-card-desc">覆盖医疗废物分类收集、称重交接、院内转运、暂存出库、处置交接等环节，实现业务过程留痕、责任追溯、异常提醒和台账归档。</p>
+        <div class="product-card-label-row">
+          <span class="product-card-label-primary tone-blue">医废追溯</span>
+        </div>
+        <div class="product-card-tags">
+          <span class="product-card-tag">医疗机构</span>
+          <span class="product-card-tag">称重交接</span>
+          <span class="product-card-tag">责任追溯</span>
+        </div>
+        <a href="products/medical-waste.html" class="product-card-link">了解医废系统 →</a>
+      </div>
+
+      <div class="product-card">
+        <div class="product-visual">
+          <div class="product-card-icon tone-amber" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4l8 14H4L12 4z"/><path d="M12 10v4"/><circle cx="12" cy="17" r="0.8" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div class="pv-hazard"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+        <h3 class="product-card-title">危险废物"五即一码"规范化管理系统</h3>
+        <p class="product-card-desc">围绕"即产生、即包装、即称重、即打码、即入库"和"一码贯通"要求，提供源头作业、标签赋码、扫码入库、出库交接、联单关联和监管驾驶舱能力。</p>
+        <div class="product-card-label-row">
+          <span class="product-card-label-primary tone-amber">危废管理</span>
+        </div>
+        <div class="product-card-tags">
+          <span class="product-card-tag">标签赋码</span>
+          <span class="product-card-tag">扫码入库</span>
+          <span class="product-card-tag">联单关联</span>
+        </div>
+        <a href="products/hazardous-waste.html" class="product-card-link">了解危废系统 →</a>
+      </div>
+
+      <div class="product-card">
+        <div class="product-visual">
+          <div class="product-card-icon tone-cyan" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18h16"/><path d="M6 18V9"/><path d="M12 18V6"/><path d="M18 18v-5"/><path d="M5 7l4-2 4 3 6-2"/></svg>
+          </div>
+          <div class="pv-supervision"><span></span><span></span><span></span><span></span><i></i></div>
+        </div>
+        <h3 class="product-card-title">智慧卫监解决方案</h3>
+        <p class="product-card-desc">支持监管对象管理、在线监测、实时预警、非现场执法、问题整改和工作留痕，覆盖医废监管、消毒灭菌监测、放射源监测等多类场景。</p>
+        <div class="product-card-label-row">
+          <span class="product-card-label-primary tone-cyan">智慧监管</span>
+        </div>
+        <div class="product-card-tags">
+          <span class="product-card-tag">在线监测</span>
+          <span class="product-card-tag">风险提醒</span>
+          <span class="product-card-tag">非现场执法</span>
+        </div>
+        <a href="products/health-supervision.html" class="product-card-link">了解智慧卫监 →</a>
+      </div>
+
+      <div class="product-card">
+        <div class="product-visual">
+          <div class="product-card-icon tone-cyan" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v8"/><path d="M9 7h6"/><path d="M10 12a4 4 0 1 0 4 0"/><path d="M15 15h3"/></svg>
+          </div>
+          <div class="pv-sterilize"><span class="ring"></span><span class="line"></span><span class="pulse"></span></div>
+        </div>
+        <h3 class="product-card-title">消毒灭菌监测系统</h3>
+        <p class="product-card-desc">通过温压传感器、物联网关等设备，对灭菌过程关键参数进行在线监测、异常提醒和记录留痕，辅助提升消毒灭菌过程规范性。</p>
+        <div class="product-card-label-row">
+          <span class="product-card-label-primary tone-cyan">院感合规</span>
+        </div>
+        <div class="product-card-tags">
+          <span class="product-card-tag">医疗机构</span>
+          <span class="product-card-tag">在线监测</span>
+          <span class="product-card-tag">异常提醒</span>
+        </div>
+        <a href="products/sterilization-monitoring.html" class="product-card-link">了解消毒灭菌监测 →</a>
+      </div>
+
+      <div class="product-card">
+        <div class="product-visual">
+          <div class="product-card-icon tone-green" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13h5"/><path d="M9 13c3 0 4-5 8-5"/><path d="M17 8c2 0 3 1 3 3s-1 3-3 3"/><path d="M8 13v4a2 2 0 0 0 2 2h4"/></svg>
+          </div>
+          <div class="pv-endoscope"><span class="scope"></span><span class="tube"></span><span class="bubble"></span></div>
+        </div>
+        <h3 class="product-card-title">内镜合规平台</h3>
+        <p class="product-card-desc">围绕内镜清洗消毒流程、质量控制、人员操作、设备状态和数据接口改造，支持内镜洗消记录规范化、可追溯和合规上报。</p>
+        <div class="product-card-label-row">
+          <span class="product-card-label-primary tone-green">内镜合规</span>
+        </div>
+        <div class="product-card-tags">
+          <span class="product-card-tag">洗消记录</span>
+          <span class="product-card-tag">接口对接</span>
+          <span class="product-card-tag">合规上报</span>
+        </div>
+        <a href="products/endoscope-compliance.html" class="product-card-link">了解内镜合规 →</a>
+      </div>
+
+      <div class="product-card">
+        <div class="product-visual">
+          <div class="product-card-icon tone-green" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14c0-4 3-7 7-8 2 4 1 9-3 11-2 1-4 1-4-3z"/><path d="M10 13c1 0 2 1 2 3"/><path d="M14 10c2 0 4 2 4 5"/></svg>
+          </div>
+          <div class="pv-carbon"><span></span><span></span><span></span><i></i></div>
+        </div>
+        <h3 class="product-card-title">碳管理与减污降碳协同</h3>
+        <p class="product-card-desc">围绕固废、危废等业务过程中的重量、流向和处置记录，拓展碳核算、减污降碳分析和综合驾驶舱能力，为绿色低碳管理提供基础支撑。</p>
+        <div class="product-card-label-row">
+          <span class="product-card-label-primary tone-green">减污降碳</span>
+        </div>
+        <div class="product-card-tags">
+          <span class="product-card-tag">园区集团</span>
+          <span class="product-card-tag">数据归集</span>
+          <span class="product-card-tag">综合驾驶舱</span>
+        </div>
+        <a href="products/carbon-management.html" class="product-card-link">了解碳管理 →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ CAPABILITIES ══════════════════════════════════════ -->
+<section class="section capabilities-section">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-label">软硬一体能力</span>
+      <h2 class="section-title">软硬一体，让现场作业形成可追溯的合规闭环</h2>
+      <p class="section-subtitle">智感云将智能终端、移动采集、业务系统和监管驾驶舱结合，帮助客户完成业务过程记录、风险提醒、责任追溯和合规闭环。</p>
+    </div>
+    <div class="capabilities-grid">
+      <div class="capability-card">
+        <div class="capability-icon tone-cyan"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="18" r="0.8" fill="currentColor" stroke="none"/><path d="M8.5 14.5a5 5 0 0 1 7 0"/><path d="M5.5 11.5a9 9 0 0 1 13 0"/><path d="M12 21v-1"/></svg></div>
+        <h3 class="capability-title">智能感知</h3>
+        <p class="capability-desc">支持二维码、RFID、电子秤、智能称重终端、温压传感器、物联网关、摄像头、移动端等多种采集方式。</p>
+      </div>
+      <div class="capability-card">
+        <div class="capability-icon tone-blue"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6"/><path d="M9 6H7a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-2"/><path d="M9 12h6"/><path d="M9 16h4"/></svg></div>
+        <h3 class="capability-title">业务留痕</h3>
+        <p class="capability-desc">对产生、包装、称重、赋码、入库、出库、交接、监测、整改、归档等关键环节进行过程记录和责任留痕。</p>
+      </div>
+      <div class="capability-card">
+        <div class="capability-icon tone-amber"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><circle cx="12" cy="17" r="0.8" fill="currentColor" stroke="none"/><path d="M10.3 4.9 3.8 16a2 2 0 0 0 1.7 3h13a2 2 0 0 0 1.7-3L13.7 4.9a2 2 0 0 0-3.4 0z"/></svg></div>
+        <h3 class="capability-title">风险提醒</h3>
+        <p class="capability-desc">支持超时、超期、漏项、重量异常、流程缺失、设备离线、参数异常等规则提醒，及时响应异常事件。</p>
+      </div>
+      <div class="capability-card">
+        <div class="capability-icon tone-green"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v6c0 5 3.5 8 7 9 3.5-1 7-4 7-9V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <h3 class="capability-title">安全合规</h3>
+        <p class="capability-desc">支持权限分级、日志审计、脱敏展示、本地化 / 私有化部署和授权范围内统计分析，满足合规要求。</p>
+      </div>
+    </div>
+    <div class="flow-bar">
+      <div class="flow-step">
+        <span class="flow-step-pill tone-cyan">终端感知</span>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">
+        <span class="flow-step-pill tone-blue">业务记录</span>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">
+        <span class="flow-step-pill tone-amber">风险提醒</span>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">
+        <span class="flow-step-pill tone-green">合规闭环</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CASES ═════════════════════════════════════════════ -->
+<section class="section home-cases">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-label">客户覆盖</span>
+      <h2 class="section-title">800+ 客户的共同选择</h2>
+      <p class="section-subtitle">智感云已服务 800+ 客户，覆盖医疗机构、监管部门、生态环境 / 危废相关单位及园区集团等多类场景。客户案例以区域覆盖、客户类型和匿名应用方式展示，兼顾可信背书与数据安全。</p>
+    </div>
+    <div class="cases-layout">
+      <div>
+        <div class="cases-stats-list">
+          <div>
+            <div class="stat-number" style="font-size:42px;color:var(--color-primary);font-weight:800">800+</div>
+            <div class="stat-label" style="font-size:15px;color:var(--color-muted)">客户服务经验</div>
+          </div>
+          <p style="font-size:15px;color:var(--color-muted);line-height:1.75;max-width:420px">
+            从医院科室级医废追溯，到区域危废"五即一码"建设，再到卫生监督在线监测与非现场执法辅助，智感云持续为高监管、高合规要求的行业客户提供可落地、可运维、可持续迭代的数字化解决方案。
+          </p>
+          <p style="font-size:13px;color:var(--color-muted-lt);line-height:1.7;max-width:420px">
+            项目经验覆盖近 30 个省市 / 地区。地图仅展示区域覆盖，不展示具体客户地址、精确点位或敏感业务数据。
+          </p>
+          <a href="cases.html" class="btn btn-secondary" style="width:fit-content">查看客户案例</a>
+        </div>
+      </div>
+      <div class="cases-map">
+        <div class="map-placeholder">
+          <svg class="china-map" viewBox="0 0 760 480" aria-label="中国区域覆盖示意图" role="img">
+            <path class="base" d="M84 195 L110 182 L148 177 L176 159 L220 154 L254 132 L300 142 L328 125 L370 130 L418 116 L456 129 L503 120 L548 136 L588 126 L620 142 L646 168 L674 182 L666 210 L634 224 L602 238 L582 268 L550 286 L516 290 L486 314 L452 322 L414 314 L382 330 L338 336 L296 326 L264 336 L236 318 L206 316 L184 296 L152 292 L124 278 L108 252 L82 238 Z"/>
+            <path class="hl" d="M176 198 L214 182 L258 184 L282 208 L246 224 L198 226 Z"/>
+            <path class="hl" d="M310 174 L350 164 L390 178 L386 208 L340 212 L308 196 Z"/>
+            <path class="hl" d="M430 170 L470 156 L518 170 L522 200 L470 216 L430 202 Z"/>
+            <path class="hl" d="M540 184 L580 174 L612 192 L604 222 L566 234 L536 216 Z"/>
+            <path class="hl" d="M364 236 L400 226 L430 240 L426 268 L388 278 L362 262 Z"/>
+            <circle class="dot" cx="232" cy="206" r="8"/>
+            <circle class="dot" cx="356" cy="190" r="8"/>
+            <circle class="dot" cx="484" cy="188" r="8"/>
+            <circle class="dot" cx="580" cy="205" r="8"/>
+            <circle class="dot" cx="398" cy="254" r="8"/>
+          </svg>
+          <p class="map-caption">客户覆盖全国多地（省级聚合示意）<br/>仅展示区域覆盖，不展示具体客户点位</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-cards">
+      <div class="case-card">
+        <div class="case-card-tag tone-blue">医疗废物追溯</div>
+        <div class="case-card-header">
+          <div class="case-card-badge tone-blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6v12"/><path d="M6 12h12"/><path d="M7 21V8a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v13"/></svg></div>
+          <div>
+            <div class="case-card-title">某三甲医院</div>
+            <div class="case-card-sub">医疗废物精细化追溯系统</div>
+          </div>
+        </div>
+        <p class="case-card-desc">围绕院内医疗废物分类收集、称重交接、院内转运、暂存出库等环节，建立业务记录、责任留痕、异常提醒和台账归档机制，辅助医院提升医废管理规范性。</p>
+      </div>
+      <div class="case-card">
+        <div class="case-card-tag tone-amber">危废管理</div>
+        <div class="case-card-header">
+          <div class="case-card-badge tone-amber"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 6h10"/><path d="M7 12h10"/><path d="M7 18h6"/><path d="M5 4v16"/><path d="M19 4v16"/></svg></div>
+          <div>
+            <div class="case-card-title">某区域医疗机构</div>
+            <div class="case-card-sub">危险废物"五即一码"规范化管理系统</div>
+          </div>
+        </div>
+        <p class="case-card-desc">围绕危险废物即产生、即包装、即称重、即打码、即入库等作业要求，支持源头赋码、扫码入库、出库交接和联单关联，提升危废管理规范化水平。</p>
+      </div>
+      <div class="case-card">
+        <div class="case-card-tag tone-cyan">智慧监管</div>
+        <div class="case-card-header">
+          <div class="case-card-badge tone-cyan"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18h16"/><path d="M6 18V9"/><path d="M12 18V6"/><path d="M18 18v-5"/><path d="M5 7l4-2 4 3 6-2"/></svg></div>
+          <div>
+            <div class="case-card-title">某市级卫生监督机构</div>
+            <div class="case-card-sub">智慧卫监解决方案</div>
+          </div>
+        </div>
+        <p class="case-card-desc">围绕监管对象管理、在线监测、风险提醒、监督检查和问题整改，辅助监管部门提升非现场监管和工作留痕能力。</p>
+      </div>
+      <div class="case-card">
+        <div class="case-card-tag tone-green">内镜合规</div>
+        <div class="case-card-header">
+          <div class="case-card-badge tone-green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13h5"/><path d="M9 13c3 0 4-5 8-5"/><path d="M17 8c2 0 3 1 3 3s-1 3-3 3"/><path d="M8 13v4a2 2 0 0 0 2 2h4"/></svg></div>
+          <div>
+            <div class="case-card-title">某医疗机构内镜中心</div>
+            <div class="case-card-sub">内镜合规平台</div>
+          </div>
+        </div>
+        <p class="case-card-desc">围绕内镜洗消流程、质量控制记录和区域平台对接要求，支持内镜清洗消毒记录规范化、接口化和可追溯管理。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ NEWS ══════════════════════════════════════════════ -->
+<section class="section" style="background:var(--color-surface)">
+  <div class="container">
+    <div class="section-header" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px">
+      <div>
+        <span class="section-label">新闻动态</span>
+        <h2 class="section-title">行业政策与产品动态</h2>
+        <p class="section-subtitle">关注医疗废物、危险废物、卫生监督等相关政策趋势，持续分享产品动态与行业洞察。</p>
+      </div>
+      <a href="news.html" class="btn btn-secondary">查看全部</a>
+    </div>
+    <div class="news-grid">
+
+      <div class="news-card">
+        <div class="news-card-img">
+          <img src="public/images/news/news_cover_policy.webp"
+               alt="行业政策封面"
+               onerror="this.style.display='none'"/>
+          <svg class="news-card-glyph" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h6l4 4v14H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M14 3v5h5"/><path d="M10 13h6"/><path d="M10 17h4"/></svg>
+        </div>
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="news-card-cat tone-blue">行业政策</span>
+            <span class="news-card-date">2025-05</span>
+          </div>
+          <h3 class="news-card-title">医疗废物精细化全程管理的政策要求与建设要点</h3>
+          <p class="news-card-excerpt">围绕医疗废物分类、称重、交接、台账管理等环节，梳理近年来政策文件中对医疗机构医废管理的主要要求与建设方向。</p>
+          <a href="news.html" class="news-card-link">查看详情 →</a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-card-img">
+          <img src="public/images/news/news_cover_policy.webp"
+               alt="行业政策封面"
+               onerror="this.style.display='none'"/>
+          <svg class="news-card-glyph" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h6l4 4v14H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M14 3v5h5"/><path d="M10 13h6"/><path d="M10 17h4"/></svg>
+        </div>
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="news-card-cat tone-blue">行业政策</span>
+            <span class="news-card-date">2025-04</span>
+          </div>
+          <h3 class="news-card-title">危险废物"五即一码"规范化建设趋势解读</h3>
+          <p class="news-card-excerpt">解读危险废物产生环节规范化管理的政策背景，分析"五即一码"要求在医疗机构、产废单位和园区等场景的实施路径。</p>
+          <a href="news.html" class="news-card-link">查看详情 →</a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-card-img">
+          <img src="public/images/news/news_cover_company.webp"
+               alt="公司动态封面"
+               onerror="this.style.display='none'"/>
+          <svg class="news-card-glyph" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13v-2l11-5v12L4 13z"/><path d="M15 9h1a3 3 0 0 1 0 6h-1"/><path d="M7 14v4a2 2 0 0 0 2 2h1"/></svg>
+        </div>
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="news-card-cat tone-green">公司动态</span>
+            <span class="news-card-date">2025-05</span>
+          </div>
+          <h3 class="news-card-title">智感云医疗废物精细化追溯系统服务客户突破新阶段</h3>
+          <p class="news-card-excerpt">智感云医疗废物精细化追溯系统持续深耕医院场景，服务医疗机构数量稳步增长，在业务过程留痕、异常提醒和台账归档方面持续积累应用经验。</p>
+          <a href="news.html" class="news-card-link">查看详情 →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ═══════════════════════════════════════════════ -->
+<section class="section cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <h2 class="cta-title">想了解哪套方案适合您的机构？</h2>
+      <p class="cta-desc">提交需求后，我们将根据您的机构类型、关注产品和建设目标，安排产品演示与方案沟通。</p>
+      <a href="contact.html" class="btn btn-primary btn-lg">预约产品演示</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="nav-logo-icon">智感</div>
+          <span>北京智感云科技有限公司</span>
+        </div>
+        <p>面向医疗卫生、生态环境、公共卫生监督、院感合规与减污降碳场景的 AIoT 软硬一体数字化解决方案服务商。</p>
+      </div>
+      <div>
+        <div class="footer-nav-title">产品与方案</div>
+        <div class="footer-nav-links">
+          <a href="products/medical-waste.html" class="footer-nav-link">医疗废物精细化追溯</a>
+          <a href="products/hazardous-waste.html" class="footer-nav-link">危险废物五即一码</a>
+          <a href="products/health-supervision.html" class="footer-nav-link">智慧卫监解决方案</a>
+          <a href="products/sterilization-monitoring.html" class="footer-nav-link">消毒灭菌监测系统</a>
+          <a href="products/endoscope-compliance.html" class="footer-nav-link">内镜合规平台</a>
+          <a href="products/carbon-management.html" class="footer-nav-link">碳管理与减污降碳</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-nav-title">公司</div>
+        <div class="footer-nav-links">
+          <a href="cases.html" class="footer-nav-link">客户案例</a>
+          <a href="news.html" class="footer-nav-link">新闻动态</a>
+          <a href="about.html" class="footer-nav-link">关于我们</a>
+          <a href="contact.html" class="footer-nav-link">联系我们</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-nav-title">联系我们</div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 11.2 19a19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3.3a2 2 0 0 1-.6 1.8l-1.6 1.6a16 16 0 0 0 6 6l1.6-1.6a2 2 0 0 1 1.8-.6l3.3.5a2 2 0 0 1 1.7 2Z"/></svg></span>
+          <span>400-160-1008</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></span>
+          <span>info@opmonitor.com</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18"/><path d="M12 3a15 15 0 0 0 0 18"/></svg></span>
+          <span>www.opmonitor.com</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s6-4.6 6-10a6 6 0 1 0-12 0c0 5.4 6 10 6 10Z"/><circle cx="12" cy="11" r="2.5"/></svg></span>
+          <span>北京市亦庄经济开发区</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 北京智感云科技有限公司 版权所有</span>
+      <span class="footer-icp">
+        <a href="#">以上线备案信息为准</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Sticky nav shadow
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 10);
+});
+
+// Mobile hamburger
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  mobileMenu.classList.toggle('open');
+});
+
+// Stat counter animation
+function animateCount(el, target, suffix) {
+  const isNumber = !isNaN(parseInt(target));
+  if (!isNumber) return;
+  const num = parseInt(target);
+  let current = 0;
+  const step = Math.ceil(num / 40);
+  const timer = setInterval(() => {
+    current = Math.min(current + step, num);
+    el.textContent = current + (suffix || '');
+    if (current >= num) clearInterval(timer);
+  }, 30);
+}
+
+// Intersection observer for animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.product-card, .capability-card, .case-card, .news-card, .stat-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>

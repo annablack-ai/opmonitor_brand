@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>联系我们 — 智感云</title>
+  <meta name="description" content="欢迎提交需求信息，获取智感云产品演示与方案沟通。电话：400-160-1008，邮箱：info@opmonitor.com"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <style>
+    .contact-layout{display:grid;grid-template-columns:1fr 2fr;gap:48px;align-items:start}
+    .contact-info-cards{display:flex;flex-direction:column;gap:20px}
+    .contact-info-card{background:#fff;border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:28px;box-shadow:var(--shadow-card)}
+    .contact-info-card-icon{font-size:2rem;margin-bottom:12px}
+    .contact-info-card-label{font-size:.82rem;color:var(--color-text-muted);margin-bottom:4px}
+    .contact-info-card-value{font-size:1rem;font-weight:700;color:var(--color-text-primary)}
+    .contact-form-card{background:#fff;border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:40px;box-shadow:var(--shadow-card)}
+    .form-title{font-size:1.3rem;font-weight:700;margin-bottom:28px;color:var(--color-text-primary)}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+    .form-label{font-size:.875rem;font-weight:600;color:var(--color-text-secondary)}
+    .form-label .req{color:#e53e3e;margin-left:2px}
+    .form-input,.form-select,.form-textarea{padding:11px 16px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);font-size:.95rem;color:var(--color-text-primary);font-family:inherit;transition:border-color .2s,box-shadow .2s;background:#fff;width:100%;box-sizing:border-box}
+    .form-input:focus,.form-select:focus,.form-textarea:focus{outline:none;border-color:var(--color-primary);box-shadow:0 0 0 3px rgba(0,123,255,.12)}
+    .form-textarea{resize:vertical;min-height:100px}
+    .form-submit{width:100%;padding:14px;background:var(--color-primary);color:#fff;border:none;border-radius:var(--radius-md);font-size:1rem;font-weight:700;cursor:pointer;transition:background .2s,transform .15s;font-family:inherit}
+    .form-submit:hover{background:#0069d9;transform:translateY(-1px)}
+    .form-note{font-size:.82rem;color:var(--color-text-muted);margin-top:12px;text-align:center}
+    .map-placeholder{border-radius:var(--radius-xl);min-height:260px;background:linear-gradient(135deg,#e8f4ff 0%,#dbeeff 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:var(--color-text-muted);border:2px dashed var(--color-border);margin-top:48px}
+    @media(max-width:1023px){.contact-layout{grid-template-columns:1fr}.contact-info-cards{flex-direction:row;flex-wrap:wrap}.contact-info-card{flex:1 1 200px}}
+    @media(max-width:767px){.form-row{grid-template-columns:1fr}.contact-info-card{flex:1 1 100%}}
+  </style>
+</head>
+<body>
+<header class="nav" id="mainNav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><div class="nav-logo-icon">智感</div><span>智感云</span></a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">首页</a>
+        <a href="products.html" class="nav-link">产品与解决方案</a>
+        <a href="cases.html" class="nav-link">客户案例</a>
+        <a href="news.html" class="nav-link">新闻动态</a>
+        <a href="about.html" class="nav-link">关于我们</a>
+        <a href="contact.html" class="nav-link active">联系我们</a>
+      </nav>
+      <a href="contact.html" class="btn btn-primary btn-sm nav-cta">预约产品演示</a>
+      <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="nav-mobile" id="mobileMenu">
+    <a href="index.html" class="nav-link">首页</a>
+    <a href="products.html" class="nav-link">产品与解决方案</a>
+    <a href="cases.html" class="nav-link">客户案例</a>
+    <a href="news.html" class="nav-link">新闻动态</a>
+    <a href="about.html" class="nav-link">关于我们</a>
+    <a href="contact.html" class="nav-link active">联系我们</a>
+    <a href="contact.html" class="btn btn-primary" style="margin-top:8px">预约产品演示</a>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html">首页</a><span class="breadcrumb-sep">/</span>
+      <span>联系我们</span>
+    </div>
+    <div class="page-hero-inner">
+      <div class="page-hero-text">
+        <span class="section-label">联系我们</span>
+        <h1 class="page-hero-title">联系我们</h1>
+        <p class="page-hero-subtitle">提交需求信息，获取产品演示与方案沟通。</p>
+      </div>
+      <div class="page-hero-img" style="background:linear-gradient(135deg,#c8e6ff 0%,#a8d4f5 100%)"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="contact-layout">
+      <div>
+        <div class="contact-info-cards">
+          <div class="contact-info-card">
+            <div class="contact-info-card-icon"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 11.2 19a19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3.3a2 2 0 0 1-.6 1.8l-1.6 1.6a16 16 0 0 0 6 6l1.6-1.6a2 2 0 0 1 1.8-.6l3.3.5a2 2 0 0 1 1.7 2Z"/></svg></div>
+            <div class="contact-info-card-label">服务热线</div>
+            <div class="contact-info-card-value">400-160-1008</div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-info-card-icon"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></div>
+            <div class="contact-info-card-label">电子邮箱</div>
+            <div class="contact-info-card-value">info@opmonitor.com</div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-info-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18"/><path d="M12 3a15 15 0 0 0 0 18"/></svg></div>
+            <div class="contact-info-card-label">官网</div>
+            <div class="contact-info-card-value">www.opmonitor.com</div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-info-card-icon"><svg viewBox="0 0 24 24"><path d="M12 21s6-4.6 6-10a6 6 0 1 0-12 0c0 5.4 6 10 6 10Z"/><circle cx="12" cy="11" r="2.5"/></svg></div>
+            <div class="contact-info-card-label">总部地址</div>
+            <div class="contact-info-card-value">以正式联系方式为准</div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form-card">
+        <div class="form-title">预约产品演示 / 方案沟通</div>
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="fname">姓名<span class="req">*</span></label>
+              <input class="form-input" type="text" id="fname" name="name" placeholder="请输入您的姓名" required/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="fphone">手机<span class="req">*</span></label>
+              <input class="form-input" type="tel" id="fphone" name="phone" placeholder="请输入手机号码" required pattern="[0-9]{11}"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="forg">公司 / 机构名称<span class="req">*</span></label>
+              <input class="form-input" type="text" id="forg" name="org" placeholder="请输入机构名称" required/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="fregion">所在地区</label>
+              <input class="form-input" type="text" id="fregion" name="region" placeholder="省份 / 城市"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="forgtype">机构类型</label>
+              <select class="form-select" id="forgtype" name="org_type">
+                <option value="">请选择机构类型</option>
+                <option value="hospital">医疗机构</option>
+                <option value="regulator">监管部门</option>
+                <option value="hazwaste">生态环境 / 危废相关单位</option>
+                <option value="park">园区 / 集团化单位</option>
+                <option value="other">其他</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="fproduct">关注产品</label>
+              <select class="form-select" id="fproduct" name="product">
+                <option value="">请选择关注产品</option>
+                <option value="medical-waste">医疗废物精细化追溯系统</option>
+                <option value="hazardous-waste">危险废物"五即一码"规范化管理系统</option>
+                <option value="health-supervision">智慧卫监解决方案</option>
+                <option value="sterilization">消毒灭菌监测系统</option>
+                <option value="endoscope">内镜合规平台</option>
+                <option value="carbon">碳管理与减污降碳协同</option>
+                <option value="other">其他</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="fmsg">需求描述</label>
+            <textarea class="form-textarea" id="fmsg" name="message" placeholder="请简要描述您的业务场景和需求，帮助我们为您提供更有针对性的方案建议…"></textarea>
+          </div>
+          <button type="submit" class="form-submit">提交预约申请</button>
+          <p class="form-note">提交信息仅用于产品演示沟通，我们将在 1—2 个工作日内与您联系。</p>
+        </form>
+      </div>
+    </div>
+
+    <div class="map-placeholder">
+      <svg width="48" height="48" viewBox="0 0 64 64" fill="none" style="opacity:.3"><path d="M32 4C18.7 4 8 14.7 8 28c0 17 24 36 24 36s24-19 24-36C56 14.7 45.3 4 32 4zm0 20a8 8 0 110 16 8 8 0 010-16z" fill="#007BFF"/></svg>
+      <p style="font-size:.95rem;font-weight:600;color:#4b6b8a">北京市亦庄经济开发区</p>
+      <p style="font-size:.82rem">总部地图加载中…</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="footer-logo"><div class="nav-logo-icon">智感</div><span>北京智感云科技有限公司</span></div><p>面向医疗卫生、生态环境、公共卫生监督、院感合规与减污降碳场景的 AIoT 软硬一体数字化解决方案服务商。</p></div>
+      <div><div class="footer-nav-title">产品与方案</div><div class="footer-nav-links"><a href="products/medical-waste.html" class="footer-nav-link">医疗废物精细化追溯</a><a href="products/hazardous-waste.html" class="footer-nav-link">危险废物五即一码</a><a href="products/health-supervision.html" class="footer-nav-link">智慧卫监解决方案</a><a href="products/sterilization-monitoring.html" class="footer-nav-link">消毒灭菌监测系统</a><a href="products/endoscope-compliance.html" class="footer-nav-link">内镜合规平台</a><a href="products/carbon-management.html" class="footer-nav-link">碳管理与减污降碳</a></div></div>
+      <div><div class="footer-nav-title">公司</div><div class="footer-nav-links"><a href="cases.html" class="footer-nav-link">客户案例</a><a href="news.html" class="footer-nav-link">新闻动态</a><a href="about.html" class="footer-nav-link">关于我们</a><a href="contact.html" class="footer-nav-link">联系我们</a></div></div>
+      <div><div class="footer-nav-title">联系我们</div><div class="footer-contact-item"><span class="footer-contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 11.2 19a19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3.3a2 2 0 0 1-.6 1.8l-1.6 1.6a16 16 0 0 0 6 6l1.6-1.6a2 2 0 0 1 1.8-.6l3.3.5a2 2 0 0 1 1.7 2Z"/></svg></span><span>400-160-1008</span></div><div class="footer-contact-item"><span class="footer-contact-icon"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></span><span>info@opmonitor.com</span></div></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 北京智感云科技有限公司 版权所有</span><span class="footer-icp"><a href="#">以上线备案信息为准</a></span></div>
+  </div>
+</footer>
+<script>
+const nav=document.getElementById('mainNav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>10));
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
+
+function handleSubmit(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.form-submit');
+  btn.textContent='提交成功，我们将尽快与您联系 ✓';
+  btn.style.background='#16a34a';
+  btn.disabled=true;
+}
+</script>
+</body>
+</html>

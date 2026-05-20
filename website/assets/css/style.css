@@ -658,26 +658,63 @@ input,textarea,select { font-family:inherit; }
   transform: translateY(-4px);
   box-shadow: 0 18px 34px rgba(17,78,133,.12);
 }
-.product-card-icon {
-  width: 42px;
-  height: 42px;
-  background: linear-gradient(145deg,#dff0ff,#f4faff);
-  border-radius: 12px;
+.icon-badge {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  color: var(--color-primary);
+  background: rgba(238, 246, 255, .96);
+  border: 1px solid rgba(170, 198, 223, .24);
+}
+.icon-badge svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.icon-badge.tone-blue {
+  color: var(--color-primary);
+  background: rgba(238, 246, 255, .96);
+  border-color: rgba(0, 123, 255, .14);
+}
+.icon-badge.tone-cyan {
+  color: var(--color-cyan-ink);
+  background: rgba(233, 251, 255, .96);
+  border-color: rgba(0, 194, 255, .18);
+}
+.icon-badge.tone-green {
+  color: var(--color-success-ink);
+  background: rgba(237, 249, 241, .96);
+  border-color: rgba(0, 200, 83, .18);
+}
+.icon-badge.tone-amber {
+  color: var(--color-warning-ink);
+  background: rgba(255, 248, 231, .98);
+  border-color: rgba(255, 193, 7, .22);
+}
+.icon-badge.tone-red {
+  color: var(--color-danger-ink);
+  background: rgba(255, 241, 239, .98);
+  border-color: rgba(255, 79, 61, .18);
+}
+.product-card-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
   font-size: 13px;
   font-weight: 700;
-  color: #0f6eb2;
   letter-spacing: .02em;
   margin-bottom: 0;
-  flex-shrink: 0;
 }
 .product-card-icon svg {
   width: 22px;
   height: 22px;
   stroke: currentColor;
-  stroke-width: 1.9;
+  stroke-width: 1.75;
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -974,17 +1011,13 @@ input,textarea,select { font-family:inherit; }
   width: 56px;
   height: 56px;
   border-radius: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin: 0 auto 16px;
-  border: 1px solid rgba(170, 198, 223, .24);
 }
 .capability-icon svg {
   width: 24px;
   height: 24px;
   stroke: currentColor;
-  stroke-width: 1.9;
+  stroke-width: 1.75;
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -1177,17 +1210,13 @@ input,textarea,select { font-family:inherit; }
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-shrink: 0;
-  border: 1px solid rgba(170, 198, 223, .24);
 }
 .case-card-badge svg {
   width: 18px;
   height: 18px;
   stroke: currentColor;
-  stroke-width: 1.9;
+  stroke-width: 1.75;
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -1396,11 +1425,7 @@ input,textarea,select { font-family:inherit; }
 .feature-icon {
   width: 44px;
   height: 44px;
-  background: var(--color-primary-light);
   border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 20px;
   margin-bottom: 14px;
 }
@@ -1408,11 +1433,13 @@ input,textarea,select { font-family:inherit; }
 .value-icon svg,
 .qual-icon svg,
 .network-item-icon svg,
-.contact-info-card-icon svg {
+.contact-info-card-icon svg,
+.customer-type-icon svg,
+.footer-contact-icon svg {
   width: 22px;
   height: 22px;
   stroke: currentColor;
-  stroke-width: 1.9;
+  stroke-width: 1.75;
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -1487,8 +1514,28 @@ input,textarea,select { font-family:inherit; }
 }
 .value-card:hover { transform: translateY(-3px); }
 .value-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
   font-size: 28px;
   margin-bottom: 12px;
+}
+.qual-icon,
+.contact-info-card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.network-item-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .value-title {
   font-size: 15px;
@@ -1523,22 +1570,9 @@ input,textarea,select { font-family:inherit; }
 .customer-type-icon {
   width: 56px;
   height: 56px;
-  background: var(--color-primary-light);
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 24px;
   margin: 0 auto 16px;
-}
-.customer-type-icon svg {
-  width: 24px;
-  height: 24px;
-  stroke: currentColor;
-  stroke-width: 1.9;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
 .customer-type-title {
   font-size: 15px;
@@ -1659,13 +1693,13 @@ input,textarea,select { font-family:inherit; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255,255,255,.78);
+  color: rgba(185, 224, 255, .92);
 }
 .footer-contact-icon svg {
   width: 16px;
   height: 16px;
   stroke: currentColor;
-  stroke-width: 1.9;
+  stroke-width: 1.75;
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;

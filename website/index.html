@@ -6,42 +6,662 @@
   <title>智感云 | AIoT 软硬一体数字化解决方案 — 北京智感云科技有限公司</title>
   <meta name="description" content="北京智感云科技有限公司，面向医疗废物、危险废物、卫生监督、消毒灭菌、内镜合规与减污降碳场景，提供 AIoT 软硬一体数字化解决方案。800+ 客户服务经验。"/>
   <meta name="keywords" content="医疗废物追溯,危险废物五即一码,智慧卫监,消毒灭菌监测,内镜合规,碳管理,AIoT,软硬一体,合规管理"/>
-  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="stylesheet" href="assets/css/style.css?v=20260520-logo"/>
   <style>
     .home-page .hero {
-      padding: 56px 0 36px;
+      position: relative;
+      width: 100%;
+      min-height: 680px;
+      padding: 72px 0 58px;
+      background:
+        linear-gradient(90deg, rgba(246, 249, 253, 0.84) 0%, rgba(246, 249, 253, 0.74) 20%, rgba(246, 249, 253, 0.56) 38%, rgba(246, 249, 253, 0.32) 54%, rgba(246, 249, 253, 0.14) 68%, rgba(246, 249, 253, 0.04) 84%),
+        url("public/images/home/home_hero_main_5_desktop.jpeg"),
+        radial-gradient(circle at 78% 34%, rgba(255, 255, 255, 0.22) 0, rgba(255, 255, 255, 0.1) 18%, rgba(255, 255, 255, 0) 42%),
+        radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.9) 0, rgba(255, 255, 255, 0.36) 28%, rgba(255, 255, 255, 0) 48%),
+        radial-gradient(circle at 18% 22%, rgba(0, 123, 255, 0.14) 0, rgba(0, 123, 255, 0) 24%),
+        radial-gradient(circle at 82% 18%, rgba(0, 194, 255, 0.12) 0, rgba(0, 194, 255, 0) 22%),
+        radial-gradient(circle at 50% 58%, rgba(0, 123, 255, 0.06) 0, rgba(0, 123, 255, 0) 36%),
+        linear-gradient(180deg, #f4f8ff 0%, #edf5ff 38%, #f7fbff 72%, #ffffff 100%);
+      background-position: left top, center center, 78% 34%, 18% 18%, 18% 22%, 82% 18%, 50% 58%, center;
+      background-repeat: no-repeat;
+      background-size: auto, cover, auto, auto, auto, auto, auto, auto;
+      overflow: hidden;
     }
-    .home-page .hero-inner {
-      gap: 28px;
-      min-height: 460px;
+    .home-page .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(17, 86, 145, 0.034) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17, 86, 145, 0.034) 1px, transparent 1px),
+        linear-gradient(112deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.22) 42%, rgba(255, 255, 255, 0) 76%),
+        radial-gradient(circle at 74% 26%, rgba(0, 123, 255, 0.08), rgba(0, 123, 255, 0) 34%);
+      background-size: 32px 32px, 32px 32px, auto, auto;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.22) 62%, transparent 100%);
+      opacity: 0.32;
+      pointer-events: none;
+    }
+    .home-page .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 144px;
+      background:
+        linear-gradient(180deg, rgba(247, 251, 255, 0) 0%, rgba(247, 251, 255, 0.36) 40%, rgba(251, 253, 255, 0.82) 78%, #ffffff 100%),
+        radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0) 70%);
+      pointer-events: none;
+    }
+    .home-page .hero-energy-pulse {
+      position: absolute;
+      right: 17.2%;
+      top: 50%;
+      width: 208px;
+      height: 208px;
+      transform: translate(50%, -50%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.98;
+      background:
+        radial-gradient(circle, rgba(164, 238, 255, 0.34) 0%, rgba(164, 238, 255, 0.15) 18%, rgba(102, 214, 255, 0.06) 36%, rgba(102, 214, 255, 0.01) 54%, rgba(102, 214, 255, 0) 72%);
+      mix-blend-mode: screen;
+      will-change: transform, opacity;
+      animation: hero-energy-breathe 5.8s ease-in-out infinite;
+    }
+    .home-page .hero-energy-pulse::before,
+    .home-page .hero-energy-pulse::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .home-page .hero-energy-pulse::before {
+      inset: 32px;
+      background:
+        radial-gradient(circle, rgba(255, 255, 255, 0.82) 0%, rgba(207, 245, 255, 0.48) 16%, rgba(121, 219, 255, 0.18) 32%, rgba(121, 219, 255, 0.04) 50%, rgba(121, 219, 255, 0) 66%);
+      box-shadow:
+        0 0 22px rgba(169, 232, 255, 0.18),
+        0 0 52px rgba(102, 201, 255, 0.14),
+        0 0 108px rgba(88, 182, 255, 0.1);
+      will-change: transform, opacity;
+      animation: hero-energy-core 5.8s ease-in-out infinite;
+    }
+    .home-page .hero-energy-pulse::after {
+      inset: -22px;
+      background:
+        radial-gradient(circle, rgba(144, 228, 255, 0) 34%, rgba(144, 228, 255, 0.14) 54%, rgba(144, 228, 255, 0.05) 66%, rgba(144, 228, 255, 0) 79%);
+      filter: blur(10px);
+      will-change: transform, opacity;
+      animation: hero-energy-halo 5.8s ease-in-out infinite;
+    }
+    .home-page .hero-energy-stream {
+      position: absolute;
+      right: 17.2%;
+      top: 50%;
+      width: 360px;
+      height: 22px;
+      transform: translate(50%, -50%);
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.92;
+      overflow: visible;
+      mix-blend-mode: screen;
+    }
+    .home-page .hero-energy-stream::before,
+    .home-page .hero-energy-stream::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .home-page .hero-energy-stream::before {
+      top: 50%;
+      height: 2px;
+      transform: translateY(-50%);
+      background:
+        linear-gradient(90deg, rgba(108, 218, 255, 0) 0%, rgba(108, 218, 255, 0.16) 18%, rgba(198, 247, 255, 0.78) 50%, rgba(108, 218, 255, 0.16) 82%, rgba(108, 218, 255, 0) 100%);
+      box-shadow:
+        0 0 8px rgba(147, 231, 255, 0.14),
+        0 0 18px rgba(99, 199, 255, 0.08);
+      transform-origin: center;
+      will-change: transform, opacity;
+      animation: hero-energy-stream-breathe 3.8s ease-in-out infinite;
+    }
+    .home-page .hero-energy-stream::after {
+      left: 50%;
+      top: 50%;
+      width: 64px;
+      height: 10px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(199, 246, 255, 0.62) 28%, rgba(113, 220, 255, 0.12) 62%, rgba(113, 220, 255, 0) 100%);
+      filter: blur(1px);
+      transform: translate(-50%, -50%);
+      will-change: transform, opacity;
+      animation: hero-energy-spark 2.9s ease-in-out infinite;
+    }
+    .home-page .hero .container {
       position: relative;
       z-index: 1;
+    }
+    .home-page .hero-inner {
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      gap: 42px;
+      min-height: 620px;
+      align-items: center;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      position: relative;
+      z-index: 1;
+    }
+    .home-page .hero-text {
+      position: relative;
+      max-width: 640px;
+      padding: 24px 0 30px;
     }
     .home-page .hero-subtitle,
     .home-page .hero-note {
       max-width: 620px;
     }
-    .home-page .hero-note {
+    .home-page .hero-tags {
+      gap: 10px;
       margin-bottom: 28px;
+    }
+    .home-page .hero-tags .tag {
+      padding: 6px 13px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #1f5f94;
+      background: rgba(255, 255, 255, 0.48);
+      border: 1px solid rgba(166, 201, 228, 0.34);
+      box-shadow: 0 8px 18px rgba(18, 85, 145, 0.05);
+      backdrop-filter: blur(8px);
+    }
+    .home-page .hero-title {
+      font-size: clamp(32px, 4.1vw, 48px);
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+      margin-bottom: 22px;
+      max-width: 14.5ch;
+      text-wrap: nowrap;
+    }
+    .home-page .hero-title span {
+      display: block;
+      white-space: nowrap;
+    }
+    .home-page .hero-title span + span {
+      margin-top: 6px;
+    }
+    .home-page .hero-title em {
+      color: #006be0;
+      text-shadow: 0 10px 24px rgba(0, 107, 224, 0.14);
+    }
+    .home-page .hero-subtitle {
+      font-size: 18px;
+      font-weight: 500;
+      color: #31465f;
+      line-height: 1.85;
+      margin-bottom: 14px;
+      max-width: 640px;
+      text-wrap: pretty;
+    }
+    .home-page .hero-note {
+      font-size: 15px;
+      color: #6d8299;
+      line-height: 1.82;
+      margin-bottom: 34px;
+      padding-left: 18px;
+      border-left: 2px solid rgba(90, 149, 205, 0.18);
     }
     .stats-section .stat-number {
       white-space: nowrap;
       word-break: keep-all;
     }
+    .home-page .surface-neutral,
+    .home-page .surface-blue {
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(226, 232, 240, 0.9);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+    }
+    .home-page .surface-neutral {
+      background: linear-gradient(180deg, #ffffff 0%, #f5f7fa 100%);
+    }
+    .home-page .surface-neutral::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 14% 18%, rgba(0, 123, 255, 0.05) 0, rgba(0, 123, 255, 0) 22%),
+        linear-gradient(180deg, rgba(243, 246, 250, 0.9) 0%, rgba(255, 255, 255, 0) 24%, rgba(255, 255, 255, 0) 100%);
+      pointer-events: none;
+    }
+    .home-page .surface-blue {
+      background:
+        radial-gradient(circle at 18% 20%, rgba(0, 123, 255, 0.1) 0, rgba(0, 123, 255, 0) 24%),
+        radial-gradient(circle at 82% 18%, rgba(0, 194, 255, 0.08) 0, rgba(0, 194, 255, 0) 22%),
+        linear-gradient(180deg, #eef6ff 0%, #e9f3ff 56%, #f4f9ff 100%);
+      border-top-color: rgba(172, 203, 228, 0.48);
+      border-bottom-color: rgba(172, 203, 228, 0.48);
+    }
+    .home-page .surface-blue::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(17, 86, 145, 0.042) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17, 86, 145, 0.042) 1px, transparent 1px);
+      background-size: 30px 30px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.18) 66%, transparent 100%);
+      opacity: 0.58;
+      pointer-events: none;
+    }
+    .home-page .surface-neutral > .container,
+    .home-page .surface-blue > .container {
+      position: relative;
+      z-index: 1;
+    }
+    .home-page .section-header .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0;
+      margin-bottom: 20px;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: var(--color-primary);
+      font-size: clamp(12px, 1.1vw, 13px);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.08em;
+    }
+    .home-page .section-header .section-label::before,
+    .home-page .section-header .section-label::after {
+      content: "";
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(0, 123, 255, 0) 0%, rgba(0, 123, 255, 0.88) 100%);
+    }
+    .home-page .section-header .section-label::after {
+      background: linear-gradient(90deg, rgba(0, 123, 255, 0.88) 0%, rgba(0, 123, 255, 0) 100%);
+    }
+    .home-page .stats-section {
+      padding-top: 78px;
+      padding-bottom: 84px;
+    }
+    .home-page .stats-section .section-header {
+      margin-bottom: 40px;
+    }
+    .home-page .stats-section .section-title {
+      margin-bottom: 14px;
+    }
+    .home-page .stats-section .section-subtitle {
+      max-width: 860px;
+      color: #718096;
+    }
+    .home-page .stats-section .stats-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: 54px;
+      row-gap: 46px;
+      align-items: start;
+    }
+    .home-page .stats-section .stat-card {
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 6px 0 2px;
+      text-align: left;
+      min-height: 0;
+    }
+    .home-page .stats-section .stat-card:hover {
+      transform: none;
+      box-shadow: none;
+    }
+    .home-page .stats-section .stat-number {
+      font-size: clamp(48px, 5.2vw, 72px);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      color: #555b66;
+      line-height: 0.96;
+      margin-bottom: 14px;
+    }
+    .home-page .stats-section .stat-label {
+      font-size: 15px;
+      font-weight: 500;
+      color: #606874;
+      line-height: 1.5;
+      max-width: 16ch;
+    }
+    .home-page .product-overview-section {
+      padding-top: 90px;
+      padding-bottom: 98px;
+    }
+    .home-page .product-overview-section .section-header {
+      max-width: 860px;
+      margin: 0 auto 34px;
+    }
+    .home-page .product-overview-section .section-title {
+      margin-bottom: 14px;
+    }
+    .home-page .product-overview-section .section-subtitle {
+      max-width: 760px;
+      color: #627286;
+    }
+    .home-page .product-tabs {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 34px;
+      border-bottom: 1px solid rgba(223, 232, 242, 0.92);
+    }
+    .home-page .product-tab {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 92px;
+      padding: 16px 10px 18px;
+      border: 0;
+      background: transparent;
+      color: #6f8298;
+      transition: color 180ms ease, background-color 180ms ease;
+    }
+    .home-page .product-tab::after {
+      content: "";
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: -1px;
+      height: 2px;
+      border-radius: 999px;
+      background: transparent;
+      transition: background-color 180ms ease;
+    }
+    .home-page .product-tab:hover {
+      color: #4f6e8d;
+      background: transparent;
+    }
+    .home-page .product-tab.is-active {
+      color: var(--color-primary);
+      background: transparent;
+    }
+    .home-page .product-tab.is-active::after {
+      background: var(--color-primary);
+    }
+    .home-page .product-tab-icon {
+      width: 30px;
+      height: 30px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: currentColor;
+    }
+    .home-page .product-tab-icon::before {
+      content: "";
+      position: absolute;
+      inset: -7px;
+      border-radius: 50%;
+      background: rgba(238, 246, 255, 0.42);
+      opacity: 0;
+      transition: opacity 180ms ease, background-color 180ms ease;
+    }
+    .home-page .product-tab:hover .product-tab-icon::before,
+    .home-page .product-tab.is-active .product-tab-icon::before {
+      opacity: 1;
+    }
+    .home-page .product-tab.is-active .product-tab-icon::before {
+      background: rgba(238, 246, 255, 0.82);
+    }
+    .home-page .product-tab-icon svg {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 1;
+      stroke: currentColor;
+      stroke-width: 1.9;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .home-page .product-tab-label {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.25;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+    .home-page .product-showcase {
+      position: relative;
+      min-height: 470px;
+      overflow: visible;
+    }
+    .home-page .product-showcase::before {
+      display: none;
+    }
+    .home-page .product-panel {
+      display: none;
+      grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+      gap: 48px;
+      align-items: stretch;
+      min-height: 470px;
+      padding: 12px 0 0;
+      animation: product-panel-fade 260ms ease;
+      position: relative;
+      z-index: 1;
+    }
+    .home-page .product-panel.is-active {
+      display: grid;
+    }
+    .home-page .product-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+      padding: 22px 0 22px 4px;
+    }
+    .home-page .product-copy-tag {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      min-height: 28px;
+      padding: 0 12px;
+      margin-bottom: 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(214, 228, 241, 0.9);
+      background: rgba(248, 251, 253, 0.92);
+      color: #587089;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .home-page .product-copy-title {
+      font-size: clamp(30px, 3.1vw, 44px);
+      line-height: 1.18;
+      letter-spacing: -0.04em;
+      color: #1f2937;
+      margin-bottom: 18px;
+      max-width: 13ch;
+    }
+    .home-page .product-copy-lead {
+      font-size: 16px;
+      line-height: 1.85;
+      color: #55677a;
+      margin-bottom: 22px;
+      max-width: 46ch;
+    }
+    .home-page .product-copy-points {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 22px;
+      color: #627286;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .home-page .product-copy-points li {
+      position: relative;
+      padding-left: 18px;
+    }
+    .home-page .product-copy-points li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(0, 123, 255, 0.72);
+      box-shadow: 0 0 0 5px rgba(0, 123, 255, 0.08);
+    }
+    .home-page .product-copy-note {
+      width: fit-content;
+      margin-bottom: 26px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(247, 250, 252, 0.72);
+      font-size: 13px;
+      line-height: 1.6;
+      color: #607286;
+    }
+    .home-page .product-copy-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .home-page .product-copy-actions .btn-secondary {
+      background: rgba(255, 255, 255, 0.88);
+    }
+    .home-page .product-visual-stage {
+      position: relative;
+      min-height: 430px;
+      border-radius: 0;
+      background: transparent;
+      overflow: visible;
+      isolation: isolate;
+    }
+    .home-page .product-visual-stage::before {
+      content: "";
+      position: absolute;
+      inset: 8px 0 10px 0;
+      background:
+        radial-gradient(circle at 74% 26%, rgba(0, 123, 255, 0.16) 0, rgba(0, 123, 255, 0) 24%),
+        radial-gradient(circle at 34% 70%, rgba(0, 194, 255, 0.12) 0, rgba(0, 194, 255, 0) 20%),
+        radial-gradient(circle at 72% 66%, rgba(0, 123, 255, 0.08) 0, rgba(0, 123, 255, 0) 18%),
+        linear-gradient(rgba(0, 123, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 123, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(247, 250, 252, 0.42) 0%, rgba(238, 246, 255, 0.56) 100%);
+      background-size: auto, auto, auto, 34px 34px, 34px 34px, auto;
+      clip-path: polygon(9% 7%, 100% 0%, 100% 92%, 16% 100%, 0% 76%, 0% 18%);
+      opacity: 0.98;
+      pointer-events: none;
+      z-index: -2;
+    }
+    .home-page .product-visual-stage::after {
+      display: none;
+    }
+    .home-page .product-visual-scene {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform: scale(1.08) translateX(12px);
+      transform-origin: center;
+    }
+    .home-page .product-visual-scene path,
+    .home-page .product-visual-scene polyline,
+    .home-page .product-visual-scene line,
+    .home-page .product-visual-scene ellipse,
+    .home-page .product-visual-scene circle,
+    .home-page .product-visual-scene rect {
+      vector-effect: non-scaling-stroke;
+    }
+    .home-page .product-visual-scene .wire {
+      fill: none;
+      stroke: rgba(0, 123, 255, 0.28);
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .home-page .product-visual-scene .wire-soft {
+      fill: none;
+      stroke: rgba(0, 123, 255, 0.16);
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .home-page .product-visual-scene .node {
+      fill: rgba(255, 255, 255, 0.92);
+      stroke: rgba(0, 123, 255, 0.22);
+      stroke-width: 2.2;
+    }
+    .home-page .product-visual-scene .node-fill {
+      fill: rgba(0, 123, 255, 0.1);
+      stroke: rgba(0, 123, 255, 0.12);
+      stroke-width: 1;
+    }
+    .home-page .product-visual-scene .plate {
+      fill: rgba(255, 255, 255, 0.78);
+      stroke: rgba(203, 220, 238, 0.72);
+      stroke-width: 1.5;
+      filter: drop-shadow(0 18px 26px rgba(31, 69, 110, 0.08));
+    }
+    .home-page .product-visual-scene .plate-strong {
+      fill: rgba(245, 250, 255, 0.88);
+      stroke: rgba(194, 214, 234, 0.84);
+      stroke-width: 1.6;
+      filter: drop-shadow(0 22px 34px rgba(25, 63, 104, 0.12));
+    }
+    .home-page .product-visual-scene .glow {
+      fill: rgba(0, 123, 255, 0.08);
+    }
+    .home-page .product-visual-scene .accent-cyan {
+      stroke: rgba(0, 194, 255, 0.22);
+      fill: rgba(0, 194, 255, 0.1);
+    }
+    .home-page .product-visual-scene .accent-green {
+      stroke: rgba(25, 135, 84, 0.2);
+      fill: rgba(25, 135, 84, 0.08);
+    }
+    .home-page .product-visual-scene .accent-amber {
+      stroke: rgba(191, 132, 24, 0.22);
+      fill: rgba(255, 193, 7, 0.1);
+    }
+    @keyframes product-panel-fade {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
     .hero-tech-visual {
       position: relative;
-      min-height: 340px;
+      min-height: 520px;
       border-radius: 28px;
       background:
         radial-gradient(circle at 24% 22%, rgba(0, 123, 255, 0.18) 0, rgba(0, 123, 255, 0) 22%),
-        radial-gradient(circle at 74% 30%, rgba(0, 194, 255, 0.14) 0, rgba(0, 194, 255, 0) 24%),
-        linear-gradient(145deg, rgba(246, 251, 255, 0.96) 0%, rgba(231, 241, 251, 0.92) 100%);
-      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
-      border: 1px solid rgba(156, 194, 225, 0.32);
+        radial-gradient(circle at 74% 30%, rgba(0, 194, 255, 0.12) 0, rgba(0, 194, 255, 0) 24%),
+        linear-gradient(145deg, rgba(248, 252, 255, 0.82) 0%, rgba(233, 243, 253, 0.72) 100%);
+      box-shadow: 0 24px 48px rgba(12, 78, 136, 0.08);
+      border: 1px solid rgba(156, 194, 225, 0.26);
       overflow: hidden;
-      padding: 18px;
+      padding: 22px;
       isolation: isolate;
+      backdrop-filter: blur(6px);
     }
+    .home-page .hero-visual { display: none; }
     .hero-tech-visual::before {
       content: "";
       position: absolute;
@@ -266,11 +886,52 @@
       stroke-dasharray: 7 7;
       animation: dash-move 16s linear infinite;
     }
-    .home-cases {
-      background: linear-gradient(180deg, #f7fbff 0%, #eff6ff 100%);
+    .home-page .capabilities-section {
+      padding: 100px 0;
     }
-    .section[style*="background:var(--color-surface)"] {
-      background: linear-gradient(180deg, #f6fbff 0%, #f3f8ff 100%) !important;
+    .home-page .capabilities-section .flow-bar {
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(170, 204, 233, 0.42);
+      box-shadow: 0 16px 34px rgba(16, 72, 124, 0.08);
+      backdrop-filter: blur(8px);
+    }
+    .home-cases {
+      padding: 104px 0 108px;
+    }
+    .home-page .home-cases .cases-layout {
+      margin-bottom: 56px;
+    }
+    .home-page .home-cases .cases-map {
+      background: linear-gradient(145deg, rgba(230, 242, 255, 0.92) 0%, rgba(244, 249, 255, 0.88) 100%);
+      border: 1px solid rgba(122, 176, 223, 0.28);
+      box-shadow: 0 22px 48px rgba(20, 76, 130, 0.08);
+    }
+    .home-page .home-cases .map-placeholder {
+      background:
+        radial-gradient(circle at 50% 18%, rgba(0, 123, 255, 0.1) 0, rgba(0, 123, 255, 0) 30%),
+        linear-gradient(165deg, rgba(238, 247, 255, 0.94), rgba(226, 239, 253, 0.76));
+    }
+    .home-page .home-cases .case-card {
+      box-shadow: 0 16px 34px rgba(20, 72, 124, 0.07);
+    }
+    .home-page .cta-section {
+      padding: 104px 0 112px;
+    }
+    .home-page .cta-section .cta-inner {
+      max-width: 720px;
+    }
+    .home-page .cta-section .cta-title {
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .home-page .cta-section .cta-desc {
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .home-page .home-news-section .news-card {
+      box-shadow: 0 18px 40px rgba(16, 72, 124, 0.08);
     }
     @keyframes wave-scan {
       to { left: 120%; }
@@ -281,23 +942,257 @@
     @keyframes spin-ring {
       to { transform: rotate(360deg); }
     }
+    @keyframes hero-energy-breathe {
+      0%, 100% {
+        transform: translate(50%, -50%) scale(0.94);
+        opacity: 0.62;
+      }
+      50% {
+        transform: translate(50%, -50%) scale(1.08);
+        opacity: 1;
+      }
+    }
+    @keyframes hero-energy-core {
+      0%, 100% {
+        opacity: 0.46;
+        transform: scale(0.92);
+      }
+      50% {
+        opacity: 0.92;
+        transform: scale(1.08);
+      }
+    }
+    @keyframes hero-energy-halo {
+      0%, 100% {
+        opacity: 0.18;
+        transform: scale(0.9);
+      }
+      50% {
+        opacity: 0.48;
+        transform: scale(1.14);
+      }
+    }
+    @keyframes hero-energy-stream-breathe {
+      0%, 100% {
+        opacity: 0.46;
+        transform: translateY(-50%) scaleX(0.9);
+      }
+      50% {
+        opacity: 0.92;
+        transform: translateY(-50%) scaleX(1.05);
+      }
+    }
+    @keyframes hero-energy-spark {
+      0%, 100% {
+        opacity: 0.18;
+        transform: translate(-58%, -50%) scale(0.82);
+      }
+      35% {
+        opacity: 0.88;
+        transform: translate(-44%, -50%) scale(1);
+      }
+      65% {
+        opacity: 0.88;
+        transform: translate(-56%, -50%) scale(1.06);
+      }
+    }
     @media (max-width: 1199px) {
-      .home-page .hero-inner { gap: 24px; }
+      .home-page .hero-energy-pulse {
+        right: 16.8%;
+        width: 176px;
+        height: 176px;
+      }
+      .home-page .hero-energy-stream {
+        right: 16.8%;
+        width: 300px;
+      }
+      .home-page .hero-inner {
+        gap: 24px;
+        min-height: 600px;
+      }
+      .hero-tech-visual { min-height: 470px; }
     }
     @media (max-width: 1023px) {
+      .home-page .hero-energy-pulse {
+        display: none;
+      }
+      .home-page .hero-energy-stream {
+        display: none;
+      }
       .home-page .hero {
-        padding: 44px 0 32px;
+        min-height: auto;
+        padding: 56px 0 38px;
+      }
+      .home-page .hero {
+        background:
+          linear-gradient(90deg, rgba(246, 249, 253, 0.84) 0%, rgba(246, 249, 253, 0.74) 20%, rgba(246, 249, 253, 0.56) 38%, rgba(246, 249, 253, 0.32) 54%, rgba(246, 249, 253, 0.14) 68%, rgba(246, 249, 253, 0.04) 84%),
+          url("public/images/home/home_hero_main_5.jpeg"),
+          radial-gradient(circle at 78% 34%, rgba(255, 255, 255, 0.22) 0, rgba(255, 255, 255, 0.1) 18%, rgba(255, 255, 255, 0) 42%),
+          radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.9) 0, rgba(255, 255, 255, 0.36) 28%, rgba(255, 255, 255, 0) 48%),
+          radial-gradient(circle at 18% 22%, rgba(0, 123, 255, 0.14) 0, rgba(0, 123, 255, 0) 24%),
+          radial-gradient(circle at 82% 18%, rgba(0, 194, 255, 0.12) 0, rgba(0, 194, 255, 0) 22%),
+          radial-gradient(circle at 50% 58%, rgba(0, 123, 255, 0.06) 0, rgba(0, 123, 255, 0) 36%),
+          linear-gradient(180deg, #f4f8ff 0%, #edf5ff 38%, #f7fbff 72%, #ffffff 100%);
+        background-position: top center, 66% center, 78% 34%, 18% 18%, 18% 22%, 82% 18%, 50% 58%, center;
+        background-repeat: no-repeat;
+        background-size: auto, cover, auto, auto, auto, auto, auto, auto;
+      }
+      .home-page .capabilities-section,
+      .home-page .home-cases,
+      .home-page .cta-section {
+        padding-top: 84px;
+        padding-bottom: 88px;
       }
       .home-page .hero-inner {
         grid-template-columns: 1fr;
         min-height: auto;
-        padding: 28px;
+        padding: 0;
       }
-      .hero-tech-visual { min-height: 380px; }
+      .home-page .stats-section .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 34px;
+        row-gap: 34px;
+      }
+      .home-page .section-header .section-label::before,
+      .home-page .section-header .section-label::after {
+        width: 30px;
+      }
+      .home-page .product-tabs {
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        gap: 0;
+        margin-left: -24px;
+        margin-right: -24px;
+        padding: 0 24px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      .home-page .product-tabs::-webkit-scrollbar {
+        display: none;
+      }
+      .home-page .product-tab {
+        flex: 0 0 132px;
+        min-height: 82px;
+      }
+      .home-page .product-showcase {
+        min-height: 0;
+      }
+      .home-page .product-panel {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        min-height: 0;
+        padding: 30px;
+      }
+      .home-page .product-copy-title {
+        max-width: none;
+      }
+      .home-page .product-visual-stage {
+        min-height: 340px;
+      }
+      .hero-tech-visual { min-height: 400px; }
       .pill-top { left: 48%; top: 12%; }
       .pill-right { right: 8%; top: 46%; }
     }
     @media (max-width: 767px) {
+      .home-page .hero {
+        padding: 48px 0 28px;
+      }
+      .home-page .hero-title {
+        font-size: clamp(30px, 10vw, 42px);
+        max-width: none;
+        text-wrap: balance;
+      }
+      .home-page .hero-title span {
+        white-space: normal;
+      }
+      .home-page .hero-note {
+        padding-left: 14px;
+      }
+      .home-page .stats-section .stats-grid {
+        grid-template-columns: 1fr;
+        row-gap: 28px;
+      }
+      .home-page .stats-section .stat-number {
+        font-size: clamp(42px, 12vw, 56px);
+      }
+      .home-page .stats-section .stat-label {
+        max-width: none;
+      }
+      .home-page .section-header .section-label {
+        gap: 10px;
+        font-size: clamp(12px, 3.8vw, 13px);
+        letter-spacing: 0.05em;
+      }
+      .home-page .section-header .section-label::before,
+      .home-page .section-header .section-label::after {
+        width: 18px;
+      }
+      .home-page .capabilities-section,
+      .home-page .home-cases,
+      .home-page .cta-section {
+        padding-top: 72px;
+        padding-bottom: 72px;
+      }
+      .home-page .product-overview-section {
+        padding-top: 76px;
+        padding-bottom: 78px;
+      }
+      .home-page .product-tabs {
+        margin-bottom: 18px;
+      }
+      .home-page .product-tab {
+        flex-basis: 118px;
+        min-height: 74px;
+        gap: 8px;
+        padding: 12px 8px 16px;
+      }
+      .home-page .product-tab-icon {
+        width: 24px;
+        height: 24px;
+      }
+      .home-page .product-tab-label {
+        font-size: 13px;
+      }
+      .home-page .product-panel {
+        padding: 22px;
+        gap: 22px;
+      }
+      .home-page .product-copy {
+        padding: 0;
+      }
+      .home-page .product-copy-tag {
+        margin-bottom: 14px;
+      }
+      .home-page .product-copy-title {
+        font-size: clamp(28px, 8vw, 36px);
+        margin-bottom: 14px;
+      }
+      .home-page .product-copy-lead {
+        font-size: 15px;
+        margin-bottom: 18px;
+      }
+      .home-page .product-copy-points {
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+      .home-page .product-copy-note {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      .home-page .product-copy-actions {
+        gap: 10px;
+      }
+      .home-page .product-copy-actions .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .home-page .product-visual-stage {
+        min-height: 280px;
+      }
+      .home-page .product-visual-scene {
+        transform: scale(1.02) translateX(0);
+      }
       .hero-tech-visual { min-height: 330px; padding: 18px; }
       .hero-core { left: 42%; top: 48%; width: 98px; height: 98px; }
       .core-chip { width: 56px; height: 56px; font-size: 13px; }
@@ -349,6 +1244,8 @@
 
 <!-- ══ HERO ═════════════════════════════════════════════ -->
 <section class="hero">
+  <div class="hero-energy-pulse" aria-hidden="true"></div>
+  <div class="hero-energy-stream" aria-hidden="true"></div>
   <div class="container">
     <div class="hero-inner">
       <div class="hero-text">
@@ -357,7 +1254,7 @@
           <span class="tag">业务过程留痕</span>
           <span class="tag">合规闭环</span>
         </div>
-        <h1 class="hero-title"><em>AIoT</em> 赋能医疗卫生<br/>与生态环境智慧合规</h1>
+        <h1 class="hero-title"><span><em>AIoT</em> 赋能医疗卫生</span><span>与生态环境智慧合规</span></h1>
         <p class="hero-subtitle">围绕医疗废物、危险废物、卫生监督、消毒灭菌、内镜合规与减污降碳等场景，提供智能终端、业务系统、监管驾驶舱与合规闭环的一体化解决方案。</p>
         <p class="hero-note">从现场作业到监管驾驶舱，从智能感知到责任追溯，帮助医疗机构、监管部门及相关单位提升业务规范性、风险响应能力和合规管理效率。</p>
         <div class="hero-btns">
@@ -422,10 +1319,10 @@
 </section>
 
 <!-- ══ DATA STATS ════════════════════════════════════════ -->
-<section class="section stats-section">
+<section class="section stats-section surface-neutral">
   <div class="container">
     <div class="section-header center">
-      <span class="section-label">数据背书</span>
+      <span class="section-label">OPM 大数据</span>
       <h2 class="section-title">800+ 客户选择智感云</h2>
       <p class="section-subtitle">这些数字，来自真实客户的长期使用。智感云围绕医疗废物、危险废物、智慧卫监、消毒灭菌监测等业务，持续服务医疗机构、监管部门、生态环境 / 危废相关单位及园区集团客户。</p>
     </div>
@@ -459,141 +1356,272 @@
 </section>
 
 <!-- ══ PRODUCTS ══════════════════════════════════════════ -->
-<section class="section">
+<section class="section product-overview-section surface-neutral">
   <div class="container">
     <div class="section-header center">
       <span class="section-label">产品与解决方案</span>
-      <h2 class="section-title">面向不同机构的合规管理需求</h2>
-      <p class="section-subtitle">面向医疗机构、监管部门、危废相关单位和园区集团，提供可部署、可追溯、可扩展的数字化解决方案。</p>
+      <h2 class="section-title">产品与解决方案</h2>
+      <p class="section-subtitle">面向医疗卫生、生态环境、公共卫生监督与院感合规场景，提供可部署、可追溯、可扩展的数字化解决方案。</p>
     </div>
-    <div class="products-grid">
-
-      <div class="product-card">
-        <div class="product-visual">
-          <div class="product-card-icon icon-badge tone-blue" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5h6"/><path d="M10 5V3h4v2"/><path d="M7 9h10"/><path d="M8 9l1 10h6l1-10"/><path d="M12 11v5"/><path d="M10 14h4"/></svg>
+    <div class="product-tabs" role="tablist" aria-label="产品切换栏">
+      <button type="button" class="product-tab is-active" role="tab" aria-selected="true" aria-controls="product-panel-medical" id="product-tab-medical" data-product="medical">
+        <span class="product-tab-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="3"/><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/><path d="M9 9h6"/><path d="M9 12h6"/><path d="M12 9v6"/></svg>
+        </span>
+        <span class="product-tab-label">医废追溯</span>
+      </button>
+      <button type="button" class="product-tab" role="tab" aria-selected="false" aria-controls="product-panel-hazard" id="product-tab-hazard" data-product="hazard">
+        <span class="product-tab-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 4l7 12H5L12 4z"/><path d="M12 9v4"/><circle cx="12" cy="16.5" r="0.9" fill="currentColor" stroke="none"/><path d="M7 18h10"/><path d="M9 20h6"/></svg>
+        </span>
+        <span class="product-tab-label">危废管理</span>
+      </button>
+      <button type="button" class="product-tab" role="tab" aria-selected="false" aria-controls="product-panel-supervision" id="product-tab-supervision" data-product="supervision">
+        <span class="product-tab-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 17h14"/><path d="M7 17V8"/><path d="M17 17V6"/><path d="M12 17v-4"/><circle cx="7" cy="8" r="1.4"/><circle cx="12" cy="13" r="1.4"/><circle cx="17" cy="6" r="1.4"/><path d="M7 8l5 5 5-7"/></svg>
+        </span>
+        <span class="product-tab-label">智慧卫监</span>
+      </button>
+      <button type="button" class="product-tab" role="tab" aria-selected="false" aria-controls="product-panel-sterilize" id="product-tab-sterilize" data-product="sterilize">
+        <span class="product-tab-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 4v3"/><path d="M12 17v3"/><path d="M4 12h3"/><path d="M17 12h3"/><path d="M7.8 7.8l2.1 2.1"/><path d="M14.1 14.1l2.1 2.1"/></svg>
+        </span>
+        <span class="product-tab-label">消毒灭菌</span>
+      </button>
+      <button type="button" class="product-tab" role="tab" aria-selected="false" aria-controls="product-panel-endoscope" id="product-tab-endoscope" data-product="endoscope">
+        <span class="product-tab-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 13h5"/><path d="M10 13c3 0 4-4 7-4"/><path d="M17 9c1.7 0 3 1.3 3 3s-1.3 3-3 3"/><circle cx="8" cy="13" r="1.5"/><path d="M8 13v4a2 2 0 0 0 2 2h5"/></svg>
+        </span>
+        <span class="product-tab-label">内镜合规</span>
+      </button>
+      <button type="button" class="product-tab" role="tab" aria-selected="false" aria-controls="product-panel-carbon" id="product-tab-carbon" data-product="carbon">
+        <span class="product-tab-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M7 15c0-4 3-7 7-8 1.8 3.7 1 8.3-2.6 10.2C9.7 18 7 17.5 7 15z"/><path d="M10.5 14c1 0 1.8.8 1.8 1.8"/><path d="M14 11c1.7 0 3.2 1.4 3.2 3.2"/><path d="M5 19h14"/></svg>
+        </span>
+        <span class="product-tab-label">碳管理</span>
+      </button>
+    </div>
+    <div class="product-showcase">
+      <article class="product-panel is-active" id="product-panel-medical" role="tabpanel" aria-labelledby="product-tab-medical" data-product-panel="medical">
+        <div class="product-copy">
+          <span class="product-copy-tag">医疗卫生</span>
+          <h3 class="product-copy-title">医疗废物精细化追溯系统</h3>
+          <p class="product-copy-lead">围绕院内收集、称重交接、暂存出库与处置交接，帮助医疗机构实现全过程留痕、责任追溯与规范管理。</p>
+          <ul class="product-copy-points">
+            <li>覆盖院内收集、称重交接、暂存出库等关键环节</li>
+            <li>支持全过程留痕、责任追溯与异常提醒</li>
+            <li>适配医疗机构日常作业与管理要求</li>
+            <li>支撑医废规范化、可追溯、可闭环管理</li>
+          </ul>
+          <div class="product-copy-note">适用于医院、院区及医疗集团的医废合规管理场景。</div>
+          <div class="product-copy-actions">
+            <a href="products/medical-waste.html" class="btn btn-primary">了解更多</a>
+            <a href="products.html" class="btn btn-secondary">查看解决方案</a>
           </div>
-          <div class="pv-med"><span></span><span></span><span></span><b></b></div>
         </div>
-        <h3 class="product-card-title">医疗废物精细化追溯系统</h3>
-        <p class="product-card-desc">覆盖医疗废物分类收集、称重交接、院内转运、暂存出库、处置交接等环节，实现业务过程留痕、责任追溯、异常提醒和台账归档。</p>
-        <div class="product-card-label-row">
-          <span class="product-card-label-primary tone-blue">医废追溯</span>
+        <div class="product-visual-stage">
+          <svg class="product-visual-scene" viewBox="0 0 720 460" aria-hidden="true">
+            <ellipse class="glow" cx="520" cy="138" rx="164" ry="92"/>
+            <path class="wire-soft" d="M120 326h142l54-58h130l56-52h98"/>
+            <path class="wire" d="M150 286h134l40-44h124l48-44h72"/>
+            <rect class="plate-strong" x="106" y="256" width="220" height="120" rx="28"/>
+            <rect class="plate" x="154" y="210" width="132" height="46" rx="16"/>
+            <rect class="plate-strong" x="368" y="184" width="210" height="150" rx="32"/>
+            <rect class="plate" x="446" y="120" width="112" height="58" rx="18"/>
+            <circle class="node" cx="320" cy="242" r="16"/>
+            <circle class="node-fill" cx="320" cy="242" r="8"/>
+            <circle class="node" cx="492" cy="198" r="14"/>
+            <circle class="node-fill accent-cyan" cx="492" cy="198" r="7"/>
+            <circle class="node" cx="598" cy="190" r="12"/>
+            <circle class="node-fill" cx="598" cy="190" r="6"/>
+            <rect class="plate" x="186" y="292" width="70" height="18" rx="9"/>
+            <rect class="plate" x="408" y="232" width="98" height="18" rx="9"/>
+          </svg>
         </div>
-        <div class="product-card-tags">
-          <span class="product-card-tag">医疗机构</span>
-          <span class="product-card-tag">称重交接</span>
-          <span class="product-card-tag">责任追溯</span>
-        </div>
-        <a href="products/medical-waste.html" class="product-card-link">了解医废系统 →</a>
-      </div>
-
-      <div class="product-card">
-        <div class="product-visual">
-          <div class="product-card-icon icon-badge tone-amber" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4l8 14H4L12 4z"/><path d="M12 10v4"/><circle cx="12" cy="17" r="0.8" fill="currentColor" stroke="none"/></svg>
+      </article>
+      <article class="product-panel" id="product-panel-hazard" role="tabpanel" aria-labelledby="product-tab-hazard" data-product-panel="hazard" hidden>
+        <div class="product-copy">
+          <span class="product-copy-tag">生态环境</span>
+          <h3 class="product-copy-title">危险废物“五即一码”规范化管理系统</h3>
+          <p class="product-copy-lead">围绕产生、包装、称重、打码、入库等作业节点，支撑危险废物全过程规范化管理。</p>
+          <ul class="product-copy-points">
+            <li>支持标签赋码、扫码入库与出库交接</li>
+            <li>支持联单关联与过程留痕</li>
+            <li>支持多节点责任追溯</li>
+            <li>提升危废规范化管理效率</li>
+          </ul>
+          <div class="product-copy-note">适用于产废单位、园区平台及多主体协同管理场景。</div>
+          <div class="product-copy-actions">
+            <a href="products/hazardous-waste.html" class="btn btn-primary">了解更多</a>
+            <a href="products.html" class="btn btn-secondary">查看解决方案</a>
           </div>
-          <div class="pv-hazard"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
         </div>
-        <h3 class="product-card-title">危险废物"五即一码"规范化管理系统</h3>
-        <p class="product-card-desc">围绕"即产生、即包装、即称重、即打码、即入库"和"一码贯通"要求，提供源头作业、标签赋码、扫码入库、出库交接、联单关联和监管驾驶舱能力。</p>
-        <div class="product-card-label-row">
-          <span class="product-card-label-primary tone-amber">危废管理</span>
+        <div class="product-visual-stage">
+          <svg class="product-visual-scene" viewBox="0 0 720 460" aria-hidden="true">
+            <ellipse class="glow" cx="510" cy="140" rx="178" ry="88"/>
+            <path class="wire" d="M142 292h110l84-86h132l74 72h86"/>
+            <path class="wire-soft" d="M142 330h156l74-72h130l82 54h64"/>
+            <rect class="plate-strong" x="126" y="244" width="166" height="108" rx="28"/>
+            <rect class="plate" x="356" y="166" width="176" height="116" rx="24"/>
+            <rect class="plate-strong" x="518" y="250" width="102" height="68" rx="18"/>
+            <circle class="node" cx="336" cy="206" r="15"/>
+            <circle class="node-fill accent-amber" cx="336" cy="206" r="7"/>
+            <circle class="node" cx="532" cy="278" r="15"/>
+            <circle class="node-fill accent-amber" cx="532" cy="278" r="7"/>
+            <circle class="node" cx="626" cy="278" r="11"/>
+            <rect class="plate" x="176" y="278" width="64" height="16" rx="8"/>
+            <rect class="plate" x="558" y="198" width="48" height="16" rx="8"/>
+          </svg>
         </div>
-        <div class="product-card-tags">
-          <span class="product-card-tag">标签赋码</span>
-          <span class="product-card-tag">扫码入库</span>
-          <span class="product-card-tag">联单关联</span>
-        </div>
-        <a href="products/hazardous-waste.html" class="product-card-link">了解危废系统 →</a>
-      </div>
-
-      <div class="product-card">
-        <div class="product-visual">
-          <div class="product-card-icon icon-badge tone-cyan" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18h16"/><path d="M6 18V9"/><path d="M12 18V6"/><path d="M18 18v-5"/><path d="M5 7l4-2 4 3 6-2"/></svg>
+      </article>
+      <article class="product-panel" id="product-panel-supervision" role="tabpanel" aria-labelledby="product-tab-supervision" data-product-panel="supervision" hidden>
+        <div class="product-copy">
+          <span class="product-copy-tag">智慧监管</span>
+          <h3 class="product-copy-title">智慧卫监解决方案</h3>
+          <p class="product-copy-lead">面向卫生监督与在线监测场景，支持实时预警、非现场监管、问题整改与过程留痕。</p>
+          <ul class="product-copy-points">
+            <li>支持多类在线监测与预警接入</li>
+            <li>支持非现场监管与问题闭环</li>
+            <li>支持过程留痕与监管协同</li>
+            <li>适配公共卫生监督相关场景</li>
+          </ul>
+          <div class="product-copy-note">适用于监管驾驶舱、在线监测与协同处置一体化场景。</div>
+          <div class="product-copy-actions">
+            <a href="products/health-supervision.html" class="btn btn-primary">了解更多</a>
+            <a href="products.html" class="btn btn-secondary">查看解决方案</a>
           </div>
-          <div class="pv-supervision"><span></span><span></span><span></span><span></span><i></i></div>
         </div>
-        <h3 class="product-card-title">智慧卫监解决方案</h3>
-        <p class="product-card-desc">支持监管对象管理、在线监测、实时预警、非现场执法、问题整改和工作留痕，覆盖医废监管、消毒灭菌监测、放射源监测等多类场景。</p>
-        <div class="product-card-label-row">
-          <span class="product-card-label-primary tone-cyan">智慧监管</span>
+        <div class="product-visual-stage">
+          <svg class="product-visual-scene" viewBox="0 0 720 460" aria-hidden="true">
+            <ellipse class="glow" cx="518" cy="128" rx="184" ry="92"/>
+            <rect class="plate-strong" x="132" y="214" width="170" height="128" rx="30"/>
+            <rect class="plate-strong" x="344" y="152" width="248" height="176" rx="34"/>
+            <line class="wire" x1="208" y1="214" x2="208" y2="152"/>
+            <line class="wire" x1="208" y1="152" x2="412" y2="152"/>
+            <line class="wire-soft" x1="208" y1="278" x2="344" y2="278"/>
+            <polyline class="wire" points="432,248 474,220 518,236 566,198"/>
+            <circle class="node" cx="208" cy="152" r="14"/>
+            <circle class="node-fill accent-cyan" cx="208" cy="152" r="7"/>
+            <circle class="node" cx="474" cy="220" r="13"/>
+            <circle class="node-fill accent-cyan" cx="474" cy="220" r="6"/>
+            <circle class="node" cx="566" cy="198" r="12"/>
+            <rect class="plate" x="388" y="192" width="76" height="14" rx="7"/>
+            <rect class="plate" x="388" y="222" width="124" height="14" rx="7"/>
+            <rect class="plate" x="388" y="252" width="92" height="14" rx="7"/>
+          </svg>
         </div>
-        <div class="product-card-tags">
-          <span class="product-card-tag">在线监测</span>
-          <span class="product-card-tag">风险提醒</span>
-          <span class="product-card-tag">非现场执法</span>
-        </div>
-        <a href="products/health-supervision.html" class="product-card-link">了解智慧卫监 →</a>
-      </div>
-
-      <div class="product-card">
-        <div class="product-visual">
-          <div class="product-card-icon icon-badge tone-cyan" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v8"/><path d="M9 7h6"/><path d="M10 12a4 4 0 1 0 4 0"/><path d="M15 15h3"/></svg>
+      </article>
+      <article class="product-panel" id="product-panel-sterilize" role="tabpanel" aria-labelledby="product-tab-sterilize" data-product-panel="sterilize" hidden>
+        <div class="product-copy">
+          <span class="product-copy-tag">院感合规</span>
+          <h3 class="product-copy-title">消毒灭菌监测系统</h3>
+          <p class="product-copy-lead">围绕温度、压力等关键参数进行在线监测，辅助消毒灭菌过程留痕与异常提醒。</p>
+          <ul class="product-copy-points">
+            <li>支持关键参数在线监测</li>
+            <li>支持异常提醒与记录归档</li>
+            <li>支持过程规范化管理</li>
+            <li>适配消毒灭菌相关场景</li>
+          </ul>
+          <div class="product-copy-note">适用于灭菌设备、流程追踪与质量管理协同场景。</div>
+          <div class="product-copy-actions">
+            <a href="products/sterilization-monitoring.html" class="btn btn-primary">了解更多</a>
+            <a href="products.html" class="btn btn-secondary">查看解决方案</a>
           </div>
-          <div class="pv-sterilize"><span class="ring"></span><span class="line"></span><span class="pulse"></span></div>
         </div>
-        <h3 class="product-card-title">消毒灭菌监测系统</h3>
-        <p class="product-card-desc">通过温压传感器、物联网关等设备，对灭菌过程关键参数进行在线监测、异常提醒和记录留痕，辅助提升消毒灭菌过程规范性。</p>
-        <div class="product-card-label-row">
-          <span class="product-card-label-primary tone-cyan">院感合规</span>
+        <div class="product-visual-stage">
+          <svg class="product-visual-scene" viewBox="0 0 720 460" aria-hidden="true">
+            <ellipse class="glow" cx="504" cy="136" rx="176" ry="88"/>
+            <circle class="plate-strong" cx="458" cy="234" r="108"/>
+            <circle class="plate" cx="458" cy="234" r="72"/>
+            <circle class="node-fill accent-cyan" cx="458" cy="234" r="26"/>
+            <line class="wire" x1="202" y1="234" x2="332" y2="234"/>
+            <line class="wire" x1="584" y1="234" x2="650" y2="234"/>
+            <line class="wire-soft" x1="458" y1="96" x2="458" y2="150"/>
+            <line class="wire-soft" x1="458" y1="318" x2="458" y2="370"/>
+            <rect class="plate-strong" x="148" y="192" width="84" height="84" rx="22"/>
+            <rect class="plate-strong" x="598" y="196" width="70" height="76" rx="20"/>
+            <circle class="node" cx="332" cy="234" r="14"/>
+            <circle class="node" cx="584" cy="234" r="14"/>
+            <circle class="node-fill accent-cyan" cx="332" cy="234" r="7"/>
+            <circle class="node-fill accent-cyan" cx="584" cy="234" r="7"/>
+          </svg>
         </div>
-        <div class="product-card-tags">
-          <span class="product-card-tag">医疗机构</span>
-          <span class="product-card-tag">在线监测</span>
-          <span class="product-card-tag">异常提醒</span>
-        </div>
-        <a href="products/sterilization-monitoring.html" class="product-card-link">了解消毒灭菌监测 →</a>
-      </div>
-
-      <div class="product-card">
-        <div class="product-visual">
-          <div class="product-card-icon icon-badge tone-green" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13h5"/><path d="M9 13c3 0 4-5 8-5"/><path d="M17 8c2 0 3 1 3 3s-1 3-3 3"/><path d="M8 13v4a2 2 0 0 0 2 2h4"/></svg>
+      </article>
+      <article class="product-panel" id="product-panel-endoscope" role="tabpanel" aria-labelledby="product-tab-endoscope" data-product-panel="endoscope" hidden>
+        <div class="product-copy">
+          <span class="product-copy-tag">院感合规</span>
+          <h3 class="product-copy-title">内镜合规平台</h3>
+          <p class="product-copy-lead">支持内镜洗消流程记录、质量控制与接口对接，辅助内镜管理合规化。</p>
+          <ul class="product-copy-points">
+            <li>支持洗消流程留痕</li>
+            <li>支持质量控制与状态管理</li>
+            <li>支持接口对接与数据联动</li>
+            <li>提升内镜管理规范性</li>
+          </ul>
+          <div class="product-copy-note">适用于内镜中心、洗消流程与跨系统数据联动场景。</div>
+          <div class="product-copy-actions">
+            <a href="products/endoscope-compliance.html" class="btn btn-primary">了解更多</a>
+            <a href="products.html" class="btn btn-secondary">查看解决方案</a>
           </div>
-          <div class="pv-endoscope"><span class="scope"></span><span class="tube"></span><span class="bubble"></span></div>
         </div>
-        <h3 class="product-card-title">内镜合规平台</h3>
-        <p class="product-card-desc">围绕内镜清洗消毒流程、质量控制、人员操作、设备状态和数据接口改造，支持内镜洗消记录规范化、可追溯和合规上报。</p>
-        <div class="product-card-label-row">
-          <span class="product-card-label-primary tone-green">内镜合规</span>
+        <div class="product-visual-stage">
+          <svg class="product-visual-scene" viewBox="0 0 720 460" aria-hidden="true">
+            <ellipse class="glow" cx="516" cy="138" rx="176" ry="88"/>
+            <path class="wire" d="M168 286c84 0 116-70 198-70 52 0 88 28 150 28h106"/>
+            <path class="wire-soft" d="M168 328c94 0 128-48 204-48 48 0 72 18 124 18h126"/>
+            <rect class="plate-strong" x="132" y="248" width="112" height="82" rx="24"/>
+            <rect class="plate-strong" x="414" y="186" width="196" height="124" rx="28"/>
+            <circle class="node" cx="366" cy="216" r="14"/>
+            <circle class="node-fill accent-green" cx="366" cy="216" r="7"/>
+            <circle class="node" cx="520" cy="244" r="16"/>
+            <circle class="node-fill accent-green" cx="520" cy="244" r="8"/>
+            <circle class="node" cx="622" cy="244" r="11"/>
+            <rect class="plate" x="462" y="214" width="78" height="14" rx="7"/>
+            <rect class="plate" x="462" y="242" width="118" height="14" rx="7"/>
+          </svg>
         </div>
-        <div class="product-card-tags">
-          <span class="product-card-tag">洗消记录</span>
-          <span class="product-card-tag">接口对接</span>
-          <span class="product-card-tag">合规上报</span>
-        </div>
-        <a href="products/endoscope-compliance.html" class="product-card-link">了解内镜合规 →</a>
-      </div>
-
-      <div class="product-card">
-        <div class="product-visual">
-          <div class="product-card-icon icon-badge tone-green" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14c0-4 3-7 7-8 2 4 1 9-3 11-2 1-4 1-4-3z"/><path d="M10 13c1 0 2 1 2 3"/><path d="M14 10c2 0 4 2 4 5"/></svg>
+      </article>
+      <article class="product-panel" id="product-panel-carbon" role="tabpanel" aria-labelledby="product-tab-carbon" data-product-panel="carbon" hidden>
+        <div class="product-copy">
+          <span class="product-copy-tag">减污降碳</span>
+          <h3 class="product-copy-title">碳管理与减污降碳协同</h3>
+          <p class="product-copy-lead">基于固废、危废、医废过程记录，拓展碳账基础与减污降碳协同分析能力。</p>
+          <ul class="product-copy-points">
+            <li>支持过程数据沉淀</li>
+            <li>支持重量记录与流向记录</li>
+            <li>支持碳账基础与协同分析</li>
+            <li>适配园区集团与综合治理场景</li>
+          </ul>
+          <div class="product-copy-note">适用于集团管理、综合治理与减污降碳协同分析场景。</div>
+          <div class="product-copy-actions">
+            <a href="products/carbon-management.html" class="btn btn-primary">了解更多</a>
+            <a href="products.html" class="btn btn-secondary">查看解决方案</a>
           </div>
-          <div class="pv-carbon"><span></span><span></span><span></span><i></i></div>
         </div>
-        <h3 class="product-card-title">碳管理与减污降碳协同</h3>
-        <p class="product-card-desc">围绕固废、危废等业务过程中的重量、流向和处置记录，拓展碳核算、减污降碳分析和综合驾驶舱能力，为绿色低碳管理提供基础支撑。</p>
-        <div class="product-card-label-row">
-          <span class="product-card-label-primary tone-green">减污降碳</span>
+        <div class="product-visual-stage">
+          <svg class="product-visual-scene" viewBox="0 0 720 460" aria-hidden="true">
+            <ellipse class="glow" cx="520" cy="130" rx="180" ry="90"/>
+            <path class="wire" d="M154 302h108l78-84 110 30 88-58h116"/>
+            <path class="wire-soft" d="M154 340h162l70-56 110 20 84-42h74"/>
+            <rect class="plate-strong" x="134" y="266" width="130" height="80" rx="24"/>
+            <rect class="plate-strong" x="468" y="150" width="154" height="112" rx="28"/>
+            <circle class="node" cx="340" cy="218" r="14"/>
+            <circle class="node-fill accent-green" cx="340" cy="218" r="7"/>
+            <circle class="node" cx="450" cy="248" r="14"/>
+            <circle class="node-fill accent-green" cx="450" cy="248" r="7"/>
+            <circle class="node" cx="538" cy="190" r="13"/>
+            <circle class="node-fill accent-cyan" cx="538" cy="190" r="6"/>
+            <rect class="plate" x="494" y="176" width="56" height="16" rx="8"/>
+            <rect class="plate" x="494" y="206" width="100" height="16" rx="8"/>
+          </svg>
         </div>
-        <div class="product-card-tags">
-          <span class="product-card-tag">园区集团</span>
-          <span class="product-card-tag">数据归集</span>
-          <span class="product-card-tag">综合驾驶舱</span>
-        </div>
-        <a href="products/carbon-management.html" class="product-card-link">了解碳管理 →</a>
-      </div>
-
+      </article>
     </div>
   </div>
 </section>
 
 <!-- ══ CAPABILITIES ══════════════════════════════════════ -->
-<section class="section capabilities-section">
+<section class="section capabilities-section surface-blue">
   <div class="container">
     <div class="section-header center">
       <span class="section-label">软硬一体能力</span>
@@ -643,7 +1671,7 @@
 </section>
 
 <!-- ══ CASES ═════════════════════════════════════════════ -->
-<section class="section home-cases">
+<section class="section home-cases surface-neutral">
   <div class="container">
     <div class="section-header center">
       <span class="section-label">客户覆盖</span>
@@ -736,7 +1764,7 @@
 </section>
 
 <!-- ══ NEWS ══════════════════════════════════════════════ -->
-<section class="section" style="background:var(--color-surface)">
+<section class="section home-news-section surface-blue">
   <div class="container">
     <div class="section-header" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px">
       <div>
@@ -807,7 +1835,7 @@
 </section>
 
 <!-- ══ CTA ═══════════════════════════════════════════════ -->
-<section class="section cta-section">
+<section class="section cta-section surface-blue">
   <div class="container">
     <div class="cta-inner">
       <h2 class="cta-title">想了解哪套方案适合您的机构？</h2>
@@ -904,10 +1932,52 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.product-card, .capability-card, .case-card, .news-card, .stat-card').forEach(el => {
+  if (el.closest('.product-overview-section')) return;
   el.style.opacity = '0';
   el.style.transform = 'translateY(20px)';
   el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
   observer.observe(el);
+});
+
+const productTabs = Array.from(document.querySelectorAll('.product-tab'));
+const productPanels = Array.from(document.querySelectorAll('[data-product-panel]'));
+const canHoverTabs = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+function activateProduct(productId) {
+  productTabs.forEach(tab => {
+    const isActive = tab.dataset.product === productId;
+    tab.classList.toggle('is-active', isActive);
+    tab.setAttribute('aria-selected', String(isActive));
+    tab.tabIndex = isActive ? 0 : -1;
+  });
+
+  productPanels.forEach(panel => {
+    const isActive = panel.dataset.productPanel === productId;
+    panel.classList.toggle('is-active', isActive);
+    panel.hidden = !isActive;
+  });
+}
+
+productTabs.forEach(tab => {
+  tab.addEventListener('click', () => activateProduct(tab.dataset.product));
+  if (canHoverTabs) {
+    tab.addEventListener('mouseenter', () => activateProduct(tab.dataset.product));
+  }
+  tab.addEventListener('keydown', (event) => {
+    const currentIndex = productTabs.indexOf(tab);
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      const nextTab = productTabs[(currentIndex + 1) % productTabs.length];
+      nextTab.focus();
+      activateProduct(nextTab.dataset.product);
+    }
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      const prevTab = productTabs[(currentIndex - 1 + productTabs.length) % productTabs.length];
+      prevTab.focus();
+      activateProduct(prevTab.dataset.product);
+    }
+  });
 });
 </script>
 

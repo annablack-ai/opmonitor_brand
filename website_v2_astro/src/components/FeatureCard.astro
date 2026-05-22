@@ -1,0 +1,21 @@
+---
+import Icon from '@/components/Icon.astro';
+import type { ProductFeature } from '@/types/site';
+
+interface Props {
+  feature: ProductFeature;
+}
+
+const { feature } = Astro.props;
+---
+
+<article class="panel feature-card-surface p-6 md:p-7">
+  <div class="flex items-start justify-between gap-4">
+    <span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 shadow-[0_10px_22px_rgba(19,103,220,0.12)]">
+      <Icon name={feature.icon} class="h-5 w-5" />
+    </span>
+    <span class="eyebrow">核心功能</span>
+  </div>
+  <h3 class="mt-6 text-[1.2rem] font-semibold tracking-[-0.02em] text-ink-900">{feature.title}</h3>
+  <p class="body-muted mt-3 text-ink-600">{feature.description}</p>
+</article>

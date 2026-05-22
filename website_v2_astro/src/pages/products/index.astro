@@ -1,0 +1,213 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SiteHeader from '@/components/SiteHeader.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+import Icon from '@/components/Icon.astro';
+import { productSummaries } from '@/data/products';
+import type { IconName } from '@/types/site';
+
+const productCardMeta = {
+  'medical-waste': {
+    label: '医废追溯',
+    tone: 'tone-blue',
+    tags: ['医疗机构', '称重交接', '责任追溯'],
+    note: '✦ 数百家医院场景应用，支持院端管理、监管协同与处置交接',
+    linkLabel: '了解医废系统',
+    visual: 'medical',
+  },
+  'hazardous-waste': {
+    label: '危废管理',
+    tone: 'tone-amber',
+    tags: ['标签赋码', '扫码入库', '联单关联'],
+    note: '✦ 对标“五即一码”规范化要求，支持区域医疗机构和产废单位快速纳管',
+    linkLabel: '了解危废系统',
+    visual: 'hazardous',
+  },
+  'health-supervision': {
+    label: '智慧监管',
+    tone: 'tone-cyan',
+    tags: ['在线监测', '风险提醒', '非现场执法'],
+    note: '✦ 覆盖多类卫生监督在线监测场景，支持实时预警与非现场监管',
+    linkLabel: '了解智慧卫监',
+    visual: 'supervision',
+  },
+  'sterilization-monitoring': {
+    label: '院感合规',
+    tone: 'tone-cyan',
+    tags: ['医疗机构', '在线监测', '异常提醒'],
+    note: '✦ 围绕灭菌设备关键参数在线监测，支持异常提醒与记录留痕',
+    linkLabel: '了解消毒灭菌监测',
+    visual: 'sterilization',
+  },
+  'endoscope-compliance': {
+    label: '内镜合规',
+    tone: 'tone-green',
+    tags: ['洗消记录', '接口对接', '合规上报'],
+    note: '✦ 面向内镜洗消记录合规对接，支持流程记录、质量控制与接口改造',
+    linkLabel: '了解内镜合规',
+    visual: 'endoscope',
+  },
+  'carbon-management': {
+    label: '减污降碳',
+    tone: 'tone-green',
+    tags: ['园区集团', '数据归集', '综合驾驶舱'],
+    note: '✦ 围绕固废、危废、医废过程记录，拓展减污降碳协同管理能力',
+    linkLabel: '了解碳管理',
+    visual: 'carbon',
+  },
+} as const;
+
+const capabilityCards: Array<{ title: string; description: string; icon: IconName; tone: string }> = [
+  {
+    title: '智能感知',
+    description: '二维码、RFID、电子秤、温压传感器、物联网关、移动端等多种采集方式。',
+    icon: 'scan',
+    tone: 'tone-cyan',
+  },
+  {
+    title: '业务留痕',
+    description: '对关键环节进行过程记录和责任留痕，支持全链路追溯。',
+    icon: 'workflow',
+    tone: 'tone-blue',
+  },
+  {
+    title: '风险提醒',
+    description: '超时、异常、离线等多类规则提醒，及时响应风险事件。',
+    icon: 'shield',
+    tone: 'tone-amber',
+  },
+  {
+    title: '安全合规',
+    description: '权限分级、日志审计、本地化/私有化部署，满足高监管场景合规要求。',
+    icon: 'shield',
+    tone: 'tone-green',
+  },
+];
+---
+
+<BaseLayout bodyClass="v1-inner-page" title="产品与解决方案 | 智感云" description="智感云围绕医疗废物、危险废物、智慧卫监、消毒灭菌监测、内镜合规与减污降碳等场景，提供软硬一体数字化解决方案。">
+  <SiteHeader currentPath={Astro.url.pathname} />
+
+  <main>
+    <section class="v1-page-hero">
+      <div class="v1-container">
+        <div class="v1-breadcrumb">
+          <a href="/">首页</a>
+          <span class="v1-breadcrumb-sep">/</span>
+          <span>产品与解决方案</span>
+        </div>
+        <div class="v1-page-hero-inner">
+          <div class="v1-page-hero-text">
+            <span class="v1-section-label">产品与解决方案</span>
+            <h1 class="v1-page-hero-title">围绕合规管理需求<br />提供软硬一体数字化方案</h1>
+            <p class="v1-page-hero-subtitle">面向医疗卫生、生态环境、公共卫生监督、院感合规与减污降碳场景，提供软硬一体、可部署、可追溯的数字化解决方案。</p>
+            <div class="v1-hero-btns">
+              <a href="/contact/" class="v1-btn v1-btn-primary">预约产品演示</a>
+              <a href="/contact/" class="v1-btn v1-btn-secondary">提交咨询</a>
+            </div>
+          </div>
+          <div class="v1-page-hero-media v1-products-hero-graphic" aria-hidden="true">
+            <div class="v1-graphic-main-card">
+              <div class="v1-graphic-title">产品矩阵总览</div>
+              <div class="v1-gm-bars"><span></span><span></span><span></span><span></span></div>
+              <div class="v1-gm-wave"></div>
+            </div>
+            <div class="v1-graphic-side-stack">
+              <div class="v1-graphic-side-card">
+                <div class="v1-graphic-title">一物一码</div>
+                <div class="v1-mini-qr">
+                  {Array.from({ length: 36 }).map(() => <i></i>)}
+                </div>
+              </div>
+              <div class="v1-graphic-side-card">
+                <div class="v1-graphic-title">智能终端</div>
+                <div class="v1-mini-device"><span></span><span></span><span></span><span></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v1-section">
+      <div class="v1-container">
+        <div class="v1-products-grid">
+          {productSummaries.map((product) => {
+            const meta = productCardMeta[product.slug as keyof typeof productCardMeta];
+            const href = `/products/${product.slug}/`;
+
+            return (
+              <article class="v1-product-card">
+                <div class="v1-product-visual">
+                  <div class:list={['v1-product-card-icon', 'v1-icon-badge', meta.tone]}>
+                    <Icon name={product.icon} class="h-[22px] w-[22px]" />
+                  </div>
+                  {meta.visual === 'medical' && (
+                    <div class="v1-pv-med"><span></span><span></span><span></span><b></b></div>
+                  )}
+                  {meta.visual === 'hazardous' && (
+                    <div class="v1-pv-hazard"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                  )}
+                  {meta.visual === 'supervision' && (
+                    <div class="v1-pv-supervision"><span></span><span></span><span></span><span></span><i></i></div>
+                  )}
+                  {meta.visual === 'sterilization' && (
+                    <div class="v1-pv-sterilize"><span class="ring"></span><span class="line"></span><span class="pulse"></span></div>
+                  )}
+                  {meta.visual === 'endoscope' && (
+                    <div class="v1-pv-endoscope"><span class="scope"></span><span class="tube"></span><span class="bubble"></span></div>
+                  )}
+                  {meta.visual === 'carbon' && (
+                    <div class="v1-pv-carbon"><span></span><span></span><span></span><i></i></div>
+                  )}
+                </div>
+                <h2 class="v1-product-card-title">{product.name}</h2>
+                <p class="v1-product-card-desc">{product.overview}</p>
+                <div class="v1-product-card-label-row">
+                  <span class:list={['v1-product-card-label-primary', meta.tone]}>{meta.label}</span>
+                </div>
+                <div class="v1-product-card-tags">
+                  {meta.tags.map((tag) => <span class="v1-product-card-tag">{tag}</span>)}
+                </div>
+                <p class="v1-product-card-note">{meta.note}</p>
+                <a href={href} class="v1-product-card-link">{meta.linkLabel} →</a>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <section class="v1-section v1-capabilities-section" id="aiot">
+      <div class="v1-container">
+        <div class="v1-section-header v1-section-header-center">
+          <span class="v1-section-label">软硬一体能力</span>
+          <h2 class="v1-section-title">从智能终端到业务系统，一体化交付</h2>
+        </div>
+        <div class="v1-capabilities-grid">
+          {capabilityCards.map((item) => (
+            <div class="v1-capability-card">
+              <div class:list={['v1-capability-icon', 'v1-icon-badge', item.tone]}>
+                <Icon name={item.icon} class="h-6 w-6" />
+              </div>
+              <h3 class="v1-capability-title">{item.title}</h3>
+              <p class="v1-capability-desc">{item.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="v1-section v1-cta-section">
+      <div class="v1-container">
+        <div class="v1-cta-inner">
+          <h2 class="v1-cta-title">想了解方案如何适配您的业务场景？</h2>
+          <p class="v1-cta-desc">欢迎提交需求信息，我们将根据您的机构类型、关注产品和建设目标，为您提供产品演示和方案沟通。</p>
+          <a href="/contact/" class="v1-btn v1-btn-primary v1-btn-lg">预约产品演示</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

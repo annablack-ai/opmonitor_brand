@@ -1,0 +1,160 @@
+---
+import Button from '@/components/Button.astro';
+import Icon from '@/components/Icon.astro';
+import { navigation, newsMenuItems, productMegaMenuGroups } from '@/data/navigation';
+import { siteMeta } from '@/data/site';
+import { siteImages } from '@/data/images';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+const activeKey = currentPath === '/'
+  ? 'home'
+  : currentPath.startsWith('/products/')
+    ? 'products'
+    : currentPath.startsWith('/cases/')
+      ? 'cases'
+      : currentPath.startsWith('/news/')
+        ? 'news'
+        : currentPath.startsWith('/about/')
+          ? 'about'
+          : currentPath.startsWith('/contact/')
+            ? 'contact'
+            : 'home';
+---
+
+<header class="site-header sticky top-0 z-40 bg-white/95 backdrop-blur-[12px]">
+  <div class="container-shell flex items-center gap-6 py-3.5">
+    <a href="/" class="site-header-logo shrink-0">
+      <span class="block h-10 w-[7.75rem] bg-left bg-contain bg-no-repeat text-transparent" style={`background-image:url('${siteImages.brand.logo}')`}>
+        {siteMeta.shortName}
+      </span>
+    </a>
+
+    <nav class="hidden flex-1 items-center gap-1 lg:flex">
+      {navigation.map((item) => {
+        const baseClass = `site-nav-link ${activeKey === item.key ? 'is-active' : ''}`;
+
+        if (item.key === 'products') {
+          return (
+            <div class="nav-item nav-item-products relative">
+              <a href={item.href} class={`${baseClass} nav-trigger`} aria-haspopup="true">
+                <span>{item.label}</span>
+                <Icon name="chevron-down" class="nav-trigger-icon h-4 w-4" />
+              </a>
+
+              <div class="nav-flyout nav-mega-menu top-full z-50">
+                <div class="nav-mega-shell">
+                  <div class="nav-mega-container">
+                    <div class="nav-mega-grid">
+                    {productMegaMenuGroups.map((group) => (
+                      <div class="nav-mega-group">
+                        <div class="nav-mega-group-title">{group.title}</div>
+                        <div class="nav-mega-divider"></div>
+                        <div class="nav-mega-list">
+                          {group.links.map((link) => (
+                            <a href={link.href} class="nav-mega-link">
+                              <span class="nav-mega-title">{link.label}</span>
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        }
+
+        if (item.key === 'news') {
+          return (
+            <div class="nav-item nav-item-news relative">
+              <a href={item.href} class={`${baseClass} nav-trigger`} aria-haspopup="true">
+                <span>{item.label}</span>
+                <Icon name="chevron-down" class="nav-trigger-icon h-4 w-4" />
+              </a>
+
+              <div class="nav-flyout nav-dropdown absolute left-0 top-full z-50">
+                <div class="nav-dropdown-inner">
+                    {newsMenuItems.map((link) => (
+                      <a href={link.href} class="nav-dropdown-link">
+                        <span class="nav-dropdown-label">{link.label}</span>
+                      </a>
+                    ))}
+                </div>
+              </div>
+            </div>
+          );
+        }
+
+        return (
+          <a href={item.href} class={baseClass}>
+            {item.label}
+          </a>
+        );
+      })}
+    </nav>
+
+    <div class="hidden items-center lg:flex">
+      <Button href="/contact/" class="site-header-cta text-[14px]">预约产品演示</Button>
+    </div>
+
+    <details class="group relative lg:hidden">
+      <summary class="site-header-menu-toggle summary-reset inline-flex h-11 w-11 items-center justify-center border bg-white text-ink-900">
+        <span class="group-open:hidden"><Icon name="menu" class="h-5 w-5" /></span>
+        <span class="hidden group-open:block"><Icon name="close" class="h-5 w-5" /></span>
+      </summary>
+
+      <div class="absolute right-0 top-full z-50 mt-4 w-[min(24rem,calc(100vw-2rem))] rounded-[24px] border border-ink-100 bg-white/98 p-5 shadow-[0_24px_64px_rgba(11,31,58,0.12)] backdrop-blur-xl">
+        <div class="grid gap-2">
+          <a href="/" class="rounded-[20px] px-4 py-3 text-sm font-medium text-ink-700 hover:bg-brand-50/70 hover:text-brand-600">首页</a>
+
+          <details class="rounded-[22px] bg-ink-50/70 px-4 py-3">
+            <summary class="summary-reset flex cursor-pointer items-center justify-between text-sm font-medium text-ink-900">
+              <span>产品与解决方案</span>
+              <Icon name="chevron-down" class="h-4 w-4" />
+            </summary>
+            <div class="mt-4 grid gap-3 pb-2">
+              <a href="/products/" class="text-sm font-medium text-brand-600">查看全部解决方案</a>
+              {productMegaMenuGroups.map((group) => (
+                <div>
+                  <div class="nav-mobile-subgroup-title">{group.title}</div>
+                  <div class="mt-2 grid gap-2">
+                    {group.links.map((link) => (
+                      <a href={link.href} class="text-sm leading-7 text-ink-600 hover:text-brand-600">{link.label}</a>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </details>
+
+          <a href="/cases/" class="rounded-[20px] px-4 py-3 text-sm font-medium text-ink-700 hover:bg-brand-50/70 hover:text-brand-600">客户案例</a>
+
+          <details class="rounded-[22px] bg-ink-50/70 px-4 py-3">
+            <summary class="summary-reset flex cursor-pointer items-center justify-between text-sm font-medium text-ink-900">
+              <span>新闻动态</span>
+              <Icon name="chevron-down" class="h-4 w-4" />
+            </summary>
+            <div class="mt-4 grid gap-2 pb-2">
+              {newsMenuItems.map((link) => (
+                <a href={link.href} class="text-sm leading-7 text-ink-600 hover:text-brand-600">{link.label}</a>
+              ))}
+            </div>
+          </details>
+
+          <a href="/about/" class="rounded-[20px] px-4 py-3 text-sm font-medium text-ink-700 hover:bg-brand-50/70 hover:text-brand-600">关于我们</a>
+          <a href="/contact/" class="rounded-[20px] px-4 py-3 text-sm font-medium text-ink-700 hover:bg-brand-50/70 hover:text-brand-600">联系我们</a>
+        </div>
+
+        <div class="mt-5 border-t border-ink-100 pt-5">
+          <Button href="/contact/" class="w-full">预约产品演示</Button>
+        </div>
+      </div>
+    </details>
+  </div>
+</header>

@@ -1,0 +1,42 @@
+---
+import type { IconName } from '@/types/site';
+
+interface Props {
+  name: IconName;
+  class?: string;
+}
+
+const { name, class: className = 'h-5 w-5' } = Astro.props;
+
+const icons: Record<IconName, string> = {
+  logo: '<path d="M18 3L7 7.5v9L18 21l11-4.5v-9L18 3Zm0 0v18"/><path d="M7 7.5 18 12l11-4.5"/>',
+  'arrow-right': '<path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>',
+  'arrow-up-right': '<path d="M8 16 16 8"/><path d="M10 8h6v6"/>',
+  'chevron-down': '<path d="m8 12 8 8 8-8"/>',
+  menu: '<path d="M6 9h20"/><path d="M6 16h20"/><path d="M6 23h20"/>',
+  close: '<path d="M9 9l14 14"/><path d="M23 9 9 23"/>',
+  phone: '<path d="M6.5 4.5h4l1.2 4.5-2.4 1.7a17 17 0 0 0 4.4 4.4l1.7-2.4 4.5 1.2v4a2 2 0 0 1-2 2A15.5 15.5 0 0 1 4.5 6.5a2 2 0 0 1 2-2Z"/>',
+  mail: '<path d="M4 6h24v12H4z"/><path d="m4 8 12 8 12-8"/>',
+  globe: '<circle cx="16" cy="16" r="11"/><path d="M5 16h22"/><path d="M16 5a18 18 0 0 1 0 22"/><path d="M16 5a18 18 0 0 0 0 22"/>',
+  map: '<path d="M6 7.5 14 5l8 2.5L30 5v19l-8 2.5-8-2.5L6 27V7.5Z"/><path d="M14 5v19"/><path d="M22 7.5V26"/>',
+  shield: '<path d="M16 4 7 8v7c0 5.4 3.8 10.3 9 11.5 5.2-1.2 9-6.1 9-11.5V8l-9-4Z"/><path d="m12.5 16 2.5 2.5 5-5"/>',
+  layers: '<path d="m16 4 11 5.5L16 15 5 9.5 16 4Z"/><path d="m5 15 11 5 11-5"/><path d="m5 20 11 5 11-5"/>',
+  chart: '<path d="M6 26h20"/><path d="M9 22V12"/><path d="M16 22V8"/><path d="M23 22v-6"/>',
+  monitor: '<rect x="5" y="6" width="22" height="14" rx="2"/><path d="M12 26h8"/><path d="m16 20 1 6"/><path d="m16 20-1 6"/>',
+  server: '<rect x="6" y="6" width="20" height="7" rx="2"/><rect x="6" y="19" width="20" height="7" rx="2"/><path d="M10 10h.01"/><path d="M10 23h.01"/>',
+  scan: '<path d="M7 10V7h3"/><path d="M22 7h3v3"/><path d="M25 22v3h-3"/><path d="M10 25H7v-3"/><path d="M10 16h12"/>',
+  workflow: '<circle cx="7" cy="8" r="2"/><circle cx="16" cy="16" r="2"/><circle cx="25" cy="24" r="2"/><path d="M8.5 9.5 14.5 14.5"/><path d="M17.5 17.5 23.5 22.5"/>',
+  camera: '<path d="M6 10h5l2-3h6l2 3h5v13H6z"/><circle cx="16" cy="17" r="4"/>',
+  image: '<rect x="5" y="6" width="22" height="20" rx="2"/><path d="m9 20 4-4 4 4 3-3 4 4"/><circle cx="12" cy="11" r="1.5"/>',
+  chip: '<rect x="8" y="8" width="16" height="16" rx="2"/><path d="M12 5v3M20 5v3M12 24v3M20 24v3M5 12h3M5 20h3M24 12h3M24 20h3"/>',
+  check: '<path d="M6 16.5 12 22l14-14"/>',
+  building: '<path d="M8 27V8l8-3 8 3v19"/><path d="M12 12h.01M20 12h.01M12 17h.01M20 17h.01M12 22h.01M20 22h.01"/>',
+  news: '<path d="M8 7h14l4 4v14H8z"/><path d="M22 7v4h4"/><path d="M12 15h10M12 19h10M12 23h6"/>',
+  case: '<rect x="5" y="8" width="22" height="16" rx="2"/><path d="M11 8V6h10v2"/>',
+  award: '<circle cx="16" cy="11" r="5"/><path d="m13 16-2 10 5-3 5 3-2-10"/>',
+  hardware: '<rect x="11" y="5" width="10" height="22" rx="3"/><path d="M14 9h4M13 22h6"/>',
+  gallery: '<rect x="5" y="8" width="10" height="14" rx="2"/><rect x="17" y="11" width="10" height="11" rx="2"/>',
+};
+---
+
+<svg class={className} viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true" set:html={icons[name]} />

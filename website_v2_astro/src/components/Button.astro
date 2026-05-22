@@ -1,0 +1,53 @@
+---
+import Icon from '@/components/Icon.astro';
+
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'text';
+  class?: string;
+  type?: 'button' | 'submit';
+}
+
+const {
+  href,
+  variant = 'primary',
+  class: className = '',
+  type = 'button',
+} = Astro.props;
+
+const base = 'inline-flex text-sm font-semibold transition-all duration-200';
+const styles = {
+  primary: 'min-h-[52px] items-stretch overflow-hidden border border-[var(--enterprise-primary)] bg-[var(--enterprise-primary)] text-white hover:border-[var(--enterprise-primary-strong)] hover:bg-[var(--enterprise-primary-strong)] hover:shadow-[var(--enterprise-shadow-hover)]',
+  secondary: 'min-h-[52px] items-stretch overflow-hidden border border-[var(--enterprise-title)] bg-[var(--enterprise-title)] text-white hover:border-ink-800 hover:bg-ink-800 hover:shadow-[var(--enterprise-shadow-rest)]',
+  text: 'items-center gap-2 text-[var(--enterprise-primary)] hover:text-[var(--enterprise-primary-strong)]',
+};
+const classes = `${base} ${styles[variant]} ${className}`.trim();
+---
+
+{href ? (
+  <a href={href} class={classes}>
+    {variant === 'text' ? (
+      <slot />
+    ) : (
+      <>
+        <span class="flex items-center px-6"> <slot /> </span>
+        <span class="flex w-12 items-center justify-center border-l border-white/18 bg-black/10">
+          <Icon name="arrow-right" class="h-4 w-4" />
+        </span>
+      </>
+    )}
+  </a>
+) : (
+  <button type={type} class={classes}>
+    {variant === 'text' ? (
+      <slot />
+    ) : (
+      <>
+        <span class="flex items-center px-6"> <slot /> </span>
+        <span class="flex w-12 items-center justify-center border-l border-white/18 bg-black/10">
+          <Icon name="arrow-right" class="h-4 w-4" />
+        </span>
+      </>
+    )}
+  </button>
+)}

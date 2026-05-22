@@ -1,0 +1,176 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SiteHeader from '@/components/SiteHeader.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+import Icon from '@/components/Icon.astro';
+import { caseStudies } from '@/data/cases';
+import { complianceNotice, customerTypeCards } from '@/data/site';
+import type { IconName } from '@/types/site';
+
+const coverageStats = [
+  { value: '800+', label: '客户服务经验' },
+  { value: '数百家', label: '医院客户实践' },
+  { value: '20+', label: '危废相关客户落地' },
+  { value: '78 项', label: '知识产权与软著成果' },
+];
+
+const customerTypeIcons: Record<string, { icon: IconName; tone: string }> = {
+  '医疗机构': { icon: 'building', tone: 'tone-blue' },
+  '监管部门': { icon: 'shield', tone: 'tone-cyan' },
+  '危废相关单位': { icon: 'workflow', tone: 'tone-amber' },
+  '园区 / 集团化单位': { icon: 'chart', tone: 'tone-green' },
+};
+
+const caseTagMeta: Record<string, string> = {
+  '医疗废物精细化追溯系统': 'tone-blue',
+  '危险废物“五即一码”规范化管理系统': 'tone-amber',
+  '智慧卫监解决方案': 'tone-cyan',
+  '内镜合规平台': 'tone-green',
+};
+
+const caseTagLabels: Record<string, string> = {
+  '医疗废物精细化追溯系统': '医疗废物追溯',
+  '危险废物“五即一码”规范化管理系统': '危废管理',
+  '智慧卫监解决方案': '智慧监管',
+  '内镜合规平台': '内镜合规',
+};
+---
+
+<BaseLayout bodyClass="v1-inner-page" title="客户案例 | 智感云" description="智感云已服务800+客户，覆盖医疗机构、监管部门、生态环境/危废相关单位及园区集团等多类场景。">
+  <SiteHeader currentPath={Astro.url.pathname} />
+
+  <main>
+    <section class="v1-page-hero">
+      <div class="v1-container">
+        <div class="v1-breadcrumb">
+          <a href="/">首页</a>
+          <span class="v1-breadcrumb-sep">/</span>
+          <span>客户案例</span>
+        </div>
+        <div class="v1-page-hero-inner">
+          <div class="v1-page-hero-text">
+            <span class="v1-section-label">客户案例</span>
+            <h1 class="v1-page-hero-title">800+ 客户的共同选择</h1>
+            <p class="v1-page-hero-subtitle">智感云已服务医疗机构、监管部门、生态环境 / 危废相关单位及园区集团等多类客户。基于行业数据安全与客户授权要求，案例以区域覆盖、客户类型和匿名应用方式展示。</p>
+          </div>
+          <div class="v1-page-hero-media v1-cases-hero-media">
+            <div class="v1-cases-map-shell">
+              <span class="v1-map-shell-badge">区域覆盖</span>
+              <svg class="v1-mini-china-map" viewBox="0 0 760 480" role="img" aria-label="中国区域覆盖示意图">
+                <path class="base" d="M84 195 L110 182 L148 177 L176 159 L220 154 L254 132 L300 142 L328 125 L370 130 L418 116 L456 129 L503 120 L548 136 L588 126 L620 142 L646 168 L674 182 L666 210 L634 224 L602 238 L582 268 L550 286 L516 290 L486 314 L452 322 L414 314 L382 330 L338 336 L296 326 L264 336 L236 318 L206 316 L184 296 L152 292 L124 278 L108 252 L82 238 Z"></path>
+                <path class="hl" d="M176 198 L214 182 L258 184 L282 208 L246 224 L198 226 Z"></path>
+                <path class="hl" d="M310 174 L350 164 L390 178 L386 208 L340 212 L308 196 Z"></path>
+                <path class="hl" d="M430 170 L470 156 L518 170 L522 200 L470 216 L430 202 Z"></path>
+                <path class="hl" d="M540 184 L580 174 L612 192 L604 222 L566 234 L536 216 Z"></path>
+                <circle class="dot" cx="232" cy="206" r="8"></circle>
+                <circle class="dot" cx="356" cy="190" r="8"></circle>
+                <circle class="dot" cx="484" cy="188" r="8"></circle>
+                <circle class="dot" cx="580" cy="205" r="8"></circle>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v1-section">
+      <div class="v1-container">
+        <div class="v1-section-header v1-section-header-center">
+          <span class="v1-section-label">服务覆盖</span>
+          <h2 class="v1-section-title">以真实项目经验，支撑高监管场景落地</h2>
+          <p class="v1-section-subtitle">从医院科室级医废追溯，到区域危废&quot;五即一码&quot;建设，再到卫生监督在线监测与非现场执法辅助，智感云持续为高监管、高合规要求的行业客户提供可落地、可运维、可持续迭代的数字化解决方案。</p>
+        </div>
+        <div class="v1-coverage-stats">
+          {coverageStats.map((item) => (
+            <div class="v1-coverage-stat">
+              <div class="v1-coverage-stat-num">{item.value}</div>
+              <div class="v1-coverage-stat-label">{item.label}</div>
+            </div>
+          ))}
+        </div>
+        <div class="v1-cases-map">
+          <div class="v1-map-placeholder">
+            <svg class="v1-china-map" viewBox="0 0 760 480" aria-label="中国区域覆盖示意图" role="img">
+              <path class="base" d="M84 195 L110 182 L148 177 L176 159 L220 154 L254 132 L300 142 L328 125 L370 130 L418 116 L456 129 L503 120 L548 136 L588 126 L620 142 L646 168 L674 182 L666 210 L634 224 L602 238 L582 268 L550 286 L516 290 L486 314 L452 322 L414 314 L382 330 L338 336 L296 326 L264 336 L236 318 L206 316 L184 296 L152 292 L124 278 L108 252 L82 238 Z"></path>
+              <path class="hl" d="M176 198 L214 182 L258 184 L282 208 L246 224 L198 226 Z"></path>
+              <path class="hl" d="M310 174 L350 164 L390 178 L386 208 L340 212 L308 196 Z"></path>
+              <path class="hl" d="M430 170 L470 156 L518 170 L522 200 L470 216 L430 202 Z"></path>
+              <path class="hl" d="M540 184 L580 174 L612 192 L604 222 L566 234 L536 216 Z"></path>
+              <path class="hl" d="M364 236 L400 226 L430 240 L426 268 L388 278 L362 262 Z"></path>
+              <circle class="dot" cx="232" cy="206" r="8"></circle>
+              <circle class="dot" cx="356" cy="190" r="8"></circle>
+              <circle class="dot" cx="484" cy="188" r="8"></circle>
+              <circle class="dot" cx="580" cy="205" r="8"></circle>
+              <circle class="dot" cx="398" cy="254" r="8"></circle>
+            </svg>
+            <p class="v1-map-caption">客户覆盖全国多地（省级聚合示意）<br />仅展示区域覆盖，不展示具体客户点位</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v1-section v1-section-surface">
+      <div class="v1-container">
+        <div class="v1-section-header v1-section-header-center">
+          <span class="v1-section-label">客户类型</span>
+          <h2 class="v1-section-title">覆盖多类型机构与场景</h2>
+        </div>
+        <div class="v1-customer-type-grid">
+          {customerTypeCards.map((item) => {
+            const meta = customerTypeIcons[item.title] ?? customerTypeIcons['医疗机构'];
+            return (
+              <article class="v1-customer-type-card">
+                <div class:list={['v1-customer-type-icon', 'v1-icon-badge', meta.tone]}>
+                  <Icon name={meta.icon} class="h-6 w-6" />
+                </div>
+                <h3 class="v1-customer-type-title">{item.title}</h3>
+                <p class="v1-customer-type-desc">{item.description}</p>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <section class="v1-section">
+      <div class="v1-container">
+        <div class="v1-section-header v1-section-header-center">
+          <span class="v1-section-label">典型应用</span>
+          <h2 class="v1-section-title">匿名典型应用案例</h2>
+          <p class="v1-section-subtitle">因行业数据安全与合规要求，以下案例采用匿名方式展示，仅反映典型应用场景与方案价值。</p>
+        </div>
+        <div class="v1-case-cards">
+          {caseStudies.map((item) => {
+            const tone = caseTagMeta[item.product] ?? 'tone-blue';
+            const label = caseTagLabels[item.product] ?? item.customerType;
+            return (
+              <article class="v1-case-card">
+                <div class:list={['v1-case-card-tag', tone]}>{label}</div>
+                <h3 class="v1-case-card-title">{item.title}</h3>
+                <p class="v1-case-card-desc">{item.summary}</p>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <section class="v1-section v1-section-surface">
+      <div class="v1-container">
+        <div class="v1-compliance-note"><strong>案例展示合规说明：</strong>{complianceNotice}</div>
+      </div>
+    </section>
+
+    <section class="v1-section v1-cta-section">
+      <div class="v1-container">
+        <div class="v1-cta-inner">
+          <h2 class="v1-cta-title">想了解智感云如何为同类机构提供解决方案？</h2>
+          <p class="v1-cta-desc">欢迎提交需求，我们将根据您的机构类型和关注场景安排专项沟通。</p>
+          <a href="/contact/" class="v1-btn v1-btn-primary v1-btn-lg">预约产品演示</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

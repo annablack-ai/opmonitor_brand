@@ -1,0 +1,79 @@
+---
+import Button from '@/components/Button.astro';
+
+interface ActionItem {
+  label: string;
+  href: string;
+  variant?: 'primary' | 'secondary';
+}
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  note?: string;
+  chips?: string[];
+  actions?: ActionItem[];
+  imageSrc?: string;
+  imageAlt?: string;
+  imageSlotTitle?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  description,
+  note,
+  chips = [],
+  actions = [],
+} = Astro.props;
+---
+
+<section class="relative overflow-hidden border-b border-ink-200" style="background: var(--hero-background)">
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(0,123,255,0.06),transparent_24%),radial-gradient(circle_at_88%_14%,rgba(0,194,255,0.05),transparent_26%)]"></div>
+  <div class="grid-surface absolute inset-0"></div>
+  <div class="container-shell relative grid gap-12 py-18 lg:grid-cols-[0.92fr_1.08fr] lg:py-28">
+    <div class="self-center">
+      <div class="eyebrow">{eyebrow}</div>
+      <h1 class="display-title mt-5 max-w-4xl">{title}</h1>
+      <p class="body-large mt-6 max-w-3xl">{description}</p>
+      {note && <p class="mt-5 max-w-3xl border-l-2 border-brand-100 pl-4 text-[0.9375rem] leading-[1.9] text-ink-400">{note}</p>}
+      {chips.length > 0 && (
+        <div class="mt-8 flex flex-wrap gap-3">
+          {chips.slice(0, 3).map((chip) => <span class="chip">{chip}</span>)}
+        </div>
+      )}
+      {actions.length > 0 && (
+        <div class="mt-8 flex flex-wrap gap-4">
+          {actions.map((action) => (
+            <Button href={action.href} variant={action.variant ?? 'primary'}>{action.label}</Button>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <div class="relative self-center">
+      <div class="absolute left-6 top-6 h-24 w-24 rounded-full bg-brand-100/55 blur-3xl"></div>
+      <div class="absolute bottom-8 right-6 h-28 w-28 rounded-full bg-sky-200/45 blur-3xl"></div>
+      <div class="tech-constellation shadow-[var(--shadow-float)]">
+        <div class="tech-orbit"></div>
+        <div class="tech-core"></div>
+        <span class="tech-node h-4 w-4" style="left: 17%; top: 28%;"></span>
+        <span class="tech-node h-3.5 w-3.5" style="left: 30%; top: 66%;"></span>
+        <span class="tech-node h-4.5 w-4.5" style="left: 68%; top: 22%;"></span>
+        <span class="tech-node h-3.5 w-3.5" style="left: 80%; top: 60%;"></span>
+        <span class="tech-node h-3 w-3" style="left: 58%; top: 76%;"></span>
+        <span class="tech-link" style="left: 20%; top: 31%; width: 31%; transform: rotate(16deg);"></span>
+        <span class="tech-link" style="left: 31%; top: 67%; width: 25%; transform: rotate(-14deg);"></span>
+        <span class="tech-link" style="left: 52%; top: 47%; width: 20%; transform: rotate(-34deg);"></span>
+        <span class="tech-link" style="left: 56%; top: 58%; width: 23%; transform: rotate(9deg);"></span>
+        <svg viewBox="0 0 640 520" class="absolute inset-0 h-full w-full text-brand-500" fill="none" aria-hidden="true">
+          <path d="M210 170c36-28 80-42 126-42 42 0 88 15 118 45" stroke="rgba(59,130,246,0.18)" stroke-width="1.4" />
+          <path d="M214 340c36 26 81 40 130 40 46 0 89-12 122-36" stroke="rgba(56,189,248,0.16)" stroke-width="1.4" />
+          <path d="M318 138v66" stroke="rgba(59,130,246,0.14)" stroke-width="1.2" stroke-dasharray="4 10" />
+          <path d="M318 316v54" stroke="rgba(59,130,246,0.14)" stroke-width="1.2" stroke-dasharray="4 10" />
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>

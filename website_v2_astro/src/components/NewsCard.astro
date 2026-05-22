@@ -1,0 +1,23 @@
+---
+import Icon from '@/components/Icon.astro';
+import type { NewsItem } from '@/types/site';
+
+interface Props {
+  item: NewsItem;
+}
+
+const { item } = Astro.props;
+---
+
+<article class="panel soft-surface p-6">
+  <div class="flex items-center justify-between gap-4">
+    <span class={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium ${item.category === '行业政策' ? 'bg-ink-900 text-white' : 'bg-brand-50 text-brand-600'}`}>
+      <Icon name={item.category === '行业政策' ? 'news' : 'award'} class="h-3.5 w-3.5" />
+      {item.category}
+    </span>
+    <span class="text-xs text-ink-400">{item.date}</span>
+  </div>
+  <h3 class="mt-5 text-lg font-semibold text-ink-900">{item.title}</h3>
+  <p class="body-muted mt-3">{item.summary}</p>
+  <div class="mt-6 text-sm font-medium text-brand-600">{item.category === '行业政策' ? '政策解读摘要' : '动态摘要'}</div>
+</article>

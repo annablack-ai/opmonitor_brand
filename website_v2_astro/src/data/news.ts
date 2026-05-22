@@ -1,0 +1,81 @@
+import type { NewsItem } from '@/types/site';
+
+export const newsItems: NewsItem[] = [
+  {
+    slug: 'policy-medical-waste',
+    category: '行业政策',
+    date: '2025-05',
+    title: '医疗废物精细化全程管理的政策要求与建设要点',
+    summary: '梳理医疗废物全程精细化管理相关政策要求，解析从分类收集、院内转运、暂存管理到处置交接的建设重点与合规路径。',
+  },
+  {
+    slug: 'policy-hazardous-waste',
+    category: '行业政策',
+    date: '2025-04',
+    title: '危险废物“五即一码”规范化建设趋势解读',
+    summary: '解读危废"五即一码"规范化管理要求的政策背景与推进趋势，分析区域医疗机构和产废单位如何有效落地合规建设。',
+  },
+  {
+    slug: 'policy-hazardous-waste-practice',
+    category: '行业政策',
+    date: '2025-04',
+    title: '医疗机构危险废物全过程追溯如何落地',
+    summary: '围绕医疗机构危废全过程追溯的合规要求，从产生赋码到转移交接，分析实施路径和关键技术选型要点。',
+  },
+  {
+    slug: 'policy-supervision',
+    category: '行业政策',
+    date: '2025-03',
+    title: '卫生监督非现场执法的数字化建设思路',
+    summary: '探讨卫生监督机构如何利用物联网、在线监测与风险预警能力推动非现场执法模式升级，提升监管效率。',
+  },
+  {
+    slug: 'policy-sterilization',
+    category: '行业政策',
+    date: '2025-03',
+    title: '消毒灭菌在线监测在基层医疗机构中的应用价值',
+    summary: '分析基层医疗机构和口腔诊所消毒灭菌过程规范化管理的政策背景，探讨在线监测系统的部署方式与实际价值。',
+  },
+  {
+    slug: 'policy-endoscope',
+    category: '行业政策',
+    date: '2025-02',
+    title: '内镜中心洗消记录合规对接的建设重点',
+    summary: '梳理内镜中心洗消记录合规化对接的政策要求，分析信息字段管理、流程记录和区域平台对接的建设路径。',
+  },
+  {
+    slug: 'policy-carbon',
+    category: '行业政策',
+    date: '2025-01',
+    title: '从固废管理到减污降碳：园区数字化治理的新方向',
+    summary: '探讨园区如何在固废、危废、医废过程管理基础上拓展减污降碳协同分析能力，开辟绿色低碳治理的新路径。',
+  },
+  {
+    slug: 'company-supervision',
+    category: '公司动态',
+    date: '2025-05',
+    title: '智感云医疗废物精细化追溯系统服务客户突破新阶段',
+    summary: '智感云医疗废物精细化追溯系统持续迭代升级，服务医疗机构客户数量迈上新台阶，覆盖场景和服务能力进一步增强。',
+  },
+  {
+    slug: 'company-hazardous-waste',
+    category: '公司动态',
+    date: '2025-04',
+    title: '智感云危废“五即一码”解决方案在区域场景快速落地',
+    summary: '智感云危险废物"五即一码"规范化管理系统在区域医疗机构及产废单位场景中快速推进，为区域危废规范化建设提供有效支撑。',
+  },
+  {
+    slug: 'company-supervision-upgrade',
+    category: '公司动态',
+    date: '2025-03',
+    title: '智感云智慧卫监解决方案助力监管数字化升级',
+    summary: '智感云智慧卫监解决方案持续服务多地卫生监督机构，在监管对象管理、在线监测和非现场执法辅助等方向取得积极进展。',
+  },
+  {
+    slug: 'company-endoscope',
+    category: '公司动态',
+    date: '2025-02',
+    title: '智感云持续完善内镜合规与院感相关产品能力',
+    summary: '智感云在内镜合规平台功能和院感相关产品能力方面持续投入，进一步提升洗消记录规范化、接口对接和合规上报的支撑能力。',
+  },
+];

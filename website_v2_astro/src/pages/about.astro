@@ -1,0 +1,122 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SiteHeader from '@/components/SiteHeader.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+import Icon from '@/components/Icon.astro';
+import { aboutPage } from '@/data/site';
+import type { IconName } from '@/types/site';
+
+const aboutTags = ['AIoT 智能感知', '软硬一体交付', '医疗卫生场景经验', '本地化/私有化部署', '权限分级与日志审计', '长期运维服务能力'];
+
+const qualificationCards: Array<{ title: string; description: string; icon: IconName; tone: string }> = [
+  { title: 'ISO 9001', description: '质量管理体系认证', icon: 'award', tone: 'tone-blue' },
+  { title: 'ISO 27001', description: '信息安全管理体系认证', icon: 'shield', tone: 'tone-blue' },
+  { title: 'ISO 14001', description: '环境管理体系认证', icon: 'chart', tone: 'tone-green' },
+  { title: '知识产权管理体系', description: '知识产权管理体系认证', icon: 'layers', tone: 'tone-amber' },
+  { title: '78 项', description: '知识产权与软件著作权等成果', icon: 'news', tone: 'tone-cyan' },
+  { title: '高监管场景经验', description: '800+ 客户服务经验，深耕高合规行业', icon: 'building', tone: 'tone-green' },
+];
+
+const networkItems: Array<{ title: string; description: string; icon: IconName; tone: string }> = [
+  { title: '北京总部', description: '研发中心 · 亦庄经济开发区', icon: 'building', tone: 'tone-blue' },
+  { title: '安徽', description: '子公司 / 服务团队', icon: 'map', tone: 'tone-cyan' },
+  { title: '江苏', description: '子公司 / 服务团队', icon: 'map', tone: 'tone-cyan' },
+  { title: '山东', description: '子公司 / 服务团队', icon: 'map', tone: 'tone-cyan' },
+];
+---
+
+<BaseLayout bodyClass="v1-inner-page" title="关于我们 | 智感云" description="北京智感云科技有限公司，专注高监管场景AIoT应用与软硬一体数字化解决方案，成立于2019年，总部位于北京亦庄经济开发区。">
+  <SiteHeader currentPath={Astro.url.pathname} />
+
+  <main>
+    <section class="v1-page-hero">
+      <div class="v1-container">
+        <div class="v1-breadcrumb">
+          <a href="/">首页</a>
+          <span class="v1-breadcrumb-sep">/</span>
+          <span>关于我们</span>
+        </div>
+        <div class="v1-page-hero-inner">
+          <div class="v1-page-hero-text">
+            <span class="v1-section-label">关于智感云</span>
+            <h1 class="v1-page-hero-title">关于智感云</h1>
+            <p class="v1-page-hero-subtitle">专注医疗卫生、公共卫生监督与生态环境场景的 AIoT 软硬一体解决方案。</p>
+          </div>
+          <div class="v1-page-hero-media v1-about-hero-media" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v1-section">
+      <div class="v1-container">
+        <div class="v1-about-intro">
+          <div class="v1-about-intro-img">
+            <img src="/images/about/about_office.webp" alt="智感云办公环境" loading="lazy" onerror="this.style.display='none'" />
+          </div>
+          <div>
+            <span class="v1-section-label">公司简介</span>
+            <h2 class="v1-about-title">北京智感云科技有限公司</h2>
+            <p class="v1-about-paragraph">{aboutPage.shortIntro}</p>
+            <p class="v1-about-paragraph">公司具备从智能硬件、嵌入式系统、移动应用、业务软件到监管驾驶舱的综合研发与交付能力，服务覆盖多类型医疗机构、监管部门及危废相关客户。通过智能感知、业务留痕、风险提醒和合规闭环，帮助客户提升现场作业规范性、管理协同效率和监管响应能力。</p>
+            <div class="v1-capability-tags">
+              {aboutTags.map((tag) => <span class="v1-cap-tag">{tag}</span>)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v1-section v1-section-surface">
+      <div class="v1-container">
+        <div class="v1-section-header v1-section-header-center">
+          <span class="v1-section-label">资质荣誉</span>
+          <h2 class="v1-section-title">资质与荣誉</h2>
+        </div>
+        <div class="v1-qualifications-grid">
+          {qualificationCards.map((item) => (
+            <article class="v1-qual-card">
+              <div class:list={['v1-qual-icon', 'v1-icon-badge', item.tone]}>
+                <Icon name={item.icon} class="h-6 w-6" />
+              </div>
+              <h3 class="v1-qual-title">{item.title}</h3>
+              <p class="v1-qual-desc">{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="v1-section">
+      <div class="v1-container">
+        <div class="v1-section-header v1-section-header-center">
+          <span class="v1-section-label">服务网络</span>
+          <h2 class="v1-section-title">研发总部与多地服务团队</h2>
+          <p class="v1-section-subtitle">总部扎根北京，多地设有子公司或服务团队，支持客户本地化交付与长期运维。</p>
+        </div>
+        <div class="v1-network-list">
+          {networkItems.map((item) => (
+            <article class="v1-network-item">
+              <div class:list={['v1-network-item-icon', 'v1-icon-badge', item.tone]}>
+                <Icon name={item.icon} class="h-6 w-6" />
+              </div>
+              <h3 class="v1-network-item-label">{item.title}</h3>
+              <p class="v1-network-item-desc">{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="v1-section v1-cta-section">
+      <div class="v1-container">
+        <div class="v1-cta-inner">
+          <h2 class="v1-cta-title">想进一步了解智感云？</h2>
+          <p class="v1-cta-desc">欢迎与我们联系，了解产品能力、服务范围和合作方式。</p>
+          <a href="/contact/" class="v1-btn v1-btn-primary v1-btn-lg">联系我们</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

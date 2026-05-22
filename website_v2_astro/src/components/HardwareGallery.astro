@@ -1,0 +1,109 @@
+---
+import Icon from '@/components/Icon.astro';
+import type { ProductGalleryItem } from '@/types/site';
+
+interface Props {
+  items: ProductGalleryItem[];
+  imagePaths: string[];
+}
+
+const { items, imagePaths } = Astro.props;
+const galleryId = `hardware-${Math.random().toString(36).slice(2, 10)}`;
+const featuredItem = items[0];
+const featuredImage = imagePaths[0] ?? imagePaths[0];
+---
+
+<div class="grid gap-6 lg:grid-cols-[1.06fr_0.94fr]" data-hardware-gallery={galleryId}>
+  <article class="section-frame overflow-hidden">
+    <div class="flex items-start justify-between gap-4 pb-5">
+      <div>
+        <div class="eyebrow">主设备展示</div>
+        <div class="mt-2 text-sm leading-7 text-ink-500">结合现场采集、标签打印与作业终端形成软硬一体交付。</div>
+      </div>
+      <div class="section-sidecard min-w-[7.5rem] text-right">
+        <div class="section-kicker">设备数量</div>
+        <div class="mt-2 text-3xl font-semibold tracking-[-0.05em] text-ink-900">{String(items.length).padStart(2, '0')}</div>
+      </div>
+    </div>
+    <div class="grid gap-5 lg:grid-cols-[1fr_0.88fr] lg:items-center">
+      <div class="image-frame aspect-[4/3] bg-white p-4 md:p-5">
+        <img
+          src={featuredImage}
+          alt={featuredItem?.imageAlt ?? ''}
+          class="h-full w-full rounded-[22px] object-contain"
+          loading="lazy"
+          data-hardware-featured-image
+        />
+      </div>
+      <div>
+        <h3 class="mt-3 text-[1.45rem] font-semibold tracking-[-0.03em] text-ink-900" data-hardware-featured-title>{featuredItem?.title}</h3>
+        <p class="body-muted mt-3" data-hardware-featured-description>{featuredItem?.description}</p>
+      </div>
+    </div>
+  </article>
+
+  <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-1">
+    {items.map((item, index) => (
+      <button
+        type="button"
+        class={`panel product-visual-card overflow-hidden p-4 text-left transition-all duration-200 ${index === 0 ? 'ring-2 ring-brand-200' : 'hover:-translate-y-0.5 hover:shadow-[var(--shadow-soft)]'}`}
+        data-hardware-trigger
+        data-image={imagePaths[index] ?? imagePaths[0]}
+        data-alt={item.imageAlt}
+        data-title={item.title}
+        data-description={item.description}
+        aria-pressed={index === 0 ? 'true' : 'false'}
+      >
+        <div class="flex items-start gap-4">
+          <div class="image-frame h-20 w-24 shrink-0 bg-white p-2">
+            <img src={imagePaths[index] ?? imagePaths[0]} alt={item.imageAlt} class="h-full w-full rounded-[14px] object-contain" loading="lazy" />
+          </div>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center gap-3">
+              <span class="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-brand-50 text-brand-600">
+                <Icon name="hardware" class="h-4.5 w-4.5" />
+              </span>
+              <h4 class="text-base font-semibold text-ink-900">{item.title}</h4>
+            </div>
+            <p class="mt-3 text-sm leading-7 text-ink-500">{item.description}</p>
+          </div>
+        </div>
+      </button>
+    ))}
+  </div>
+</div>
+
+<script is:inline>
+  const hardwareGalleries = document.querySelectorAll('[data-hardware-gallery]');
+
+  hardwareGalleries.forEach((gallery) => {
+    const featuredImage = gallery.querySelector('[data-hardware-featured-image]');
+    const featuredTitle = gallery.querySelector('[data-hardware-featured-title]');
+    const featuredDescription = gallery.querySelector('[data-hardware-featured-description]');
+    const triggers = gallery.querySelectorAll('[data-hardware-trigger]');
+
+    const setActive = (trigger) => {
+      triggers.forEach((item) => {
+        const isActive = item === trigger;
+        item.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        item.classList.toggle('ring-2', isActive);
+        item.classList.toggle('ring-brand-200', isActive);
+      });
+
+      if (featuredImage) {
+        featuredImage.setAttribute('src', trigger.getAttribute('data-image') || '');
+        featuredImage.setAttribute('alt', trigger.getAttribute('data-alt') || '');
+      }
+      if (featuredTitle) {
+        featuredTitle.textContent = trigger.getAttribute('data-title') || '';
+      }
+      if (featuredDescription) {
+        featuredDescription.textContent = trigger.getAttribute('data-description') || '';
+      }
+    };
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => setActive(trigger));
+    });
+  });
+</script>

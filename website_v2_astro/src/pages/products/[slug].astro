@@ -1,0 +1,384 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SiteHeader from '@/components/SiteHeader.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+import Icon from '@/components/Icon.astro';
+import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { productDetails } from '@/data/products';
+import type { IconName } from '@/types/site';
+
+export function getStaticPaths() {
+  return Object.keys(productDetails).map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const product = slug ? productDetails[slug] : undefined;
+
+if (!product) {
+  throw new Error(`Missing product template data for slug: ${slug}`);
+}
+
+const productPageMeta: Record<string, {
+  heroLabel: string;
+  heroTitleLines: string[];
+  heroTags: string[];
+  heroImage: string;
+  heroFallback: string;
+  positioningTitle: string;
+  positioningTags?: string[];
+  painTitle?: string;
+  painCards?: Array<{ title: string; description: string }>;
+  featureLabel: string;
+  featureTitle?: string;
+  features: Array<{ title: string; description: string; tone: string; icon: IconName }>;
+  flowTitle?: string;
+  valueTitle?: string;
+  values: Array<{ title: string; description: string; tone: string; icon: IconName }>;
+  ctaDescription: string;
+}> = {
+  'medical-waste': {
+    heroLabel: '医疗废物管理',
+    heroTitleLines: ['医疗废物精细化追溯系统'],
+    heroTags: ['医疗机构', '卫健监管', '全流程追溯'],
+    heroImage: '/images/products/medical_waste_hero.webp',
+    heroFallback: 'linear-gradient(135deg,#c8e6ff 0%,#a8d4f5 100%)',
+    positioningTitle: '数百家医院场景落地，全流程可追溯',
+    painTitle: '医废管理面临的主要挑战',
+    painCards: [
+      { title: '人工台账依赖度高', description: '容易出现漏填、错填、补填，台账真实性难以保障。' },
+      { title: '责任链条不易追溯', description: '科室收集、院内转运、暂存出库等环节交接多，责任难以明确。' },
+      { title: '信息分散管理效率低', description: '医废重量、时间、交接人员、暂存状态等信息分散，统计困难。' },
+      { title: '异常发现滞后', description: '难以及时发现超时、漏收等异常事件，整改闭环响应慢。' },
+      { title: '多院区协同难度高', description: '多院区、多科室、多角色协同管理难度大，缺少统一视图。' },
+    ],
+    featureLabel: '核心功能',
+    featureTitle: '覆盖医废管理全流程关键环节',
+    features: [
+      { title: '科室收集与分类管理', description: '支持按科室、类别、人员、时间进行医废收集记录，规范分类操作流程。', tone: 'tone-blue', icon: 'building' },
+      { title: '智能称重与标签打印', description: '通过智能称重终端完成重量记录、标签生成和实物绑定，实现一物一码。', tone: 'tone-cyan', icon: 'hardware' },
+      { title: '院内转运与交接管理', description: '记录收集、转运、暂存、出库等节点，形成责任留痕和交接记录。', tone: 'tone-green', icon: 'workflow' },
+      { title: '暂存间管理', description: '支持库存查看、入库出库、暂存时间提醒和异常记录，掌握暂存实时状态。', tone: 'tone-blue', icon: 'server' },
+      { title: '异常提醒', description: '支持重量异常、超时未收、交接缺失、设备离线等多类提醒规则配置。', tone: 'tone-amber', icon: 'shield' },
+      { title: '统计报表与院端驾驶舱', description: '支持按科室、时间、类别等维度进行统计和归档，生成台账报表。', tone: 'tone-cyan', icon: 'chart' },
+    ],
+    flowTitle: '全程节点可追溯',
+    valueTitle: '帮助客户提升管理效率与合规水平',
+    values: [
+      { title: '减少人工台账依赖', description: '帮助医院减少人工台账，提升医废管理效率，降低人工错误风险。', tone: 'tone-blue', icon: 'chart' },
+      { title: '全过程留痕追溯', description: '支持医疗废物全过程留痕，强化主体责任落实，满足监管要求。', tone: 'tone-cyan', icon: 'scan' },
+      { title: '提升异常响应效率', description: '提升异常发现与处置效率，降低合规风险，辅助及时整改闭环。', tone: 'tone-amber', icon: 'shield' },
+      { title: '多方协同管理', description: '支持医院、处置单位、监管相关方在授权范围内协同管理，提升协同效率。', tone: 'tone-green', icon: 'workflow' },
+    ],
+    ctaDescription: '欢迎预约产品演示，我们将根据您的医院规模和管理需求提供专项方案沟通。',
+  },
+  'hazardous-waste': {
+    heroLabel: '危险废物管理',
+    heroTitleLines: ['危险废物"五即一码"', '规范化管理系统'],
+    heroTags: ['医疗机构', '产废单位', '生态环境监管'],
+    heroImage: '/images/products/hazardous_waste_hero.webp',
+    heroFallback: 'linear-gradient(135deg,#c8e6ff 0%,#a8d4f5 100%)',
+    positioningTitle: '从作业规范到全流程追溯，支撑区域落地',
+    painTitle: '危废管理面临的主要挑战',
+    painCards: [
+      { title: '作业操作不够规范', description: '危废产生、包装、称重、赋码和入库操作缺乏统一规范，一致性难以保障。' },
+      { title: '实物台账容易脱节', description: '实物、重量、标签、责任人和台账之间容易脱节，核验困难。' },
+      { title: '暂存和转移缺少核验', description: '暂存、出库、转移和联单关联过程缺少有效核验机制。' },
+      { title: '多业态差异大', description: '小微医疗机构、园区、制造企业等不同业态作业模式差异大，统一管理难度高。' },
+      { title: '监管侧信息不足', description: '监管侧难以及时掌握纳管进度、联单状态、异常事项和整改进展。' },
+    ],
+    featureLabel: '核心功能',
+    featureTitle: '"五即"全流程，一码全贯通',
+    features: [
+      { title: '"五即"作业办理', description: '支持即产生、即包装、即称重、即打码、即入库流程化办理，规范产废源头作业。', tone: 'tone-blue', icon: 'workflow' },
+      { title: '一物一码标签绑定', description: '通过二维码、电子标签等方式绑定实物、重量、责任人和流转状态，实现一码贯通。', tone: 'tone-cyan', icon: 'scan' },
+      { title: '扫码入库与出库交接', description: '支持暂存入库核验、出库扫码确认和账实一致校验，防止差错。', tone: 'tone-green', icon: 'hardware' },
+      { title: '电子联单关联', description: '支持出库批次与运输、处置环节联单关联，辅助实现危废去向可追。', tone: 'tone-amber', icon: 'news' },
+      { title: '院端 / 企业端业务后台', description: '支持产生台账、入库台账、出库台账和异常事项管理，满足日常管理需求。', tone: 'tone-blue', icon: 'monitor' },
+      { title: '监管端驾驶舱', description: '支持纳管进度、设备状态、联单状态、异常督办等授权范围内查看。', tone: 'tone-cyan', icon: 'chart' },
+    ],
+    flowTitle: '从产生识别到台账归档',
+    valueTitle: '从人工填报升级为现场作业留痕',
+    values: [
+      { title: '规范化作业升级', description: '将危废管理从人工填报升级为现场作业留痕，提升数据真实性。', tone: 'tone-blue', icon: 'arrow-up-right' },
+      { title: '账实一致性提升', description: '提升危废实物、标签、重量和台账的一致性，减少数据差错。', tone: 'tone-green', icon: 'shield' },
+      { title: '区域规范化落地', description: '支撑区域医疗机构、园区和产废单位规范化管理，快速纳管。', tone: 'tone-cyan', icon: 'layers' },
+      { title: '协同减污降碳', description: '为减污降碳协同和监管驾驶舱提供基础数据支撑，延伸管理价值。', tone: 'tone-green', icon: 'chart' },
+    ],
+    ctaDescription: '欢迎预约方案沟通，我们将根据您的区域规模和产废单位类型提供专项方案建议。',
+  },
+  'health-supervision': {
+    heroLabel: '智慧卫监',
+    heroTitleLines: ['智慧卫监解决方案'],
+    heroTags: ['卫生监督机构', '非现场执法', '在线监测'],
+    heroImage: '/images/products/health_supervision_hero.webp',
+    heroFallback: 'linear-gradient(135deg,#c8e6ff 0%,#a8d4f5 100%)',
+    positioningTitle: '覆盖多类卫生监督在线监测场景',
+    positioningTags: ['卫生监督物联网管理平台', '医疗废物在线监管', '消毒灭菌监测', '放射源在线监测', '饮用水 / 游泳池水质在线监测', '空气质量在线监测', '非现场执法与事件闭环'],
+    featureLabel: '核心功能',
+    featureTitle: '全面支撑数字化监管能力',
+    features: [
+      { title: '监管对象管理', description: '建立被监管单位基础档案和分类管理，掌握监管对象基本信息和状态。', tone: 'tone-blue', icon: 'building' },
+      { title: '在线监测', description: '接入传感器、摄像头、业务系统等前端数据源，进行多类场景状态实时查看。', tone: 'tone-cyan', icon: 'scan' },
+      { title: '实时预警', description: '基于规则配置识别异常，并通过 PC、APP、微信、短信等多方式提醒相关人员。', tone: 'tone-amber', icon: 'shield' },
+      { title: '非现场执法辅助', description: '支持远程查看、事件识别、证据留痕和执法调度，辅助提升执法效率。', tone: 'tone-green', icon: 'camera' },
+      { title: '问题闭环管理', description: '支持事件发现、任务派发、整改反馈、复核销号和归档，形成完整闭环。', tone: 'tone-green', icon: 'workflow' },
+      { title: '监管驾驶舱', description: '支持监管态势、异常趋势、对象分布和处置进展展示，辅助管理决策。', tone: 'tone-cyan', icon: 'chart' },
+    ],
+    valueTitle: '推动卫生监督数字化协同升级',
+    values: [
+      { title: '提升监管覆盖效率', description: '减少完全依赖现场检查的压力，扩大监管覆盖范围和深度。', tone: 'tone-blue', icon: 'chart' },
+      { title: '加快异常响应', description: '支持异常事件及时提醒，提升监管响应速度和处置及时性。', tone: 'tone-amber', icon: 'shield' },
+      { title: '证据留痕与工作闭环', description: '辅助形成执法证据留痕和工作闭环，支撑监管合规管理。', tone: 'tone-blue', icon: 'news' },
+      { title: '数字化能力升级', description: '推动卫生监督从经验驱动向数字化协同升级，持续提升监管质效。', tone: 'tone-cyan', icon: 'arrow-up-right' },
+    ],
+    ctaDescription: '欢迎预约方案沟通，我们将根据您的监管场景和业务需求提供针对性方案。',
+  },
+  'sterilization-monitoring': {
+    heroLabel: '消毒灭菌监测',
+    heroTitleLines: ['消毒灭菌监测系统'],
+    heroTags: ['医疗机构', '口腔诊所', '消毒供应中心'],
+    heroImage: '/images/products/sterilization_monitoring_hero.webp',
+    heroFallback: 'linear-gradient(135deg,#c8e6ff 0%,#a8d4f5 100%)',
+    positioningTitle: '围绕灭菌设备关键参数，建立在线监测能力',
+    painTitle: '消毒灭菌管理面临的挑战',
+    painCards: [
+      { title: '记录依赖人工', description: '灭菌过程记录依赖人工，追溯效率低，存在漏填漏记风险。' },
+      { title: '参数缺少在线监测', description: '温度、压力等关键参数缺少在线监测和留痕，过程管理薄弱。' },
+      { title: '异常发现不及时', description: '异常事件发现不及时，整改过程难以有效闭环。' },
+      { title: '基层机构监管压力大', description: '基层医疗机构和口腔诊所面临较大的监管压力和管理成本。' },
+    ],
+    featureLabel: '核心功能',
+    featureTitle: '关键参数在线监测与记录留痕',
+    features: [
+      { title: '灭菌设备运行监测', description: '实时监测灭菌设备运行状态，及时掌握设备工作情况。', tone: 'tone-blue', icon: 'monitor' },
+      { title: '温度 / 压力参数记录', description: '对灭菌温度、压力等关键过程参数进行连续记录和留痕。', tone: 'tone-cyan', icon: 'chart' },
+      { title: '异常规则提醒', description: '基于参数阈值配置异常提醒规则，及时推送预警通知。', tone: 'tone-amber', icon: 'shield' },
+      { title: '监测数据图形化展示', description: '将温压曲线、运行记录以图形化方式展示，便于查看分析。', tone: 'tone-cyan', icon: 'chart' },
+      { title: '事件记录与处理留痕', description: '支持异常事件记录、处置反馈和归档，形成完整处理记录。', tone: 'tone-blue', icon: 'news' },
+      { title: '监管 / 院感管理端查看', description: '支持监管部门或院感管理人员在授权范围内查看监测数据和记录。', tone: 'tone-green', icon: 'monitor' },
+    ],
+    values: [
+      { title: '减少人工记录依赖', description: '自动记录灭菌关键参数，减少人工填报工作量。', tone: 'tone-blue', icon: 'chart' },
+      { title: '提升可追溯性', description: '提升消毒灭菌过程可追溯性，满足院感合规和监管要求。', tone: 'tone-cyan', icon: 'scan' },
+      { title: '及时发现和整改', description: '支持异常及时发现和整改，降低灭菌不合格风险。', tone: 'tone-amber', icon: 'shield' },
+      { title: '辅助合规管理', description: '辅助医疗机构、诊所和监管单位提升消毒灭菌合规管理水平。', tone: 'tone-green', icon: 'building' },
+    ],
+    ctaDescription: '欢迎预约演示，我们将根据您的机构类型和监测需求提供专项方案。',
+  },
+  'endoscope-compliance': {
+    heroLabel: '内镜合规',
+    heroTitleLines: ['内镜合规平台'],
+    heroTags: ['内镜中心', '院感部门', '区域平台对接'],
+    heroImage: '/images/products/endoscope_compliance_hero.webp',
+    heroFallback: 'linear-gradient(135deg,#c8e6ff 0%,#a8d4f5 100%)',
+    positioningTitle: '内镜洗消记录规范化与合规对接',
+    painTitle: '内镜管理面临的合规挑战',
+    painCards: [
+      { title: '人工记录工作量大', description: '内镜洗消流程节点多，人工记录工作量大，容易出现漏记或错记。' },
+      { title: '信息规范留痕要求高', description: '清洗人员、清洗方式、设备编号、消毒时间等信息需要规范留痕。' },
+      { title: '质控数据分散', description: '质量控制数据分散，接口对接工作复杂，数据标准化程度低。' },
+      { title: '接口对接要求明确', description: '区域平台或合规平台对数据传输格式有明确要求，改造难度大。' },
+    ],
+    featureLabel: '核心能力',
+    featureTitle: '覆盖内镜全流程关键管理节点',
+    features: [
+      { title: '清洗消毒流程记录', description: '支持内镜清洗消毒各环节节点记录，覆盖手洗和机洗流程。', tone: 'tone-green', icon: 'workflow' },
+      { title: '内镜信息字段管理', description: '管理内镜编号、类型、清洗人员、流程节点等关键字段，实现一镜一档。', tone: 'tone-cyan', icon: 'scan' },
+      { title: '关键节点时间记录', description: '手洗 / 机洗关键节点时间精确记录，满足流程规范性要求。', tone: 'tone-blue', icon: 'monitor' },
+      { title: '质量控制记录', description: '消毒或灭菌剂浓度、监测结果、批次等质量控制数据结构化记录。', tone: 'tone-green', icon: 'shield' },
+      { title: '相关设备状态记录', description: '制水设备状态、内镜存储柜等相关信息记录，支持综合管理。', tone: 'tone-cyan', icon: 'server' },
+      { title: '区域平台接口对接', description: '与区域卫生信息平台、传染病合规平台等完成接口对接，支持合规上报。', tone: 'tone-amber', icon: 'layers' },
+    ],
+    values: [
+      { title: '规范洗消记录', description: '帮助医疗机构规范内镜洗消记录，减少人工记录错误。', tone: 'tone-blue', icon: 'news' },
+      { title: '质控数据结构化', description: '支持内镜中心质量控制数据结构化管理，便于查询和归档。', tone: 'tone-cyan', icon: 'chart' },
+      { title: '满足接口规范', description: '满足区域平台或监管侧的数据传输规范要求，降低对接难度。', tone: 'tone-amber', icon: 'layers' },
+      { title: '院感合规支撑', description: '为院感合规、传染病防治依法执业合规等场景提供基础支撑。', tone: 'tone-green', icon: 'shield' },
+    ],
+    ctaDescription: '欢迎预约沟通，我们将根据您的内镜中心规模和对接需求提供专项方案。',
+  },
+  'carbon-management': {
+    heroLabel: '绿色低碳',
+    heroTitleLines: ['碳管理与减污降碳协同'],
+    heroTags: ['园区', '集团化单位', '绿色低碳'],
+    heroImage: '/images/products/carbon_management_hero.webp',
+    heroFallback: 'linear-gradient(135deg,#c8e6ff 0%,#b8ddb0 100%)',
+    positioningTitle: '从固废管理延伸到减污降碳协同',
+    painCards: [
+      { title: '基础数据分散', description: '固废、危废、医废等业务数据分散，减污降碳分析缺乏统一数据基础。' },
+      { title: '记录缺少统一管理', description: '重量、流向、处置方式等关键记录缺少统一管理，难以形成完整数据链。' },
+      { title: '目标协同难度大', description: '园区或集团单位需要将环境管理与绿色低碳目标结合，但协同工作量大。' },
+      { title: '材料准备工作量大', description: '减污降碳相关统计和材料准备工作量大，数据整理效率低。' },
+    ],
+    featureLabel: '核心能力',
+    features: [
+      { title: '固废 / 危废 / 医废重量记录', description: '基于智能称重和业务系统记录各类废弃物重量，形成完整数据基础。', tone: 'tone-blue', icon: 'hardware' },
+      { title: '转移与处置过程记录', description: '记录废弃物转移方向和处置结果，支持流向追溯和台账管理。', tone: 'tone-cyan', icon: 'workflow' },
+      { title: '碳账基础数据管理', description: '围绕废弃物处置和能耗数据，建立企业或机构碳账基础数据体系。', tone: 'tone-green', icon: 'chart' },
+      { title: '减污降碳综合驾驶舱', description: '通过可视化看板展示减污降碳关键指标、趋势分析和目标进展。', tone: 'tone-cyan', icon: 'monitor' },
+      { title: '绩效支撑材料管理', description: '辅助管理政策资金绩效支撑材料，提升材料准备效率和规范性。', tone: 'tone-amber', icon: 'news' },
+      { title: '协同分析拓展', description: '支持在已有废弃物管理基础上拓展减污降碳协同分析能力，降低新建成本。', tone: 'tone-green', icon: 'layers' },
+    ],
+    values: [
+      { title: '数据转化利用', description: '将固废、危废、医废等过程记录转化为绿色管理基础数据，提升数据价值。', tone: 'tone-green', icon: 'workflow' },
+      { title: '协同分析能力', description: '支持园区和集团单位开展减污降碳协同分析，辅助绿色低碳目标实现。', tone: 'tone-cyan', icon: 'chart' },
+      { title: '管理趋势掌握', description: '辅助管理部门掌握重点环节和变化趋势，支持管理决策优化。', tone: 'tone-blue', icon: 'monitor' },
+      { title: '持续发展支撑', description: '为后续碳核算、绩效评估和绿色低碳管理持续迭代提供稳定数据支撑。', tone: 'tone-green', icon: 'shield' },
+    ],
+    ctaDescription: '欢迎预约沟通，我们将根据您的单位类型和管理需求提供专项方案建议。',
+  },
+};
+
+const meta = productPageMeta[slug!];
+const publicRoot = fileURLToPath(new URL('../../../public', import.meta.url));
+const heroImageExists = existsSync(fileURLToPath(new URL(`.${meta.heroImage}`, `file://${publicRoot}/`)));
+---
+
+<BaseLayout bodyClass="v1-inner-page" title={`${product.name} | 智感云`} description={product.excerpt}>
+  <SiteHeader currentPath={Astro.url.pathname} />
+
+  <main>
+    <section class="v1-page-hero">
+      <div class="v1-container">
+        <div class="v1-breadcrumb">
+          <a href="/">首页</a>
+          <span class="v1-breadcrumb-sep">/</span>
+          <a href="/products/">产品与解决方案</a>
+          <span class="v1-breadcrumb-sep">/</span>
+          <span>{product.name}</span>
+        </div>
+        <div class="v1-page-hero-inner">
+          <div class="v1-page-hero-text">
+            <span class="v1-section-label">{meta.heroLabel}</span>
+            <h1 class="v1-page-hero-title v1-product-hero-title">
+              {meta.heroTitleLines.map((line) => <span>{line}</span>)}
+            </h1>
+            <p class="v1-page-hero-subtitle">{product.heroSummary}</p>
+            <div class="v1-product-hero-tags">
+              {meta.heroTags.map((tag) => <span class="v1-product-hero-tag">{tag}</span>)}
+            </div>
+          </div>
+          <div class="v1-page-hero-media v1-product-page-hero-media">
+            {heroImageExists ? (
+              <img src={meta.heroImage} alt={product.name} loading="lazy" />
+            ) : (
+              <div class="v1-product-page-hero-fallback" aria-hidden="true"></div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v1-section">
+      <div class="v1-container">
+        <div class="v1-product-section-header">
+          <span class="v1-section-label">产品定位</span>
+          <h2 class="v1-section-title">{meta.positioningTitle}</h2>
+          <p class="v1-section-subtitle v1-product-section-subtitle">{product.positioning}</p>
+        </div>
+        {meta.positioningTags && (
+          <div class="v1-product-positioning-box">
+            <div class="v1-product-positioning-label">覆盖场景</div>
+            <div class="v1-product-positioning-tags">
+              {meta.positioningTags.map((tag) => <span class="v1-product-hero-tag">{tag}</span>)}
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+
+    {meta.painCards && (
+      <section class="v1-section v1-section-surface v1-product-detail-offset">
+        <div class="v1-container">
+          <div class="v1-section-header v1-section-header-center">
+            <span class="v1-section-label">业务痛点</span>
+            {meta.painTitle && <h2 class="v1-section-title">{meta.painTitle}</h2>}
+          </div>
+          <div class="v1-pain-grid">
+            {meta.painCards.map((item) => (
+              <article class="v1-pain-card">
+                <h3 class="v1-pain-card-title">{item.title}</h3>
+                <p class="v1-pain-card-desc">{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <section class="v1-section">
+      <div class="v1-container">
+        <div class="v1-section-header v1-section-header-center">
+          <span class="v1-section-label">{meta.featureLabel}</span>
+          {meta.featureTitle && <h2 class="v1-section-title">{meta.featureTitle}</h2>}
+        </div>
+        <div class="v1-feature-grid">
+          {meta.features.map((feature) => (
+            <article class="v1-feature-card">
+              <div class:list={['v1-feature-icon', 'v1-icon-badge', feature.tone]}>
+                <Icon name={feature.icon} class="h-6 w-6" />
+              </div>
+              <h3 class="v1-feature-title">{feature.title}</h3>
+              <p class="v1-feature-desc">{feature.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {meta.flowTitle && (
+      <section class="v1-section v1-section-surface v1-product-detail-offset">
+        <div class="v1-container">
+          <div class="v1-section-header v1-section-header-center">
+            <span class="v1-section-label">业务流程</span>
+            <h2 class="v1-section-title">{meta.flowTitle}</h2>
+          </div>
+          <div class="v1-flow-steps">
+            {product.processSteps.map((step, index) => (
+              <>
+                <div class="v1-flow-node">
+                  <div class="v1-flow-node-circle">{index + 1}</div>
+                  <div class="v1-flow-node-label">{step}</div>
+                </div>
+                {index < product.processSteps.length - 1 && <div class="v1-flow-connector"></div>}
+              </>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <section class="v1-section v1-section-surface">
+      <div class="v1-container">
+        <div class="v1-section-header v1-section-header-center">
+          <span class="v1-section-label">应用价值</span>
+          {meta.valueTitle && <h2 class="v1-section-title">{meta.valueTitle}</h2>}
+        </div>
+        <div class="v1-value-grid">
+          {meta.values.map((item) => (
+            <article class="v1-value-card">
+              <div class:list={['v1-value-icon', 'v1-icon-badge', item.tone]}>
+                <Icon name={item.icon} class="h-6 w-6" />
+              </div>
+              <h3 class="v1-value-title">{item.title}</h3>
+              <p class="v1-value-desc">{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="v1-section v1-cta-section">
+      <div class="v1-container">
+        <div class="v1-cta-inner">
+          <h2 class="v1-cta-title">{product.ctaTitle}</h2>
+          <p class="v1-cta-desc">{meta.ctaDescription}</p>
+          <a href="/contact/" class="v1-btn v1-btn-primary v1-btn-lg">预约产品演示</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

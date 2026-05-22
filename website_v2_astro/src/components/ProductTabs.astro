@@ -1,0 +1,17 @@
+---
+import type { ProductSummary } from '@/types/site';
+
+interface Props {
+  products: ProductSummary[];
+}
+
+const { products } = Astro.props;
+---
+
+<div class="flex flex-wrap gap-3">
+  {products.map((product) => (
+    <a href={`#product-${product.slug}`} class="chip hover:border-brand-300 hover:text-brand-600">
+      {product.name}
+    </a>
+  ))}
+</div>

@@ -1,0 +1,20 @@
+---
+import type { CaseStudy } from '@/types/site';
+
+interface Props {
+  item: CaseStudy;
+}
+
+const { item } = Astro.props;
+---
+
+<article class="panel soft-surface p-6">
+  <div class="flex flex-wrap items-center gap-2 text-xs font-medium text-ink-500">
+    <span class="rounded-full border border-white/80 bg-white/78 px-3 py-1 text-ink-500">匿名案例</span>
+    <span class="rounded-full bg-ink-50 px-3 py-1">{item.customerType}</span>
+    <span class="rounded-full bg-brand-50 px-3 py-1 text-brand-600">{item.product}</span>
+    <span class="rounded-full border border-white/80 bg-white/78 px-3 py-1">{item.region}</span>
+  </div>
+  <h3 class="mt-5 text-lg font-semibold text-ink-900">{item.title}</h3>
+  <p class="body-muted mt-3">{item.summary}</p>
+</article>

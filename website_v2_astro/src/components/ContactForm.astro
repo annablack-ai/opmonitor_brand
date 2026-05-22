@@ -1,0 +1,53 @@
+---
+---
+
+<form class="panel p-6" action="#" method="post">
+  <div class="grid gap-4 md:grid-cols-2">
+    <label class="grid gap-2 text-sm text-ink-700">
+      <span>姓名</span>
+      <input class="rounded-2xl border border-ink-200 px-4 py-3 outline-none ring-0 placeholder:text-ink-300 focus:border-brand-300" name="name" placeholder="请输入姓名" />
+    </label>
+    <label class="grid gap-2 text-sm text-ink-700">
+      <span>手机</span>
+      <input class="rounded-2xl border border-ink-200 px-4 py-3 outline-none ring-0 placeholder:text-ink-300 focus:border-brand-300" name="phone" placeholder="请输入手机" />
+    </label>
+    <label class="grid gap-2 text-sm text-ink-700">
+      <span>公司 / 机构名称</span>
+      <input class="rounded-2xl border border-ink-200 px-4 py-3 outline-none ring-0 placeholder:text-ink-300 focus:border-brand-300" name="organization" placeholder="请输入公司或机构名称" />
+    </label>
+    <label class="grid gap-2 text-sm text-ink-700">
+      <span>所在地区</span>
+      <input class="rounded-2xl border border-ink-200 px-4 py-3 outline-none ring-0 placeholder:text-ink-300 focus:border-brand-300" name="region" placeholder="请输入所在地区" />
+    </label>
+    <label class="grid gap-2 text-sm text-ink-700">
+      <span>机构类型</span>
+      <select class="rounded-2xl border border-ink-200 px-4 py-3 outline-none ring-0 focus:border-brand-300" name="organizationType">
+        <option>医疗机构</option>
+        <option>监管部门</option>
+        <option>生态环境 / 危废相关单位</option>
+        <option>园区 / 集团化单位</option>
+        <option>其他</option>
+      </select>
+    </label>
+    <label class="grid gap-2 text-sm text-ink-700">
+      <span>关注产品</span>
+      <select class="rounded-2xl border border-ink-200 px-4 py-3 outline-none ring-0 focus:border-brand-300" name="productInterest">
+        <option>医疗废物精细化追溯系统</option>
+        <option>危险废物“五即一码”规范化管理系统</option>
+        <option>智慧卫监解决方案</option>
+        <option>消毒灭菌监测系统</option>
+        <option>内镜合规平台</option>
+        <option>碳管理与减污降碳协同</option>
+        <option>其他</option>
+      </select>
+    </label>
+  </div>
+  <label class="mt-4 grid gap-2 text-sm text-ink-700">
+    <span>需求描述</span>
+    <textarea class="min-h-32 rounded-[24px] border border-ink-200 px-4 py-3 outline-none placeholder:text-ink-300 focus:border-brand-300" name="message" placeholder="请描述您的建设场景、关注产品和需求说明"></textarea>
+  </label>
+  <div class="mt-5 flex flex-wrap items-center justify-between gap-4">
+    <div class="text-xs leading-6 text-ink-400">提交成功后展示：您的需求已提交，我们将尽快与您联系。</div>
+    <button type="submit" class="inline-flex items-center justify-center rounded-full bg-ink-900 px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-brand-600">提交需求</button>
+  </div>
+</form>

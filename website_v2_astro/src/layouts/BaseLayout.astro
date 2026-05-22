@@ -1,0 +1,26 @@
+---
+import '@/styles/global.css';
+import { siteMeta } from '@/data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  bodyClass?: string;
+}
+
+const { title = siteMeta.title, description = siteMeta.description, bodyClass = '' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body class={bodyClass}>
+    <slot />
+  </body>
+</html>

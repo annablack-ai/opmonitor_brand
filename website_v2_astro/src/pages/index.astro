@@ -1,0 +1,395 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import HeroVisual from '@/components/HeroVisual.astro';
+import SiteHeader from '@/components/SiteHeader.astro';
+import { caseStudies } from '@/data/cases';
+import { newsItems } from '@/data/news';
+import { productSummaries } from '@/data/products';
+import { siteImages } from '@/data/images';
+import { capabilities, capabilityProcess, homeHero, homeHeroBullets, siteMeta } from '@/data/site';
+import { stats } from '@/data/stats';
+
+const productOrder = ['medical-waste', 'hazardous-waste', 'health-supervision', 'sterilization-monitoring', 'endoscope-compliance', 'carbon-management'] as const;
+const productShortLabels: Record<string, string> = {
+  'medical-waste': '医废追溯',
+  'hazardous-waste': '危废管理',
+  'health-supervision': '智慧卫监',
+  'sterilization-monitoring': '消毒灭菌',
+  'endoscope-compliance': '内镜合规',
+  'carbon-management': '碳管理',
+};
+const productDataKey: Record<string, string> = {
+  'medical-waste': 'medical',
+  'hazardous-waste': 'hazard',
+  'health-supervision': 'supervision',
+  'sterilization-monitoring': 'sterilize',
+  'endoscope-compliance': 'endoscope',
+  'carbon-management': 'carbon',
+};
+const productTabIcons: Record<string, string> = {
+  'medical-waste': '<svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="3"/><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/><path d="M9 9h6"/><path d="M9 12h6"/><path d="M12 9v6"/></svg>',
+  'hazardous-waste': '<svg viewBox="0 0 24 24"><path d="M12 4l7 12H5L12 4z"/><path d="M12 9v4"/><circle cx="12" cy="16.5" r="0.9" fill="currentColor" stroke="none"/><path d="M7 18h10"/><path d="M9 20h6"/></svg>',
+  'health-supervision': '<svg viewBox="0 0 24 24"><path d="M5 17h14"/><path d="M7 17V8"/><path d="M17 17V6"/><path d="M12 17v-4"/><circle cx="7" cy="8" r="1.4"/><circle cx="12" cy="13" r="1.4"/><circle cx="17" cy="6" r="1.4"/><path d="M7 8l5 5 5-7"/></svg>',
+  'sterilization-monitoring': '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 4v3"/><path d="M12 17v3"/><path d="M4 12h3"/><path d="M17 12h3"/><path d="M7.8 7.8l2.1 2.1"/><path d="M14.1 14.1l2.1 2.1"/></svg>',
+  'endoscope-compliance': '<svg viewBox="0 0 24 24"><path d="M5 13h5"/><path d="M10 13c3 0 4-4 7-4"/><path d="M17 9c1.7 0 3 1.3 3 3s-1.3 3-3 3"/><circle cx="8" cy="13" r="1.5"/><path d="M8 13v4a2 2 0 0 0 2 2h5"/></svg>',
+  'carbon-management': '<svg viewBox="0 0 24 24"><path d="M7 15c0-4 3-7 7-8 1.8 3.7 1 8.3-2.6 10.2C9.7 18 7 17.5 7 15z"/><path d="M10.5 14c1 0 1.8.8 1.8 1.8"/><path d="M14 11c1.7 0 3.2 1.4 3.2 3.2"/><path d="M5 19h14"/></svg>',
+};
+const productPanelMeta: Record<string, { tag: string; lead: string; points: string[]; note: string }> = {
+  'medical-waste': {
+    tag: '医疗卫生',
+    lead: '围绕院内收集、称重交接、暂存出库与处置交接，帮助医疗机构实现全过程留痕、责任追溯与规范管理。',
+    points: ['覆盖院内收集、称重交接、暂存出库等关键环节', '支持全过程留痕、责任追溯与异常提醒', '适配医疗机构日常作业与管理要求', '支撑医废规范化、可追溯、可闭环管理'],
+    note: '适用于医院、院区及医疗集团的医废合规管理场景。',
+  },
+  'hazardous-waste': {
+    tag: '生态环境',
+    lead: '围绕产生、包装、称重、打码、入库等作业节点，支撑危险废物全过程规范化管理。',
+    points: ['支持标签赋码、扫码入库与出库交接', '支持联单关联与过程留痕', '支持多节点责任追溯', '提升危废规范化管理效率'],
+    note: '适用于产废单位、园区平台及多主体协同管理场景。',
+  },
+  'health-supervision': {
+    tag: '智慧监管',
+    lead: '面向卫生监督与在线监测场景，支持实时预警、非现场监管、问题整改与过程留痕。',
+    points: ['支持多类在线监测与预警接入', '支持非现场监管与问题闭环', '支持过程留痕与监管协同', '适配公共卫生监督相关场景'],
+    note: '适用于监管驾驶舱、在线监测与协同处置一体化场景。',
+  },
+  'sterilization-monitoring': {
+    tag: '院感合规',
+    lead: '围绕温度、压力等关键参数进行在线监测，辅助消毒灭菌过程留痕与异常提醒。',
+    points: ['支持关键参数在线监测', '支持异常提醒与记录归档', '支持过程规范化管理', '适配消毒灭菌相关场景'],
+    note: '适用于灭菌设备、流程追踪与质量管理协同场景。',
+  },
+  'endoscope-compliance': {
+    tag: '院感合规',
+    lead: '支持内镜洗消流程记录、质量控制与接口对接，辅助内镜管理合规化。',
+    points: ['支持洗消流程留痕', '支持质量控制与状态管理', '支持接口对接与数据联动', '提升内镜管理规范性'],
+    note: '适用于内镜中心、洗消流程与跨系统数据联动场景。',
+  },
+  'carbon-management': {
+    tag: '减污降碳',
+    lead: '基于固废、危废、医废过程记录，拓展碳账基础与减污降碳协同分析能力。',
+    points: ['支持过程数据沉淀', '支持重量记录与流向记录', '支持碳账基础与协同分析', '适配园区集团与综合治理场景'],
+    note: '适用于集团管理、综合治理与减污降碳协同分析场景。',
+  },
+};
+const productPanelVisuals: Record<string, string> = {
+  medical: '<svg class="product-visual-scene" viewBox="0 0 720 460" aria-hidden="true"><ellipse class="glow" cx="520" cy="138" rx="164" ry="92"/><path class="wire-soft" d="M120 326h142l54-58h130l56-52h98"/><path class="wire" d="M150 286h134l40-44h124l48-44h72"/><rect class="plate-strong" x="106" y="256" width="220" height="120" rx="28"/><rect class="plate" x="154" y="210" width="132" height="46" rx="16"/><rect class="plate-strong" x="368" y="184" width="210" height="150" rx="32"/><rect class="plate" x="446" y="120" width="112" height="58" rx="18"/><circle class="node" cx="320" cy="242" r="16"/><circle class="node-fill" cx="320" cy="242" r="8"/><circle class="node" cx="492" cy="198" r="14"/><circle class="node-fill accent-cyan" cx="492" cy="198" r="7"/><circle class="node" cx="598" cy="190" r="12"/><circle class="node-fill" cx="598" cy="190" r="6"/><rect class="plate" x="186" y="292" width="70" height="18" rx="9"/><rect class="plate" x="408" y="232" width="98" height="18" rx="9"/></svg>',
+  hazard: '<svg class="product-visual-scene" viewBox="0 0 720 460" aria-hidden="true"><ellipse class="glow" cx="510" cy="140" rx="178" ry="88"/><path class="wire" d="M142 292h110l84-86h132l74 72h86"/><path class="wire-soft" d="M142 330h156l74-72h130l82 54h64"/><rect class="plate-strong" x="126" y="244" width="166" height="108" rx="28"/><rect class="plate" x="356" y="166" width="176" height="116" rx="24"/><rect class="plate-strong" x="518" y="250" width="102" height="68" rx="18"/><circle class="node" cx="336" cy="206" r="15"/><circle class="node-fill accent-amber" cx="336" cy="206" r="7"/><circle class="node" cx="532" cy="278" r="15"/><circle class="node-fill accent-amber" cx="532" cy="278" r="7"/><circle class="node" cx="626" cy="278" r="11"/><rect class="plate" x="176" y="278" width="64" height="16" rx="8"/><rect class="plate" x="558" y="198" width="48" height="16" rx="8"/></svg>',
+  supervision: '<svg class="product-visual-scene" viewBox="0 0 720 460" aria-hidden="true"><ellipse class="glow" cx="518" cy="128" rx="184" ry="92"/><rect class="plate-strong" x="132" y="214" width="170" height="128" rx="30"/><rect class="plate-strong" x="344" y="152" width="248" height="176" rx="34"/><line class="wire" x1="208" y1="214" x2="208" y2="152"/><line class="wire" x1="208" y1="152" x2="412" y2="152"/><line class="wire-soft" x1="208" y1="278" x2="344" y2="278"/><polyline class="wire" points="432,248 474,220 518,236 566,198"/><circle class="node" cx="208" cy="152" r="14"/><circle class="node-fill accent-cyan" cx="208" cy="152" r="7"/><circle class="node" cx="474" cy="220" r="13"/><circle class="node-fill accent-cyan" cx="474" cy="220" r="6"/><circle class="node" cx="566" cy="198" r="12"/><rect class="plate" x="388" y="192" width="76" height="14" rx="7"/><rect class="plate" x="388" y="222" width="124" height="14" rx="7"/><rect class="plate" x="388" y="252" width="92" height="14" rx="7"/></svg>',
+  sterilize: '<svg class="product-visual-scene" viewBox="0 0 720 460" aria-hidden="true"><ellipse class="glow" cx="504" cy="136" rx="176" ry="88"/><circle class="plate-strong" cx="458" cy="234" r="108"/><circle class="plate" cx="458" cy="234" r="72"/><circle class="node-fill accent-cyan" cx="458" cy="234" r="26"/><line class="wire" x1="202" y1="234" x2="332" y2="234"/><line class="wire" x1="584" y1="234" x2="650" y2="234"/><line class="wire-soft" x1="458" y1="96" x2="458" y2="150"/><line class="wire-soft" x1="458" y1="318" x2="458" y2="370"/><rect class="plate-strong" x="148" y="192" width="84" height="84" rx="22"/><rect class="plate-strong" x="598" y="196" width="70" height="76" rx="20"/><circle class="node" cx="332" cy="234" r="14"/><circle class="node" cx="584" cy="234" r="14"/><circle class="node-fill accent-cyan" cx="332" cy="234" r="7"/><circle class="node-fill accent-cyan" cx="584" cy="234" r="7"/></svg>',
+  endoscope: '<svg class="product-visual-scene" viewBox="0 0 720 460" aria-hidden="true"><ellipse class="glow" cx="516" cy="138" rx="176" ry="88"/><path class="wire" d="M168 286c84 0 116-70 198-70 52 0 88 28 150 28h106"/><path class="wire-soft" d="M168 328c94 0 128-48 204-48 48 0 72 18 124 18h126"/><rect class="plate-strong" x="132" y="248" width="112" height="82" rx="24"/><rect class="plate-strong" x="414" y="186" width="196" height="124" rx="28"/><circle class="node" cx="366" cy="216" r="14"/><circle class="node-fill accent-green" cx="366" cy="216" r="7"/><circle class="node" cx="520" cy="244" r="16"/><circle class="node-fill accent-green" cx="520" cy="244" r="8"/><circle class="node" cx="622" cy="244" r="11"/><rect class="plate" x="462" y="214" width="78" height="14" rx="7"/><rect class="plate" x="462" y="242" width="118" height="14" rx="7"/></svg>',
+  carbon: '<svg class="product-visual-scene" viewBox="0 0 720 460" aria-hidden="true"><ellipse class="glow" cx="520" cy="130" rx="180" ry="90"/><path class="wire" d="M154 302h108l78-84 110 30 88-58h116"/><path class="wire-soft" d="M154 340h162l70-56 110 20 84-42h74"/><rect class="plate-strong" x="134" y="266" width="130" height="80" rx="24"/><rect class="plate-strong" x="468" y="150" width="154" height="112" rx="28"/><circle class="node" cx="340" cy="218" r="14"/><circle class="node-fill accent-green" cx="340" cy="218" r="7"/><circle class="node" cx="450" cy="248" r="14"/><circle class="node-fill accent-green" cx="450" cy="248" r="7"/><circle class="node" cx="538" cy="190" r="13"/><circle class="node-fill accent-cyan" cx="538" cy="190" r="6"/><rect class="plate" x="494" y="176" width="56" height="16" rx="8"/><rect class="plate" x="494" y="206" width="100" height="16" rx="8"/></svg>',
+};
+const capabilityToneClasses = ['tone-cyan', 'tone-blue', 'tone-amber', 'tone-green'];
+const capabilityIcons = [
+  '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="18" r="0.8" fill="currentColor" stroke="none"/><path d="M8.5 14.5a5 5 0 0 1 7 0"/><path d="M5.5 11.5a9 9 0 0 1 13 0"/><path d="M12 21v-1"/></svg>',
+  '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6"/><path d="M9 6H7a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-2"/><path d="M9 12h6"/><path d="M9 16h4"/></svg>',
+  '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><circle cx="12" cy="17" r="0.8" fill="currentColor" stroke="none"/><path d="M10.3 4.9 3.8 16a2 2 0 0 0 1.7 3h13a2 2 0 0 0 1.7-3L13.7 4.9a2 2 0 0 0-3.4 0z"/></svg>',
+  '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v6c0 5 3.5 8 7 9 3.5-1 7-4 7-9V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>',
+];
+const caseTagMeta = [
+  { label: '医疗废物追溯', tone: 'tone-blue', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6v12"/><path d="M6 12h12"/><path d="M7 21V8a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v13"/></svg>' },
+  { label: '危废管理', tone: 'tone-amber', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 6h10"/><path d="M7 12h10"/><path d="M7 18h6"/><path d="M5 4v16"/><path d="M19 4v16"/></svg>' },
+  { label: '智慧监管', tone: 'tone-cyan', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18h16"/><path d="M6 18V9"/><path d="M12 18V6"/><path d="M18 18v-5"/><path d="M5 7l4-2 4 3 6-2"/></svg>' },
+  { label: '内镜合规', tone: 'tone-green', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13h5"/><path d="M9 13c3 0 4-5 8-5"/><path d="M17 8c2 0 3 1 3 3s-1 3-3 3"/><path d="M8 13v4a2 2 0 0 0 2 2h4"/></svg>' },
+];
+const newsGlyphs: Record<string, string> = {
+  '行业政策': '<svg class="news-card-glyph" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h6l4 4v14H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M14 3v5h5"/><path d="M10 13h6"/><path d="M10 17h4"/></svg>',
+  '公司动态': '<svg class="news-card-glyph" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13v-2l11-5v12L4 13z"/><path d="M15 9h1a3 3 0 0 1 0 6h-1"/><path d="M7 14v4a2 2 0 0 0 2 2h1"/></svg>',
+};
+const footerContactIcons = {
+  phone: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 11.2 19a19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3.3a2 2 0 0 1-.6 1.8l-1.6 1.6a16 16 0 0 0 6 6l1.6-1.6a2 2 0 0 1 1.8-.6l3.3.5a2 2 0 0 1 1.7 2Z"/></svg>',
+  mail: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>',
+  globe: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18"/><path d="M12 3a15 15 0 0 0 0 18"/></svg>',
+  map: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s6-4.6 6-10a6 6 0 1 0-12 0c0 5.4 6 10 6 10Z"/><circle cx="12" cy="11" r="2.5"/></svg>',
+};
+const buttonArrowIcon = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M3.75 10h10.5"/><path d="m10.75 5 5 5-5 5"/></svg>';
+---
+
+<BaseLayout bodyClass="home-page">
+	<SiteHeader currentPath={Astro.url.pathname} />
+
+	<main style={`--brand-logo:url('${siteImages.brand.logo}');`}>
+		<section class="hero">
+			<div class="container">
+				<div class="hero-inner">
+					<div class="hero-text">
+						<div class="hero-tags">
+							{homeHeroBullets.map((item) => <span class="tag">{item.label}</span>)}
+						</div>
+						<h1 class="hero-title"><span><em>AIoT</em> 赋能医疗卫生</span><span>与生态环境智慧合规</span></h1>
+						<p class="hero-subtitle">{homeHero.subtitle}</p>
+						<p class="hero-note">{homeHero.supporting}</p>
+						<div class="hero-btns">
+							<a href="/contact/" class="btn btn-primary btn-lg"><span class="btn-label">预约产品演示</span><span class="btn-icon" aria-hidden="true" set:html={buttonArrowIcon}></span></a>
+							<a href="/products/" class="btn btn-secondary btn-lg"><span class="btn-label">查看解决方案</span><span class="btn-icon" aria-hidden="true" set:html={buttonArrowIcon}></span></a>
+						</div>
+					</div>
+					<div class="hero-visual">
+						<HeroVisual />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section stats-section surface-neutral">
+			<div class="container">
+				<div class="section-header center">
+					<span class="section-label">OPM 大数据</span>
+					<h2 class="section-title">800+ 客户选择智感云</h2>
+					<p class="section-subtitle">这些数字，来自真实客户的长期使用。智感云围绕医疗废物、危险废物、智慧卫监、消毒灭菌监测等业务，持续服务医疗机构、监管部门、生态环境 / 危废相关单位及园区集团客户。</p>
+				</div>
+				<div class="stats-grid">
+					{stats.map((item) => (
+						<div class="stat-card">
+							<div class="stat-number">{item.value}</div>
+							<div class="stat-label">{item.label}</div>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="section product-overview-section surface-neutral" id="products">
+			<div class="container">
+				<div class="section-header center">
+					<span class="section-label">产品与解决方案</span>
+					<h2 class="section-title">产品与解决方案</h2>
+					<p class="section-subtitle">面向医疗卫生、生态环境、公共卫生监督与院感合规场景，提供可部署、可追溯、可扩展的数字化解决方案。</p>
+				</div>
+				<div class="product-tabs" role="tablist" aria-label="产品切换栏">
+					{productOrder.map((slug, index) => (
+						<button type="button" class={`product-tab ${index === 0 ? 'is-active' : ''}`} role="tab" aria-selected={index === 0 ? 'true' : 'false'} aria-controls={`product-panel-${productDataKey[slug]}`} id={`product-tab-${productDataKey[slug]}`} data-product={productDataKey[slug]}>
+							<span class="product-tab-icon" aria-hidden="true" set:html={productTabIcons[slug]}></span>
+							<span class="product-tab-label">{productShortLabels[slug]}</span>
+						</button>
+					))}
+				</div>
+				<div class="product-showcase">
+					{productOrder.map((slug, index) => {
+						const product = productSummaries.find((item) => item.slug === slug)!;
+						const meta = productPanelMeta[slug];
+						const productKey = productDataKey[slug];
+						const href = product.detailReady ? `/products/${slug}/` : '/products/';
+						return (
+							<article class={`product-panel ${index === 0 ? 'is-active' : ''}`} id={`product-panel-${productKey}`} role="tabpanel" aria-labelledby={`product-tab-${productKey}`} data-product-panel={productKey} hidden={index !== 0}>
+								<div class="product-copy">
+									<span class="product-copy-tag">{meta.tag}</span>
+									<h3 class="product-copy-title">{product.name}</h3>
+									<p class="product-copy-lead">{meta.lead}</p>
+									<ul class="product-copy-points">
+										{meta.points.map((point) => <li>{point}</li>)}
+									</ul>
+									<div class="product-copy-note">{meta.note}</div>
+									<div class="product-copy-actions">
+										<a href={href} class="btn btn-primary"><span class="btn-label">了解更多</span><span class="btn-icon" aria-hidden="true" set:html={buttonArrowIcon}></span></a>
+										<a href="/products/" class="btn btn-secondary"><span class="btn-label">查看解决方案</span><span class="btn-icon" aria-hidden="true" set:html={buttonArrowIcon}></span></a>
+									</div>
+								</div>
+								<div class="product-visual-stage" set:html={productPanelVisuals[productKey]}></div>
+							</article>
+						);
+					})}
+				</div>
+			</div>
+		</section>
+
+		<section class="section capabilities-section surface-blue">
+			<div class="container">
+				<div class="section-header center">
+					<span class="section-label">软硬一体能力</span>
+					<h2 class="section-title">软硬一体，让现场作业形成可追溯的合规闭环</h2>
+					<p class="section-subtitle">智感云将智能终端、移动采集、业务系统和监管驾驶舱结合，帮助客户完成业务过程记录、风险提醒、责任追溯和合规闭环。</p>
+				</div>
+				<div class="capabilities-grid">
+					{capabilities.map((item, index) => (
+						<div class="capability-card">
+							<div class={`capability-icon icon-badge ${capabilityToneClasses[index]}`} set:html={capabilityIcons[index]}></div>
+							<h3 class="capability-title">{item.title}</h3>
+							<p class="capability-desc">{item.description}</p>
+						</div>
+					))}
+				</div>
+				<div class="flow-bar">
+					{capabilityProcess.map((item, index) => (
+						<>
+							<div class="flow-step"><span class={`flow-step-pill ${capabilityToneClasses[index]}`}>{item}</span></div>
+							{index < capabilityProcess.length - 1 && <span class="flow-arrow">→</span>}
+						</>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="section home-cases surface-neutral" id="cases">
+			<div class="container">
+				<div class="section-header center">
+					<span class="section-label">客户覆盖</span>
+					<h2 class="section-title">800+ 客户的共同选择</h2>
+					<p class="section-subtitle">智感云已服务 800+ 客户，覆盖医疗机构、监管部门、生态环境 / 危废相关单位及园区集团等多类场景。客户案例以区域覆盖、客户类型和匿名应用方式展示，兼顾可信背书与数据安全。</p>
+				</div>
+				<div class="cases-layout">
+					<div>
+						<div class="cases-stats-list">
+							<div>
+								<div class="cases-highlight-number">800+</div>
+								<div class="cases-highlight-label">客户服务经验</div>
+							</div>
+							<p class="cases-copy-main">从医院科室级医废追溯，到区域危废"五即一码"建设，再到卫生监督在线监测与非现场执法辅助，智感云持续为高监管、高合规要求的行业客户提供可落地、可运维、可持续迭代的数字化解决方案。</p>
+							<p class="cases-copy-note">项目经验覆盖近 30 个省市 / 地区。地图仅展示区域覆盖，不展示具体客户地址、精确点位或敏感业务数据。</p>
+							<a href="/cases/" class="btn btn-secondary cases-link"><span class="btn-label">查看客户案例</span><span class="btn-icon" aria-hidden="true" set:html={buttonArrowIcon}></span></a>
+						</div>
+					</div>
+					<div class="cases-map">
+						<div class="map-placeholder">
+							<svg class="china-map" viewBox="0 0 760 480" aria-label="中国区域覆盖示意图" role="img">
+								<path class="base" d="M84 195 L110 182 L148 177 L176 159 L220 154 L254 132 L300 142 L328 125 L370 130 L418 116 L456 129 L503 120 L548 136 L588 126 L620 142 L646 168 L674 182 L666 210 L634 224 L602 238 L582 268 L550 286 L516 290 L486 314 L452 322 L414 314 L382 330 L338 336 L296 326 L264 336 L236 318 L206 316 L184 296 L152 292 L124 278 L108 252 L82 238 Z"></path>
+								<path class="hl" d="M176 198 L214 182 L258 184 L282 208 L246 224 L198 226 Z"></path>
+								<path class="hl" d="M310 174 L350 164 L390 178 L386 208 L340 212 L308 196 Z"></path>
+								<path class="hl" d="M430 170 L470 156 L518 170 L522 200 L470 216 L430 202 Z"></path>
+								<path class="hl" d="M540 184 L580 174 L612 192 L604 222 L566 234 L536 216 Z"></path>
+								<path class="hl" d="M364 236 L400 226 L430 240 L426 268 L388 278 L362 262 Z"></path>
+								<circle class="dot" cx="232" cy="206" r="8"></circle>
+								<circle class="dot" cx="356" cy="190" r="8"></circle>
+								<circle class="dot" cx="484" cy="188" r="8"></circle>
+								<circle class="dot" cx="580" cy="205" r="8"></circle>
+								<circle class="dot" cx="398" cy="254" r="8"></circle>
+							</svg>
+							<p class="map-caption">客户覆盖全国多地（省级聚合示意）<br />仅展示区域覆盖，不展示具体客户点位</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="case-cards">
+					{caseStudies.map((item, index) => {
+						const meta = caseTagMeta[index];
+						const [caseTitle, caseSub = item.product] = item.title.split('｜');
+						return (
+							<div class="case-card">
+								<div class={`case-card-tag ${meta.tone}`}>{meta.label}</div>
+								<div class="case-card-header">
+									<div class={`case-card-badge icon-badge ${meta.tone}`} set:html={meta.icon}></div>
+									<div>
+										<div class="case-card-title">{caseTitle}</div>
+										<div class="case-card-sub">{caseSub}</div>
+									</div>
+								</div>
+								<p class="case-card-desc">{item.summary}</p>
+							</div>
+						);
+					})}
+				</div>
+			</div>
+		</section>
+
+		<section class="section home-news-section surface-blue" id="news">
+			<div class="container">
+				<div class="section-header home-news-header">
+					<div>
+						<span class="section-label">新闻动态</span>
+						<h2 class="section-title">行业政策与产品动态</h2>
+						<p class="section-subtitle">关注医疗废物、危险废物、卫生监督等相关政策趋势，持续分享产品动态与行业洞察。</p>
+					</div>
+					<a href="/news/" class="btn btn-secondary"><span class="btn-label">查看全部</span><span class="btn-icon" aria-hidden="true" set:html={buttonArrowIcon}></span></a>
+				</div>
+				<div class="news-grid">
+					{newsItems.slice(0, 3).map((item) => (
+						<div class="news-card">
+							<div class="news-card-img">
+								<div class="news-card-fallback"></div>
+								<div set:html={newsGlyphs[item.category]}></div>
+							</div>
+							<div class="news-card-body">
+								<div class="news-card-meta">
+									<span class={`news-card-cat ${item.category === '行业政策' ? 'tone-blue' : 'tone-green'}`}>{item.category}</span>
+									<span class="news-card-date">{item.date}</span>
+								</div>
+								<h3 class="news-card-title">{item.title}</h3>
+								<p class="news-card-excerpt">{item.summary}</p>
+								<a href="/news/" class="news-card-link">查看详情 →</a>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="section cta-section surface-blue">
+			<div class="container">
+				<div class="cta-inner">
+					<h2 class="cta-title">想了解哪套方案适合您的机构？</h2>
+					<p class="cta-desc">提交需求后，我们将根据您的机构类型、关注产品和建设目标，安排产品演示与方案沟通。</p>
+					<a href="/contact/" class="btn btn-primary btn-lg"><span class="btn-label">预约产品演示</span><span class="btn-icon" aria-hidden="true" set:html={buttonArrowIcon}></span></a>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="footer">
+		<div class="container">
+			<div class="footer-top">
+				<div class="footer-brand">
+					<div class="footer-logo">
+						<div class="nav-logo-icon">智感</div>
+						<span>{siteMeta.name}</span>
+					</div>
+					<p>{siteMeta.tagline}</p>
+				</div>
+				<div>
+					<div class="footer-nav-title">产品与方案</div>
+					<div class="footer-nav-links">
+						<a href="/products/medical-waste/" class="footer-nav-link">医疗废物精细化追溯</a>
+						<a href="/products/hazardous-waste/" class="footer-nav-link">危险废物五即一码</a>
+						<a href="/products/health-supervision/" class="footer-nav-link">智慧卫监解决方案</a>
+						<a href="/products/sterilization-monitoring/" class="footer-nav-link">消毒灭菌监测系统</a>
+						<a href="/products/endoscope-compliance/" class="footer-nav-link">内镜合规平台</a>
+						<a href="/products/carbon-management/" class="footer-nav-link">碳管理与减污降碳</a>
+					</div>
+				</div>
+				<div>
+					<div class="footer-nav-title">公司</div>
+					<div class="footer-nav-links">
+						<a href="/cases/" class="footer-nav-link">客户案例</a>
+						<a href="/news/" class="footer-nav-link">新闻动态</a>
+						<a href="/about/" class="footer-nav-link">关于我们</a>
+						<a href="/contact/" class="footer-nav-link">联系我们</a>
+					</div>
+				</div>
+				<div>
+					<div class="footer-nav-title">联系我们</div>
+					<div class="footer-contact-item"><span class="footer-contact-icon" set:html={footerContactIcons.phone}></span><span>{siteMeta.phone}</span></div>
+					<div class="footer-contact-item"><span class="footer-contact-icon" set:html={footerContactIcons.mail}></span><span>{siteMeta.email}</span></div>
+					<div class="footer-contact-item"><span class="footer-contact-icon" set:html={footerContactIcons.globe}></span><span>{siteMeta.website}</span></div>
+					<div class="footer-contact-item"><span class="footer-contact-icon" set:html={footerContactIcons.map}></span><span>{siteMeta.address}</span></div>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<span>© 2025 {siteMeta.name} 版权所有</span>
+				<span class="footer-icp"><a href="#">{siteMeta.icp}</a></span>
+			</div>
+		</div>
+	</footer>
+</BaseLayout>
+
+<script is:inline>
+  const tabs = document.querySelectorAll('[data-product]');
+  const panels = document.querySelectorAll('[data-product-panel]');
+
+  const setActivePanel = (key) => {
+    tabs.forEach((tab) => {
+      const isActive = tab.getAttribute('data-product') === key;
+      tab.classList.toggle('is-active', isActive);
+      tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    panels.forEach((panel) => {
+      const isActive = panel.getAttribute('data-product-panel') === key;
+      panel.classList.toggle('is-active', isActive);
+      panel.hidden = !isActive;
+    });
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => setActivePanel(tab.getAttribute('data-product')));
+  });
+</script>

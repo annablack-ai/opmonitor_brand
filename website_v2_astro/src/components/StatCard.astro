@@ -1,0 +1,24 @@
+---
+import type { StatItem } from '@/types/site';
+
+interface Props {
+  item: StatItem;
+  compact?: boolean;
+}
+
+const { item, compact = false } = Astro.props;
+---
+
+{compact ? (
+  <article class="panel soft-surface flex min-h-[12rem] flex-col justify-center p-6 text-center md:p-7">
+    <div class="metric-value text-[clamp(2.75rem,5vw,4.5rem)] leading-none text-ink-700">{item.value}</div>
+    <div class="mt-4 text-base font-medium tracking-[-0.02em] text-ink-600 md:text-[1.0625rem]">{item.label}</div>
+  </article>
+) : (
+  <article class="panel soft-surface p-6 md:p-7">
+    <div class="eyebrow">数据背书</div>
+    <div class="metric-value mt-5">{item.value}</div>
+    <div class="mt-3 text-lg font-semibold tracking-[-0.02em] text-ink-900">{item.label}</div>
+    {item.detail && <p class="body-muted mt-4">{item.detail}</p>}
+  </article>
+)}

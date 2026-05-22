@@ -1,0 +1,137 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SiteHeader from '@/components/SiteHeader.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+import Icon from '@/components/Icon.astro';
+import { siteMeta } from '@/data/site';
+import type { IconName } from '@/types/site';
+
+const contactInfoCards: Array<{ label: string; value: string; icon: IconName; tone: string }> = [
+  { label: '服务热线', value: siteMeta.phone, icon: 'phone', tone: 'tone-blue' },
+  { label: '电子邮箱', value: siteMeta.email, icon: 'mail', tone: 'tone-cyan' },
+  { label: '官网', value: siteMeta.website, icon: 'globe', tone: 'tone-green' },
+  { label: '总部地址', value: '以正式联系方式为准', icon: 'map', tone: 'tone-amber' },
+];
+---
+
+<BaseLayout bodyClass="v1-inner-page" title="联系我们 | 智感云" description="欢迎提交需求信息，获取智感云产品演示与方案沟通。电话：400-160-1008，邮箱：info@opmonitor.com">
+  <SiteHeader currentPath={Astro.url.pathname} />
+
+  <main>
+    <section class="v1-page-hero">
+      <div class="v1-container">
+        <div class="v1-breadcrumb">
+          <a href="/">首页</a>
+          <span class="v1-breadcrumb-sep">/</span>
+          <span>联系我们</span>
+        </div>
+        <div class="v1-page-hero-inner">
+          <div class="v1-page-hero-text">
+            <span class="v1-section-label">联系我们</span>
+            <h1 class="v1-page-hero-title">联系我们</h1>
+            <p class="v1-page-hero-subtitle">提交需求信息，获取产品演示与方案沟通。</p>
+          </div>
+          <div class="v1-page-hero-media v1-contact-hero-media" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v1-section">
+      <div class="v1-container">
+        <div class="v1-contact-layout">
+          <div>
+            <div class="v1-contact-info-cards">
+              {contactInfoCards.map((item) => (
+                <article class="v1-contact-info-card">
+                  <div class:list={['v1-contact-info-card-icon', 'v1-icon-badge', item.tone]}>
+                    <Icon name={item.icon} class="h-6 w-6" />
+                  </div>
+                  <div class="v1-contact-info-card-label">{item.label}</div>
+                  <div class="v1-contact-info-card-value">{item.value}</div>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div class="v1-contact-form-card">
+            <div class="v1-form-title">预约产品演示 / 方案沟通</div>
+            <form id="contactForm">
+              <div class="v1-form-row">
+                <div class="v1-form-group">
+                  <label class="v1-form-label" for="fname">姓名<span class="req">*</span></label>
+                  <input class="v1-form-input" type="text" id="fname" name="name" placeholder="请输入您的姓名" required />
+                </div>
+                <div class="v1-form-group">
+                  <label class="v1-form-label" for="fphone">手机<span class="req">*</span></label>
+                  <input class="v1-form-input" type="tel" id="fphone" name="phone" placeholder="请输入手机号码" required pattern="[0-9]{11}" />
+                </div>
+              </div>
+              <div class="v1-form-row">
+                <div class="v1-form-group">
+                  <label class="v1-form-label" for="forg">公司 / 机构名称<span class="req">*</span></label>
+                  <input class="v1-form-input" type="text" id="forg" name="org" placeholder="请输入机构名称" required />
+                </div>
+                <div class="v1-form-group">
+                  <label class="v1-form-label" for="fregion">所在地区</label>
+                  <input class="v1-form-input" type="text" id="fregion" name="region" placeholder="省份 / 城市" />
+                </div>
+              </div>
+              <div class="v1-form-row">
+                <div class="v1-form-group">
+                  <label class="v1-form-label" for="forgtype">机构类型</label>
+                  <select class="v1-form-select" id="forgtype" name="org_type">
+                    <option value="">请选择机构类型</option>
+                    <option value="hospital">医疗机构</option>
+                    <option value="regulator">监管部门</option>
+                    <option value="hazwaste">生态环境 / 危废相关单位</option>
+                    <option value="park">园区 / 集团化单位</option>
+                    <option value="other">其他</option>
+                  </select>
+                </div>
+                <div class="v1-form-group">
+                  <label class="v1-form-label" for="fproduct">关注产品</label>
+                  <select class="v1-form-select" id="fproduct" name="product">
+                    <option value="">请选择关注产品</option>
+                    <option value="medical-waste">医疗废物精细化追溯系统</option>
+                    <option value="hazardous-waste">危险废物&quot;五即一码&quot;规范化管理系统</option>
+                    <option value="health-supervision">智慧卫监解决方案</option>
+                    <option value="sterilization">消毒灭菌监测系统</option>
+                    <option value="endoscope">内镜合规平台</option>
+                    <option value="carbon">碳管理与减污降碳协同</option>
+                    <option value="other">其他</option>
+                  </select>
+                </div>
+              </div>
+              <div class="v1-form-group">
+                <label class="v1-form-label" for="fmsg">需求描述</label>
+                <textarea class="v1-form-textarea" id="fmsg" name="message" placeholder="请简要描述您的业务场景和需求，帮助我们为您提供更有针对性的方案建议…"></textarea>
+              </div>
+              <button type="submit" class="v1-form-submit">提交预约申请</button>
+              <p class="v1-form-note">提交信息仅用于产品演示沟通，我们将在 1—2 个工作日内与您联系。</p>
+            </form>
+          </div>
+        </div>
+
+        <div class="v1-contact-map-placeholder">
+          <svg width="48" height="48" viewBox="0 0 64 64" fill="none" aria-hidden="true" class="v1-contact-map-icon"><path d="M32 4C18.7 4 8 14.7 8 28c0 17 24 36 24 36s24-19 24-36C56 14.7 45.3 4 32 4zm0 20a8 8 0 110 16 8 8 0 010-16z" fill="#007BFF"/></svg>
+          <p class="v1-contact-map-title">北京市亦庄经济开发区</p>
+          <p class="v1-contact-map-desc">总部地图加载中…</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+
+  <script is:inline>
+    const contactForm = document.getElementById('contactForm');
+    contactForm?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const submitButton = contactForm.querySelector('.v1-form-submit');
+      if (!(submitButton instanceof HTMLButtonElement)) return;
+      submitButton.textContent = '提交成功，我们将尽快与您联系 ✓';
+      submitButton.style.background = '#16a34a';
+      submitButton.disabled = true;
+    });
+  </script>
+</BaseLayout>

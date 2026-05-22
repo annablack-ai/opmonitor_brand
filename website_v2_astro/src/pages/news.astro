@@ -1,0 +1,108 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SiteHeader from '@/components/SiteHeader.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+import { newsItems } from '@/data/news';
+
+const newsCardGlyph = `<svg class="v1-news-card-glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13v-2l11-5v12L4 13z"/><path d="M15 9h1a3 3 0 0 1 0 6h-1"/><path d="M7 14v4a2 2 0 0 0 2 2h1"/></svg>`;
+---
+
+<BaseLayout bodyClass="v1-inner-page" title="新闻动态 | 智感云" description="聚焦医疗废物、危险废物、卫生监督、消毒灭菌、内镜合规与减污降碳相关政策趋势，分享产品动态与行业洞察。">
+  <SiteHeader currentPath={Astro.url.pathname} />
+
+  <main>
+    <section class="v1-page-hero">
+      <div class="v1-container">
+        <div class="v1-breadcrumb">
+          <a href="/">首页</a>
+          <span class="v1-breadcrumb-sep">/</span>
+          <span>新闻动态</span>
+        </div>
+        <div class="v1-page-hero-inner">
+          <div class="v1-page-hero-text">
+            <span class="v1-section-label">新闻动态</span>
+            <h1 class="v1-page-hero-title">新闻动态</h1>
+            <p class="v1-page-hero-subtitle">聚焦医疗废物、危险废物、卫生监督、消毒灭菌、内镜合规与减污降碳相关政策趋势，分享产品动态与行业洞察。</p>
+          </div>
+          <div class="v1-page-hero-media v1-news-hero-media" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v1-section">
+      <div class="v1-container">
+        <div class="v1-news-filter" id="newsFilter">
+          <button class="v1-news-filter-btn active" data-cat="all" type="button">全部</button>
+          <button class="v1-news-filter-btn" data-cat="行业政策" type="button">行业政策</button>
+          <button class="v1-news-filter-btn" data-cat="公司动态" type="button">公司动态</button>
+        </div>
+
+        <div class="v1-news-grid" id="newsGrid">
+          {newsItems.map((item) => (
+            <article class="v1-news-card" data-cat={item.category}>
+              <div class="v1-news-card-img" set:html={item.category === '公司动态' ? newsCardGlyph : ''}></div>
+              <div class="v1-news-card-body">
+                <div class="v1-news-meta">
+                  <span class:list={['v1-news-card-cat', item.category === '行业政策' ? 'tone-blue' : 'tone-green']}>{item.category}</span>
+                  <span class="v1-news-date">{item.date}</span>
+                </div>
+                <h2 class="v1-news-card-title">{item.title}</h2>
+                <p class="v1-news-card-desc">{item.summary}</p>
+                <span class="v1-news-card-note">{item.category === '行业政策' ? '政策解读摘要' : '动态摘要'}</span>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div class="v1-news-pagination" aria-label="新闻分页">
+          <button class="v1-page-btn active" type="button">1</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="v1-section v1-cta-section">
+      <div class="v1-container">
+        <div class="v1-cta-inner">
+          <h2 class="v1-cta-title">关注智感云产品动态与行业资讯</h2>
+          <p class="v1-cta-desc">了解最新政策解读、产品进展和行业实践，欢迎预约与我们沟通。</p>
+          <a href="/contact/" class="v1-btn v1-btn-primary v1-btn-lg">预约产品演示</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+
+  <script is:inline>
+    const filterRoot = document.getElementById('newsFilter');
+    const filterButtons = Array.from(filterRoot?.querySelectorAll('.v1-news-filter-btn') ?? []);
+    const cards = Array.from(document.querySelectorAll('.v1-news-card'));
+    const categoryMap = { policy: '行业政策', company: '公司动态' };
+
+    const applyNewsFilter = (categoryKey) => {
+      const mappedCategory = categoryMap[categoryKey] ?? 'all';
+
+      filterButtons.forEach((button) => {
+        const isActive = button.dataset.cat === mappedCategory || (mappedCategory === 'all' && button.dataset.cat === 'all');
+        button.classList.toggle('active', isActive);
+      });
+
+      cards.forEach((card) => {
+        const visible = mappedCategory === 'all' || card.dataset.cat === mappedCategory;
+        card.toggleAttribute('hidden', !visible);
+      });
+    };
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const key = button.dataset.cat === '行业政策' ? 'policy' : button.dataset.cat === '公司动态' ? 'company' : 'all';
+        const url = key === 'all' ? '/news/' : `/news/?category=${key}`;
+        window.history.replaceState(null, '', url);
+        applyNewsFilter(key);
+      });
+    });
+
+    const initialCategory = new URLSearchParams(window.location.search).get('category') ?? 'all';
+    applyNewsFilter(initialCategory);
+  </script>
+</BaseLayout>

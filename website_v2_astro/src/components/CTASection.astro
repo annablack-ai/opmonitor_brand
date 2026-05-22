@@ -1,0 +1,75 @@
+---
+import Button from '@/components/Button.astro';
+
+interface ActionItem {
+  label: string;
+  href: string;
+  variant?: 'primary' | 'secondary';
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description: string;
+  actions?: ActionItem[];
+  highlights?: string[];
+  variant?: 'default' | 'product';
+}
+
+const { eyebrow, title, description, actions = [], highlights = [], variant = 'default' } = Astro.props;
+const isProductVariant = variant === 'product';
+---
+
+<section class="section-space">
+  <div class="container-shell">
+    {isProductVariant ? (
+      <div class="cta-shell border border-white/10 px-8 py-10 text-white shadow-[var(--shadow-float)] lg:grid lg:grid-cols-[1.08fr_0.92fr] lg:gap-10 lg:px-10 lg:py-12">
+        <div class="relative max-w-3xl">
+          {eyebrow && <div class="eyebrow text-white/64">{eyebrow}</div>}
+          <h2 class={`section-title text-white ${eyebrow ? 'mt-3' : ''}`}>{title}</h2>
+          <p class="mt-4 max-w-2xl text-[1rem] leading-8 text-white/78 md:text-[1.125rem]">{description}</p>
+          {highlights.length > 0 && (
+            <div class="mt-8 flex flex-wrap gap-3">
+              {highlights.map((item) => (
+                <span class="inline-flex items-center border border-white/18 bg-white/8 px-4 py-2 text-sm font-medium text-white/88 backdrop-blur-sm">{item}</span>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div class="relative mt-8 lg:mt-0 lg:self-end">
+          <div class="border border-white/14 bg-black/10 p-6 backdrop-blur-sm">
+            <div class="eyebrow text-white/55">下一步</div>
+            {actions.length > 0 && (
+              <div class="mt-5 flex flex-wrap gap-4">
+                {actions.map((action) => (
+                  <Button href={action.href} variant={action.variant ?? 'primary'}>{action.label}</Button>
+                ))}
+              </div>
+            )}
+            {highlights.length > 0 && (
+              <div class="mt-6 grid gap-3 text-sm leading-7 text-white/78">
+                {highlights.slice(0, 3).map((item) => <div>{item}</div>)}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    ) : (
+      <div class="panel px-8 py-10 lg:flex lg:items-center lg:justify-between lg:gap-10">
+        <div class="max-w-3xl">
+          {eyebrow && <div class="eyebrow">{eyebrow}</div>}
+          <h2 class={`section-title ${eyebrow ? 'mt-3' : ''}`}>{title}</h2>
+          <p class="body-large mt-4">{description}</p>
+        </div>
+        {actions.length > 0 && (
+          <div class="mt-6 flex flex-wrap gap-4 lg:mt-0 lg:justify-end">
+            {actions.map((action) => (
+              <Button href={action.href} variant={action.variant ?? 'primary'}>{action.label}</Button>
+            ))}
+          </div>
+        )}
+      </div>
+    )}
+  </div>
+</section>

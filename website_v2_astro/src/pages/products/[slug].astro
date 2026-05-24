@@ -21,7 +21,6 @@ if (!product) {
 
 const productPageMeta: Record<string, {
   heroLabel: string;
-  heroTitleLines: string[];
   heroTags: string[];
   heroImage: string;
   heroFallback: string;
@@ -39,7 +38,6 @@ const productPageMeta: Record<string, {
 }> = {
   'medical-waste': {
     heroLabel: '医疗废物管理',
-    heroTitleLines: ['医疗废物精细化追溯系统'],
     heroTags: ['医疗机构', '卫健监管', '全流程追溯'],
     heroImage: '/images/products/medical_waste_hero.webp',
     heroFallback: 'linear-gradient(135deg,#c8e6ff 0%,#a8d4f5 100%)',
@@ -74,7 +72,6 @@ const productPageMeta: Record<string, {
   },
   'hazardous-waste': {
     heroLabel: '危险废物管理',
-    heroTitleLines: ['危险废物"五即一码"', '规范化管理系统'],
     heroTags: ['医疗机构', '产废单位', '生态环境监管'],
     heroImage: '/images/products/hazardous_waste_hero.webp',
     heroFallback: 'linear-gradient(135deg,#c8e6ff 0%,#a8d4f5 100%)',
@@ -109,7 +106,6 @@ const productPageMeta: Record<string, {
   },
   'health-supervision': {
     heroLabel: '智慧卫监',
-    heroTitleLines: ['智慧卫监解决方案'],
     heroTags: ['卫生监督机构', '非现场执法', '在线监测'],
     heroImage: '/images/products/health_supervision_hero.webp',
     heroFallback: 'linear-gradient(135deg,#c8e6ff 0%,#a8d4f5 100%)',
@@ -136,7 +132,6 @@ const productPageMeta: Record<string, {
   },
   'sterilization-monitoring': {
     heroLabel: '消毒灭菌监测',
-    heroTitleLines: ['消毒灭菌监测系统'],
     heroTags: ['医疗机构', '口腔诊所', '消毒供应中心'],
     heroImage: '/images/products/sterilization_monitoring_hero.webp',
     heroFallback: 'linear-gradient(135deg,#c8e6ff 0%,#a8d4f5 100%)',
@@ -168,7 +163,6 @@ const productPageMeta: Record<string, {
   },
   'endoscope-compliance': {
     heroLabel: '内镜合规',
-    heroTitleLines: ['内镜合规平台'],
     heroTags: ['内镜中心', '院感部门', '区域平台对接'],
     heroImage: '/images/products/endoscope_compliance_hero.webp',
     heroFallback: 'linear-gradient(135deg,#c8e6ff 0%,#a8d4f5 100%)',
@@ -200,7 +194,6 @@ const productPageMeta: Record<string, {
   },
   'carbon-management': {
     heroLabel: '绿色低碳',
-    heroTitleLines: ['碳管理与减污降碳协同'],
     heroTags: ['园区', '集团化单位', '绿色低碳'],
     heroImage: '/images/products/carbon_management_hero.webp',
     heroFallback: 'linear-gradient(135deg,#c8e6ff 0%,#b8ddb0 100%)',
@@ -235,7 +228,7 @@ const publicRoot = fileURLToPath(new URL('../../../public', import.meta.url));
 const heroImageExists = existsSync(fileURLToPath(new URL(`.${meta.heroImage}`, `file://${publicRoot}/`)));
 ---
 
-<BaseLayout bodyClass="v1-inner-page" title={`${product.name} | 智感云`} description={product.excerpt}>
+<BaseLayout bodyClass="v1-inner-page" title={`${product.displayName} | 智感云`} description={product.excerpt}>
   <SiteHeader currentPath={Astro.url.pathname} />
 
   <main>
@@ -246,14 +239,13 @@ const heroImageExists = existsSync(fileURLToPath(new URL(`.${meta.heroImage}`, `
           <span class="v1-breadcrumb-sep">/</span>
           <a href="/products/">产品与解决方案</a>
           <span class="v1-breadcrumb-sep">/</span>
-          <span>{product.name}</span>
+          <span>{product.shortName}</span>
         </div>
         <div class="v1-page-hero-inner">
           <div class="v1-page-hero-text">
             <span class="v1-section-label">{meta.heroLabel}</span>
-            <h1 class="v1-page-hero-title v1-product-hero-title">
-              {meta.heroTitleLines.map((line) => <span>{line}</span>)}
-            </h1>
+            <h1 class="v1-page-hero-title v1-product-hero-title"><span>{product.displayName}</span></h1>
+            <p class="v1-product-hero-english">{product.englishName}</p>
             <p class="v1-page-hero-subtitle">{product.heroSummary}</p>
             <div class="v1-product-hero-tags">
               {meta.heroTags.map((tag) => <span class="v1-product-hero-tag">{tag}</span>)}

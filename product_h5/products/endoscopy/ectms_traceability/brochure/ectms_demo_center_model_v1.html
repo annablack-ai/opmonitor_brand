@@ -1,0 +1,2165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECTMS 内镜洗消中心演示模型</title>
+    <style>
+        :root {
+            --bg: #edf2f7;
+            --paper: #ffffff;
+            --surface: #f5f7fa;
+            --surface-blue: #eef5ff;
+            --surface-cyan: #eefcff;
+            --ink: #1f2937;
+            --ink-deep: #16283d;
+            --muted: #67758a;
+            --muted-light: #98a2b3;
+            --line: #dbe3ee;
+            --line-soft: #e7edf4;
+            --blue: #007bff;
+            --blue-deep: #0f4c81;
+            --cyan: #18c1d6;
+            --green: #4ea50f;
+            --orange: #f4a62a;
+            --danger: #dc2626;
+            --danger-soft: #fff2f2;
+            --shadow-page: 0 18px 34px rgba(15, 23, 42, 0.10);
+            --shadow-soft: 0 14px 22px rgba(15, 23, 42, 0.06);
+            --shadow-card: 0 8px 16px rgba(15, 23, 42, 0.05);
+            --radius-xl: 28px;
+            --radius-lg: 22px;
+            --radius-md: 18px;
+            --radius-sm: 14px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "IBM Plex Sans", "PingFang SC", "Noto Sans SC", "Segoe UI", sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 10% 0%, #f9fbff 0%, #edf2f7 44%),
+                linear-gradient(180deg, #f6f9fc 0%, #edf2f7 100%);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .page-shell {
+            width: min(1440px, calc(100vw - 32px));
+            margin: 0 auto;
+            padding: 20px 0 56px;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            background: rgba(237, 242, 247, 0.72);
+            border-bottom: 1px solid rgba(219, 227, 238, 0.8);
+        }
+
+        .topbar-inner {
+            width: min(1440px, calc(100vw - 32px));
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 14px 0;
+        }
+
+        .brand-lockup {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .brand-lockup img {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .brand-copy {
+            min-width: 0;
+        }
+
+        .brand-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--ink-deep);
+            line-height: 1.1;
+        }
+
+        .brand-sub {
+            margin-top: 2px;
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            color: var(--muted-light);
+        }
+
+        .topnav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .topnav a {
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(219, 227, 238, 0.95);
+            background: rgba(255, 255, 255, 0.9);
+            color: #45607e;
+            font-size: 12px;
+            font-weight: 600;
+            transition: 180ms ease;
+        }
+
+        .topnav a:hover {
+            border-color: #bfd4ef;
+            color: var(--blue-deep);
+            transform: translateY(-1px);
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            min-height: 34px;
+            padding: 0 14px;
+            border-radius: 999px;
+            border: 1px solid #e2e9f3;
+            background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+            font-size: 12px;
+            letter-spacing: 0.06em;
+            color: var(--muted-light);
+            font-weight: 600;
+            width: fit-content;
+        }
+
+        .section-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            color: var(--blue);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .section-kicker::before {
+            content: "";
+            width: 28px;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--blue), rgba(0, 123, 255, 0.2));
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+            gap: 22px;
+            align-items: stretch;
+            margin-top: 22px;
+        }
+
+        .hero-copy,
+        .hero-stage {
+            position: relative;
+            border: 1px solid var(--line);
+            border-radius: 32px;
+            background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+            box-shadow: var(--shadow-page);
+            overflow: hidden;
+        }
+
+        .hero-copy {
+            padding: 34px;
+        }
+
+        .hero-copy::before,
+        .hero-stage::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(135deg, rgba(0, 123, 255, 0.05), transparent 42%, rgba(24, 193, 214, 0.03));
+        }
+
+        .hero-title {
+            margin-top: 18px;
+            font-size: clamp(38px, 4.6vw, 66px);
+            line-height: 1.04;
+            letter-spacing: -0.04em;
+            font-weight: 800;
+            color: var(--ink-deep);
+        }
+
+        .hero-subtitle {
+            margin-top: 14px;
+            font-size: 16px;
+            color: var(--blue);
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .hero-lead {
+            margin-top: 18px;
+            max-width: 640px;
+            font-size: 15px;
+            color: #405368;
+        }
+
+        .hero-chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: 1px solid #d7e4f7;
+            background: #f5f9ff;
+            color: #355174;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .chip i {
+            width: 9px;
+            height: 9px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #18c1d6, #007bff);
+            box-shadow: 0 0 12px rgba(0, 123, 255, 0.24);
+        }
+
+        .hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .metric-card {
+            padding: 16px 16px 15px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--line-soft);
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            box-shadow: var(--shadow-card);
+        }
+
+        .metric-label {
+            font-size: 11px;
+            color: var(--muted-light);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .metric-value {
+            margin-top: 8px;
+            font-size: 18px;
+            line-height: 1.35;
+            font-weight: 700;
+            color: #1d334e;
+        }
+
+        .hero-note {
+            margin-top: 18px;
+            padding: 16px 18px;
+            border-radius: var(--radius-md);
+            border: 1px solid #dbe7f7;
+            background: linear-gradient(180deg, #f8fbff 0%, #f1f7ff 100%);
+            color: #314761;
+            font-size: 13px;
+            line-height: 1.7;
+            border-left: 3px solid #7bb1ff;
+        }
+
+        .hero-note strong {
+            color: var(--blue-deep);
+        }
+
+        .hero-stage {
+            padding: 28px;
+            min-height: 720px;
+        }
+
+        .stage-meta {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .stage-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 34px;
+            padding: 0 12px;
+            border-radius: 999px;
+            border: 1px solid #d6e4f8;
+            background: rgba(255, 255, 255, 0.88);
+            color: #355174;
+            font-size: 11px;
+            font-weight: 700;
+            box-shadow: var(--shadow-card);
+        }
+
+        .stage-meta span::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #18c1d6, #007bff);
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.22);
+        }
+
+        .stage-heading {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 14px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stage-title {
+            font-size: 22px;
+            line-height: 1.2;
+            color: var(--ink-deep);
+            font-weight: 800;
+        }
+
+        .stage-desc {
+            margin-top: 8px;
+            max-width: 520px;
+            color: #52667d;
+            font-size: 13px;
+        }
+
+        .stage-badge {
+            padding: 10px 12px;
+            border-radius: 16px;
+            background: linear-gradient(180deg, #f3f8ff 0%, #eaf2ff 100%);
+            border: 1px solid #d6e4f8;
+            font-size: 12px;
+            color: var(--blue-deep);
+            font-weight: 700;
+            text-align: right;
+            box-shadow: var(--shadow-card);
+            white-space: nowrap;
+        }
+
+        .stage-board {
+            position: relative;
+            margin-top: 18px;
+            min-height: 590px;
+            border-radius: 28px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 20% 0%, rgba(24, 193, 214, 0.14), transparent 36%),
+                radial-gradient(circle at 100% 10%, rgba(0, 123, 255, 0.16), transparent 34%),
+                linear-gradient(180deg, #f8fbff 0%, #eaf3ff 100%);
+            border: 1px solid #d9e6f7;
+        }
+
+        .stage-board::before {
+            content: "";
+            position: absolute;
+            inset: 20px 20px 28px;
+            border-radius: 26px;
+            background:
+                linear-gradient(rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.68)),
+                linear-gradient(90deg, rgba(0, 123, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(rgba(0, 123, 255, 0.035) 1px, transparent 1px);
+            background-size: auto, 34px 34px, 34px 34px;
+            box-shadow:
+                inset 0 0 0 1px rgba(217, 230, 247, 0.84),
+                inset 0 -40px 60px rgba(0, 123, 255, 0.04);
+        }
+
+        .stage-board::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 12px;
+            width: 74%;
+            height: 56px;
+            transform: translateX(-50%);
+            border-radius: 999px;
+            background: radial-gradient(ellipse at center, rgba(15, 76, 129, 0.16), transparent 68%);
+            filter: blur(18px);
+            pointer-events: none;
+        }
+
+        .center-map {
+            position: absolute;
+            inset: 42px 36px 58px 36px;
+            z-index: 1;
+        }
+
+        .center-map svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .zone-card,
+        .data-bubble,
+        .scene-media,
+        .route-tag {
+            position: absolute;
+            z-index: 3;
+            border-radius: 18px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .zone-card {
+            padding: 14px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.76);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            width: 220px;
+            overflow: hidden;
+        }
+
+        .zone-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, rgba(0, 123, 255, 0.85), rgba(24, 193, 214, 0.45));
+        }
+
+        .zone-card small {
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            color: var(--muted-light);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .zone-card h3 {
+            margin-top: 5px;
+            font-size: 18px;
+            line-height: 1.2;
+            color: var(--ink-deep);
+        }
+
+        .zone-card p {
+            margin-top: 8px;
+            font-size: 12px;
+            color: #4e6279;
+            line-height: 1.65;
+        }
+
+        .zone-card.zone-a { left: 16px; top: 78px; }
+        .zone-card.zone-a::before { background: linear-gradient(180deg, #f4a62a, #ef7e21); }
+        .zone-card.zone-b { left: 248px; top: 254px; width: 260px; }
+        .zone-card.zone-b::before { background: linear-gradient(180deg, #007bff, #18c1d6); }
+        .zone-card.zone-c { right: 26px; top: 96px; }
+        .zone-card.zone-c::before { background: linear-gradient(180deg, #56b656, #2d8c49); }
+        .zone-card.zone-d { right: 26px; bottom: 42px; }
+        .zone-card.zone-d::before { background: linear-gradient(180deg, #8b73ef, #5f4cb2); }
+
+        .data-bubble {
+            padding: 10px 12px;
+            min-width: 170px;
+            border: 1px solid rgba(255, 255, 255, 0.84);
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            font-size: 11px;
+            color: #13345a;
+        }
+
+        .data-bubble strong {
+            color: #0d2d57;
+        }
+
+        .data-bubble .ok {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 6px;
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            color: #f2fff7;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .data-bubble.b1 { left: 32px; bottom: 44px; }
+        .data-bubble.b2 { right: 240px; top: 26px; min-width: 190px; }
+        .data-bubble.b3 { right: 26px; top: 292px; min-width: 200px; }
+
+        .route-tag {
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(255, 255, 255, 0.92);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .route-tag.clean {
+            color: #0f7ac5;
+            right: 130px;
+            top: 170px;
+        }
+
+        .route-tag.polluted {
+            color: #b86f16;
+            left: 420px;
+            bottom: 76px;
+        }
+
+        .scene-media {
+            overflow: hidden;
+            border: 1px solid #cfe0f5;
+            background: #ffffff;
+        }
+
+        .scene-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .scene-media.screen {
+            right: 38px;
+            top: 160px;
+            width: 230px;
+            height: 148px;
+            transform: rotate(-3deg);
+        }
+
+        .scene-media.phone {
+            right: 86px;
+            bottom: 52px;
+            width: 92px;
+            height: 168px;
+            border-radius: 24px;
+            transform: rotate(5deg);
+            z-index: 4;
+        }
+
+        .scene-media.board {
+            left: 522px;
+            top: 22px;
+            width: 220px;
+            height: 118px;
+        }
+
+        .beacon {
+            position: absolute;
+            z-index: 4;
+            width: 16px;
+            height: 16px;
+            border-radius: 999px;
+            background: #ffffff;
+            border: 2px solid #007bff;
+            box-shadow:
+                0 0 0 8px rgba(0, 123, 255, 0.08),
+                0 8px 20px rgba(0, 123, 255, 0.14);
+        }
+
+        .beacon::after {
+            content: "";
+            position: absolute;
+            inset: 3px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #18c1d6, #007bff);
+        }
+
+        .beacon.b-a { left: 170px; top: 170px; }
+        .beacon.b-b { left: 460px; top: 270px; }
+        .beacon.b-c { right: 160px; top: 188px; }
+        .beacon.b-d { right: 120px; bottom: 140px; }
+
+        .stage-legend {
+            position: relative;
+            z-index: 3;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .stage-legend article {
+            padding: 12px 14px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.84);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .stage-legend strong {
+            display: block;
+            font-size: 12px;
+            color: var(--ink-deep);
+            font-weight: 800;
+        }
+
+        .stage-legend span {
+            display: block;
+            margin-top: 4px;
+            font-size: 11px;
+            color: #557087;
+            line-height: 1.5;
+        }
+
+        .section {
+            margin-top: 26px;
+            padding: 30px;
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--line);
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            box-shadow: var(--shadow-page);
+        }
+
+        .section-head {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 22px;
+        }
+
+        .section-title {
+            margin-top: 10px;
+            font-size: clamp(28px, 3vw, 40px);
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+            color: var(--ink-deep);
+            font-weight: 800;
+        }
+
+        .section-desc {
+            max-width: 600px;
+            margin-top: 12px;
+            font-size: 14px;
+            color: #53687f;
+        }
+
+        .section-side-note {
+            max-width: 280px;
+            padding: 14px 16px;
+            border-radius: 18px;
+            border: 1px solid #dbe7f7;
+            background: linear-gradient(180deg, #f8fbff 0%, #f1f7ff 100%);
+            color: #314761;
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .summary-card {
+            padding: 18px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--line-soft);
+            background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+            box-shadow: var(--shadow-card);
+        }
+
+        .summary-index {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #eaf3ff, #f5fbff);
+            color: var(--blue);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .summary-card h3 {
+            margin-top: 14px;
+            font-size: 18px;
+            line-height: 1.22;
+            color: #1f344c;
+        }
+
+        .summary-card p {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #53677d;
+        }
+
+        .layout-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+            gap: 18px;
+            align-items: stretch;
+        }
+
+        .blueprint,
+        .content-stack {
+            min-width: 0;
+        }
+
+        .blueprint-card {
+            height: 100%;
+            border-radius: 28px;
+            border: 1px solid #d6e4f5;
+            background:
+                radial-gradient(circle at 12% 0%, rgba(0, 123, 255, 0.12), transparent 34%),
+                linear-gradient(180deg, #f8fbff 0%, #eef5ff 100%);
+            overflow: hidden;
+            padding: 18px;
+        }
+
+        .blueprint-card svg {
+            width: 100%;
+            height: 100%;
+            min-height: 440px;
+        }
+
+        .zone-list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .zone-list article {
+            padding: 18px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--line-soft);
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            box-shadow: var(--shadow-card);
+        }
+
+        .zone-list .label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            color: var(--muted-light);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .zone-list .label i {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+        }
+
+        .zone-list h3 {
+            margin-top: 10px;
+            font-size: 20px;
+            line-height: 1.22;
+            color: var(--ink-deep);
+        }
+
+        .zone-list p {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #52667d;
+        }
+
+        .timeline {
+            position: relative;
+            display: grid;
+            gap: 14px;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 29px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: linear-gradient(180deg, rgba(0, 123, 255, 0.15), rgba(15, 76, 129, 0.4));
+        }
+
+        .timeline-step {
+            position: relative;
+            display: grid;
+            grid-template-columns: 60px minmax(0, 1fr);
+            gap: 16px;
+            align-items: start;
+        }
+
+        .timeline-badge {
+            position: relative;
+            z-index: 1;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            background: linear-gradient(180deg, #ffffff 0%, #eef5ff 100%);
+            border: 1px solid #d8e5f7;
+            color: var(--blue-deep);
+            font-size: 18px;
+            font-weight: 800;
+            box-shadow: var(--shadow-card);
+        }
+
+        .timeline-card {
+            padding: 18px 20px;
+            border-radius: 22px;
+            border: 1px solid var(--line-soft);
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            box-shadow: var(--shadow-card);
+        }
+
+        .timeline-card h3 {
+            font-size: 22px;
+            line-height: 1.2;
+            color: var(--ink-deep);
+        }
+
+        .timeline-card p {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #4f637a;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .tag.product {
+            color: var(--blue-deep);
+            background: #eef5ff;
+            border: 1px solid #d6e4f8;
+        }
+
+        .tag.data {
+            color: #35604b;
+            background: #eefbf0;
+            border: 1px solid #d9f0dd;
+        }
+
+        .tag.value {
+            color: #805300;
+            background: #fff7e8;
+            border: 1px solid #f4e0b5;
+        }
+
+        .hardware-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .hardware-card {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--line-soft);
+            border-radius: 24px;
+            overflow: hidden;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            box-shadow: var(--shadow-card);
+        }
+
+        .hardware-visual {
+            position: relative;
+            height: 180px;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(0, 123, 255, 0.14), transparent 44%),
+                linear-gradient(180deg, #f6faff 0%, #eef4fb 100%);
+        }
+
+        .hardware-visual img {
+            max-width: 72%;
+            max-height: 128px;
+            object-fit: contain;
+            filter: drop-shadow(0 18px 16px rgba(38, 45, 58, 0.16));
+        }
+
+        .hardware-icon {
+            width: 86px;
+            height: 86px;
+            display: grid;
+            place-items: center;
+            border-radius: 24px;
+            background: linear-gradient(180deg, #ffffff 0%, #edf4ff 100%);
+            border: 1px solid #d6e4f8;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .hardware-icon svg {
+            width: 48px;
+            height: 48px;
+            stroke: var(--blue);
+            stroke-width: 1.7;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .hardware-copy {
+            padding: 18px;
+        }
+
+        .hardware-copy h3 {
+            font-size: 18px;
+            line-height: 1.25;
+            color: var(--ink-deep);
+        }
+
+        .hardware-copy p {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #56697f;
+        }
+
+        .hardware-copy .mini-tag {
+            display: inline-flex;
+            margin-top: 14px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #eef5ff;
+            border: 1px solid #d6e4f8;
+            color: #325275;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .control-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 380px;
+            gap: 18px;
+        }
+
+        .control-visual {
+            min-width: 0;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 14px;
+        }
+
+        .screen-card,
+        .phone-card,
+        .capability-card,
+        .cta-card {
+            border-radius: 24px;
+            border: 1px solid var(--line-soft);
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+        }
+
+        .screen-card img,
+        .phone-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .screen-card {
+            min-height: 360px;
+        }
+
+        .phone-stack {
+            display: grid;
+            grid-template-rows: 1fr auto;
+            gap: 14px;
+        }
+
+        .phone-card {
+            min-height: 248px;
+            background: #eef5ff;
+        }
+
+        .control-copy {
+            display: grid;
+            gap: 14px;
+        }
+
+        .capability-card {
+            padding: 18px;
+        }
+
+        .capability-card h3 {
+            font-size: 18px;
+            line-height: 1.25;
+            color: var(--ink-deep);
+        }
+
+        .capability-card p {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #56697f;
+        }
+
+        .capability-card ul {
+            margin-top: 12px;
+            display: grid;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .capability-card li {
+            position: relative;
+            padding-left: 14px;
+            font-size: 13px;
+            color: #466076;
+        }
+
+        .capability-card li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #18c1d6, #007bff);
+        }
+
+        .cta {
+            margin-top: 26px;
+            padding: 30px;
+            border-radius: 32px;
+            background:
+                radial-gradient(circle at 0% 0%, rgba(0, 123, 255, 0.16), transparent 34%),
+                radial-gradient(circle at 100% 0%, rgba(24, 193, 214, 0.12), transparent 32%),
+                linear-gradient(135deg, #f8fbff 0%, #eef5ff 100%);
+            border: 1px solid #d8e5f7;
+            box-shadow: var(--shadow-page);
+        }
+
+        .cta-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+            gap: 18px;
+            align-items: stretch;
+        }
+
+        .cta-title {
+            margin-top: 12px;
+            font-size: clamp(28px, 3.2vw, 42px);
+            line-height: 1.08;
+            color: var(--ink-deep);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .cta-text {
+            margin-top: 14px;
+            max-width: 620px;
+            font-size: 14px;
+            color: #4f657a;
+        }
+
+        .cta-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 0 18px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .cta-button.primary {
+            background: linear-gradient(135deg, var(--blue), #0f4c81);
+            color: #ffffff;
+            box-shadow: 0 12px 24px rgba(0, 123, 255, 0.24);
+        }
+
+        .cta-button.secondary {
+            background: rgba(255, 255, 255, 0.82);
+            color: var(--blue-deep);
+            border: 1px solid #d6e4f8;
+        }
+
+        .contact-panel {
+            display: grid;
+            gap: 12px;
+        }
+
+        .contact-card {
+            padding: 18px;
+            border-radius: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.86);
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .contact-card h3 {
+            font-size: 17px;
+            line-height: 1.24;
+            color: var(--ink-deep);
+        }
+
+        .contact-card p,
+        .contact-card li {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #53687e;
+        }
+
+        .contact-card ul {
+            list-style: none;
+            display: grid;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .contact-card strong {
+            color: #17365b;
+        }
+
+        .footer {
+            margin-top: 18px;
+            padding: 0 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            color: var(--muted-light);
+            font-size: 12px;
+        }
+
+        @media (max-width: 1200px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stage {
+                min-height: 780px;
+            }
+
+            .summary-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .hardware-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .control-grid,
+            .cta-grid,
+            .layout-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .page-shell,
+            .topbar-inner {
+                width: min(100vw - 20px, 1440px);
+            }
+
+            .topbar-inner {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .topnav {
+                justify-content: flex-start;
+            }
+
+            .hero-copy,
+            .hero-stage,
+            .section,
+            .cta {
+                padding: 22px;
+                border-radius: 26px;
+            }
+
+            .hero-stage {
+                min-height: 930px;
+            }
+
+            .zone-card.zone-a,
+            .zone-card.zone-b,
+            .zone-card.zone-c,
+            .zone-card.zone-d,
+            .data-bubble.b1,
+            .data-bubble.b2,
+            .data-bubble.b3,
+            .scene-media.screen,
+            .scene-media.phone,
+            .scene-media.board,
+            .route-tag.clean,
+            .route-tag.polluted {
+                position: static;
+                width: auto;
+                margin-top: 12px;
+            }
+
+            .center-map {
+                position: relative;
+                inset: auto;
+                height: 420px;
+                margin-top: 16px;
+            }
+
+            .stage-board {
+                padding: 14px;
+                min-height: 0;
+            }
+
+            .stage-board::before {
+                inset: 10px;
+            }
+
+            .stage-board::after {
+                width: 86%;
+            }
+
+            .stage-mobile-stack {
+                position: relative;
+                z-index: 2;
+                display: grid;
+                gap: 12px;
+                margin-top: 14px;
+            }
+
+            .beacon {
+                display: none;
+            }
+
+            .summary-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .hardware-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .stage-legend {
+                grid-template-columns: 1fr;
+            }
+
+            .control-visual {
+                grid-template-columns: 1fr;
+            }
+
+            .screen-card {
+                min-height: 260px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-title,
+            .section-title,
+            .cta-title {
+                letter-spacing: -0.02em;
+            }
+
+            .hero-metrics,
+            .summary-grid,
+            .hardware-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-step {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .timeline::before {
+                display: none;
+            }
+
+            .timeline-badge {
+                width: 54px;
+                height: 54px;
+            }
+
+            .blueprint-card svg {
+                min-height: 340px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="brand-lockup">
+                <img src="../../../../../opmoniter_logo.png" alt="OpMonitor Logo">
+                <div class="brand-copy">
+                    <div class="brand-name">智感云 OpMonitor</div>
+                    <div class="brand-sub">ECTMS DEMO CENTER MODEL</div>
+                </div>
+            </div>
+            <nav class="topnav" aria-label="页面导航">
+                <a href="#traceability">追溯维度</a>
+                <a href="#layout">区域布局</a>
+                <a href="#journey">7 步流转</a>
+                <a href="#hardware">硬件落位</a>
+                <a href="#control">管理闭环</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-shell">
+        <section class="hero">
+            <div class="hero-copy">
+                <span class="eyebrow">ECTMS 解决方案 / 内镜洗消中心演示模型</span>
+                <h1 class="hero-title">把洗消中心的<br>物理动线，翻译成<br>可追溯数字节点</h1>
+                <p class="hero-subtitle">上帝视角场景演示 · WS507 导向 · 软硬协同闭环</p>
+                <p class="hero-lead">
+                    这不是一张静态流程图，而是一套可向客户直观讲清楚的“中心级演示模型”。
+                    页面同时展示<strong>四大物理区域</strong>、<strong>五类追溯维度</strong>、<strong>七步流转动作</strong>与<strong>智感云全系软硬件落位</strong>，让院感、消毒供应与护士长一眼看懂整个洗消中心如何被数字化治理。
+                </p>
+
+                <div class="hero-chip-row">
+                    <span class="chip"><i></i>人、机、患精准绑定</span>
+                    <span class="chip"><i></i>洁污分流动线可视化</span>
+                    <span class="chip"><i></i>底层设备参数直采</span>
+                    <span class="chip"><i></i>机器人 + 储镜柜联动</span>
+                </div>
+
+                <div class="hero-metrics">
+                    <article class="metric-card">
+                        <span class="metric-label">演示主轴</span>
+                        <div class="metric-value">区域布局 → 业务动作 → 产品落位 → 数据结果</div>
+                    </article>
+                    <article class="metric-card">
+                        <span class="metric-label">目标受众</span>
+                        <div class="metric-value">院感、消毒供应、护士长、中心建设决策者</div>
+                    </article>
+                    <article class="metric-card">
+                        <span class="metric-label">规范导向</span>
+                        <div class="metric-value">围绕 WS507-2016 的追溯、设备留痕与合规台账要求展开</div>
+                    </article>
+                    <article class="metric-card">
+                        <span class="metric-label">核心表达</span>
+                        <div class="metric-value">用一个中心级场景，而不是若干孤立设备，讲清楚 OpMonitor 的壁垒</div>
+                    </article>
+                </div>
+
+                <div class="hero-note">
+                    <strong>讲解建议：</strong>从诊疗区起点开始，引导客户看到污染内镜如何被绑定、转运、清洗、机洗、干燥、归柜，再回到管理端生成长期电子台账。每到一个节点，都能对应看见“设备在现场哪里、系统在记录什么、管理价值在哪里”。
+                </div>
+            </div>
+
+            <div class="hero-stage">
+                <div class="stage-heading">
+                    <div>
+                        <div class="section-kicker">God View Demo</div>
+                        <h2 class="stage-title">内镜洗消中心上帝视角</h2>
+                        <p class="stage-desc">一屏同时讲清楚四大区域、洁污分流、机器人行驶路线、设备落位与关键追溯数据。</p>
+                    </div>
+                    <div class="stage-badge">四区一线<br>数字孪生演示</div>
+                </div>
+
+                <div class="stage-meta" aria-label="首屏场景特征">
+                    <span>俯视沙盘布局</span>
+                    <span>洁污双路线</span>
+                    <span>设备节点可见</span>
+                    <span>数据浮层同屏</span>
+                </div>
+
+                <div class="stage-board">
+                    <div class="center-map" aria-label="内镜洗消中心区域布局图">
+                        <svg viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="zoneA" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#fff3ef"/>
+                                    <stop offset="100%" stop-color="#ffe3d8"/>
+                                </linearGradient>
+                                <linearGradient id="zoneB" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#eef7ff"/>
+                                    <stop offset="100%" stop-color="#deeeff"/>
+                                </linearGradient>
+                                <linearGradient id="zoneC" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#f3fff3"/>
+                                    <stop offset="100%" stop-color="#e2f8e4"/>
+                                </linearGradient>
+                                <linearGradient id="zoneD" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#fbf8ff"/>
+                                    <stop offset="100%" stop-color="#efeaff"/>
+                                </linearGradient>
+                                <linearGradient id="dirtyRoute" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#f0bf40"/>
+                                    <stop offset="100%" stop-color="#f08a24"/>
+                                </linearGradient>
+                                <linearGradient id="cleanRoute" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#18c1d6"/>
+                                    <stop offset="100%" stop-color="#0f7ac5"/>
+                                </linearGradient>
+                                <filter id="softShadow">
+                                    <feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="rgba(15,23,42,0.08)"/>
+                                </filter>
+                                <filter id="tileShadow">
+                                    <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="rgba(15,23,42,0.10)"/>
+                                </filter>
+                            </defs>
+
+                            <ellipse cx="450" cy="560" rx="320" ry="28" fill="rgba(15,76,129,0.10)"/>
+                            <path d="M52 70 H848 C862 70 874 82 874 96 V516 C874 536 858 552 838 552 H76 C58 552 44 538 44 520 V78 C44 74 47 70 52 70 Z" fill="#e7f0fb" opacity="0.9"/>
+                            <rect x="26" y="34" width="848" height="540" rx="36" fill="#ffffff" stroke="#d7e5f7" stroke-width="2" filter="url(#softShadow)"/>
+
+                            <path d="M70 430 H824" fill="none" stroke="#d8e5f5" stroke-width="3" stroke-dasharray="10 10"/>
+                            <text x="86" y="420" font-size="11" fill="#8ea1b8" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">机器人专用通道</text>
+
+                            <g filter="url(#tileShadow)">
+                                <rect x="70" y="86" width="226" height="170" rx="28" fill="url(#zoneA)" stroke="#f1c9bb" stroke-width="2"/>
+                                <rect x="328" y="86" width="342" height="360" rx="32" fill="url(#zoneB)" stroke="#cfe0f5" stroke-width="2"/>
+                                <rect x="700" y="86" width="124" height="220" rx="28" fill="url(#zoneC)" stroke="#cde8cf" stroke-width="2"/>
+                                <rect x="700" y="332" width="124" height="114" rx="28" fill="url(#zoneD)" stroke="#ddd5f6" stroke-width="2"/>
+                            </g>
+
+                            <path d="M70 86 l16 -12 h226 l16 12" fill="#fff7f4" opacity="0.9"/>
+                            <path d="M328 86 l18 -14 h342 l18 14" fill="#f4f9ff" opacity="0.9"/>
+                            <path d="M700 86 l12 -10 h124 l12 10" fill="#f5fff5" opacity="0.9"/>
+                            <path d="M700 332 l12 -10 h124 l12 10" fill="#fbf8ff" opacity="0.9"/>
+
+                            <path d="M184 224 H328" fill="none" stroke="url(#dirtyRoute)" stroke-width="14" stroke-linecap="round" stroke-dasharray="18 12"/>
+                            <path d="M670 196 H744" fill="none" stroke="url(#cleanRoute)" stroke-width="14" stroke-linecap="round" stroke-dasharray="18 12"/>
+                            <path d="M744 306 V384" fill="none" stroke="url(#cleanRoute)" stroke-width="14" stroke-linecap="round" stroke-dasharray="18 12"/>
+
+                            <path d="M200 160 C270 160 292 174 332 198" fill="none" stroke="#efad42" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
+                            <path d="M448 390 C520 420 604 416 706 390" fill="none" stroke="#13a9c0" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
+                            <circle cx="330" cy="198" r="7" fill="#ffffff" stroke="#efad42" stroke-width="3"/>
+                            <circle cx="706" cy="390" r="7" fill="#ffffff" stroke="#13a9c0" stroke-width="3"/>
+
+                            <g>
+                                <ellipse cx="136" cy="172" rx="40" ry="10" fill="rgba(154,79,42,0.10)"/>
+                                <rect x="96" y="128" width="76" height="14" rx="7" fill="#d7b29f"/>
+                                <rect x="104" y="112" width="78" height="30" rx="12" fill="#ffffff" stroke="#e8a98f" stroke-width="2"/>
+                                <rect x="108" y="116" width="54" height="20" rx="10" fill="#fff8f4"/>
+                                <rect x="162" y="117" width="14" height="12" rx="5" fill="#ffe0d1" stroke="#e8a98f" stroke-width="1.2"/>
+                                <rect x="110" y="142" width="6" height="18" rx="3" fill="#c6957f"/>
+                                <rect x="166" y="142" width="6" height="18" rx="3" fill="#c6957f"/>
+                                <circle cx="113" cy="162" r="4" fill="#c6957f"/>
+                                <circle cx="169" cy="162" r="4" fill="#c6957f"/>
+                                <text x="140" y="182" text-anchor="middle" font-size="12" fill="#9a4f2a" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">诊疗床</text>
+
+                                <ellipse cx="231" cy="178" rx="44" ry="10" fill="rgba(154,79,42,0.08)"/>
+                                <rect x="194" y="121" width="56" height="10" rx="5" fill="#d6b6a6"/>
+                                <rect x="198" y="102" width="48" height="28" rx="8" fill="#ffffff" stroke="#e8a98f" stroke-width="2"/>
+                                <rect x="204" y="108" width="36" height="16" rx="4" fill="#eef6ff" stroke="#d3e4f8" stroke-width="1.2"/>
+                                <rect x="210" y="136" width="12" height="5" rx="2.5" fill="#d5e5f8"/>
+                                <rect x="202" y="146" width="44" height="20" rx="6" fill="#ffffff" stroke="#e8a98f" stroke-width="2"/>
+                                <rect x="212" y="168" width="6" height="10" rx="3" fill="#c6957f"/>
+                                <rect x="232" y="168" width="6" height="10" rx="3" fill="#c6957f"/>
+                                <rect x="256" y="102" width="8" height="64" rx="4" fill="#d3a58f"/>
+                                <rect x="250" y="97" width="20" height="8" rx="4" fill="#ffffff" stroke="#e8a98f" stroke-width="1.4"/>
+                                <text x="228" y="188" text-anchor="middle" font-size="12" fill="#9a4f2a" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">医生工位</text>
+
+                                <rect x="116" y="188" width="120" height="24" rx="12" fill="#ffffff" stroke="#f0c9b7" stroke-width="1.6"/>
+                                <circle cx="130" cy="200" r="4" fill="#18c1d6" opacity="0.25"/>
+                                <circle cx="130" cy="200" r="2" fill="#18c1d6"/>
+                                <text x="180" y="203" text-anchor="middle" font-size="11" fill="#9a6a49" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">患者绑定 / 医生刷卡</text>
+                            </g>
+
+                            <g>
+                                <ellipse cx="418" cy="176" rx="48" ry="10" fill="rgba(39,81,123,0.10)"/>
+                                <rect x="370" y="116" width="96" height="44" rx="14" fill="#ffffff" stroke="#b8d4f8" stroke-width="2"/>
+                                <rect x="380" y="122" width="76" height="10" rx="5" fill="#dceaf9"/>
+                                <rect x="382" y="136" width="24" height="14" rx="6" fill="#eef7ff" stroke="#cfe2f9" stroke-width="1.2"/>
+                                <rect x="430" y="136" width="24" height="14" rx="6" fill="#eef7ff" stroke="#cfe2f9" stroke-width="1.2"/>
+                                <path d="M394 118 C394 112 398 108 402 108" fill="none" stroke="#8fbbe9" stroke-width="2.2" stroke-linecap="round"/>
+                                <path d="M442 118 C442 112 446 108 450 108" fill="none" stroke="#8fbbe9" stroke-width="2.2" stroke-linecap="round"/>
+                                <text x="418" y="179" text-anchor="middle" font-size="12" fill="#27517b" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">预处理 / 测漏槽</text>
+
+                                <ellipse cx="536" cy="178" rx="48" ry="10" fill="rgba(39,81,123,0.10)"/>
+                                <rect x="488" y="114" width="100" height="48" rx="16" fill="#ffffff" stroke="#b8d4f8" stroke-width="2"/>
+                                <rect x="500" y="122" width="76" height="10" rx="5" fill="#dceaf9"/>
+                                <rect x="502" y="136" width="24" height="16" rx="7" fill="#eef7ff" stroke="#cfe2f9" stroke-width="1.2"/>
+                                <rect x="550" y="136" width="24" height="16" rx="7" fill="#eef7ff" stroke="#cfe2f9" stroke-width="1.2"/>
+                                <path d="M514 120 C514 113 519 108 523 108" fill="none" stroke="#8fbbe9" stroke-width="2.2" stroke-linecap="round"/>
+                                <path d="M562 120 C562 113 567 108 571 108" fill="none" stroke="#8fbbe9" stroke-width="2.2" stroke-linecap="round"/>
+                                <text x="538" y="181" text-anchor="middle" font-size="12" fill="#27517b" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">手工清洗槽</text>
+
+                                <ellipse cx="480" cy="318" rx="112" ry="14" fill="rgba(39,81,123,0.10)"/>
+                                <rect x="382" y="220" width="196" height="84" rx="22" fill="#ffffff" stroke="#b8d4f8" stroke-width="2"/>
+                                <rect x="394" y="232" width="80" height="60" rx="16" fill="#f6fbff" stroke="#cfe2f9" stroke-width="1.6"/>
+                                <circle cx="434" cy="262" r="18" fill="#eef6ff" stroke="#b9d4f5" stroke-width="1.6"/>
+                                <circle cx="434" cy="262" r="10" fill="#ffffff" stroke="#cfe2f9" stroke-width="1.2"/>
+                                <rect x="402" y="238" width="64" height="9" rx="4.5" fill="#dceaf9"/>
+                                <rect x="486" y="232" width="80" height="60" rx="16" fill="#f6fbff" stroke="#cfe2f9" stroke-width="1.6"/>
+                                <circle cx="526" cy="262" r="18" fill="#eef6ff" stroke="#b9d4f5" stroke-width="1.6"/>
+                                <circle cx="526" cy="262" r="10" fill="#ffffff" stroke="#cfe2f9" stroke-width="1.2"/>
+                                <rect x="494" y="238" width="64" height="9" rx="4.5" fill="#dceaf9"/>
+                                <rect x="420" y="274" width="28" height="6" rx="3" fill="#18c1d6" opacity="0.5"/>
+                                <rect x="512" y="274" width="28" height="6" rx="3" fill="#18c1d6" opacity="0.5"/>
+                                <text x="480" y="324" text-anchor="middle" font-size="15" fill="#27517b" font-weight="800" font-family="IBM Plex Sans, PingFang SC, sans-serif">全自动清洗消毒机排间</text>
+                                <text x="480" y="344" text-anchor="middle" font-size="12" fill="#6d8298" font-family="IBM Plex Sans, PingFang SC, sans-serif">白盒 / 黑盒采集 + 运行参数判定</text>
+
+                                <ellipse cx="430" cy="408" rx="46" ry="9" fill="rgba(39,81,123,0.10)"/>
+                                <rect x="384" y="346" width="92" height="46" rx="16" fill="#ffffff" stroke="#b8d4f8" stroke-width="2"/>
+                                <rect x="398" y="354" width="60" height="10" rx="5" fill="#dceaf9"/>
+                                <path d="M404 382 C409 372 414 368 420 360" fill="none" stroke="#8fbbe9" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M420 382 C425 372 430 368 436 360" fill="none" stroke="#8fbbe9" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M436 382 C441 372 446 368 452 360" fill="none" stroke="#8fbbe9" stroke-width="2" stroke-linecap="round"/>
+                                <text x="430" y="410" text-anchor="middle" font-size="12" fill="#27517b" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">终末干燥台</text>
+
+                                <ellipse cx="538" cy="410" rx="52" ry="10" fill="rgba(39,81,123,0.10)"/>
+                                <rect x="492" y="340" width="94" height="58" rx="18" fill="#102345" stroke="#7ca7da" stroke-width="2"/>
+                                <rect x="500" y="348" width="78" height="42" rx="10" fill="#16335f"/>
+                                <rect x="506" y="356" width="32" height="8" rx="4" fill="#1ec48f" opacity="0.9"/>
+                                <rect x="506" y="368" width="54" height="6" rx="3" fill="#7fa2cf" opacity="0.65"/>
+                                <rect x="544" y="356" width="18" height="8" rx="4" fill="#ef5f53" opacity="0.9"/>
+                                <rect x="506" y="378" width="24" height="6" rx="3" fill="#7fa2cf" opacity="0.55"/>
+                                <rect x="536" y="378" width="38" height="6" rx="3" fill="#1ec48f" opacity="0.85"/>
+                                <text x="538" y="414" text-anchor="middle" font-size="12" fill="#27517b" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">55 寸监控大屏</text>
+
+                                <rect x="608" y="134" width="34" height="34" rx="12" fill="#ffffff" stroke="#b8d4f8" stroke-width="2"/>
+                                <circle cx="625" cy="151" r="6" fill="#18c1d6" opacity="0.25"/>
+                                <circle cx="625" cy="151" r="3" fill="#18c1d6"/>
+                                <text x="625" y="186" text-anchor="middle" font-size="10" fill="#6d8298" font-family="IBM Plex Sans, PingFang SC, sans-serif">暗装读卡点</text>
+                            </g>
+
+                            <g>
+                                <ellipse cx="762" cy="286" rx="44" ry="10" fill="rgba(45,116,64,0.10)"/>
+                                <rect x="720" y="114" width="84" height="78" rx="18" fill="#ffffff" stroke="#c6e2c8" stroke-width="2"/>
+                                <rect x="728" y="124" width="30" height="58" rx="10" fill="#f5fff6" stroke="#d4ebd6" stroke-width="1.4"/>
+                                <rect x="766" y="124" width="30" height="58" rx="10" fill="#f5fff6" stroke="#d4ebd6" stroke-width="1.4"/>
+                                <rect x="736" y="132" width="14" height="42" rx="6" fill="#e8f8ea"/>
+                                <rect x="774" y="132" width="14" height="42" rx="6" fill="#e8f8ea"/>
+                                <circle cx="752" cy="132" r="3" fill="#4ea50f"/>
+                                <circle cx="772" cy="132" r="3" fill="#18c1d6"/>
+                                <text x="762" y="204" text-anchor="middle" font-size="12" fill="#2d7440" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">数智储镜柜 / 72h</text>
+
+                                <rect x="720" y="220" width="84" height="52" rx="18" fill="#ffffff" stroke="#c6e2c8" stroke-width="2"/>
+                                <rect x="732" y="232" width="24" height="22" rx="8" fill="#e8f8ea" stroke="#cde8cf" stroke-width="1.2"/>
+                                <rect x="766" y="232" width="24" height="22" rx="8" fill="#e8f8ea" stroke="#cde8cf" stroke-width="1.2"/>
+                                <path d="M744 254 V264" stroke="#7baf84" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M778 254 V264" stroke="#7baf84" stroke-width="2" stroke-linecap="round"/>
+                                <text x="762" y="287" text-anchor="middle" font-size="11" fill="#64846f" font-family="IBM Plex Sans, PingFang SC, sans-serif">洁净归柜 / 环境监测</text>
+                            </g>
+
+                            <g>
+                                <ellipse cx="762" cy="430" rx="42" ry="10" fill="rgba(95,76,178,0.10)"/>
+                                <rect x="718" y="352" width="88" height="54" rx="18" fill="#ffffff" stroke="#d8cff8" stroke-width="2"/>
+                                <rect x="734" y="360" width="38" height="24" rx="6" fill="#eff0ff" stroke="#ddd8fb" stroke-width="1.2"/>
+                                <rect x="740" y="366" width="26" height="12" rx="4" fill="#dfe3ff"/>
+                                <rect x="730" y="388" width="48" height="6" rx="3" fill="#d7d0f8"/>
+                                <rect x="746" y="394" width="16" height="8" rx="4" fill="#c7bef0"/>
+                                <path d="M782 362 h10 a6 6 0 0 1 6 6 v14 a6 6 0 0 1 -6 6 h-10" fill="#f6f3ff" stroke="#ddd8fb" stroke-width="1.2"/>
+                                <text x="762" y="424" text-anchor="middle" font-size="12" fill="#5f4cb2" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">办公桌 / PC / 小程序</text>
+                            </g>
+
+                            <g transform="translate(258 430)">
+                                <ellipse cx="28" cy="38" rx="34" ry="8" fill="rgba(15,122,197,0.10)"/>
+                                <rect x="0" y="8" width="58" height="22" rx="11" fill="#e8f4ff" stroke="#0f7ac5" stroke-width="2"/>
+                                <rect x="10" y="2" width="24" height="16" rx="6" fill="#0f7ac5"/>
+                                <rect x="36" y="10" width="12" height="8" rx="4" fill="#beddff"/>
+                                <circle cx="16" cy="32" r="5" fill="#0f7ac5"/>
+                                <circle cx="42" cy="32" r="5" fill="#0f7ac5"/>
+                                <circle cx="16" cy="32" r="2" fill="#ffffff"/>
+                                <circle cx="42" cy="32" r="2" fill="#ffffff"/>
+                                <text x="74" y="22" font-size="13" fill="#0f7ac5" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">AGV 洁污分流行驶</text>
+                            </g>
+
+                            <text x="112" y="108" font-size="11" fill="#aa6a45" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">诊疗区</text>
+                            <text x="352" y="108" font-size="11" fill="#31608c" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">清洗消毒区</text>
+                            <text x="724" y="108" font-size="11" fill="#3d8050" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">内镜存储区</text>
+                            <text x="724" y="346" font-size="11" fill="#715fba" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">管理办公区</text>
+                        </svg>
+                    </div>
+
+                    <div class="zone-card zone-a">
+                        <small>Zone A</small>
+                        <h3>诊疗区</h3>
+                        <p>患者、医生、内镜在起点完成绑定。检查结束后，污染镜由系统派单进入污染路线。</p>
+                    </div>
+
+                    <div class="zone-card zone-b">
+                        <small>Zone B</small>
+                        <h3>清洗消毒区</h3>
+                        <p>预处理、测漏、手工清洗、机洗消毒、终末干燥在一个连续区域完成，形成单步时长与设备参数闭环。</p>
+                    </div>
+
+                    <div class="zone-card zone-c">
+                        <small>Zone C</small>
+                        <h3>内镜存储区</h3>
+                        <p>洁净内镜通过 AGV 进入储镜柜，自动开启 72 小时无菌存放倒计时并监控微正压、温湿度。</p>
+                    </div>
+
+                    <div class="zone-card zone-d">
+                        <small>Zone D</small>
+                        <h3>管理办公区</h3>
+                        <p>护士长、院感与感控人员在 PC 和移动端查看全局运行态势，导出符合规范的长期电子台账。</p>
+                    </div>
+
+                    <div class="data-bubble b1">
+                        <strong>HIS / PACS 绑定</strong><br>
+                        患者 ID、检查项目、医生身份、内镜编号在诊疗起点被自动挂接。 <span class="ok">已建档</span>
+                    </div>
+
+                    <div class="data-bubble b2">
+                        <strong>机洗参数直采</strong><br>
+                        温度、步骤、运行时长与异常中断来自底层采集模块，而不是人工补录。
+                    </div>
+
+                    <div class="data-bubble b3">
+                        <strong>归柜状态</strong><br>
+                        储镜柜状态、无菌存放剩余时间、环境温湿度与柜门开启动作全部留痕。
+                    </div>
+
+                    <div class="route-tag polluted">污染路线</div>
+                    <div class="route-tag clean">洁净路线</div>
+                    <span class="beacon b-a" aria-hidden="true"></span>
+                    <span class="beacon b-b" aria-hidden="true"></span>
+                    <span class="beacon b-c" aria-hidden="true"></span>
+                    <span class="beacon b-d" aria-hidden="true"></span>
+
+                    <figure class="scene-media board" aria-label="管理后台缩略图">
+                        <img src="../../../../../assets/images/ectms/管理后台数据概览.png" alt="管理后台数据概览">
+                    </figure>
+                    <figure class="scene-media screen" aria-label="内镜监控大屏缩略图">
+                        <img src="../../../../../assets/images/ectms/内镜监控大屏.png" alt="内镜监控大屏">
+                    </figure>
+                    <figure class="scene-media phone" aria-label="手机端缩略图">
+                        <img src="../../../../../assets/images/ectms/手机端2.png" alt="手机端小程序界面">
+                    </figure>
+                </div>
+
+                <div class="stage-legend" aria-label="场景解释">
+                    <article>
+                        <strong>物理层</strong>
+                        <span>四个实体区域直接对应真实中心建设空间，避免客户只看到抽象流程。</span>
+                    </article>
+                    <article>
+                        <strong>设备层</strong>
+                        <span>清洗槽、机洗排间、大屏、AGV、储镜柜与办公端在同一视图内被点亮。</span>
+                    </article>
+                    <article>
+                        <strong>数据层</strong>
+                        <span>绑定、参数、归柜状态等关键证据以浮层形式叠加，体现“现场即数据”。</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="traceability">
+            <div class="section-head">
+                <div>
+                    <div class="section-kicker">Traceability</div>
+                    <h2 class="section-title">模型里必须被看见的 5 类追溯维度</h2>
+                    <p class="section-desc">演示模型不是只讲“流程顺序”，而是要让客户理解：每个物理动作都被系统转成了可核验的数字证据。</p>
+                </div>
+                <div class="section-side-note">建议讲解时按“谁做的、做了多久、设备真实运行如何、环境是否合规、内镜现在处于什么生命周期状态”五问法展开。</div>
+            </div>
+
+            <div class="summary-grid">
+                <article class="summary-card">
+                    <span class="summary-index">01</span>
+                    <h3>人、机、患精准绑定</h3>
+                    <p>记录诊疗日期、患者标识、内镜唯一编号、操作医生与洗消人员，完成源头绑定与责任归因。</p>
+                </article>
+                <article class="summary-card">
+                    <span class="summary-index">02</span>
+                    <h3>单步时长与状态</h3>
+                    <p>预处理、测漏、初洗、酶洗、次洗、消毒、末洗、干燥等每个步骤单独计时，精确到秒。</p>
+                </article>
+                <article class="summary-card">
+                    <span class="summary-index">03</span>
+                    <h3>底层设备真实参数</h3>
+                    <p>跨品牌无损获取全自动清洗机温度、步骤、时长与运行结果，形成设备执行证据链。</p>
+                </article>
+                <article class="summary-card">
+                    <span class="summary-index">04</span>
+                    <h3>环境与耗材监测</h3>
+                    <p>覆盖消毒剂浓度、更换批次、环境温湿度、水质、微生物监测与手卫生执行记录。</p>
+                </article>
+                <article class="summary-card">
+                    <span class="summary-index">05</span>
+                    <h3>内镜全生命周期状态</h3>
+                    <p>记录维修保养、安全库存、储镜柜无菌存放倒计时与再使用前状态判定，实现全生命周期留痕。</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="layout">
+            <div class="section-head">
+                <div>
+                    <div class="section-kicker">Physical Layout</div>
+                    <h2 class="section-title">四大区域的物理布局，要天然服务数字追溯</h2>
+                    <p class="section-desc">空间动线设计不是装修问题，而是追溯系统的第一层数据结构。演示模型建议采用 U 型或直线贯通型布局，突出单向流与洁污分离。</p>
+                </div>
+                <div class="section-side-note">这里要重点让客户看到：机器人有独立行驶通道，清洁物与污染物不走同一条业务线。</div>
+            </div>
+
+            <div class="layout-grid">
+                <div class="blueprint">
+                    <div class="blueprint-card">
+                        <svg viewBox="0 0 780 460" xmlns="http://www.w3.org/2000/svg" aria-label="内镜洗消中心布局建议图">
+                            <defs>
+                                <linearGradient id="routeDirty" x1="0" y1="0" x2="1" y2="0">
+                                    <stop offset="0%" stop-color="#f5bf43"/>
+                                    <stop offset="100%" stop-color="#f08a24"/>
+                                </linearGradient>
+                                <linearGradient id="routeClean" x1="0" y1="0" x2="1" y2="0">
+                                    <stop offset="0%" stop-color="#18c1d6"/>
+                                    <stop offset="100%" stop-color="#0f7ac5"/>
+                                </linearGradient>
+                            </defs>
+                            <rect x="24" y="24" width="732" height="404" rx="30" fill="#ffffff" stroke="#d6e4f5" stroke-width="2"/>
+                            <rect x="62" y="62" width="180" height="136" rx="24" fill="#fff0e9" stroke="#f0c9b7" stroke-width="2"/>
+                            <rect x="272" y="62" width="280" height="264" rx="28" fill="#eef7ff" stroke="#cfe0f5" stroke-width="2"/>
+                            <rect x="578" y="62" width="122" height="160" rx="24" fill="#f2fff2" stroke="#cce4cd" stroke-width="2"/>
+                            <rect x="578" y="248" width="122" height="78" rx="24" fill="#f7f1ff" stroke="#ddd4f7" stroke-width="2"/>
+                            <rect x="62" y="224" width="490" height="102" rx="26" fill="#ffffff" stroke="#e7edf4" stroke-dasharray="10 8" stroke-width="2"/>
+
+                            <text x="82" y="90" font-size="12" fill="#ad6d45" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">诊疗区</text>
+                            <text x="294" y="90" font-size="12" fill="#31608c" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">清洗消毒区</text>
+                            <text x="598" y="90" font-size="12" fill="#397b4c" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">内镜存储区</text>
+                            <text x="598" y="272" font-size="12" fill="#6b5db4" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">管理办公区</text>
+
+                            <rect x="88" y="108" width="58" height="38" rx="10" fill="#ffffff" stroke="#e7ae93" stroke-width="2"/>
+                            <text x="117" y="132" text-anchor="middle" font-size="12" fill="#9a4f2a" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">诊疗床</text>
+                            <rect x="156" y="98" width="58" height="48" rx="12" fill="#ffffff" stroke="#e7ae93" stroke-width="2"/>
+                            <text x="185" y="126" text-anchor="middle" font-size="12" fill="#9a4f2a" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">工作站</text>
+
+                            <rect x="296" y="116" width="74" height="50" rx="14" fill="#ffffff" stroke="#b8d4f8" stroke-width="2"/>
+                            <text x="333" y="146" text-anchor="middle" font-size="12" fill="#27517b" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">预处理/测漏</text>
+                            <rect x="390" y="116" width="74" height="50" rx="14" fill="#ffffff" stroke="#b8d4f8" stroke-width="2"/>
+                            <text x="427" y="146" text-anchor="middle" font-size="12" fill="#27517b" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">手工清洗</text>
+                            <rect x="482" y="108" width="44" height="150" rx="18" fill="#ffffff" stroke="#b8d4f8" stroke-width="2"/>
+                            <text x="504" y="144" text-anchor="middle" font-size="12" fill="#27517b" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">机洗</text>
+                            <text x="504" y="162" text-anchor="middle" font-size="12" fill="#27517b" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">排间</text>
+                            <rect x="302" y="246" width="78" height="48" rx="14" fill="#ffffff" stroke="#b8d4f8" stroke-width="2"/>
+                            <text x="341" y="276" text-anchor="middle" font-size="12" fill="#27517b" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">干燥台</text>
+                            <rect x="400" y="246" width="84" height="48" rx="14" fill="#ffffff" stroke="#b8d4f8" stroke-width="2"/>
+                            <text x="442" y="274" text-anchor="middle" font-size="12" fill="#27517b" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">55 寸大屏</text>
+
+                            <rect x="602" y="114" width="74" height="56" rx="16" fill="#ffffff" stroke="#c6e2c8" stroke-width="2"/>
+                            <text x="639" y="146" text-anchor="middle" font-size="12" fill="#2d7440" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">储镜柜</text>
+                            <rect x="602" y="176" width="74" height="28" rx="14" fill="#ffffff" stroke="#c6e2c8" stroke-width="2"/>
+                            <text x="639" y="194" text-anchor="middle" font-size="11" fill="#5a7f65" font-family="IBM Plex Sans, PingFang SC, sans-serif">洁净归柜</text>
+
+                            <rect x="602" y="270" width="74" height="34" rx="12" fill="#ffffff" stroke="#ddd4f7" stroke-width="2"/>
+                            <text x="639" y="291" text-anchor="middle" font-size="12" fill="#6b5db4" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">办公工位</text>
+
+                            <path d="M214 152 H296" fill="none" stroke="url(#routeDirty)" stroke-width="10" stroke-linecap="round" stroke-dasharray="14 10"/>
+                            <path d="M526 152 H602" fill="none" stroke="url(#routeClean)" stroke-width="10" stroke-linecap="round" stroke-dasharray="14 10"/>
+                            <path d="M639 204 V270" fill="none" stroke="url(#routeClean)" stroke-width="10" stroke-linecap="round" stroke-dasharray="14 10"/>
+                            <path d="M280 352 H542" fill="none" stroke="#0f7ac5" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 8"/>
+                            <text x="370" y="370" font-size="11" fill="#0f7ac5" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">机器人洁净路线</text>
+                            <text x="220" y="142" font-size="11" fill="#b27310" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">污染路线</text>
+                            <text x="548" y="142" font-size="11" fill="#0f7ac5" font-weight="700" font-family="IBM Plex Sans, PingFang SC, sans-serif">洁净路线</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="content-stack">
+                    <div class="zone-list">
+                        <article>
+                            <div class="label"><i style="background:#f4a62a"></i>Area 01</div>
+                            <h3>诊疗区是追溯起点，不只是业务起点</h3>
+                            <p>这里放置诊疗床、内镜主机与医生工作站，医生刷卡或系统自动拉取患者信息，完成患者、内镜、医生的精准绑定。</p>
+                        </article>
+                        <article>
+                            <div class="label"><i style="background:#007bff"></i>Area 02</div>
+                            <h3>清洗消毒区是整个模型的“数据工厂”</h3>
+                            <p>从预处理/测漏槽、手工清洗槽到全自动清洗消毒机排间，再到干燥台和大屏，所有节点既是实物设备，也是系统采集点。</p>
+                        </article>
+                        <article>
+                            <div class="label"><i style="background:#4ea50f"></i>Area 03</div>
+                            <h3>内镜存储区强调洁净归柜与 72 小时状态管理</h3>
+                            <p>储镜柜不仅是终点设备，更是生命周期监测器。归柜时间、存放环境、倒计时与开柜动作都要被持续追踪。</p>
+                        </article>
+                        <article>
+                            <div class="label"><i style="background:#7a65d8"></i>Area 04</div>
+                            <h3>管理办公区负责把现场数据转成台账与监管视图</h3>
+                            <p>护士长、感控人员在这里看大屏、PC 网页端与手机端，进行质控预警、过程核查、飞检资料调取与长期归档。</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="journey">
+            <div class="section-head">
+                <div>
+                    <div class="section-kicker">Customer Walkthrough</div>
+                    <h2 class="section-title">引导客户走一遍“内镜的一天”</h2>
+                    <p class="section-desc">最好的演示顺序，不是先讲设备清单，而是顺着内镜实际流转路径往下讲。每一步都对应一个业务动作、一个产品节点、一个被留下来的数据结果。</p>
+                </div>
+                <div class="section-side-note">这 7 步建议用于现场讲解脚本，也适合作为销售讲稿与投屏演示的时间轴主线。</div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-step">
+                    <div class="timeline-badge">1</div>
+                    <article class="timeline-card">
+                        <h3>诊疗与无感绑定</h3>
+                        <p>医生为患者做检查，系统自动获取患者信息，医生刷卡绑定患者与所用内镜，从源头建立完整责任链。</p>
+                        <div class="tag-row">
+                            <span class="tag product">产品：2.4G 无线 USB 读卡器 + ECTMS 对接模块</span>
+                            <span class="tag data">数据：患者 ID、医生身份、内镜编号、诊疗时间</span>
+                            <span class="tag value">价值：源头追责清晰，飞检可回溯</span>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-badge">2</div>
+                    <article class="timeline-card">
+                        <h3>污染转运</h3>
+                        <p>诊疗结束后由系统派单，污染内镜进入指定污染路线，避免人工随意流转带来的洁污混行风险。</p>
+                        <div class="tag-row">
+                            <span class="tag product">产品：内镜智能转运机器人（AGV）</span>
+                            <span class="tag data">数据：任务派单、行驶路径、到达确认、污染状态</span>
+                            <span class="tag value">价值：洁污分流可视化、动线可审计</span>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-badge">3</div>
+                    <article class="timeline-card">
+                        <h3>手工预处理与清洗</h3>
+                        <p>清洗工进行测漏、初洗、酶洗、次洗。每做一步，都在清洗槽侧通过暗装读卡器完成无接触刷卡，系统记录单步开始与结束时间，并通过语音做防错提醒。</p>
+                        <div class="tag-row">
+                            <span class="tag product">产品：暗装读卡器 + RFID 卡 + 55 寸全景监控大屏</span>
+                            <span class="tag data">数据：单步时长、人员动作、节点状态、超时预警</span>
+                            <span class="tag value">价值：把手工流程从经验动作变成卡控流程</span>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-badge">4</div>
+                    <article class="timeline-card">
+                        <h3>全自动机洗与消毒</h3>
+                        <p>内镜放入全自动清洗机后，系统通过白盒/黑盒模块抓取底层运行数据，自动判断温度、步骤与时长是否合格。</p>
+                        <div class="tag-row">
+                            <span class="tag product">产品：清洗机数据采集模块 + 无线网关</span>
+                            <span class="tag data">数据：温度、运行步骤、总时长、中断与合格判定</span>
+                            <span class="tag value">价值：设备真实证据链，不依赖人工补录</span>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-badge">5</div>
+                    <article class="timeline-card">
+                        <h3>终末干燥</h3>
+                        <p>对内镜管道进行深度吹干处理，并自动留存吹干设备运行参数，避免“流程完成但内部状态不确定”的隐性风险。</p>
+                        <div class="tag-row">
+                            <span class="tag product">产品：四通路内镜智能化吹干机</span>
+                            <span class="tag data">数据：吹干时长、通路状态、设备运行参数</span>
+                            <span class="tag value">价值：终末状态有据可查，减少再污染隐患</span>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-badge">6</div>
+                    <article class="timeline-card">
+                        <h3>洁净转运与归柜存储</h3>
+                        <p>洗净内镜由机器人沿洁净路线送至存储区，护士刷卡开柜后完成归柜，系统立即开启 72 小时无菌倒计时并同步监控柜体环境。</p>
+                        <div class="tag-row">
+                            <span class="tag product">产品：AGV + 数智内镜储存干燥柜</span>
+                            <span class="tag data">数据：归柜时间、剩余存放时长、柜门动作、温湿度与微正压</span>
+                            <span class="tag value">价值：生命周期状态持续在线，不靠人工盯守</span>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-badge">7</div>
+                    <article class="timeline-card">
+                        <h3>全局质控与台账生成</h3>
+                        <p>护士长或感控人员在 PC 网页端查看全科室运行概览，也可以在手机端随时查看消毒液浓度与历史记录，并一键导出电子台账。</p>
+                        <div class="tag-row">
+                            <span class="tag product">产品：ECTMS PC 管理端 + 小程序 / APP</span>
+                            <span class="tag data">数据：运行总览、预警、过程明细、电子台账、审计证据</span>
+                            <span class="tag value">价值：把现场执行转成长期合规资产</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="hardware">
+            <div class="section-head">
+                <div>
+                    <div class="section-kicker">Hardware & Scene</div>
+                    <h2 class="section-title">在沙盘模型里，哪些硬件必须被亮出来</h2>
+                    <p class="section-desc">演示模型的说服力来自“客户一眼能看见现场设备如何彼此联动”。这里建议把隐蔽式工艺、直读模块、大屏、机器人、储镜柜与吹干机都做成可见节点。</p>
+                </div>
+                <div class="section-side-note">硬件展示不要做成静态陈列，要让客户看到每个设备和某个具体业务动作、某类具体数据之间的对应关系。</div>
+            </div>
+
+            <div class="hardware-grid">
+                <article class="hardware-card">
+                    <div class="hardware-visual">
+                        <img src="../../../../../assets/images/ectms/hw-reader.png" alt="读卡器硬件图">
+                    </div>
+                    <div class="hardware-copy">
+                        <h3>隐蔽式暗装读卡器</h3>
+                        <p>嵌入清洗槽池壁内侧，不外露线缆。演示时只需让池壁亮起识别光点，即可讲清“隔池壁刷卡、降低交叉污染”。</p>
+                        <span class="mini-tag">场景：预处理 / 清洗槽</span>
+                    </div>
+                </article>
+
+                <article class="hardware-card">
+                    <div class="hardware-visual">
+                        <img src="../../../../../assets/images/ectms/hw-gateway.png" alt="无线网关硬件图">
+                    </div>
+                    <div class="hardware-copy">
+                        <h3>白盒 / 黑盒直读模块</h3>
+                        <p>外挂在清洗机侧面，强调 uart-Dect 与振动传感的组合能力，突出跨品牌、免接口费、底层数据真实可得。</p>
+                        <span class="mini-tag">场景：全自动清洗机</span>
+                    </div>
+                </article>
+
+                <article class="hardware-card">
+                    <div class="hardware-visual">
+                        <img src="../../../../../assets/images/ectms/内镜监控大屏.png" alt="内镜监控大屏图">
+                    </div>
+                    <div class="hardware-copy">
+                        <h3>55 寸洗消全景监控大屏</h3>
+                        <p>墙面大屏展示多条内镜洗消进度条、倒计时卡控与异常拦截，用“绿条达标、红条预警”强化观感。</p>
+                        <span class="mini-tag">场景：清洗消毒区墙面</span>
+                    </div>
+                </article>
+
+                <article class="hardware-card">
+                    <div class="hardware-visual">
+                        <div class="hardware-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="4" y="10" width="10" height="6" rx="2"></rect>
+                                <path d="M14 12h3.5l2.5 2.5V16H14"></path>
+                                <circle cx="8" cy="18" r="2"></circle>
+                                <circle cx="18" cy="18" r="2"></circle>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="hardware-copy">
+                        <h3>内镜智能转运机器人</h3>
+                        <p>用于污染路线与洁净路线的任务行驶，模型里应明确区分双路线，避免把“机器人”展示成普通搬运工具。</p>
+                        <span class="mini-tag">场景：走廊 / 通道</span>
+                    </div>
+                </article>
+
+                <article class="hardware-card">
+                    <div class="hardware-visual">
+                        <div class="hardware-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="5" y="4" width="14" height="16" rx="2"></rect>
+                                <line x1="9" y1="8" x2="9" y2="16"></line>
+                                <line x1="15" y1="8" x2="15" y2="16"></line>
+                                <line x1="7" y1="8" x2="17" y2="8"></line>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="hardware-copy">
+                        <h3>数智内镜储存干燥柜</h3>
+                        <p>归柜后自动开启 72 小时倒计时，并将微正压、温湿度与开柜动作转成连续监测记录。</p>
+                        <span class="mini-tag">场景：内镜存储区</span>
+                    </div>
+                </article>
+
+                <article class="hardware-card">
+                    <div class="hardware-visual">
+                        <div class="hardware-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M8 7v10"></path>
+                                <path d="M12 5v14"></path>
+                                <path d="M16 7v10"></path>
+                                <path d="M5 10c1.5 0 1.5 2 3 2s1.5-2 3-2 1.5 2 3 2 1.5-2 3-2"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="hardware-copy">
+                        <h3>四通路内镜智能吹干机</h3>
+                        <p>终末干燥是很多中心容易被轻描淡写的环节，演示模型要把它单独亮出来，讲清“深度吹干 + 参数留痕”。</p>
+                        <span class="mini-tag">场景：干燥台</span>
+                    </div>
+                </article>
+
+                <article class="hardware-card">
+                    <div class="hardware-visual">
+                        <img src="../../../../../assets/images/ectms/hw-usb-cardreader.png" alt="USB 读卡器图">
+                    </div>
+                    <div class="hardware-copy">
+                        <h3>2.4G 无线 USB 读卡器</h3>
+                        <p>作为诊疗端的轻量入口，支持医生快速刷卡绑定，用最短的交互完成患者与内镜的源头关联。</p>
+                        <span class="mini-tag">场景：诊疗区医生工位</span>
+                    </div>
+                </article>
+
+                <article class="hardware-card">
+                    <div class="hardware-visual">
+                        <img src="../../../../../assets/images/ectms/hw-usb.png" alt="USB 设备图">
+                    </div>
+                    <div class="hardware-copy">
+                        <h3>无线网关与边缘采集节点</h3>
+                        <p>负责打通暗装读卡器、清洗机采集模块、吹干机与管理端的连接，保证复杂环境下秒级稳定并网。</p>
+                        <span class="mini-tag">场景：设备间 / 柜体侧边</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="control">
+            <div class="section-head">
+                <div>
+                    <div class="section-kicker">Command & Audit</div>
+                    <h2 class="section-title">最后要落回到“谁来管理、怎么监管、如何出证据”</h2>
+                    <p class="section-desc">中心级演示模型的收束点，应该是让客户看到大屏、PC 与手机端如何把现场数据汇总成质控看板、移动监测与长期台账，而不是只停留在设备层。</p>
+                </div>
+                <div class="section-side-note">如果客户问“我们要怎么日常管理”，这一屏就是答案：同一套链路既服务现场执行，也服务院感、飞检和长期审计。</div>
+            </div>
+
+            <div class="control-grid">
+                <div class="control-visual">
+                    <figure class="screen-card">
+                        <img src="../../../../../assets/images/ectms/内镜监控大屏.png" alt="内镜监控大屏界面">
+                    </figure>
+                    <div class="phone-stack">
+                        <figure class="phone-card">
+                            <img src="../../../../../assets/images/ectms/手机端2.png" alt="手机端界面">
+                        </figure>
+                        <figure class="phone-card">
+                            <img src="../../../../../assets/images/ectms/管理后台数据概览.png" alt="管理后台界面">
+                        </figure>
+                    </div>
+                </div>
+
+                <div class="control-copy">
+                    <article class="capability-card">
+                        <h3>现场执行看板</h3>
+                        <p>大屏用来显示多条内镜的洗消进度、当前步骤、超时预警与防错拦截，服务一线执行过程中的即时纠偏。</p>
+                        <ul>
+                            <li>进度条展示达标与异常状态</li>
+                            <li>预警事件即时上墙</li>
+                            <li>关键节点倒计时可视化</li>
+                        </ul>
+                    </article>
+
+                    <article class="capability-card">
+                        <h3>护士长与院感监管端</h3>
+                        <p>PC 网页端看全局运行态势、人员工作量、设备状态与过程明细，支持从“全局概览”深入到“单镜追溯”。</p>
+                        <ul>
+                            <li>科室运行总览与质量分析</li>
+                            <li>流程顺序、时长、漏登记预警</li>
+                            <li>设备、人员、患者多维检索</li>
+                        </ul>
+                    </article>
+
+                    <article class="capability-card">
+                        <h3>移动质控与长期台账</h3>
+                        <p>手机小程序 / APP 支持随时查看洗消记录、消毒液浓度、更换批次和异常事件；合规台账可长期电子存档。</p>
+                        <ul>
+                            <li>移动端查看实时与历史状态</li>
+                            <li>飞检调阅与跨期追溯更高效</li>
+                            <li>形成可沉淀、可核验的长期证据</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="cta-grid">
+                <div>
+                    <div class="section-kicker">Next Step</div>
+                    <h2 class="cta-title">把这套模型继续做成客户演示页、展会大屏页或线下沙盘讲解脚本</h2>
+                    <p class="cta-text">
+                        当前页面已经完成“场景主线、区域布局、追溯维度、产品落位与管理闭环”的第一版实现，后续可以继续派生为带动画的演示版、投屏版，或者为销售准备逐步讲解稿。
+                    </p>
+                    <div class="cta-actions">
+                        <a class="cta-button primary" href="#journey">查看 7 步流转讲解</a>
+                        <a class="cta-button secondary" href="#hardware">查看硬件落位建议</a>
+                    </div>
+                </div>
+
+                <div class="contact-panel">
+                    <article class="contact-card">
+                        <h3>面向客户，这一页最该传达的不是“设备多”，而是“中心级闭环能力”</h3>
+                        <p>客户最终会记住三件事：智感云能把现场真实数据抓回来，能把洁污动线变成数字节点，能把日常执行沉淀成长期台账。</p>
+                    </article>
+                    <article class="contact-card">
+                        <h3>联系信息</h3>
+                        <ul>
+                            <li><strong>官网：</strong>www.opmonitor.com</li>
+                            <li><strong>邮箱：</strong>info@opmonitor.com</li>
+                            <li><strong>热线：</strong>400 160 1008</li>
+                            <li><strong>公司：</strong>北京智感云科技有限公司</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <span>ECTMS 内镜洗消中心演示模型网页 · v1</span>
+            <span>用于展示“区域布局 + 流程追溯 + 产品生态 + 管理闭环”的统一故事线</span>
+        </footer>
+    </main>
+</body>
+</html>

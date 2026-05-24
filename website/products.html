@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>产品与解决方案 — 智感云</title>
   <meta name="description" content="智感云围绕医疗废物、危险废物、智慧卫监、消毒灭菌监测、内镜合规与减污降碳等场景，提供软硬一体数字化解决方案。"/>
-  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="stylesheet" href="assets/css/style.css?v=20260520-logo"/>
 </head>
 <body>
 
@@ -59,30 +59,7 @@
         </div>
       </div>
       <div class="page-hero-img">
-        <div class="page-hero-graphic graphic-products" aria-label="产品与解决方案主视觉">
-          <div class="graphic-main-card">
-            <div class="gm-title">产品矩阵</div>
-            <div class="gm-bars"><span></span><span></span><span></span><span></span></div>
-            <div class="gm-wave"></div>
-          </div>
-          <div class="graphic-side-stack">
-            <div class="graphic-side-card">
-              <div class="gm-title">二维码标签</div>
-              <div class="mini-qr">
-                <i></i><i></i><i></i><i></i><i></i><i></i>
-                <i></i><i></i><i></i><i></i><i></i><i></i>
-                <i></i><i></i><i></i><i></i><i></i><i></i>
-                <i></i><i></i><i></i><i></i><i></i><i></i>
-                <i></i><i></i><i></i><i></i><i></i><i></i>
-                <i></i><i></i><i></i><i></i><i></i><i></i>
-              </div>
-            </div>
-            <div class="graphic-side-card">
-              <div class="gm-title">智能终端</div>
-              <div class="mini-device"><span></span><span></span><span></span><span></span></div>
-            </div>
-          </div>
-        </div>
+        <img src="public/images/products/products_banner.png" alt="产品与技术解决方案主视觉"/>
       </div>
     </div>
   </div>
@@ -292,7 +269,9 @@
     </div>
   </div>
 </footer>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <script src="assets/js/navigation.js"></script>
+<script src="assets/js/icons.js"></script>
 <script>
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)'}}),{threshold:0.1});
 document.querySelectorAll('.product-card,.capability-card').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity 0.5s ease,transform 0.5s ease';obs.observe(el)});

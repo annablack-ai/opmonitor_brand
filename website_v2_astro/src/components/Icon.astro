@@ -8,6 +8,12 @@ interface Props {
 
 const { name, class: className = 'h-5 w-5' } = Astro.props;
 
+const isProductTablerIcon = name.startsWith('product-');
+const viewBox = isProductTablerIcon ? '0 0 24 24' : '0 0 32 32';
+const strokeWidth = isProductTablerIcon ? '2' : '1.5';
+const strokeLineCap = isProductTablerIcon ? 'round' : 'square';
+const strokeLineJoin = isProductTablerIcon ? 'round' : 'miter';
+
 const icons: Record<IconName, string> = {
   logo: '<path d="M18 3L7 7.5v9L18 21l11-4.5v-9L18 3Zm0 0v18"/><path d="M7 7.5 18 12l11-4.5"/>',
   'arrow-right': '<path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>',
@@ -36,7 +42,13 @@ const icons: Record<IconName, string> = {
   award: '<circle cx="16" cy="11" r="5"/><path d="m13 16-2 10 5-3 5 3-2-10"/>',
   hardware: '<rect x="11" y="5" width="10" height="22" rx="3"/><path d="M14 9h4M13 22h6"/>',
   gallery: '<rect x="5" y="8" width="10" height="14" rx="2"/><rect x="17" y="11" width="10" height="11" rx="2"/>',
+  'product-medical': '<path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M13 3a1 1 0 0 1 1 1v4.535l3.928 -2.267a1 1 0 0 1 1.366 .366l1 1.732a1 1 0 0 1 -.366 1.366l-3.927 2.268l3.927 2.269a1 1 0 0 1 .366 1.366l-1 1.732a1 1 0 0 1 -1.366 .366l-3.928 -2.269v4.536a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1v-4.536l-3.928 2.268a1 1 0 0 1 -1.366 -.366l-1 -1.732a1 1 0 0 1 .366 -1.366l3.927 -2.268l-3.927 -2.268a1 1 0 0 1 -.366 -1.366l1 -1.732a1 1 0 0 1 1.366 -.366l3.928 2.267v-4.535a1 1 0 0 1 1 -1h2" />',
+  'product-hazardous': '<path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 9v4" /><path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0" /><path d="M12 16h.01" />',
+  'product-supervision': '<path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M15.51 15.56a5 5 0 1 0 -3.51 1.44" /><path d="M18.832 17.86a9 9 0 1 0 -6.832 3.14" /><path d="M12 12v9" />',
+  'product-sterilization': '<path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 12a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v7a2 2 0 0 1 -2 2h-4a2 2 0 0 1 -2 -2l0 -7" /><path d="M6 10v-4a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4" /><path d="M15 7h.01" /><path d="M18 9h.01" /><path d="M18 5h.01" /><path d="M21 3h.01" /><path d="M21 7h.01" /><path d="M21 11h.01" /><path d="M10 7h1" />',
+  'product-endoscope': '<path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 21h14" /><path d="M6 18h2" /><path d="M7 18v3" /><path d="M9 11l3 3l6 -6l-3 -3l-6 6" /><path d="M10.5 12.5l-1.5 1.5" /><path d="M17 3l3 3" /><path d="M12 21a6 6 0 0 0 3.715 -10.712" />',
+  'product-carbon': '<path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 21c.5 -4.5 2.5 -8 7 -10" /><path d="M9 18c6.218 0 10.5 -3.288 11 -12v-2h-4.014c-9 0 -11.986 4 -12 9c0 1 0 3 2 5h3l.014 0" />',
 };
 ---
 
-<svg class={className} viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true" set:html={icons[name]} />
+<svg class={className} viewBox={viewBox} fill="none" stroke="currentColor" stroke-width={strokeWidth} stroke-linecap={strokeLineCap} stroke-linejoin={strokeLineJoin} aria-hidden="true" set:html={icons[name]} />

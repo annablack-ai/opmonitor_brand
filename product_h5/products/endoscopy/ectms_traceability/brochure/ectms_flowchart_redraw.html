@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内镜流程图</title>
+    <style>
+        :root {
+            --bg: #f4f7fb;
+            --ink: #2e3f54;
+            --line: #7f95ad;
+            --purple: #6b56ee;
+            --green: #4ea50f;
+            --cyan: #11b8c4;
+            --blue: #0f7ac5;
+            --red: #ff5f43;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background:
+                radial-gradient(circle at 10% 0%, #fbfdff 0%, #f4f7fb 44%),
+                linear-gradient(180deg, #f7f9fd 0%, #eff4fb 100%);
+            font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+            color: var(--ink);
+        }
+
+        .canvas {
+            width: min(96vw, 1400px);
+            margin: 16px auto;
+            background: #ffffff;
+            border: 1px solid #d7e2ef;
+            border-radius: 14px;
+            box-shadow: 0 12px 30px rgba(36, 60, 90, 0.10);
+            padding: 10px;
+        }
+
+        svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .edge {
+            fill: none;
+            stroke-width: 2.6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .edge-thin {
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .edge-purple { stroke: var(--purple); }
+        .edge-green { stroke: var(--green); }
+        .edge-cyan { stroke: var(--cyan); }
+        .edge-blue { stroke: var(--blue); }
+        .edge-gray { stroke: var(--line); }
+
+        .node-text {
+            font-size: 14px;
+            fill: #2b3c51;
+            font-weight: 600;
+            dominant-baseline: middle;
+            text-anchor: middle;
+        }
+
+        .flow-label {
+            font-size: 12px;
+            fill: #666;
+            font-weight: 500;
+            text-anchor: middle;
+            dominant-baseline: middle;
+            paint-order: stroke;
+            stroke: #ffffff;
+            stroke-width: 3;
+            stroke-linejoin: round;
+        }
+
+        .zone-text {
+            font-size: 18px;
+            fill: #28461f;
+            font-weight: 700;
+            dominant-baseline: middle;
+            text-anchor: middle;
+        }
+    </style>
+</head>
+<body>
+<div class="canvas">
+    <svg viewBox="0 0 1900 820" aria-label="内镜流程图">
+        <defs>
+            <linearGradient id="zoneGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#d4f59a"/>
+                <stop offset="44%" stop-color="#f4f291"/>
+                <stop offset="72%" stop-color="#cde98c"/>
+                <stop offset="100%" stop-color="#9adf4f"/>
+            </linearGradient>
+
+            <marker id="arrow-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#6f8198"/>
+            </marker>
+            <marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#6d5efc"/>
+            </marker>
+            <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#48a700"/>
+            </marker>
+            <marker id="arrow-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#10b9c7"/>
+            </marker>
+            <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f7acb"/>
+            </marker>
+        </defs>
+
+        <!-- 顶部外框 -->
+        <rect x="350" y="80" width="1450" height="520" fill="none" stroke="#999" stroke-width="2"/>
+        <text x="1100" y="105" class="flow-label" style="font-size:13px; fill:#666;">转运</text>
+
+        <!-- ===== 诊疗室 主流程 ===== -->
+        <!-- 诊疗使用（红色） -->
+        <rect x="50" y="340" width="100" height="60" fill="#ffcccc" stroke="#ff4444" stroke-width="3" rx="8" ry="8"/>
+        <text x="100" y="375" class="node-text">诊疗使用</text>
+
+        <!-- 诊疗→预处理 -->
+        <path class="edge edge-purple" d="M150 375 H220" marker-end="url(#arrow-purple)"/>
+
+        <!-- 预处理 -->
+        <rect x="220" y="340" width="100" height="60" fill="#f0f0f0" stroke="#999" stroke-width="2" rx="8" ry="8"/>
+        <text x="270" y="375" class="node-text">预处理</text>
+
+        <!-- 预处理→转运→测漏 -->
+        <path class="edge-thin edge-gray" d="M320 375 H380" marker-end="url(#arrow-gray)"/>
+        <text x="350" y="360" class="flow-label">转运</text>
+
+        <!-- ===== 上层路线：晨洗分支 ===== -->
+        <!-- 顶部测漏 -->
+        <rect x="400" y="140" width="90" height="55" fill="#f0f0f0" stroke="#999" stroke-width="2" rx="8" ry="8"/>
+        <text x="445" y="172" class="node-text" style="font-size:13px;">测漏</text>
+
+        <!-- 测漏→晨洗→消毒 -->
+        <path class="edge edge-cyan" d="M490 172 H680 V269" marker-end="url(#arrow-cyan)"/>
+        <text x="580" y="160" class="flow-label">晨洗</text>
+
+        <!-- ===== 主流程：测漏、清洗、漂洗 ===== -->
+        <!-- 转运分支：向下到测漏+向右到清洗 -->
+        <path class="edge-thin edge-gray" d="M380 375 V225 H400" marker-end="url(#arrow-gray)"/>
+
+        <!-- 下层测漏→清洗 -->
+        <path class="edge edge-green" d="M445 195 V340 H470" marker-end="url(#arrow-green)"/>
+
+        <!-- 清洗（红色） -->
+        <rect x="470" y="340" width="100" height="60" fill="#ffcccc" stroke="#ff4444" stroke-width="3" rx="8" ry="8"/>
+        <text x="520" y="375" class="node-text">清洗</text>
+
+        <!-- 清洗→漂洗 -->
+        <path class="edge edge-green" d="M570 375 H640" marker-end="url(#arrow-green)"/>
+
+        <!-- 漂洗（红色） -->
+        <rect x="640" y="340" width="100" height="60" fill="#ffcccc" stroke="#ff4444" stroke-width="3" rx="8" ry="8"/>
+        <text x="690" y="375" class="node-text">漂洗</text>
+
+        <!-- 漂洗→分支（手洗/机洗） -->
+        <path class="edge edge-green" d="M740 375 H820" marker-end="url(#arrow-green)"/>
+
+        <!-- ===== 手洗分支 ===== -->
+        <!-- 手洗向上→消毒 -->
+        <path class="edge edge-green" d="M820 355 V269 H680" marker-end="url(#arrow-green)"/>
+        <text x="770" y="305" class="flow-label" style="font-size:11px;">手洗</text>
+
+        <!-- ===== 清洗消毒室 - 上层流程 ===== -->
+        <!-- 消毒（黄色/橙色） -->
+        <rect x="680" y="240" width="100" height="60" fill="#ffe8cc" stroke="#ffb347" stroke-width="3" rx="8" ry="8"/>
+        <text x="730" y="275" class="node-text">消毒</text>
+
+        <!-- 消毒→末洗 -->
+        <path class="edge edge-green" d="M780 270 H870" marker-end="url(#arrow-green)"/>
+
+        <!-- 末洗（红色粗边） -->
+        <rect x="870" y="240" width="100" height="60" fill="#ffcccc" stroke="#ff4444" stroke-width="4" rx="8" ry="8"/>
+        <text x="920" y="275" class="node-text">末洗</text>
+
+        <!-- 末洗→干燥 -->
+        <path class="edge edge-green" d="M970 270 H1050" marker-end="url(#arrow-green)"/>
+
+        <!-- 干燥（白色/浅色） -->
+        <rect x="1050" y="240" width="100" height="60" fill="#f5f5f5" stroke="#999" stroke-width="2" rx="8" ry="8"/>
+        <text x="1100" y="275" class="node-text" style="color:#666;">干燥</text>
+
+        <!-- 干燥→结束 -->
+        <path class="edge edge-green" d="M1150 270 H1220" marker-end="url(#arrow-green)"/>
+
+        <!-- 结束（蓝色圆） -->
+        <circle cx="1260" cy="270" r="35" fill="#0f7ac5" stroke="#0f7ac5" stroke-width="3"/>
+        <text x="1260" y="275" class="node-text" style="fill:#ffffff; font-size:13px;">结束</text>
+
+        <!-- 结束→存储 -->
+        <text x="1300" y="260" class="flow-label" style="font-size:10px;">转运</text>
+        <path class="edge-thin edge-gray" d="M1295 270 H1380" marker-end="url(#arrow-gray)"/>
+
+        <!-- 存储 -->
+        <rect x="1380" y="240" width="100" height="60" fill="#f0f0f0" stroke="#999" stroke-width="2" rx="8" ry="8"/>
+        <text x="1430" y="275" class="node-text">存储</text>
+
+        <!-- 存储→下方转运 -->
+        <path class="edge-thin edge-gray" d="M1430 300 V380" marker-end="url(#arrow-gray)"/>
+
+        <!-- ===== 机洗分支 ===== -->
+        <!-- 漂洗向下→机洗 -->
+        <path class="edge edge-blue" d="M740 400 V480 H820" marker-end="url(#arrow-blue)"/>
+        <text x="760" y="445" class="flow-label" style="font-size:11px;">机洗</text>
+
+        <!-- 机洗（红色） -->
+        <rect x="820" y="450" width="100" height="60" fill="#ffcccc" stroke="#ff4444" stroke-width="3" rx="8" ry="8"/>
+        <text x="870" y="485" class="node-text">机洗</text>
+
+        <!-- 机洗→分支 -->
+        <path class="edge edge-blue" d="M920 485 H1000" marker-end="url(#arrow-blue)"/>
+
+        <!-- 不带干燥功能→干燥 -->
+        <path class="edge edge-blue" d="M1000 475 H1050 V290 H1050" marker-end="url(#arrow-blue)"/>
+        <text x="1020" y="375" class="flow-label small" style="font-size:10px;">不带干燥功能</text>
+
+        <!-- 带干燥功能→结束 -->
+        <path class="edge edge-blue" d="M1000 495 H1220 V305 H1225" marker-end="url(#arrow-blue)"/>
+        <text x="1110" y="510" class="flow-label small" style="font-size:10px;">带干燥功能</text>
+
+        <!-- ===== 底部转运循环 ===== -->
+        <path class="edge-thin edge-gray" d="M50 380 V540 H1480" fill="none" stroke="#999" stroke-width="2"/>
+        <text x="760" y="565" class="flow-label">转运</text>
+
+        <!-- ===== 底部分区标签 ===== -->
+        <rect x="40" y="630" width="1820" height="65" fill="url(#zoneGrad)"/>
+        <line x1="500" y1="630" x2="500" y2="695" stroke="#d7e695" stroke-width="1.5"/>
+        <line x1="1380" y1="630" x2="1380" y2="695" stroke="#d7e695" stroke-width="1.5"/>
+
+        <text x="270" y="665" class="zone-text">诊疗室（区）</text>
+        <text x="940" y="665" class="zone-text">清洗消毒室（区）</text>
+        <text x="1610" y="665" class="zone-text">内镜与附件储存库（柜）</text>
+    </svg>
+</div>
+</body>
+</html>

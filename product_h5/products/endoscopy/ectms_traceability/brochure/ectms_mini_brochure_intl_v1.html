@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECTMS One-Pager International v1</title>
+    <style>
+        :root {
+            --bg: #edf2f7;
+            --paper: #ffffff;
+            --surface: #f5f7fa;
+            --surface-blue: #eef5ff;
+            --ink: #1f2937;
+            --muted: #67758a;
+            --muted-light: #98a2b3;
+            --line: #dbe3ee;
+            --line-soft: #e7edf4;
+            --blue: #007bff;
+            --blue-deep: #0f4c81;
+            --blue-soft: #eaf3ff;
+            --shadow-paper: 0 18px 34px rgba(15, 23, 42, 0.10);
+            --shadow-card: 0 8px 16px rgba(15, 23, 42, 0.04);
+            --radius-card: 3.4mm;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: "IBM Plex Sans", "PingFang SC", "Noto Sans SC", "Segoe UI", sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 16% 0%, #f9fbff 0%, #edf2f7 44%),
+                linear-gradient(180deg, #f6f9fc 0%, #edf2f7 100%);
+            padding: 22px 0 42px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        .brochure {
+            width: min(96vw, 230mm);
+            margin: 0 auto;
+            display: grid;
+            gap: 20px;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            background: var(--paper);
+            border: 1px solid #dbe4ef;
+            border-radius: 8px;
+            box-shadow: var(--shadow-paper);
+            position: relative;
+            overflow: hidden;
+            padding: 14mm 14mm 12mm;
+            display: grid;
+            grid-template-rows: auto auto auto auto auto auto;
+            gap: 2.8mm;
+        }
+
+        .page::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10mm;
+            background: linear-gradient(90deg, rgba(0, 123, 255, 0.06) 0%, rgba(0, 123, 255, 0.01) 42%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+        }
+
+        .page::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(0, 123, 255, 0.04);
+            pointer-events: none;
+        }
+
+        .logo {
+            position: absolute;
+            right: 14mm;
+            top: 11mm;
+            width: 22mm;
+            height: auto;
+            z-index: 4;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            min-height: 7mm;
+            padding: 0 3mm;
+            border-radius: 999px;
+            border: 1px solid #e2e9f3;
+            background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+            font-size: 9.8px;
+            letter-spacing: 0.06em;
+            color: var(--muted-light);
+            margin-bottom: 2.2mm;
+            font-weight: 500;
+            width: fit-content;
+        }
+
+        .title {
+            font-size: 24px;
+            line-height: 1.18;
+            letter-spacing: -0.02em;
+            font-weight: 700;
+            color: #16283d;
+            word-break: keep-all;
+        }
+
+        .subtitle {
+            margin-top: 1.6mm;
+            font-size: 12.6px;
+            color: var(--blue);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .hero {
+            min-height: 68mm;
+            border: 1px solid #d8e6f9;
+            border-radius: var(--radius-card);
+            background: linear-gradient(160deg, #f5f9ff 0%, #eef5ff 65%, #f8fbff 100%);
+            display: grid;
+            grid-template-columns: 0.95fr 1.05fr;
+            gap: 3mm;
+            padding: 3.4mm;
+        }
+
+        .hero-copy {
+            display: grid;
+            align-content: start;
+            gap: 1.6mm;
+        }
+
+        .hero-copy p {
+            font-size: 10.2px;
+            line-height: 1.58;
+            color: #4a607c;
+        }
+
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 0.8mm;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: 999px;
+            border: 1px solid #d6e4f8;
+            background: #f4f8ff;
+            color: #355174;
+            font-size: 9px;
+            font-weight: 600;
+        }
+
+        .hero-media {
+            border: 1px solid #d7e5f8;
+            border-radius: 3mm;
+            background: #ffffff;
+            overflow: hidden;
+        }
+
+        .hero-media img {
+            width: 100%;
+            height: 100%;
+            min-height: 58mm;
+            object-fit: contain;
+        }
+
+        .strip {
+            border: 1px solid #dbe7f7;
+            border-left: 2.5px solid #7bb1ff;
+            border-radius: 3.2mm;
+            background: linear-gradient(180deg, #f8fbff 0%, #f1f7ff 100%);
+            padding: 2.4mm 3mm;
+            font-size: 10.2px;
+            line-height: 1.52;
+            color: #3f5672;
+        }
+
+        .strip strong { color: #0f4c81; }
+
+        .quick-pick {
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius-card);
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            box-shadow: var(--shadow-card);
+            padding: 2.8mm;
+            display: grid;
+            gap: 2mm;
+        }
+
+        .section-head {
+            font-size: 11.4px;
+            color: #1f344c;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 1.8mm;
+        }
+
+        .section-head::before {
+            content: "";
+            width: 2.2px;
+            height: 1.1em;
+            border-radius: 999px;
+            background: var(--blue);
+        }
+
+        .version-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1.8mm;
+        }
+
+        .vcard {
+            border: 1px solid #d9e5f6;
+            border-radius: 2.8mm;
+            background: #ffffff;
+            padding: 2mm 1.8mm;
+            display: grid;
+            gap: 1.1mm;
+        }
+
+        .vcard h4 {
+            font-size: 9.8px;
+            color: #184067;
+            line-height: 1.35;
+            text-align: center;
+        }
+
+        .vtag {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            border: 1px solid #d4e2f7;
+            background: #f4f8ff;
+            color: #45668d;
+            font-size: 8.4px;
+            padding: 1px 6px;
+        }
+
+        .vtags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            justify-content: center;
+        }
+
+        .core {
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius-card);
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            box-shadow: var(--shadow-card);
+            padding: 2.6mm;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2mm;
+        }
+
+        .mini-card {
+            border: 1px solid #dce7f6;
+            border-radius: 2.8mm;
+            padding: 2mm;
+            background: #ffffff;
+            display: grid;
+            gap: 0.8mm;
+        }
+
+        .mini-card h4 {
+            font-size: 9.9px;
+            color: #173f66;
+            line-height: 1.35;
+        }
+
+        .mini-card p {
+            font-size: 9px;
+            line-height: 1.46;
+            color: #536b86;
+        }
+
+        .mini-card img {
+            width: 100%;
+            height: 27mm;
+            object-fit: cover;
+            border-radius: 2mm;
+            border: 1px solid #dce6f3;
+            background: #f8fbff;
+        }
+
+        .brand-mini {
+            border: 1px solid #dce7f6;
+            border-radius: 3mm;
+            background: #ffffff;
+            padding: 2.2mm 2.6mm;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 2mm;
+            min-height: 20mm;
+        }
+
+        .brand-mini img { width: 16mm; }
+
+        .brand-mini p {
+            font-size: 9px;
+            color: #5b7190;
+            line-height: 1.42;
+        }
+
+        .brand-mini .office {
+            font-size: 8.6px;
+            color: #647b98;
+            text-align: right;
+            line-height: 1.36;
+            white-space: nowrap;
+        }
+
+        .cta {
+            border: 1px solid #d7e4f7;
+            border-radius: 3.2mm;
+            background: linear-gradient(180deg, #f8fbff 0%, #f1f7ff 100%);
+            padding: 2.6mm;
+            display: grid;
+            gap: 1.6mm;
+        }
+
+        .cta h3 {
+            font-size: 12.5px;
+            color: #163e67;
+        }
+
+        .cta-row {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.6mm;
+        }
+
+        .cta-btn {
+            min-height: 7mm;
+            border-radius: 999px;
+            border: 1px solid #b9d6fb;
+            background: #eaf4ff;
+            color: #0f4c81;
+            font-size: 9.2px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .cta-btn.primary {
+            background: linear-gradient(180deg, #0f78f5 0%, #0b66d0 100%);
+            color: #ffffff;
+            border-color: #0d67cf;
+        }
+
+        .contact {
+            display: flex;
+            justify-content: space-between;
+            gap: 2mm;
+            font-size: 9.3px;
+            color: #4c627e;
+            flex-wrap: wrap;
+        }
+
+        .page-no {
+            position: absolute;
+            right: 12mm;
+            bottom: 7mm;
+            font-size: 9.2px;
+            color: #8fa0b3;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        @media print {
+            @page { size: A4 portrait; margin: 0; }
+
+            body {
+                background: #fff;
+                padding: 0;
+            }
+
+            .brochure {
+                width: auto;
+                gap: 0;
+            }
+
+            .page {
+                border: 0;
+                border-radius: 0;
+                box-shadow: none;
+                margin: 0;
+                page-break-after: auto;
+                break-after: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+<main class="brochure">
+    <section class="page">
+        <img src="../../../../../opmoniter_logo.png" alt="OpMonitor Logo" class="logo">
+
+        <header class="hero">
+            <div class="hero-copy">
+                <span class="eyebrow">ECTMS 国际风单页 · One-Pager</span>
+                <h1 class="title">ECTMS 内镜综合追溯管理系统</h1>
+                <p class="subtitle">全流程质控 · 全流程追溯 · 多系统对接</p>
+                <p>把 WS507 要求转化为可执行、可校验、可追溯的闭环管理，帮助内镜中心快速建立稳定的质控运营体系。</p>
+                <div class="badge-row">
+                    <span class="badge">WS507 对齐</span>
+                    <span class="badge">数据直采</span>
+                    <span class="badge">多端协同</span>
+                    <span class="badge">审计可追溯</span>
+                </div>
+            </div>
+            <div class="hero-media">
+                <img src="../../../../../assets/images/ectms/hero-cover-v01.jpeg" alt="ECTMS 主视觉图">
+            </div>
+        </header>
+
+        <section class="strip">
+            <strong>合规亮点：</strong>支持人机患绑定、设备参数留痕、监测结果存档与长期归档，形成可核验的证据链条。
+        </section>
+
+        <section class="quick-pick">
+            <p class="section-head">版本快选（4 阶）</p>
+            <div class="version-grid">
+                <article class="vcard">
+                    <h4>Mini</h4>
+                    <div class="vtags"><span class="vtag">轻量起步</span><span class="vtag">机洗直采</span><span class="vtag">快速上线</span></div>
+                </article>
+                <article class="vcard">
+                    <h4>标准版</h4>
+                    <div class="vtags"><span class="vtag">HIS 对接</span><span class="vtag">多端监管</span><span class="vtag">语音提醒</span></div>
+                </article>
+                <article class="vcard">
+                    <h4>Plus</h4>
+                    <div class="vtags"><span class="vtag">镜柜采集</span><span class="vtag">PDA 协同</span><span class="vtag">专业治理</span></div>
+                </article>
+                <article class="vcard">
+                    <h4>Pro</h4>
+                    <div class="vtags"><span class="vtag">深度定制</span><span class="vtag">纯水机解析</span><span class="vtag">全院治理</span></div>
+                </article>
+            </div>
+        </section>
+
+        <section class="core">
+            <article class="mini-card">
+                <h4>核心能力 1：全链路追溯</h4>
+                <p>覆盖预处理、清洗、消毒、存储、发放与使用，关键节点自动留痕。</p>
+                <img src="../../../../../assets/images/ectms/管理后台数据概览.png" alt="后台监管界面">
+            </article>
+            <article class="mini-card">
+                <h4>核心能力 2：多端协同监管</h4>
+                <p>后台、移动端和大屏共用同一数据链路，异常信息实时触达。</p>
+                <img src="../../../../../assets/images/ectms/手机端2.png" alt="移动端监管界面">
+            </article>
+            <article class="mini-card">
+                <h4>硬件卖点 1：隐蔽暗装部署</h4>
+                <p>降低线缆暴露与交叉污染风险，适配临床复杂环境。</p>
+                <img src="../../../../../assets/images/ectms/现场安装图02.png" alt="现场安装图">
+            </article>
+            <article class="mini-card">
+                <h4>硬件卖点 2：无损底层直读</h4>
+                <p>多源感知采集真实设备参数，为质控判断提供可信输入。</p>
+                <img src="../../../../../assets/images/ectms/hw-reader.png" alt="硬件示意图">
+            </article>
+        </section>
+
+        <section class="brand-mini">
+            <img src="../../../../../opmoniter_logo.png" alt="OpMonitor Logo">
+            <p>北京智感云科技有限公司 | 深耕医疗物联网与感控场景，提供标准化实施与 7x24 响应服务。</p>
+            <div class="office">北京 | 江苏 | 安徽 | 广东</div>
+        </section>
+
+        <section class="cta">
+            <h3>下一步：先试点，再扩展</h3>
+            <div class="cta-row">
+                <span class="cta-btn primary">预约演示</span>
+                <span class="cta-btn">下载资料</span>
+                <span class="cta-btn">联系办事处</span>
+            </div>
+            <div class="contact">
+                <span>www.opmonitor.com</span>
+                <span>info@opmonitor.com</span>
+                <span>400 160 1008</span>
+            </div>
+        </section>
+
+        <span class="page-no">One-Pager</span>
+    </section>
+</main>
+</body>
+</html>

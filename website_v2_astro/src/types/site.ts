@@ -25,7 +25,13 @@ export type IconName =
   | 'case'
   | 'award'
   | 'hardware'
-  | 'gallery';
+  | 'gallery'
+  | 'product-medical'
+  | 'product-hazardous'
+  | 'product-supervision'
+  | 'product-sterilization'
+  | 'product-endoscope'
+  | 'product-carbon';
 
 export interface NavItem {
   key: string;
@@ -80,7 +86,11 @@ export interface StatItem {
 
 export interface ProductSummary {
   slug: string;
+  code: string;
   name: string;
+  displayName: string;
+  shortName: string;
+  englishName: string;
   category: string;
   excerpt: string;
   targetUsers: string[];

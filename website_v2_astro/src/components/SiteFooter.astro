@@ -2,41 +2,58 @@
 import { footerLinkGroups } from '@/data/navigation';
 import { siteMeta } from '@/data/site';
 import Icon from '@/components/Icon.astro';
+
+const [productGroup, companyGroup] = footerLinkGroups;
 ---
 
 <footer class="site-footer text-white">
-  <div class="container-shell grid gap-10 py-14 lg:grid-cols-[1.3fr_0.8fr_0.9fr]">
-    <div>
-      <div class="flex items-center gap-3">
-        <span class="inline-flex h-11 w-11 items-center justify-center border border-white/14 bg-white/6 text-brand-200">
+  <div class="container-shell site-footer-grid py-14">
+    <div class="site-footer-brand-block">
+      <div class="site-footer-brand-head">
+        <span class="site-footer-brand-mark">
           <Icon name="logo" class="h-6 w-6" />
         </span>
         <span>
-          <span class="block text-base font-semibold tracking-[0.04em]">{siteMeta.shortName}</span>
-          <span class="block text-[11px] tracking-[0.1em] text-white/44">{siteMeta.name}</span>
+          <span class="site-footer-brand-name">{siteMeta.shortName}</span>
+          <span class="site-footer-brand-company">{siteMeta.name}</span>
         </span>
       </div>
-      <p class="mt-5 max-w-xl text-sm leading-7 text-white/64">{siteMeta.tagline}</p>
-      <div class="mt-6 grid gap-3 text-sm text-white/56 sm:grid-cols-2">
-        <div class="flex items-start gap-3"><Icon name="phone" class="mt-1 h-4 w-4 text-brand-200" /> <span>{siteMeta.phone}</span></div>
-        <div class="flex items-start gap-3"><Icon name="mail" class="mt-1 h-4 w-4 text-brand-200" /> <span>{siteMeta.email}</span></div>
-        <div class="flex items-start gap-3"><Icon name="globe" class="mt-1 h-4 w-4 text-brand-200" /> <span>{siteMeta.website}</span></div>
-        <div class="flex items-start gap-3"><Icon name="map" class="mt-1 h-4 w-4 text-brand-200" /> <span>{siteMeta.address}</span></div>
+      <p class="site-footer-brand-copy">{siteMeta.tagline}</p>
+    </div>
+
+    <div class="site-footer-group site-footer-group-products">
+      <div class="site-footer-title">{productGroup.title}</div>
+      <div class="site-footer-product-links">
+        {productGroup.links.map((link) => (
+          <a href={link.href} class="site-footer-link site-footer-link-product">{link.label}</a>
+        ))}
       </div>
     </div>
 
-    {footerLinkGroups.map((group) => (
-      <div>
-        <div class="text-sm font-semibold tracking-[0.08em] text-white">{group.title}</div>
-        <div class="mt-4 grid gap-3 text-sm text-white/56">
-          {group.links.map((link) => (
-            <a href={link.href} class="hover:text-white">{link.label}</a>
-          ))}
-        </div>
+    <div class="site-footer-group">
+      <div class="site-footer-title">{companyGroup.title}</div>
+      <div class="site-footer-link-list">
+        {companyGroup.links.map((link) => (
+          <a href={link.href} class="site-footer-link">{link.label}</a>
+        ))}
       </div>
-    ))}
+    </div>
+
+    <div class="site-footer-group">
+      <div class="site-footer-title">联系我们</div>
+      <div class="site-footer-contact-list">
+        <div class="site-footer-contact-item"><Icon name="phone" class="site-footer-contact-icon" /> <span>{siteMeta.phone}</span></div>
+        <div class="site-footer-contact-item"><Icon name="mail" class="site-footer-contact-icon" /> <span>{siteMeta.email}</span></div>
+        <div class="site-footer-contact-item"><Icon name="globe" class="site-footer-contact-icon" /> <span>{siteMeta.website}</span></div>
+        <div class="site-footer-contact-item"><Icon name="map" class="site-footer-contact-icon" /> <span>{siteMeta.address}</span></div>
+      </div>
+    </div>
   </div>
-  <div class="border-t border-white/10 py-5 text-center text-xs text-white/42">
-    © 2026 {siteMeta.name} 版权所有 · {siteMeta.icp}
+
+  <div class="site-footer-bottom">
+    <div class="container-shell site-footer-bottom-inner">
+      <span>© 2026 {siteMeta.name} 版权所有</span>
+      <span>{siteMeta.icp}</span>
+    </div>
   </div>
 </footer>

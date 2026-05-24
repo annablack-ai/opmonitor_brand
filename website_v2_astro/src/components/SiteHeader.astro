@@ -57,6 +57,7 @@ const activeKey = currentPath === '/'
                           {group.links.map((link) => (
                             <a href={link.href} class="nav-mega-link">
                               <span class="nav-mega-title">{link.label}</span>
+                              {link.description && <span class="nav-mega-note">{link.description}</span>}
                             </a>
                           ))}
                         </div>
@@ -125,7 +126,10 @@ const activeKey = currentPath === '/'
                   <div class="nav-mobile-subgroup-title">{group.title}</div>
                   <div class="mt-2 grid gap-2">
                     {group.links.map((link) => (
-                      <a href={link.href} class="text-sm leading-7 text-ink-600 hover:text-brand-600">{link.label}</a>
+                      <a href={link.href} class="nav-mobile-product-link">
+                        <span class="nav-mobile-product-title">{link.label}</span>
+                        {link.description && <span class="nav-mobile-product-note">{link.description}</span>}
+                      </a>
                     ))}
                   </div>
                 </div>

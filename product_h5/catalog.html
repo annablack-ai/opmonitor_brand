@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品H5归类总览</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f3f6ef;
+            --ink: #1f2a1f;
+            --muted: #566456;
+            --line: #d9e2d1;
+            --card: #ffffff;
+            --primary: #2f7d32;
+            --primary-soft: #e8f4e8;
+            --accent: #0f4c81;
+            --radius: 18px;
+            --shadow: 0 12px 30px rgba(25, 50, 25, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', 'PingFang SC', sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 10% 10%, rgba(47, 125, 50, 0.08) 0 18%, transparent 45%),
+                radial-gradient(circle at 90% 0%, rgba(15, 76, 129, 0.09) 0 15%, transparent 40%),
+                var(--bg);
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+
+        .page {
+            width: min(1160px, 92vw);
+            margin: 0 auto;
+            padding: 36px 0 48px;
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            padding: 36px 32px;
+            background: linear-gradient(125deg, #17331a 0%, #2f7d32 45%, #0f4c81 100%);
+            color: #f3fff3;
+            box-shadow: var(--shadow);
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            right: -80px;
+            top: -80px;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            border: 1px dashed rgba(255, 255, 255, 0.35);
+        }
+
+        .hero h1 {
+            font-family: 'ZCOOL XiaoWei', serif;
+            font-size: clamp(30px, 5vw, 48px);
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: rgba(236, 255, 236, 0.9);
+            font-size: 16px;
+        }
+
+        .meta {
+            margin-top: 18px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .pill {
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 999px;
+            padding: 8px 14px;
+            font-size: 13px;
+        }
+
+        .line-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+            margin-top: 26px;
+        }
+
+        .line-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .line-head {
+            padding: 18px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--line);
+            background: linear-gradient(180deg, #ffffff 0%, #f9fcf6 100%);
+        }
+
+        .line-name {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .line-count {
+            color: var(--muted);
+            font-size: 13px;
+            background: var(--primary-soft);
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid #d0e3d0;
+        }
+
+        .product-list {
+            padding: 14px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .product-item {
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: #fff;
+            padding: 14px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: center;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .product-item:hover {
+            transform: translateY(-2px);
+            border-color: #bfd0bf;
+            box-shadow: 0 8px 16px rgba(30, 60, 30, 0.08);
+        }
+
+        .product-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .product-sub {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .action {
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 1px solid #b8d5b9;
+            background: var(--primary-soft);
+            color: var(--primary);
+            white-space: nowrap;
+        }
+
+        .action.pending {
+            border-color: #c8d5e4;
+            background: #edf4fb;
+            color: var(--accent);
+            cursor: default;
+        }
+
+        .foot {
+            margin-top: 22px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        @media (max-width: 860px) {
+            .page {
+                width: 94vw;
+                padding-top: 20px;
+            }
+
+            .hero {
+                padding: 24px 18px;
+            }
+
+            .line-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .line-name {
+                font-size: 20px;
+            }
+
+            .product-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .action {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <section class="hero">
+            <h1>产品 H5 归类总览</h1>
+            <p>按“产品线 - 产品”统一管理，后续新增页面直接补到对应分类即可。</p>
+            <div class="meta">
+                <span class="pill">本地预览可用</span>
+                <span class="pill">当前已接入: 3 个页面</span>
+                <span class="pill">更新时间: 2026-03-14</span>
+            </div>
+        </section>
+
+        <section class="line-grid">
+            <article class="line-card">
+                <div class="line-head">
+                    <h2 class="line-name">医废</h2>
+                    <span class="line-count">3 个产品</span>
+                </div>
+                <div class="product-list">
+                    <div class="product-item">
+                        <div>
+                            <p class="product-title">物联钩秤</p>
+                            <p class="product-sub">对应页面: yf001.html</p>
+                        </div>
+                        <a class="action" href="./yf001.html" target="_blank">打开H5</a>
+                    </div>
+                    <div class="product-item">
+                        <div>
+                            <p class="product-title">面向卫健委</p>
+                            <p class="product-sub">页面待补充</p>
+                        </div>
+                        <span class="action pending">待补充</span>
+                    </div>
+                    <div class="product-item">
+                        <div>
+                            <p class="product-title">XXX</p>
+                            <p class="product-sub">页面待补充</p>
+                        </div>
+                        <span class="action pending">待补充</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="line-card">
+                <div class="line-head">
+                    <h2 class="line-name">内镜</h2>
+                    <span class="line-count">5 个产品</span>
+                </div>
+                <div class="product-list">
+                    <div class="product-item">
+                        <div>
+                            <p class="product-title">内镜追溯系统</p>
+                            <p class="product-sub">对应页面: ectms.html</p>
+                        </div>
+                        <a class="action" href="./ectms.html" target="_blank">打开H5</a>
+                    </div>
+                    <div class="product-item">
+                        <div>
+                            <p class="product-title">内镜追溯系统（专业版）</p>
+                            <p class="product-sub">对应页面: ectms_pro.html</p>
+                        </div>
+                        <a class="action" href="./ectms_pro.html" target="_blank">打开H5</a>
+                    </div>
+                    <div class="product-item">
+                        <div>
+                            <p class="product-title">多端协同 2.5D 场景页</p>
+                            <p class="product-sub">对应页面: multi_terminal_scene/ectms_multi_terminal_scene_25d.html</p>
+                        </div>
+                        <a class="action" href="./multi_terminal_scene/ectms_multi_terminal_scene_25d.html" target="_blank">打开H5</a>
+                    </div>
+                    <div class="product-item">
+                        <div>
+                            <p class="product-title">内镜转运机器人</p>
+                            <p class="product-sub">页面待补充</p>
+                        </div>
+                        <span class="action pending">待补充</span>
+                    </div>
+                    <div class="product-item">
+                        <div>
+                            <p class="product-title">XXX</p>
+                            <p class="product-sub">页面待补充</p>
+                        </div>
+                        <span class="action pending">待补充</span>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <p class="foot">建议使用 VS Code 的 Live Server 或直接浏览器打开该文件进行本地预览。</p>
+    </main>
+</body>
+</html>

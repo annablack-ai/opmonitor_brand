@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECTMS Mini 内镜清洗机追溯系统 | 产品单页</title>
+    <style>
+        :root {
+            --bg: #edf2f7;
+            --paper: #ffffff;
+            --surface: #f5f7fa;
+            --surface-blue: #eef5ff;
+            --ink: #1f2937;
+            --muted: #67758a;
+            --muted-light: #98a2b3;
+            --line: #dbe3ee;
+            --line-soft: #e7edf4;
+            --blue: #007bff;
+            --blue-deep: #0f4c81;
+            --blue-soft: #eaf3ff;
+            --danger: #dc2626;
+            --danger-soft: #fff2f2;
+            --shadow-paper: 0 18px 34px rgba(15, 23, 42, 0.10);
+            --shadow-soft: 0 14px 22px rgba(15, 23, 42, 0.06);
+            --shadow-card: 0 8px 16px rgba(15, 23, 42, 0.04);
+            --shadow-device: drop-shadow(0 18px 16px rgba(38, 45, 58, 0.22));
+            --radius-card: 3.4mm;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: "IBM Plex Sans", "PingFang SC", "Noto Sans SC", "Segoe UI", sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 16% 0%, #f9fbff 0%, #edf2f7 44%),
+                linear-gradient(180deg, #f6f9fc 0%, #edf2f7 100%);
+            padding: 22px 0 42px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            word-break: normal;
+        }
+
+        /* ── Brochure Container ── */
+        .brochure {
+            width: min(96vw, 230mm);
+            margin: 0 auto;
+            display: grid;
+            gap: 20px;
+        }
+
+        /* ── Page Shell ── */
+        .page {
+            width: 210mm;
+            height: 297mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            background: var(--paper);
+            border: 1px solid #dbe4ef;
+            border-radius: 8px;
+            box-shadow: var(--shadow-paper);
+            position: relative;
+            overflow: hidden;
+            padding: 14mm 14mm 12mm;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 10mm;
+            background: linear-gradient(90deg, rgba(0,123,255,0.06) 0%, rgba(0,123,255,0.01) 42%, rgba(255,255,255,0) 100%);
+            pointer-events: none;
+        }
+        .page::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(0,123,255,0.04);
+            pointer-events: none;
+        }
+
+        /* ── Common Elements ── */
+        .page-no {
+            position: absolute;
+            right: 12mm; bottom: 7mm;
+            font-size: 9.4px;
+            color: #8fa0b3;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .brand-logo {
+            position: absolute;
+            right: 14mm; top: 11mm;
+            width: 22mm;
+            height: auto;
+            z-index: 4;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            min-height: 7mm;
+            padding: 0 3mm;
+            border-radius: 999px;
+            border: 1px solid #e2e9f3;
+            background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+            font-size: 10px;
+            letter-spacing: 0.06em;
+            color: var(--muted-light);
+            margin-bottom: 4.2mm;
+            font-weight: 500;
+            width: fit-content;
+        }
+
+        .title {
+            font-size: 28px;
+            line-height: 1.16;
+            letter-spacing: -0.028em;
+            font-weight: 700;
+            color: #16283d;
+            word-break: keep-all;
+        }
+
+        .subtitle {
+            margin-top: 2.2mm;
+            font-size: 14px;
+            color: var(--blue);
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+
+        .body {
+            font-size: 12.4px;
+            line-height: 1.7;
+            color: #415063;
+        }
+
+        .body.small {
+            font-size: 11.5px;
+            line-height: 1.66;
+        }
+
+        .body.tiny {
+            font-size: 10.5px;
+            line-height: 1.62;
+            color: #5d7082;
+        }
+
+        /* ── Section Shell ── */
+        .section-shell {
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius-card);
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            box-shadow: var(--shadow-card);
+            padding: 4mm;
+        }
+
+        /* ── Summary Cards ── */
+        .summary-strip {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 2.5mm;
+        }
+        .summary-strip.two { grid-template-columns: 1fr 1fr; }
+        .summary-strip.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+        .summary-item {
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius-card);
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            padding: 3mm 3.2mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: var(--shadow-card);
+        }
+
+        .summary-label {
+            display: block;
+            font-size: 9px;
+            color: #8a97a8;
+            margin-bottom: 1mm;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .summary-value {
+            display: block;
+            font-size: 11.5px;
+            line-height: 1.45;
+            color: #1f344c;
+            font-weight: 600;
+        }
+
+        /* ── Insight Bar ── */
+        .insight-bar {
+            border: 1px solid #dbe7f7;
+            background: linear-gradient(180deg, #f8fbff 0%, #f1f7ff 100%);
+            color: #314761;
+            border-radius: 3.5mm;
+            padding: 3mm 3.6mm;
+            font-size: 11px;
+            line-height: 1.62;
+            box-shadow: var(--shadow-card);
+            border-left: 2.5px solid #7bb1ff;
+        }
+
+        .insight-bar strong { color: var(--blue-deep); }
+
+        /* ── Matrix Table ── */
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10.8px;
+        }
+        .matrix-table th,
+        .matrix-table td {
+            border: 1px solid var(--line-soft);
+            padding: 2.2mm 2.4mm;
+            text-align: left;
+            vertical-align: top;
+        }
+        .matrix-table th {
+            background: var(--surface-blue);
+            color: #294667;
+            font-weight: 700;
+        }
+
+        /* ── Chip / Tag ── */
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 7px;
+            border-radius: 999px;
+            border: 1px solid #d6e4f8;
+            background: #f4f8ff;
+            color: #355174;
+            font-size: 9.6px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        /* ── Layouts ── */
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3mm;
+        }
+        .layout-3col {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 3mm;
+        }
+
+        /* ── Media Frame ── */
+        .media-frame {
+            border: 1px dashed #c9d8ee;
+            border-radius: var(--radius-card);
+            background: #f7fbff;
+            display: grid;
+            place-items: center;
+            color: #7890ad;
+            font-size: 11px;
+            text-align: center;
+        }
+
+        /* ── Section Divider ── */
+        .section-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #16283d;
+            letter-spacing: -0.01em;
+            margin-bottom: 2.5mm;
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+        }
+        .section-title::before {
+            content: "";
+            display: inline-block;
+            width: 2.5px;
+            height: 1em;
+            background: var(--blue);
+            border-radius: 999px;
+            flex-shrink: 0;
+        }
+
+        /* ── Footer ── */
+        .footer-contact {
+            margin-top: auto;
+            padding-top: 4mm;
+            border-top: 1px solid var(--line-soft);
+            font-size: 11px;
+            color: #4d627d;
+        }
+
+        /* ── Page 1: Hero Visual ── */
+        .hero-visual {
+            margin-top: 5mm;
+            flex: 1 1 auto;
+            border-radius: var(--radius-card);
+            background: linear-gradient(145deg, #f4f9ff 0%, #edf4ff 60%, #e6f0ff 100%);
+            border: 1px solid #d6e7fb;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 72mm;
+        }
+
+        .hero-visual::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 50% at 50% 110%, rgba(0,123,255,0.07) 0%, transparent 70%),
+                radial-gradient(ellipse 35% 30% at 30% 20%, rgba(15,76,129,0.04) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* SVG Illustration container */
+        .hero-illustration {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6mm;
+        }
+
+        .module-copy-stack {
+            display: grid;
+            gap: 1.3mm;
+        }
+
+        .module-copy-stack .sub-item {
+            gap: 2.4mm;
+            padding: 1.4mm 0;
+        }
+
+        .module-copy-stack .sub-item-desc {
+            font-size: 9.8px;
+            line-height: 1.45;
+        }
+
+        .hardware-flat-gallery {
+            margin-top: 1.8mm;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1.4mm;
+        }
+
+        .software-flat-gallery {
+            margin-top: 1.2mm;
+            display: grid;
+            grid-template-columns: 1.12fr 1fr;
+            gap: 1.6mm;
+        }
+
+        .module-two-layout {
+            margin-top: 0.9mm;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 41mm;
+            gap: 2.2mm;
+            align-items: start;
+        }
+
+        .module-two-layout .module-copy-stack {
+            margin-top: 0.1mm;
+            gap: 1.1mm;
+        }
+
+        .module-two-layout .module-copy-stack .sub-item {
+            padding: 1.1mm 0;
+        }
+
+        .module-two-layout .software-flat-gallery {
+            margin-top: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1mm;
+            align-content: start;
+        }
+
+        .flat-media-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 3mm;
+            border: 1px solid #d7e5f6;
+            background: linear-gradient(180deg, #ffffff 0%, #f6faff 100%);
+            box-shadow: var(--shadow-card);
+            padding: 1.1mm;
+            height: 16.8mm;
+        }
+
+        .flat-media-card img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain;
+        }
+
+        .software-flat-gallery .flat-media-card {
+            height: 15.6mm;
+            padding: 1mm;
+        }
+
+        .module-two-layout .software-flat-gallery .flat-media-card {
+            height: auto;
+            min-height: 0;
+            padding: 0.8mm;
+            border: 0.45mm solid #d4deea;
+            background: #ffffff;
+            border-radius: 2.4mm;
+            box-shadow: 0 1px 2px rgba(20, 40, 70, 0.05);
+        }
+
+        .module-two-layout .software-flat-gallery .flat-media-card:first-child {
+            grid-column: 1 / -1;
+            aspect-ratio: 16 / 10;
+            padding: 0.7mm;
+            transform: translateY(-0.2mm);
+        }
+
+        .module-two-layout .software-flat-gallery .flat-media-card:nth-child(2),
+        .module-two-layout .software-flat-gallery .flat-media-card:nth-child(3) {
+            aspect-ratio: 9 / 16;
+            padding: 1mm;
+        }
+
+        .module-two-layout .software-flat-gallery .flat-media-card:first-child img {
+            border-radius: 1.8mm;
+            object-fit: contain;
+        }
+
+        .module-two-layout .software-flat-gallery .flat-media-card:nth-child(2) img,
+        .module-two-layout .software-flat-gallery .flat-media-card:nth-child(3) img {
+            border-radius: 1.8mm;
+            object-fit: cover;
+        }
+
+        .software-flat-gallery .flat-media-card img {
+            object-fit: cover;
+            border-radius: 2mm;
+            background: #fff;
+        }
+
+        .flat-media-label {
+            position: absolute;
+            left: 1.1mm;
+            right: 1.1mm;
+            bottom: 0.9mm;
+            padding: 0.5mm 0.9mm;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.92);
+            color: #607388;
+            font-size: 6.6px;
+            font-weight: 700;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        .flat-media-badge {
+            position: absolute;
+            left: 1.1mm;
+            top: 1.1mm;
+            display: inline-flex;
+            align-items: center;
+            min-height: 4.1mm;
+            padding: 0 1.3mm;
+            border-radius: 999px;
+            background: rgba(0, 123, 255, 0.94);
+            color: #fff;
+            font-size: 6.2px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            z-index: 2;
+            box-shadow: 0 6px 12px rgba(0, 123, 255, 0.26);
+        }
+
+        /* ── Pain Point List ── */
+        .pain-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5mm;
+        }
+        .pain-list li {
+            font-size: 11.2px;
+            line-height: 1.55;
+            color: #415063;
+            padding-left: 4.5mm;
+            position: relative;
+        }
+        .pain-list li::before {
+            content: "›";
+            position: absolute;
+            left: 0;
+            color: var(--blue);
+            font-weight: 700;
+            font-size: 13px;
+            line-height: 1.2;
+        }
+
+        /* ── Back page module blocks ── */
+        .module-block {
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius-card);
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            box-shadow: var(--shadow-card);
+            padding: 2.7mm 3.2mm;
+        }
+
+        .module-block + .module-block {
+            margin-top: 2.2mm;
+        }
+
+        .module-header {
+            font-size: 12px;
+            font-weight: 700;
+            color: #16283d;
+            margin-bottom: 1.8mm;
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+        }
+        .module-header .icon-dot {
+            width: 5px; height: 5px;
+            background: var(--blue);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .module-header .icon-line {
+            width: 2px; height: 1em;
+            background: var(--blue);
+            border-radius: 999px;
+            flex-shrink: 0;
+        }
+
+        .sub-item {
+            display: flex;
+            gap: 3mm;
+            padding: 2.5mm 0;
+            border-top: 1px solid var(--line-soft);
+        }
+        .sub-item:first-of-type { border-top: none; padding-top: 0; }
+
+        .sub-item-icon {
+            width: 7mm; height: 7mm;
+            border-radius: 2mm;
+            background: var(--surface-blue);
+            border: 1px solid #d0e5fa;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .sub-item-icon svg { width: 13px; height: 13px; }
+
+        .sub-item-body {
+            flex: 1;
+        }
+        .sub-item-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #1f344c;
+            margin-bottom: 1mm;
+        }
+        .sub-item-desc {
+            font-size: 10.5px;
+            line-height: 1.6;
+            color: #5a6e82;
+        }
+
+        /* ── Spec Badge Grid ── */
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 2mm;
+            margin-top: 2.5mm;
+        }
+        .spec-badge {
+            background: var(--surface-blue);
+            border: 1px solid #d0e5fa;
+            border-radius: 2.5mm;
+            padding: 2mm 2.5mm;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.8mm;
+        }
+        .spec-badge-label {
+            font-size: 8.5px;
+            color: #7a9ab8;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .spec-badge-value {
+            font-size: 10.2px;
+            font-weight: 700;
+            color: #1f344c;
+        }
+
+        /* ── Brand Endorsement Bar ── */
+        .brand-bar {
+            background: #f5f5f5;
+            border: 1px solid #e6e6e6;
+            border-radius: var(--radius-card);
+            padding: 3.5mm 4mm;
+        }
+
+        .brand-bar-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--blue-deep);
+            margin-bottom: 1.5mm;
+            letter-spacing: 0.01em;
+        }
+
+        /* QR placeholder */
+        .qr-box {
+            width: 16mm; height: 16mm;
+            border: 1px solid var(--line);
+            border-radius: 2mm;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .qr-box svg { width: 12mm; height: 12mm; }
+
+        /* ── Print Rules ── */
+        @media print {
+            @page { size: A4 portrait; margin: 0; }
+            body { background: #fff; padding: 0; }
+            .brochure { width: auto; gap: 0; }
+            .page {
+                border: 0; border-radius: 0; box-shadow: none; margin: 0;
+                page-break-after: always; break-after: page;
+            }
+            .page:last-child { page-break-after: auto; break-after: auto; }
+        }
+    </style>
+</head>
+<body>
+<main class="brochure">
+
+    <!-- ════════════════════════════════════════════
+         PAGE 1 · FRONT — 痛点直击 + 轻量化价值
+         ════════════════════════════════════════════ -->
+    <section class="page">
+        <img class="brand-logo" src="../../../../../opmoniter_logo.png" alt="OpMonitor Logo">
+
+        <!-- Eyebrow -->
+        <span class="eyebrow">ECTMS 产品系列 / 极简追溯版</span>
+
+        <!-- Hero Title -->
+        <h1 class="title">ECTMS Mini<br>内镜清洗机追溯系统</h1>
+        <p class="subtitle">极简部署 &nbsp;·&nbsp; 底层直读 &nbsp;·&nbsp; 小程序 + 管理后台</p>
+
+        <!-- Hero Visual -->
+        <div class="hero-visual">
+            <div class="hero-illustration">
+                <!-- SVG Illustration: Washer → IoT Module → Data Stream → Phone -->
+                <svg viewBox="0 0 340 140" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-height:58mm">
+                    <defs>
+                        <linearGradient id="washer-grad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#f5f8fe"/>
+                            <stop offset="100%" stop-color="#e8f0fc"/>
+                        </linearGradient>
+                        <linearGradient id="stream-grad" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stop-color="#007bff" stop-opacity="0"/>
+                            <stop offset="40%" stop-color="#007bff" stop-opacity="0.9"/>
+                            <stop offset="100%" stop-color="#0f4c81" stop-opacity="0.6"/>
+                        </linearGradient>
+                        <linearGradient id="phone-grad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#ffffff"/>
+                            <stop offset="100%" stop-color="#f0f6ff"/>
+                        </linearGradient>
+                        <filter id="shadow-drop">
+                            <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="rgba(38,45,58,0.18)"/>
+                        </filter>
+                        <filter id="glow-blue">
+                            <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                        </filter>
+                    </defs>
+
+                    <g filter="url(#shadow-drop)">
+                        <rect x="14" y="28" width="90" height="88" rx="6" fill="url(#washer-grad)" stroke="#d4e1f5" stroke-width="1"/>
+                        <circle cx="59" cy="72" r="28" fill="#eef5ff" stroke="#c8daf5" stroke-width="1.2"/>
+                        <circle cx="59" cy="72" r="20" fill="#f8fbff" stroke="#d6e6fa" stroke-width="0.8"/>
+                        <circle cx="59" cy="72" r="10" fill="#e4effd" stroke="#c0d5f2" stroke-width="0.8"/>
+                        <rect x="18" y="32" width="82" height="14" rx="3" fill="#ebf2fc" stroke="#d4e1f5" stroke-width="0.6"/>
+                        <circle cx="34" cy="39" r="3.5" fill="#fff" stroke="#b8ccee" stroke-width="0.8"/>
+                        <circle cx="46" cy="39" r="3.5" fill="#fff" stroke="#b8ccee" stroke-width="0.8"/>
+                        <rect x="56" y="35" width="36" height="8" rx="2" fill="#ddeafc" stroke="#c0d5f2" stroke-width="0.6"/>
+                        <rect x="22" y="114" width="10" height="6" rx="2" fill="#d4e0f0"/>
+                        <rect x="86" y="114" width="10" height="6" rx="2" fill="#d4e0f0"/>
+                        <text x="59" y="130" text-anchor="middle" font-size="6" fill="#7a9abe" font-family="IBM Plex Sans, sans-serif" font-weight="600">内镜全自动清洗机</text>
+                    </g>
+
+                    <g filter="url(#shadow-drop)">
+                        <rect x="108" y="56" width="28" height="36" rx="4" fill="#ffffff" stroke="#a8c8f0" stroke-width="1.2"/>
+                        <circle cx="122" cy="65" r="3" fill="#007bff" opacity="0.85"/>
+                        <circle cx="122" cy="65" r="5" fill="#007bff" opacity="0.12"/>
+                        <rect x="115" y="70" width="14" height="14" rx="2" fill="#eef5ff" stroke="#b8d4f8" stroke-width="0.8"/>
+                        <line x1="115" y1="74" x2="113" y2="74" stroke="#99b8de" stroke-width="0.8"/>
+                        <line x1="115" y1="77" x2="113" y2="77" stroke="#99b8de" stroke-width="0.8"/>
+                        <line x1="115" y1="80" x2="113" y2="80" stroke="#99b8de" stroke-width="0.8"/>
+                        <line x1="129" y1="74" x2="131" y2="74" stroke="#99b8de" stroke-width="0.8"/>
+                        <line x1="129" y1="77" x2="131" y2="77" stroke="#99b8de" stroke-width="0.8"/>
+                        <line x1="129" y1="80" x2="131" y2="80" stroke="#99b8de" stroke-width="0.8"/>
+                        <line x1="130" y1="58" x2="134" y2="50" stroke="#007bff" stroke-width="1.2" stroke-linecap="round"/>
+                        <circle cx="134" cy="49" r="1.5" fill="#007bff"/>
+                        <text x="122" y="100" text-anchor="middle" font-size="5" fill="#7090b5" font-family="IBM Plex Sans, sans-serif" font-weight="600">uart-Dect</text>
+                    </g>
+
+                    <g filter="url(#glow-blue)" opacity="0.9">
+                        <path d="M 140 74 Q 180 74 200 50 Q 220 26 240 30" stroke="url(#stream-grad)" stroke-width="2" fill="none" stroke-dasharray="4,3"/>
+                        <circle cx="158" cy="69" r="2.5" fill="#007bff" opacity="0.7"/>
+                        <circle cx="175" cy="63" r="2" fill="#007bff" opacity="0.5"/>
+                        <circle cx="192" cy="52" r="2.5" fill="#007bff" opacity="0.7"/>
+                        <circle cx="210" cy="37" r="2" fill="#007bff" opacity="0.5"/>
+                        <g transform="translate(175,48)">
+                            <ellipse cx="0" cy="2" rx="8" ry="5" fill="#dbeeff" stroke="#a8d0ff" stroke-width="0.8"/>
+                            <ellipse cx="-4" cy="3" rx="5" ry="4" fill="#dbeeff" stroke="#a8d0ff" stroke-width="0.8"/>
+                            <ellipse cx="4" cy="3" rx="5" ry="4" fill="#dbeeff" stroke="#a8d0ff" stroke-width="0.8"/>
+                            <text x="0" y="3.5" text-anchor="middle" font-size="4.5" fill="#4a8fd0" font-weight="700">4G</text>
+                        </g>
+                    </g>
+
+                    <g filter="url(#shadow-drop)">
+                        <rect x="240" y="14" width="68" height="112" rx="8" fill="#edf4ff" stroke="#bdd1eb" stroke-width="1"/>
+                        <rect x="244" y="20" width="60" height="100" rx="5" fill="url(#phone-grad)"/>
+                        <rect x="244" y="20" width="60" height="7" rx="5" fill="#eef5ff"/>
+                        <rect x="267" y="21" width="14" height="4" rx="2" fill="#d0dff0"/>
+                        <rect x="244" y="27" width="60" height="10" rx="0" fill="#007bff"/>
+                        <text x="274" y="34.5" text-anchor="middle" font-size="5" fill="#fff" font-family="IBM Plex Sans, sans-serif" font-weight="600">洗消追溯</text>
+                        <rect x="248" y="40" width="52" height="14" rx="2.5" fill="#f0f7ff" stroke="#d4e8fb" stroke-width="0.6"/>
+                        <circle cx="254" cy="47" r="3.5" fill="#007bff" opacity="0.8"/>
+                        <rect x="261" y="43" width="30" height="3" rx="1" fill="#b8cfe8"/>
+                        <rect x="261" y="48" width="20" height="2.5" rx="1" fill="#d4e4f2"/>
+                        <text x="288" y="49" font-size="5.5" fill="#007bff" font-weight="700">✓</text>
+
+                        <rect x="248" y="58" width="52" height="14" rx="2.5" fill="#f0f7ff" stroke="#d4e8fb" stroke-width="0.6"/>
+                        <circle cx="254" cy="65" r="3.5" fill="#0f4c81" opacity="0.7"/>
+                        <rect x="261" y="61" width="26" height="3" rx="1" fill="#b8cfe8"/>
+                        <rect x="261" y="66" width="18" height="2.5" rx="1" fill="#d4e4f2"/>
+                        <text x="288" y="67" font-size="5.5" fill="#007bff" font-weight="700">✓</text>
+
+                        <rect x="248" y="76" width="52" height="14" rx="2.5" fill="#f0f7ff" stroke="#d4e8fb" stroke-width="0.6"/>
+                        <circle cx="254" cy="83" r="3.5" fill="#007bff" opacity="0.6"/>
+                        <rect x="261" y="79" width="28" height="3" rx="1" fill="#b8cfe8"/>
+                        <rect x="261" y="84" width="16" height="2.5" rx="1" fill="#d4e4f2"/>
+                        <text x="288" y="85" font-size="5.5" fill="#007bff" font-weight="700">✓</text>
+
+                        <rect x="248" y="94" width="52" height="22" rx="2.5" fill="#fff" stroke="#d4e8fb" stroke-width="0.6"/>
+                        <text x="274" y="100" text-anchor="middle" font-size="4.2" fill="#7090b0" font-family="IBM Plex Sans, sans-serif">运行参数时间轴</text>
+                        <polyline points="252,112 258,107 264,109 270,103 276,105 282,100 288,102 294,98" fill="none" stroke="#007bff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="264" y="122" width="20" height="3" rx="1.5" fill="#8ca0bb"/>
+                        <text x="274" y="135" text-anchor="middle" font-size="5.2" fill="#8ca0bb" font-family="IBM Plex Sans, sans-serif">移动追溯端</text>
+                    </g>
+
+                    <g filter="url(#shadow-drop)">
+                        <rect x="278" y="24" width="56" height="46" rx="5" fill="#ffffff" stroke="#c5d8ee" stroke-width="1"/>
+                        <rect x="282" y="29" width="48" height="8" rx="2.2" fill="#e9f2ff"/>
+                        <text x="306" y="34.2" text-anchor="middle" font-size="4.8" fill="#42678f" font-weight="700" font-family="IBM Plex Sans, sans-serif">管理后台</text>
+
+                        <rect x="283" y="40" width="18" height="12" rx="1.8" fill="#f2f7ff" stroke="#d4e5fa" stroke-width="0.7"/>
+                        <polyline points="285,49 289,46 292,47 296,43 299,45" fill="none" stroke="#007bff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+                        <rect x="304" y="40" width="24" height="3" rx="1.2" fill="#c8dcf4"/>
+                        <rect x="304" y="44.6" width="19" height="2.8" rx="1.1" fill="#d8e7f8"/>
+                        <rect x="304" y="48.5" width="22" height="2.6" rx="1.1" fill="#cfe1f6"/>
+
+                        <rect x="283" y="55" width="45" height="10" rx="1.8" fill="#f6faff" stroke="#dde9f8" stroke-width="0.7"/>
+                        <circle cx="287" cy="60" r="1.4" fill="#007bff"/>
+                        <rect x="290" y="58.7" width="15" height="2.5" rx="1" fill="#c5daf2"/>
+                        <circle cx="310" cy="60" r="1.4" fill="#0f4c81" opacity="0.8"/>
+                        <rect x="313" y="58.7" width="11" height="2.5" rx="1" fill="#d0e3f7"/>
+                    </g>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Pain + Positioning Block -->
+        <div class="section-shell" style="margin-top: 4mm;">
+            <p class="section-title">合规痛点与轻量化破局</p>
+            <p class="body small" style="margin-bottom: 2.5mm;">
+                《WS507-2016》明确要求留存清洗消毒机运行参数资料。传统模式依赖热敏纸打印，台账易褪色、难检索，飞检时难以形成完整电子证据链；而全场景追溯系统又面临建设成本高、内网弱电工程繁杂等门槛。
+            </p>
+            <div class="layout-2col">
+                <div>
+                    <p class="section-title" style="font-size:11px; margin-bottom:1.5mm;">传统痛点</p>
+                    <ul class="pain-list">
+                        <li>热敏纸台账易褪色、破损、丢失</li>
+                        <li>飞检时无法快速调取历史记录</li>
+                        <li>全院级系统建设成本高、工期长</li>
+                        <li>内网配置繁杂，弱电施工代价大</li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="section-title" style="font-size:11px; margin-bottom:1.5mm;">Mini 解法</p>
+                    <ul class="pain-list">
+                        <li>参数自动采集，彻底告别纸质耗材</li>
+                        <li>云端存储随时调阅，飞检一键响应</li>
+                        <li>剥离冗杂模块，仅聚焦清洗机参数</li>
+                        <li>4G 直联免施工，通电即联网上云</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4 Core Benefit Cards -->
+        <div class="summary-strip" style="margin-top: 3mm;">
+            <article class="summary-item">
+                <span class="summary-label">核心成效 01</span>
+                <span class="summary-value">告别纸质耗材</span>
+            </article>
+            <article class="summary-item">
+                <span class="summary-label">核心成效 02</span>
+                <span class="summary-value">分钟级无感部署</span>
+            </article>
+            <article class="summary-item">
+                <span class="summary-label">核心成效 03</span>
+                <span class="summary-value">底层参数云存</span>
+            </article>
+            <article class="summary-item">
+                <span class="summary-label">核心成效 04</span>
+                <span class="summary-value">随时移动查阅</span>
+            </article>
+        </div>
+
+        <!-- Footer -->
+        <p class="footer-contact" style="margin-top: 4mm;">
+            www.opmonitor.com &nbsp;|&nbsp; 400-160-1008 &nbsp;|&nbsp; info@opmonitor.com
+        </p>
+
+        <span class="page-no">01 / 02</span>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════
+         PAGE 2 · BACK — 硬核技术 + 掌上质控 + 品牌背书
+         ════════════════════════════════════════════ -->
+    <section class="page">
+        <img class="brand-logo" src="../../../../../opmoniter_logo.png" alt="OpMonitor Logo">
+
+        <!-- Eyebrow -->
+        <span class="eyebrow">技术架构与移动管家</span>
+
+        <!-- Page Title -->
+        <h2 class="title" style="font-size: 22px;">硬核直读 · 掌上质控</h2>
+        <p class="subtitle">自主研发直采模块 | 小程序 + 管理后台双端联动 | 零施工成本</p>
+
+        <!-- ── Module 1: Hardware Direct Read ── -->
+        <div class="module-block" style="margin-top: 2.8mm;">
+            <div class="module-header">
+                <span class="icon-line"></span>
+                模块一 &nbsp;·&nbsp; 硬核直读，打破数据孤岛
+            </div>
+
+            <div class="module-copy-stack">
+                <div class="sub-item">
+                    <div class="sub-item-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="6" y="6" width="12" height="12" rx="2" stroke="#007bff" stroke-width="1.8"/>
+                            <line x1="9" y1="6" x2="9" y2="3" stroke="#007bff" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="12" y1="6" x2="12" y2="3" stroke="#007bff" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="15" y1="6" x2="15" y2="3" stroke="#007bff" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="9" y1="18" x2="9" y2="21" stroke="#007bff" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="12" y1="18" x2="12" y2="21" stroke="#007bff" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="15" y1="18" x2="15" y2="21" stroke="#007bff" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="6" y1="9" x2="3" y2="9" stroke="#007bff" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="6" y1="12" x2="3" y2="12" stroke="#007bff" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="6" y1="15" x2="3" y2="15" stroke="#007bff" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="18" y1="9" x2="21" y2="9" stroke="#007bff" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="18" y1="12" x2="21" y2="12" stroke="#007bff" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="18" y1="15" x2="21" y2="15" stroke="#007bff" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="sub-item-body">
+                        <p class="sub-item-title">底层数据无损直读</p>
+                        <p class="sub-item-desc">配置自主研发的 <strong>uart-Dect</strong> 信号截取模块与 <strong>vibrates-Dect</strong> 多维传感模块，跨越传统设备厂家封闭限制，直接采集市面主流全自动清洗机的底层真实运行状态与参数，保障核心监测数据的真实性与完整性。</p>
+                    </div>
+                </div>
+
+                <div class="sub-item">
+                    <div class="sub-item-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12.5C6.65 9.8 9.6 8 12 8C14.4 8 17.35 9.8 19 12.5" stroke="#007bff" stroke-width="1.8" stroke-linecap="round"/>
+                            <path d="M8 16C9.1 14.2 10.45 13 12 13C13.55 13 14.9 14.2 16 16" stroke="#007bff" stroke-width="1.8" stroke-linecap="round"/>
+                            <circle cx="12" cy="19" r="1.5" fill="#007bff"/>
+                            <path d="M2 9C4.3 5.4 7.9 3 12 3C16.1 3 19.7 5.4 22 9" stroke="#007bff" stroke-width="1.5" stroke-linecap="round" opacity="0.45"/>
+                        </svg>
+                    </div>
+                    <div class="sub-item-body">
+                        <p class="sub-item-title">4G 云端直连，零施工成本</p>
+                        <p class="sub-item-desc">内置 4G 通信模块，通电即联网，数据直接加密上云。彻底免除科室复杂的内网交换机配置与弱电施工，实现<strong>即插即用</strong>的极简轻量化部署。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hardware-flat-gallery">
+                <div class="flat-media-card">
+                    <img src="images/产品透明背景图_自研_无线读卡器网关3.png" alt="无线读卡器网关硬件图">
+                    <span class="flat-media-badge">自研硬件</span>
+                    <span class="flat-media-label">无线网关</span>
+                </div>
+                <div class="flat-media-card">
+                    <img src="images/产品透明背景图_自研_485有线读卡器2.png" alt="485有线读卡器硬件图">
+                    <span class="flat-media-label">485 读卡器</span>
+                </div>
+                <div class="flat-media-card">
+                    <img src="images/产品透明背景图_Lora无线读卡器01.png" alt="Lora无线读卡器硬件图">
+                    <span class="flat-media-label">Lora 读卡器</span>
+                </div>
+                <div class="flat-media-card">
+                    <img src="images/产品透明背景图_IC卡.png" alt="IC卡硬件图">
+                    <span class="flat-media-label">IC 卡识别</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Module 2: Mobile Monitoring ── -->
+        <div class="module-block" style="margin-top: 1.6mm;">
+            <div class="module-header">
+                <span class="icon-line"></span>
+                模块二 &nbsp;·&nbsp; 掌上质控，数据尽在掌握
+            </div>
+
+            <div class="module-two-layout">
+                <div class="module-copy-stack" style="margin-top: 0.2mm;">
+                    <div class="sub-item" style="padding-top: 0; border-top: none; flex-direction: column; gap: 1mm;">
+                        <p class="sub-item-title" style="display:flex; align-items:center; gap:1.5mm;">
+                            <span style="display:inline-block; width:4px; height:4px; background:var(--blue); border-radius:50%;"></span>
+                            精准记录 · 自动生成台账
+                        </p>
+                        <p class="sub-item-desc">自动采集清洗流程时长、温度与执行信息，按批次生成完整时间轴台账，减少人工填报负担。</p>
+                    </div>
+                    <div class="sub-item" style="padding-top: 0; border-top: none; flex-direction: column; gap: 1mm;">
+                        <p class="sub-item-title" style="display:flex; align-items:center; gap:1.5mm;">
+                            <span style="display:inline-block; width:4px; height:4px; background:var(--blue); border-radius:50%;"></span>
+                            双端联动 · 后台全局监管
+                        </p>
+                        <p class="sub-item-desc">微信端与管理后台实时同步，现场执行和科室监管同屏可见，关键节点状态及时掌握。</p>
+                    </div>
+                    <div class="sub-item" style="padding-top: 0; border-top: none; flex-direction: column; gap: 1mm;">
+                        <p class="sub-item-title" style="display:flex; align-items:center; gap:1.5mm;">
+                            <span style="display:inline-block; width:4px; height:4px; background:var(--blue); border-radius:50%;"></span>
+                            飞检调阅 · 秒级检索证据
+                        </p>
+                        <p class="sub-item-desc">支持按设备、日期、人员与批次快速筛选，一键调阅飞检所需记录和过程截图证据。</p>
+                    </div>
+                    <div class="sub-item" style="padding-top: 0; border-top: none; flex-direction: column; gap: 1mm;">
+                        <p class="sub-item-title" style="display:flex; align-items:center; gap:1.5mm;">
+                            <span style="display:inline-block; width:4px; height:4px; background:var(--blue); border-radius:50%;"></span>
+                            权限分级 · 审计全程留痕
+                        </p>
+                        <p class="sub-item-desc">多角色权限与操作日志全程留痕，关键动作可追责，满足院感管理与审计合规要求。</p>
+                    </div>
+                </div>
+
+                <div class="software-flat-gallery">
+                    <div class="flat-media-card">
+                        <img src="images/管理后台_实时监控.png" alt="管理后台实时监控界面截图">
+                        <span class="flat-media-label">管理后台总览</span>
+                    </div>
+                    <div class="flat-media-card">
+                        <img src="images/手机端首页.png" alt="手机端应用首页截图">
+                        <span class="flat-media-label">手机端首页</span>
+                    </div>
+                    <div class="flat-media-card">
+                        <img src="images/界面UI_手机端洗消流程.png" alt="手机端洗消流程界面截图">
+                        <span class="flat-media-label">洗消流程</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Module 3: Brand Endorsement ── -->
+        <div class="brand-bar" style="margin-top: 1.1mm;">
+            <div style="display: flex; align-items: flex-start; gap: 4mm;">
+                <div style="flex: 1;">
+                    <p class="brand-bar-title">智感云 OpMonitor &nbsp;|&nbsp; 智领感控 · 专业信赖</p>
+                    <p class="body tiny">
+                        深耕医疗物联网与感控领域，核心研发团队源自国内顶尖高校。「<strong>致力于通过创新的设备、软件、服务，推动内镜中心设备、设施、环境的整体智能化升级，支撑内镜洗消质量控制精细化管理。</strong>」
+                    </p>
+                    <div style="margin-top: 2.5mm; display: flex; gap: 2mm; flex-wrap: wrap; align-items: center;">
+                        <span class="chip">100+ 项专业知识产权</span>
+                        <span class="chip">全国 30 省覆盖</span>
+                        <span class="chip">近千家标杆医院</span>
+                    </div>
+                    <div style="margin-top: 2.5mm; border-top: 1px solid #e2e2e2; padding-top: 2.5mm;">
+                        <p class="body tiny"><strong>公司：</strong>北京智感云科技有限公司 &nbsp;(Beijing OpMaster Technology Co., Ltd.)</p>
+                        <p class="body tiny" style="margin-top: 1mm;"><strong>服务热线：</strong>400-160-1008 &nbsp;&nbsp; <strong>官网：</strong>www.opmonitor.com</p>
+                        
+                        <!-- 办事处联系信息 -->
+                        <div style="margin-top: 1.8mm; padding-top: 1.8mm; border-top: 1px dashed #e8e8e8;">
+                            <p class="body tiny" style="font-weight: 600; color: #314761; margin-bottom: 1.2mm;">📍 办事处与联系方式</p>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm; font-size: 8.8px; line-height: 1.45; color: #5b6b7d;">
+                                <div style="border: 1px solid #f0f3f8; border-radius: 2mm; padding: 1.6mm; background: #fafbfd;">
+                                    <p style="font-weight: 700; color: #16283d; margin-bottom: 0.8mm;">北京总部</p>
+                                    <p style="margin-bottom: 0.6mm;"><strong style="color: #667a8d;">地址</strong> 北京经开区嘉创路5号1号楼8层918-A44</p>
+                                    <p style="margin-bottom: 0.6mm;"><strong style="color: #667a8d;">电话</strong> 010-6780 3037 / 185 0039 4278（张）</p>
+                                    <p><strong style="color: #667a8d;">邮箱</strong> bj@opmonitor.com</p>
+                                </div>
+                                <div style="border: 1px solid #f0f3f8; border-radius: 2mm; padding: 1.6mm; background: #fafbfd;">
+                                    <p style="font-weight: 700; color: #16283d; margin-bottom: 0.8mm;">江苏办事处</p>
+                                    <p style="margin-bottom: 0.6mm;"><strong style="color: #667a8d;">地址</strong> 南京高淳区东坝信息新材料产业园832号</p>
+                                    <p style="margin-bottom: 0.6mm;"><strong style="color: #667a8d;">电话</strong> 189 5117 0876（王）</p>
+                                    <p><strong style="color: #667a8d;">邮箱</strong> js@opmonitor.com</p>
+                                </div>
+                                <div style="border: 1px solid #f0f3f8; border-radius: 2mm; padding: 1.6mm; background: #fafbfd;">
+                                    <p style="font-weight: 700; color: #16283d; margin-bottom: 0.8mm;">安徽办事处</p>
+                                    <p style="margin-bottom: 0.6mm;"><strong style="color: #667a8d;">地址</strong> 合肥蜀山区潜山南路188号蔚蓝商务港D幢1111号</p>
+                                    <p style="margin-bottom: 0.6mm;"><strong style="color: #667a8d;">电话</strong> 187 3030 6171（刘）</p>
+                                    <p><strong style="color: #667a8d;">邮箱</strong> ah@opmonitor.com</p>
+                                </div>
+                                <div style="border: 1px solid #f0f3f8; border-radius: 2mm; padding: 1.6mm; background: #fafbfd;">
+                                    <p style="font-weight: 700; color: #16283d; margin-bottom: 0.8mm;">广东办事处</p>
+                                    <p style="margin-bottom: 0.6mm;"><strong style="color: #667a8d;">地址</strong> 广州白云区大金钟路40号四层412室</p>
+                                    <p style="margin-bottom: 0.6mm;"><strong style="color: #667a8d;">电话</strong> 133 5289 6600（朱）</p>
+                                    <p><strong style="color: #667a8d;">邮箱</strong> gd@opmonitor.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QR Code placeholder -->
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5mm; flex-shrink: 0;">
+                    <div class="qr-box">
+                        <!-- QR pattern placeholder SVG -->
+                        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="40" height="40" fill="#fff"/>
+                            <!-- Finder pattern TL -->
+                            <rect x="2" y="2" width="12" height="12" rx="1.5" fill="none" stroke="#1f2937" stroke-width="1.8"/>
+                            <rect x="5" y="5" width="6" height="6" rx="0.5" fill="#1f2937"/>
+                            <!-- Finder pattern TR -->
+                            <rect x="26" y="2" width="12" height="12" rx="1.5" fill="none" stroke="#1f2937" stroke-width="1.8"/>
+                            <rect x="29" y="5" width="6" height="6" rx="0.5" fill="#1f2937"/>
+                            <!-- Finder pattern BL -->
+                            <rect x="2" y="26" width="12" height="12" rx="1.5" fill="none" stroke="#1f2937" stroke-width="1.8"/>
+                            <rect x="5" y="29" width="6" height="6" rx="0.5" fill="#1f2937"/>
+                            <!-- Data modules (simplified) -->
+                            <rect x="16" y="2" width="3" height="3" fill="#1f2937"/>
+                            <rect x="21" y="2" width="3" height="3" fill="#1f2937"/>
+                            <rect x="16" y="7" width="3" height="3" fill="#1f2937"/>
+                            <rect x="2" y="16" width="3" height="3" fill="#1f2937"/>
+                            <rect x="7" y="16" width="3" height="3" fill="#1f2937"/>
+                            <rect x="2" y="21" width="3" height="3" fill="#1f2937"/>
+                            <rect x="16" y="16" width="12" height="12" rx="1" fill="none" stroke="#1f2937" stroke-width="1.2"/>
+                            <rect x="19" y="19" width="6" height="6" rx="0.5" fill="#007bff"/>
+                            <rect x="26" y="16" width="3" height="3" fill="#1f2937"/>
+                            <rect x="35" y="16" width="3" height="3" fill="#1f2937"/>
+                            <rect x="30" y="21" width="3" height="3" fill="#1f2937"/>
+                            <rect x="21" y="30" width="3" height="3" fill="#1f2937"/>
+                            <rect x="26" y="35" width="3" height="3" fill="#1f2937"/>
+                            <rect x="35" y="30" width="3" height="3" fill="#1f2937"/>
+                            <rect x="35" y="35" width="3" height="3" fill="#1f2937"/>
+                        </svg>
+                    </div>
+                    <p style="font-size: 7.5px; color: #9aabb8; text-align: center; letter-spacing: 0.04em; font-weight: 600; line-height: 1.4;">微信小程序<br>扫码体验</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <p class="footer-contact" style="margin-top: auto;">
+            <span style="font-size: 10px; color: #8a9bae; letter-spacing: 0.04em; font-weight: 500;">
+                OpMonitor &nbsp;·&nbsp; ECTMS Mini 内镜清洗机追溯系统 &nbsp;·&nbsp; 产品单页 V1.0 &nbsp;·&nbsp; 2026
+            </span>
+        </p>
+
+        <span class="page-no">02 / 02</span>
+    </section>
+
+</main>
+</body>
+</html>

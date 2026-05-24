@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brochure Visual Template V1</title>
+    <style>
+        :root {
+            --bg: #edf2f7;
+            --paper: #ffffff;
+            --surface: #f5f7fa;
+            --surface-blue: #eef5ff;
+            --ink: #1f2937;
+            --muted: #67758a;
+            --muted-light: #98a2b3;
+            --line: #dbe3ee;
+            --line-soft: #e7edf4;
+            --blue: #007bff;
+            --blue-deep: #0f4c81;
+            --blue-soft: #eaf3ff;
+            --danger: #dc2626;
+            --danger-soft: #fff2f2;
+            --shadow-paper: 0 18px 34px rgba(15, 23, 42, 0.10);
+            --shadow-soft: 0 14px 22px rgba(15, 23, 42, 0.06);
+            --shadow-card: 0 8px 16px rgba(15, 23, 42, 0.04);
+            --radius-card: 3.4mm;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "IBM Plex Sans", "PingFang SC", "Noto Sans SC", "Segoe UI", sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 16% 0%, #f9fbff 0%, #edf2f7 44%),
+                linear-gradient(180deg, #f6f9fc 0%, #edf2f7 100%);
+            padding: 22px 0 42px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        .brochure {
+            width: min(96vw, 230mm);
+            margin: 0 auto;
+            display: grid;
+            gap: 20px;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            background: var(--paper);
+            border: 1px solid #dbe4ef;
+            border-radius: 8px;
+            box-shadow: var(--shadow-paper);
+            position: relative;
+            overflow: hidden;
+            padding: 14mm 14mm 12mm;
+        }
+
+        .page::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10mm;
+            background: linear-gradient(90deg, rgba(0, 123, 255, 0.06) 0%, rgba(0, 123, 255, 0.01) 42%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+        }
+
+        .page::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(0, 123, 255, 0.04);
+            pointer-events: none;
+        }
+
+        .page-no {
+            position: absolute;
+            right: 12mm;
+            bottom: 7mm;
+            font-size: 9.4px;
+            color: #8fa0b3;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .brand-logo {
+            position: absolute;
+            right: 14mm;
+            top: 11mm;
+            width: 22mm;
+            height: auto;
+            z-index: 4;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            min-height: 7mm;
+            padding: 0 3mm;
+            border-radius: 999px;
+            border: 1px solid #e2e9f3;
+            background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+            font-size: 10px;
+            line-height: 1.4;
+            letter-spacing: 0.06em;
+            color: var(--muted-light);
+            margin-bottom: 4.2mm;
+            font-weight: 500;
+        }
+
+        .title {
+            font-size: 30px;
+            line-height: 1.16;
+            letter-spacing: -0.028em;
+            font-weight: 700;
+            color: #16283d;
+            word-break: keep-all;
+        }
+
+        .subtitle {
+            margin-top: 2.6mm;
+            font-size: 16px;
+            color: var(--blue);
+            font-weight: 600;
+            letter-spacing: 0.01em;
+        }
+
+        .body {
+            font-size: 12.4px;
+            line-height: 1.7;
+            color: #415063;
+        }
+
+        .body.small {
+            font-size: 11.5px;
+            line-height: 1.66;
+        }
+
+        .section-shell {
+            margin-top: 5mm;
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius-card);
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            box-shadow: var(--shadow-card);
+            padding: 4mm;
+        }
+
+        .summary-strip {
+            margin-top: 4mm;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 2.8mm;
+            align-items: stretch;
+        }
+
+        .summary-strip.four {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .summary-item {
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius-card);
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            padding: 3.1mm 3.3mm;
+            min-height: 18.5mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: var(--shadow-card);
+        }
+
+        .summary-label {
+            display: block;
+            font-size: 9.2px;
+            color: #8a97a8;
+            margin-bottom: 1.1mm;
+            font-weight: 600;
+        }
+
+        .summary-value {
+            display: block;
+            font-size: 11.8px;
+            line-height: 1.48;
+            color: #1f344c;
+            font-weight: 600;
+        }
+
+        .insight-bar {
+            margin-top: 4mm;
+            border: 1px solid #dbe7f7;
+            background: linear-gradient(180deg, #f8fbff 0%, #f1f7ff 100%);
+            color: #314761;
+            border-radius: 3.5mm;
+            padding: 3.1mm 3.6mm;
+            font-size: 11px;
+            line-height: 1.62;
+            box-shadow: var(--shadow-card);
+            border-left: 2.5px solid #7bb1ff;
+        }
+
+        .insight-bar strong {
+            color: var(--blue-deep);
+        }
+
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 3mm;
+            font-size: 10.8px;
+        }
+
+        .matrix-table th,
+        .matrix-table td {
+            border: 1px solid var(--line-soft);
+            padding: 2.2mm 2.4mm;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .matrix-table th {
+            background: var(--surface-blue);
+            color: #294667;
+            font-weight: 700;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: 999px;
+            border: 1px solid #d6e4f8;
+            background: #f4f8ff;
+            color: #355174;
+            font-size: 9.8px;
+            font-weight: 600;
+        }
+
+        .media-frame {
+            margin-top: 4mm;
+            border: 1px dashed #c9d8ee;
+            border-radius: var(--radius-card);
+            background: #f7fbff;
+            min-height: 54mm;
+            display: grid;
+            place-items: center;
+            color: #7890ad;
+            font-size: 11px;
+            text-align: center;
+        }
+
+        .footer-contact {
+            margin-top: auto;
+            padding-top: 4mm;
+            border-top: 1px solid var(--line-soft);
+            font-size: 11px;
+            color: #4d627d;
+        }
+
+        .layout-2col {
+            margin-top: 4mm;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3mm;
+        }
+
+        .layout-3col {
+            margin-top: 4mm;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 3mm;
+        }
+
+        .layout-4col {
+            margin-top: 4mm;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 3mm;
+        }
+
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+
+            body {
+                background: #fff;
+                padding: 0;
+            }
+
+            .brochure {
+                width: auto;
+                gap: 0;
+            }
+
+            .page {
+                border: 0;
+                border-radius: 0;
+                box-shadow: none;
+                margin: 0;
+                page-break-after: always;
+                break-after: page;
+            }
+
+            .page:last-child {
+                page-break-after: auto;
+                break-after: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="brochure">
+        <!-- Page 1: Cover Slot -->
+        <section class="page">
+            <img class="brand-logo" src="./opmoniter_logo.png" alt="Brand Logo">
+            <span class="eyebrow">产品线 / 子产品名称</span>
+            <h1 class="title">[主标题槽位]</h1>
+            <p class="subtitle">[副标题槽位]</p>
+            <div class="media-frame">主视觉图槽位（建议 16:9 / 深浅均可）</div>
+            <div class="summary-strip four">
+                <article class="summary-item"><span class="summary-label">卖点 01</span><span class="summary-value">[一句话卖点]</span></article>
+                <article class="summary-item"><span class="summary-label">卖点 02</span><span class="summary-value">[一句话卖点]</span></article>
+                <article class="summary-item"><span class="summary-label">卖点 03</span><span class="summary-value">[一句话卖点]</span></article>
+                <article class="summary-item"><span class="summary-label">卖点 04</span><span class="summary-value">[一句话卖点]</span></article>
+            </div>
+            <p class="footer-contact">www.opmonitor.com | info@opmonitor.com | 400 160 1008</p>
+            <span class="page-no">01</span>
+        </section>
+
+        <!-- Page 2: Narrative Slot (可换成任意业务逻辑页) -->
+        <section class="page">
+            <span class="eyebrow">业务背景 / 痛点洞察 / 合规要求</span>
+            <h2 class="title" style="font-size: 24px;">[页面主叙事标题]</h2>
+            <p class="subtitle">[页面次级主张]</p>
+            <div class="section-shell">
+                <p class="body">[正文段落槽位：建议 80-140 字]</p>
+                <div class="layout-2col">
+                    <article class="summary-item"><span class="summary-label">问题 A</span><span class="summary-value">[问题描述]</span></article>
+                    <article class="summary-item"><span class="summary-label">方案 A</span><span class="summary-value">[方案描述]</span></article>
+                </div>
+                <div class="layout-2col">
+                    <article class="summary-item"><span class="summary-label">问题 B</span><span class="summary-value">[问题描述]</span></article>
+                    <article class="summary-item"><span class="summary-label">方案 B</span><span class="summary-value">[方案描述]</span></article>
+                </div>
+            </div>
+            <p class="insight-bar"><strong>结论：</strong>[总结语槽位，强调一条核心价值。]</p>
+            <span class="page-no">02</span>
+        </section>
+
+        <!-- Page 3: Matrix Slot -->
+        <section class="page">
+            <span class="eyebrow">方案矩阵 / 版本体系 / 组件组合</span>
+            <h2 class="title" style="font-size: 24px;">[矩阵页标题]</h2>
+            <p class="subtitle">[矩阵页副标题]</p>
+            <table class="matrix-table">
+                <thead>
+                    <tr>
+                        <th>功能项</th>
+                        <th>版本 A</th>
+                        <th>版本 B</th>
+                        <th>版本 C</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>[功能项 1]</td><td>✓</td><td>✓</td><td>✓</td></tr>
+                    <tr><td>[功能项 2]</td><td>-</td><td>✓</td><td>✓</td></tr>
+                    <tr><td>[功能项 3]</td><td>-</td><td>-</td><td>✓</td></tr>
+                </tbody>
+            </table>
+            <div class="media-frame">流程图 / 架构图槽位</div>
+            <p class="insight-bar"><strong>架构说明：</strong>[统一底座 + 按需演进说明]</p>
+            <span class="page-no">03</span>
+        </section>
+
+        <!-- Page 4: Capability Slot -->
+        <section class="page">
+            <span class="eyebrow">能力体系 / 协同监管 / 追溯预警</span>
+            <h2 class="title" style="font-size: 24px;">[能力页标题]</h2>
+            <p class="subtitle">[能力页副标题]</p>
+            <div class="layout-2col">
+                <article class="summary-item"><span class="summary-label">能力 01</span><span class="summary-value">[能力描述]</span></article>
+                <article class="summary-item"><span class="summary-label">能力 02</span><span class="summary-value">[能力描述]</span></article>
+                <article class="summary-item"><span class="summary-label">能力 03</span><span class="summary-value">[能力描述]</span></article>
+                <article class="summary-item"><span class="summary-label">能力 04</span><span class="summary-value">[能力描述]</span></article>
+            </div>
+            <div class="summary-strip">
+                <article class="summary-item"><span class="summary-label">对接系统</span><span class="summary-value">HIS / PACS / [其他]</span></article>
+                <article class="summary-item"><span class="summary-label">追溯维度</span><span class="summary-value">人 / 机 / 患 / 流程</span></article>
+                <article class="summary-item"><span class="summary-label">质控机制</span><span class="summary-value">预警 / 拦截 / 留痕</span></article>
+            </div>
+            <span class="page-no">04</span>
+        </section>
+
+        <!-- Page 5: Hardware or Evidence Slot -->
+        <section class="page">
+            <span class="eyebrow">硬件能力 / 实施交付 / 场景证据</span>
+            <h2 class="title" style="font-size: 24px;">[硬件或交付页标题]</h2>
+            <p class="subtitle">[硬件或交付页副标题]</p>
+            <div class="layout-4col">
+                <article class="summary-item"><span class="summary-label">模块 A</span><span class="summary-value">[说明]</span></article>
+                <article class="summary-item"><span class="summary-label">模块 B</span><span class="summary-value">[说明]</span></article>
+                <article class="summary-item"><span class="summary-label">模块 C</span><span class="summary-value">[说明]</span></article>
+                <article class="summary-item"><span class="summary-label">模块 D</span><span class="summary-value">[说明]</span></article>
+            </div>
+            <div class="media-frame">现场图 / 产品图 / 部署图槽位</div>
+            <p class="insight-bar"><strong>价值归纳：</strong>[一句话说明“为什么可信”。]</p>
+            <span class="page-no">05</span>
+        </section>
+
+        <!-- Page 6: Brand / Service Network Slot -->
+        <section class="page">
+            <img class="brand-logo" src="./opmoniter_logo.png" alt="Brand Logo">
+            <span class="eyebrow">品牌愿景 / 服务网络 / 联系方式</span>
+            <h2 class="title" style="font-size: 24px;">[品牌页标题]</h2>
+            <p class="subtitle">[品牌页副标题]</p>
+            <div class="layout-2col">
+                <article class="section-shell">
+                    <p class="body"><span class="chip">专业</span> [专业描述]</p>
+                    <p class="body"><span class="chip">科技</span> [科技描述]</p>
+                </article>
+                <article class="section-shell">
+                    <p class="body"><span class="chip">信赖</span> [信赖描述]</p>
+                    <p class="body"><span class="chip">服务</span> [服务描述]</p>
+                </article>
+            </div>
+            <div class="section-shell" style="margin-top: 3mm;">
+                <p class="body small"><strong>公司：</strong>[公司名]</p>
+                <p class="body small"><strong>官网：</strong>www.opmonitor.com</p>
+                <p class="body small"><strong>邮箱：</strong>info@opmonitor.com</p>
+                <p class="body small"><strong>热线：</strong>400 160 1008</p>
+            </div>
+            <span class="page-no">06</span>
+        </section>
+    </main>
+</body>
+</html>

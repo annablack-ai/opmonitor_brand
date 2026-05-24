@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>客户案例 | 智感云</title>
+  <meta name="description" content="查看智感云服务 800+ 客户的区域覆盖、客户类型和匿名典型应用案例。">
+  <script>
+    window.tailwind = window.tailwind || {};
+    window.tailwind.config = { theme: { extend: { colors: { brand: '#007BFF', cyanBright: '#00C2FF', ink: '#333333', light: '#F5F5F5' }, fontFamily: { sans: ['PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', 'Arial', 'sans-serif'] } } } };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body data-page="cases" class="bg-white font-sans text-ink antialiased">
+  <div data-site-header></div>
+  <main>
+    <section class="relative overflow-hidden border-b border-slate-200 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)]">
+      <div class="op-grid-bg absolute inset-0 opacity-45"></div>
+      <div class="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
+        <div class="text-sm text-slate-500"><a href="index.html" class="hover:text-brand">首页</a> / 客户案例</div>
+        <div class="mt-8 max-w-4xl">
+          <div class="text-xs uppercase tracking-[0.24em] text-slate-400">客户案例</div>
+          <h1 class="mt-3 text-4xl font-bold text-slate-900 md:text-5xl">800+ 客户的共同选择</h1>
+          <p class="mt-5 text-base leading-8 text-slate-600">智感云已服务医疗机构、监管部门、生态环境 / 危废相关单位及园区集团等多类客户。基于行业数据安全与客户授权要求，案例以区域覆盖、客户类型和匿名应用方式展示。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white">
+      <div class="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
+        <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+          <div data-cases-map></div>
+          <div>
+            <div class="text-xs uppercase tracking-[0.24em] text-slate-400">覆盖总览</div>
+            <h2 class="mt-3 text-3xl font-semibold text-slate-900">客户覆盖总览</h2>
+            <p class="mt-4 text-base leading-8 text-slate-600">从医院科室级医废追溯，到区域危废“五即一码”建设，再到卫生监督在线监测与非现场执法辅助，智感云持续为高监管、高合规要求的行业客户提供可落地、可运维、可持续迭代的数字化解决方案。</p>
+            <div class="mt-8 grid grid-cols-2 gap-4">
+              <div class="rounded-[24px] border border-slate-200 bg-slate-50 p-5"><div class="text-3xl font-black text-brand">800+</div><div class="mt-2 text-sm text-slate-500">累计服务客户</div></div>
+              <div class="rounded-[24px] border border-slate-200 bg-slate-50 p-5"><div class="text-3xl font-black text-brand">近 30 个</div><div class="mt-2 text-sm text-slate-500">覆盖省市 / 地区</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-light">
+      <div class="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
+        <div class="text-xs uppercase tracking-[0.24em] text-slate-400">客户类型</div>
+        <h2 class="mt-3 text-3xl font-semibold text-slate-900">客户类型分布</h2>
+        <div data-cases-types class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4"></div>
+      </div>
+    </section>
+
+    <section class="bg-white">
+      <div class="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
+        <div class="text-xs uppercase tracking-[0.24em] text-slate-400">匿名案例</div>
+        <h2 class="mt-3 text-3xl font-semibold text-slate-900">匿名典型应用</h2>
+        <div data-cases-list class="mt-10 grid gap-5 xl:grid-cols-2"></div>
+        <div class="mt-10 rounded-[28px] border border-slate-200 bg-slate-50 p-6 text-sm leading-7 text-slate-600">地图展示项目区域覆盖情况，仅用于呈现服务范围，不展示具体医院、监管单位、项目地址或客户敏感信息。页面内容仅包含经授权公开的信息，不展示真实敏感数据、业务明细、系统后台数据、精确地址或未经授权的客户标识。</div>
+      </div>
+    </section>
+
+    <section class="px-6 pb-16 lg:px-10 lg:pb-24">
+      <div class="mx-auto max-w-7xl rounded-[36px] border border-slate-200 bg-white p-8 shadow-[0_16px_48px_rgba(15,23,42,0.05)] lg:flex lg:items-center lg:justify-between lg:gap-12 lg:p-10">
+        <div>
+          <div class="text-xs uppercase tracking-[0.24em] text-slate-400">预约咨询</div>
+          <h2 class="mt-3 text-3xl font-semibold text-slate-900">预约咨询</h2>
+          <p class="mt-4 text-base leading-8 text-slate-600">告诉我们您的机构类型、关注产品和建设目标，我们将安排方案沟通。</p>
+        </div>
+        <a href="contact.html" class="mt-6 inline-flex rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand lg:mt-0">预约咨询</a>
+      </div>
+    </section>
+  </main>
+  <div data-site-footer></div>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>

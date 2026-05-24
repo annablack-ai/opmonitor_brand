@@ -140,7 +140,7 @@ const capabilityCards: Array<{ title: string; description: string; icon: IconNam
               <article class="v1-product-card">
                 <div class="v1-product-visual">
                   <div class:list={['v1-product-card-icon', 'v1-icon-badge', meta.tone]}>
-                    <Icon name={product.icon} class="h-[22px] w-[22px]" />
+                      <Icon name={product.icon} class="h-[34px] w-[34px]" />
                   </div>
                   {meta.visual === 'medical' && (
                     <div class="v1-pv-med"><span></span><span></span><span></span><b></b></div>
@@ -161,7 +161,7 @@ const capabilityCards: Array<{ title: string; description: string; icon: IconNam
                     <div class="v1-pv-carbon"><span></span><span></span><span></span><i></i></div>
                   )}
                 </div>
-                <h2 class="v1-product-card-title">{product.name}</h2>
+                <h2 class="v1-product-card-title">{product.displayName}</h2>
                 <p class="v1-product-card-desc">{product.overview}</p>
                 <div class="v1-product-card-label-row">
                   <span class:list={['v1-product-card-label-primary', meta.tone]}>{meta.label}</span>

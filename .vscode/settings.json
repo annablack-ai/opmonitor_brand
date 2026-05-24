@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^git add index\\.html && git commit -m \"feat: enhance brand guideline index page\" && git push origin main$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

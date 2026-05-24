@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>联系我们 | 智感云</title>
+  <meta name="description" content="提交需求信息，获取智感云产品演示与方案沟通。">
+  <script>
+    window.tailwind = window.tailwind || {};
+    window.tailwind.config = { theme: { extend: { colors: { brand: '#007BFF', cyanBright: '#00C2FF', ink: '#333333', light: '#F5F5F5' }, fontFamily: { sans: ['PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', 'Arial', 'sans-serif'] } } } };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body data-page="contact" class="bg-white font-sans text-ink antialiased">
+  <div data-site-header></div>
+  <main>
+    <section class="relative overflow-hidden border-b border-slate-200 bg-[linear-gradient(180deg,#ffffff_0%,#eef6ff_100%)]">
+      <div class="op-grid-bg absolute inset-0 opacity-45"></div>
+      <div class="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
+        <div class="text-sm text-slate-500"><a href="index.html" class="hover:text-brand">首页</a> / 联系我们</div>
+        <div class="mt-8 max-w-4xl">
+          <div class="text-xs uppercase tracking-[0.24em] text-slate-400">Contact</div>
+          <h1 class="mt-3 text-4xl font-bold text-slate-900 md:text-5xl">联系我们</h1>
+          <p class="mt-5 text-base leading-8 text-slate-600">提交需求信息，获取产品演示与方案沟通。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-light">
+      <div class="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
+        <div class="grid gap-10 lg:grid-cols-[0.82fr_1.18fr]">
+          <div class="grid gap-5">
+            <article class="rounded-[30px] border border-slate-200 bg-white p-6 shadow-[0_12px_30px_rgba(15,23,42,0.04)]">
+              <div class="flex items-center gap-3">
+                <span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand/10 text-brand"><i data-lucide="phone" class="h-5 w-5"></i></span>
+                <div><div class="text-sm text-slate-400">服务热线</div><div class="mt-1 text-lg font-semibold text-slate-900">400-160-1008</div></div>
+              </div>
+            </article>
+            <article class="rounded-[30px] border border-slate-200 bg-white p-6 shadow-[0_12px_30px_rgba(15,23,42,0.04)]">
+              <div class="flex items-center gap-3">
+                <span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-cyanBright/10 text-cyan-700"><i data-lucide="mail" class="h-5 w-5"></i></span>
+                <div><div class="text-sm text-slate-400">电子邮箱</div><div class="mt-1 text-lg font-semibold text-slate-900">info@opmonitor.com</div></div>
+              </div>
+            </article>
+            <article class="rounded-[30px] border border-slate-200 bg-white p-6 shadow-[0_12px_30px_rgba(15,23,42,0.04)]">
+              <div class="flex items-center gap-3">
+                <span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700"><i data-lucide="globe" class="h-5 w-5"></i></span>
+                <div><div class="text-sm text-slate-400">官网</div><div class="mt-1 text-lg font-semibold text-slate-900">www.opmonitor.com</div></div>
+              </div>
+            </article>
+            <article class="rounded-[30px] border border-slate-200 bg-white p-6 shadow-[0_12px_30px_rgba(15,23,42,0.04)]">
+              <div class="flex items-center gap-3">
+                <span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-amber-700"><i data-lucide="map-pinned" class="h-5 w-5"></i></span>
+                <div><div class="text-sm text-slate-400">地址</div><div class="mt-1 text-lg font-semibold text-slate-900">以正式联系方式为准</div></div>
+              </div>
+            </article>
+            <article class="rounded-[30px] border border-slate-200 bg-[linear-gradient(180deg,#f8fbff,#ffffff)] p-6 shadow-[0_12px_30px_rgba(15,23,42,0.04)]">
+              <div class="text-xs uppercase tracking-[0.24em] text-slate-400">地图位置</div>
+              <div class="mt-4 flex h-52 items-center justify-center rounded-[24px] border border-dashed border-slate-300 bg-slate-50 text-slate-500">在线地图占位</div>
+            </article>
+          </div>
+
+          <div class="rounded-[34px] border border-slate-200 bg-white p-8 shadow-[0_16px_48px_rgba(15,23,42,0.05)] lg:p-10">
+            <div class="text-xs uppercase tracking-[0.24em] text-slate-400">预约表单</div>
+            <h2 class="mt-3 text-3xl font-semibold text-slate-900">预约产品演示 / 方案沟通</h2>
+            <form data-contact-form class="mt-8 grid gap-5">
+              <div class="grid gap-5 md:grid-cols-2">
+                <label class="grid gap-2 text-sm font-medium text-slate-700">
+                  姓名
+                  <input type="text" name="name" required class="rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand focus:ring-4 focus:ring-brand/10">
+                </label>
+                <label class="grid gap-2 text-sm font-medium text-slate-700">
+                  手机
+                  <input type="tel" name="phone" required pattern="[0-9]{11}" class="rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand focus:ring-4 focus:ring-brand/10">
+                </label>
+              </div>
+              <div class="grid gap-5 md:grid-cols-2">
+                <label class="grid gap-2 text-sm font-medium text-slate-700">
+                  公司 / 机构名称
+                  <input type="text" name="organization" required class="rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand focus:ring-4 focus:ring-brand/10">
+                </label>
+                <label class="grid gap-2 text-sm font-medium text-slate-700">
+                  所在地区
+                  <input type="text" name="region" class="rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand focus:ring-4 focus:ring-brand/10">
+                </label>
+              </div>
+              <div class="grid gap-5 md:grid-cols-2">
+                <label class="grid gap-2 text-sm font-medium text-slate-700">
+                  机构类型
+                  <select name="organizationType" class="rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand focus:ring-4 focus:ring-brand/10">
+                    <option value="">请选择机构类型</option>
+                    <option>医疗机构</option>
+                    <option>监管部门</option>
+                    <option>生态环境 / 危废相关单位</option>
+                    <option>园区 / 集团化单位</option>
+                    <option>其他</option>
+                  </select>
+                </label>
+                <label class="grid gap-2 text-sm font-medium text-slate-700">
+                  需求概述
+                  <input type="text" name="summary" placeholder="例如：区域危废纳管、医院院感监测" class="rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand focus:ring-4 focus:ring-brand/10">
+                </label>
+              </div>
+              <div>
+                <div class="text-sm font-medium text-slate-700">关注产品</div>
+                <div data-contact-products class="mt-4 flex flex-wrap gap-3"></div>
+              </div>
+              <label class="grid gap-2 text-sm font-medium text-slate-700">
+                需求描述
+                <textarea name="message" rows="5" class="rounded-[24px] border border-slate-200 px-4 py-3 outline-none transition focus:border-brand focus:ring-4 focus:ring-brand/10" placeholder="请简要描述您的业务场景和需求，帮助我们更高效安排演示与沟通。"></textarea>
+              </label>
+              <button type="submit" class="inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand">提交预约申请</button>
+              <p class="text-sm leading-7 text-slate-500">提交成功后，我们将尽快与您联系。</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-contact-modal class="fixed inset-0 z-[60] hidden items-center justify-center bg-slate-950/60 px-6 backdrop-blur-md">
+    <div class="w-full max-w-lg rounded-[34px] border border-white/10 bg-white p-8 shadow-[0_24px_80px_rgba(15,23,42,0.24)]">
+      <div class="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-brand/10 text-brand"><i data-lucide="check-check" class="h-7 w-7"></i></div>
+      <h2 class="mt-6 text-3xl font-semibold text-slate-900">您的需求已收到</h2>
+      <p class="mt-4 text-base leading-8 text-slate-600">智感云专属顾问将在 2 小时内与您联系。我们会根据您的机构类型、关注产品和建设目标安排产品演示与方案沟通。</p>
+      <button type="button" data-contact-close class="mt-8 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-brand">关闭</button>
+    </div>
+  </div>
+
+  <div data-site-footer></div>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>

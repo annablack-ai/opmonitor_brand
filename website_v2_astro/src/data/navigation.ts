@@ -1,4 +1,17 @@
-import type { FooterLinkGroup, MegaMenuGroup, MegaMenuLink, NavItem } from '@/types/site';
+import { productSummaries } from '@/data/products';
+import type { FooterLinkGroup, MegaMenuGroup, MegaMenuLink, NavItem, ProductSummary } from '@/types/site';
+
+const productBySlug = productSummaries.reduce<Record<string, ProductSummary>>((accumulator, product) => {
+  accumulator[product.slug] = product;
+  return accumulator;
+}, {});
+
+const productMenuLink = (slug: string): MegaMenuLink => ({
+  key: slug,
+  label: productBySlug[slug].displayName,
+  href: `/products/${slug}/`,
+  description: productBySlug[slug].englishName,
+});
 
 export const navigation: NavItem[] = [
   { key: 'home', label: '首页', href: '/' },
@@ -13,9 +26,12 @@ export const footerLinkGroups: FooterLinkGroup[] = [
   {
     title: '产品与解决方案',
     links: [
-      { key: 'product-list', label: '产品与解决方案', href: '/products/' },
-      { key: 'product-detail', label: '医疗废物精细化追溯系统', href: '/products/medical-waste/' },
-      { key: 'hazardous', label: '危险废物“五即一码”规范化管理系统', href: '/products/hazardous-waste/' },
+      { key: 'medical-waste', label: productBySlug['medical-waste'].displayName, href: '/products/medical-waste/' },
+      { key: 'hazardous-waste', label: productBySlug['hazardous-waste'].displayName, href: '/products/hazardous-waste/' },
+      { key: 'health-supervision', label: productBySlug['health-supervision'].displayName, href: '/products/health-supervision/' },
+      { key: 'sterilization-monitoring', label: productBySlug['sterilization-monitoring'].displayName, href: '/products/sterilization-monitoring/' },
+      { key: 'endoscope-compliance', label: productBySlug['endoscope-compliance'].displayName, href: '/products/endoscope-compliance/' },
+      { key: 'carbon-management', label: productBySlug['carbon-management'].displayName, href: '/products/carbon-management/' },
     ],
   },
   {
@@ -33,22 +49,22 @@ export const productMegaMenuGroups: MegaMenuGroup[] = [
   {
     title: '医疗卫生',
     links: [
-      { key: 'medical-waste', label: '医疗废物精细化追溯系统', href: '/products/medical-waste/' },
-      { key: 'sterilization-monitoring', label: '消毒灭菌监测系统', href: '/products/sterilization-monitoring/' },
-      { key: 'endoscope-compliance', label: '内镜合规平台', href: '/products/endoscope-compliance/' },
+      productMenuLink('medical-waste'),
+      productMenuLink('sterilization-monitoring'),
+      productMenuLink('endoscope-compliance'),
     ],
   },
   {
     title: '生态环境',
     links: [
-      { key: 'hazardous-waste', label: '危险废物“五即一码”规范化管理系统', href: '/products/hazardous-waste/' },
-      { key: 'carbon-management', label: '碳管理与减污降碳协同', href: '/products/carbon-management/' },
+      productMenuLink('hazardous-waste'),
+      productMenuLink('carbon-management'),
     ],
   },
   {
     title: '智慧监管',
     links: [
-      { key: 'health-supervision', label: '智慧卫监解决方案', href: '/products/health-supervision/' },
+      productMenuLink('health-supervision'),
     ],
   },
   {

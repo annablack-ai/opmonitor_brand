@@ -224,7 +224,7 @@ input,textarea,select { font-family:inherit; }
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0;
   font-size: 18px;
   font-weight: 700;
   color: var(--color-ink);
@@ -232,17 +232,18 @@ input,textarea,select { font-family:inherit; }
   flex-shrink: 0;
 }
 .nav-logo-icon {
-  width: 36px;
-  height: 36px;
-  background: linear-gradient(135deg,var(--color-primary),var(--color-cyan));
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
+  width: 124px;
+  height: 40px;
+  display: block;
+  flex-shrink: 0;
+  background: url('../../public/images/brand/logo.png') left center / contain no-repeat;
+  color: transparent;
+  font-size: 0;
+  line-height: 0;
+  overflow: hidden;
+}
+.nav-logo > span {
+  display: none;
 }
 .nav-links {
   display: flex;
@@ -880,51 +881,63 @@ input,textarea,select { font-family:inherit; }
   box-shadow: 0 18px 34px rgba(17,78,133,.12);
 }
 .icon-badge {
+  --icon-box-size: 42px;
+  --icon-glyph-size: 22px;
+  --icon-badge-bg: #F6FAFF;
+  --icon-stroke-color: #334155;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: var(--color-primary);
-  background: rgba(238, 246, 255, .96);
+  width: var(--icon-box-size);
+  height: var(--icon-box-size);
+  color: var(--icon-stroke-color);
+  background: var(--icon-badge-bg);
   border: 1px solid rgba(170, 198, 223, .24);
 }
-.icon-badge svg {
-  width: 22px;
-  height: 22px;
+.icon-badge svg,
+.icon-badge i {
+  width: var(--icon-glyph-size);
+  height: var(--icon-glyph-size);
   stroke: currentColor;
   stroke-width: 1.75;
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+.icon-badge[data-active="true"],
+.icon-badge:hover {
+  --icon-stroke-color: #007BFF;
+}
 .icon-badge.tone-blue {
-  color: var(--color-primary);
-  background: rgba(238, 246, 255, .96);
+  background: #EEF6FF;
   border-color: rgba(0, 123, 255, .14);
 }
 .icon-badge.tone-cyan {
-  color: var(--color-cyan-ink);
-  background: rgba(233, 251, 255, .96);
+  background: #F6FAFF;
   border-color: rgba(0, 194, 255, .18);
 }
 .icon-badge.tone-green {
-  color: var(--color-success-ink);
-  background: rgba(237, 249, 241, .96);
+  background: #F6FAFF;
   border-color: rgba(0, 200, 83, .18);
 }
 .icon-badge.tone-amber {
-  color: var(--color-warning-ink);
-  background: rgba(255, 248, 231, .98);
+  background: #F6FAFF;
   border-color: rgba(255, 193, 7, .22);
 }
 .icon-badge.tone-red {
-  color: var(--color-danger-ink);
-  background: rgba(255, 241, 239, .98);
+  background: #F6FAFF;
   border-color: rgba(255, 79, 61, .18);
 }
+.icon-inline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: currentColor;
+}
 .product-card-icon {
-  width: 42px;
-  height: 42px;
+  --icon-box-size: 42px;
+  --icon-glyph-size: 22px;
   border-radius: 12px;
   font-size: 13px;
   font-weight: 700;
@@ -1644,8 +1657,8 @@ input,textarea,select { font-family:inherit; }
   box-shadow: var(--shadow-card-hover);
 }
 .feature-icon {
-  width: 44px;
-  height: 44px;
+  --icon-box-size: 44px;
+  --icon-glyph-size: 30px;
   border-radius: var(--radius-sm);
   font-size: 20px;
   margin-bottom: 14px;
@@ -1656,9 +1669,16 @@ input,textarea,select { font-family:inherit; }
 .network-item-icon svg,
 .contact-info-card-icon svg,
 .customer-type-icon svg,
-.footer-contact-icon svg {
-  width: 22px;
-  height: 22px;
+.footer-contact-icon svg,
+.feature-icon i,
+.value-icon i,
+.qual-icon i,
+.network-item-icon i,
+.contact-info-card-icon i,
+.customer-type-icon i,
+.footer-contact-icon i {
+  width: var(--icon-glyph-size, 22px);
+  height: var(--icon-glyph-size, 22px);
   stroke: currentColor;
   stroke-width: 1.75;
   fill: none;
@@ -1735,24 +1755,24 @@ input,textarea,select { font-family:inherit; }
 }
 .value-card:hover { transform: translateY(-3px); }
 .value-icon {
-  width: 44px;
-  height: 44px;
+  --icon-box-size: 44px;
+  --icon-glyph-size: 30px;
   border-radius: var(--radius-sm);
   font-size: 28px;
   margin-bottom: 12px;
 }
 .qual-icon,
 .contact-info-card-icon {
-  width: 56px;
-  height: 56px;
+  --icon-box-size: 56px;
+  --icon-glyph-size: 20px;
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .network-item-icon {
-  width: 48px;
-  height: 48px;
+  --icon-box-size: 48px;
+  --icon-glyph-size: 22px;
   border-radius: 14px;
   display: flex;
   align-items: center;
@@ -1789,8 +1809,8 @@ input,textarea,select { font-family:inherit; }
   box-shadow: var(--shadow-card-hover);
 }
 .customer-type-icon {
-  width: 56px;
-  height: 56px;
+  --icon-box-size: 56px;
+  --icon-glyph-size: 22px;
   border-radius: 50%;
   font-size: 24px;
   margin: 0 auto 16px;
@@ -1881,6 +1901,11 @@ input,textarea,select { font-family:inherit; }
   font-size: 17px;
   font-weight: 700;
 }
+
+.footer-logo .nav-logo-icon {
+  width: 132px;
+  height: 44px;
+}
 .footer-nav-title {
   font-size: 14px;
   font-weight: 700;
@@ -1909,16 +1934,19 @@ input,textarea,select { font-family:inherit; }
 }
 .footer-contact-icon {
   flex-shrink: 0;
-  width: 16px;
-  height: 16px;
+  --icon-box-size: 20px;
+  --icon-glyph-size: 20px;
+  width: var(--icon-box-size);
+  height: var(--icon-box-size);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: rgba(185, 224, 255, .92);
 }
-.footer-contact-icon svg {
-  width: 16px;
-  height: 16px;
+.footer-contact-icon svg,
+.footer-contact-icon i {
+  width: var(--icon-glyph-size);
+  height: var(--icon-glyph-size);
   stroke: currentColor;
   stroke-width: 1.75;
   fill: none;
